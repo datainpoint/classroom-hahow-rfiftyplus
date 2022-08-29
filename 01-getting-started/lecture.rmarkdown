@@ -1,0 +1,335 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "R 語言起步走"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "R 語言起步走"
+    scrollable: true
+    incremental: true
+---
+
+
+# 關於 R 語言
+
+## 給同學的課前心理建設
+
+- 對於初學者而言，R 語言程式設計與資料科學是有一定難度的。
+- 同學在修課過程可能會遭遇挫折，有不懂的地方可以重複觀看課程影片、練習題卡關不知從何下手時可以先看練習題詳解，善加使用 Hahow 的「問題討論」發問，我會盡快回覆。
+- 覺得累了的時候，休息個幾天、轉換心情再回來，學習效率會更好。
+
+## （沒什麼用的）冷知識
+
+- 為什麼命名為 R？
+- 因為 R 的前身是一個被稱為 S 的統計程式語言。
+- S language: a language for **s**tatistics
+
+## R 的英文字母排序在 S 前一個
+
+
+```{r}
+LETTERS
+```
+
+
+## 程式語言的分類
+
+- 廣泛用途（General-purposed）程式語言。
+- 專門用途（Special-purposed）程式語言。
+
+## 從 IEEE Top Programming Languages 暸解程式語言分類
+
+![](../images/ieee-top-programming.png)
+
+來源：<https://spectrum.ieee.org/top-programming-languages>
+
+## R 是一個專門用途的程式語言
+
+- 由紐西蘭奧克蘭大學的 Ross Ihaka 和 Robert Gentleman 所開發設計。
+- 目前由 [R 開發核心團隊](https://www.r-project.org/)開發維護。
+- 專注在資料科學應用領域的「統計程式語言」。
+- 常用於開發統計和資料分析軟體系統。
+
+## （沒什麼用的）冷知識
+
+另有一說 R 語言的命名來自兩位作者的名字均為 R 開頭：**R**oss Ihaka 和 **R**obert Gentleman。
+
+## R 與其他廣泛用途的程式語言（Python、C 語言、Java）相對比較
+
+- 向量化運算是內建的功能。
+- 以「函數」（Functions）作為主體。
+- 使用者不需要學習類別（Class），因此學習路線比較短。
+
+## R 與其他資料科學的專門用途程式語言（Matlab、SAS、Julia）相對比較
+
+- 授權種類的不同：Matlab、SAS 屬於商業授權，R 語言則是屬於開源授權。
+- 使用者數量的不同：Julia 是相對年輕的程式語言，相較之下 R 語言的開發者更多、使用者社群更龐大。
+
+來源：<https://spectrum.ieee.org/top-programming-languages>
+
+
+```{r}
+#| echo: false
+#| message: false
+library("dplyr")
+library("ggplot2")
+
+get_survey_data <- function(csv_path) {
+  column_names <- read.csv(csv_path, nrows = 1L) |>
+    colnames()
+  survey_data <- read.csv(csv_path, skip = 2L)
+  colnames(survey_data) <- column_names
+  return(survey_data)
+}
+summarize_multiple_choice_question <- function(df, question_char) {
+  res_df <- df[, question_char] |>
+    table() |>
+    as.data.frame()
+  return(res_df)
+}
+summarize_multiple_selection_question <- function(df, question_char) {
+  column_names <- colnames(df)
+  columns_to_select <- grepl(question_char, column_names)
+  stacked_vector <- df[, columns_to_select] |>
+    t() |>
+    c()
+  stacked_vector_cleaned <- stacked_vector[stacked_vector != ""]
+  res_df <- stacked_vector_cleaned |> 
+    table() |>
+    as.data.frame()
+  return(res_df)
+}
+
+csv_path <- "../data/kaggle_survey_2021_responses.csv"
+survey_data <- get_survey_data(csv_path)
+survey_data_da_ds <- survey_data[survey_data[["Q5"]] %in% c("Data Analyst", "Data Scientist"), ]
+```
+
+
+## 課程目標：以 R 語言程式設計做資料科學的應用
+
+![](../images/r-for-data-science.png)
+來源：<https://r4ds.had.co.nz/program-intro.html>
+
+## 為什麼學習 R 語言
+
+- 內建向量化運算功能，適合科學計算和資料科學。
+- 內建豐富的統計函數，適合統計分析。
+
+## 為什麼學習 R 語言（續）
+
+- 是資料分析師與資料科學家常用且推薦的前三語言。
+- 是資料科學專門用途程式語言中討論度最高的語言。
+- 是 Google 資料分析專業證照的必修程式語言。
+
+## R 在資料分析師與資料科學家日常頻繁使用語言中排名第三
+
+
+```{r}
+#| echo: false
+q7 <- summarize_multiple_selection_question(survey_data_da_ds, "Q7")
+q7 |> 
+  mutate(highlight = ifelse(stacked_vector_cleaned == "R", FALSE, TRUE)) |>
+  ggplot(aes(x = Freq, y = reorder(stacked_vector_cleaned, Freq), fill = highlight)) + 
+    geom_col() +
+    ggtitle("What programming languages do you use on a regular basis?") + 
+    ylab("Programming Languages") + 
+    xlab("Responses") + 
+    theme(legend.position = "none")
+```
+
+
+來源：<https://www.kaggle.com/c/kaggle-survey-2021>
+
+## R 在資料分析師與資料科學家推薦語言中排名第三
+
+
+```{r}
+#| echo: false
+q8 <- summarize_multiple_choice_question(survey_data_da_ds, "Q8")
+q8 |>
+  mutate(highlight = ifelse(Var1 == "R", FALSE, TRUE)) |>
+  ggplot(aes(x = Freq, y = reorder(Var1, Freq), fill = highlight)) + 
+    geom_col() +
+    ggtitle("What programming language would you recommend an aspiring\ndata scientist to learn first?") + 
+    ylab("Programming Languages") + 
+    xlab("Responses") + 
+    theme(legend.position="none")
+```
+
+
+來源：<https://www.kaggle.com/c/kaggle-survey-2021>
+
+## R 在資料科學專門用途程式語言中討論度最高
+
+![](../images/stackoverflow-trends.png)
+
+來源：<https://insights.stackoverflow.com/trends?tags=r%2Cmatlab%2Csas%2Cjulia>
+
+## Google 資料分析專業證照將 R 列入為必修程式語言
+
+![](../images/coursera-google-data-analytics.png)
+
+來源：<https://www.coursera.org/professional-certificates/google-data-analytics>
+
+# 建立 R 語言的學習環境
+
+## 學習環境的兩個安裝重點
+
+- 安裝 R：結合統計分析與繪圖功能的開放原始碼程式語言。
+- 安裝 RStudio：讓我們使用體驗更好的整合開發環境（Integrated Development Environment，IDE），也是最多 R 語言愛好者在使用的。
+
+## 安裝 R（Windows 作業系統）
+
+- 下載並安裝 [R4.2.1-win.exe](https://cran.r-project.org/bin/windows/base/R-4.2.1-win.exe)
+- 未來若想下載並安裝更新版本的 R <https://cran.r-project.org/bin/windows/base>
+- 請注意副檔名為 `.exe`
+
+## 安裝 R（macOS）
+
+- 下載並安裝 [R4.2.1.pkg](https://cran.r-project.org/bin/macosx/base/R-4.2.1.pkg)
+- 未來若想下載並安裝更新版本的 R <https://cran.r-project.org/bin/macosx>
+- 請注意副檔名為 `.pkg`
+
+## 安裝 RStudio（Windows 作業系統）
+
+- 下載並安裝 [RStudio-2022.07.1-554.exe](https://download1.rstudio.org/desktop/windows/RStudio-2022.07.1-554.exe)
+- 未來若想下載並安裝更新版本的 RStudio <https://www.rstudio.com/products/rstudio/download>
+- 請注意副檔名為 `.exe`
+
+## 安裝 RStudio（macOS）
+
+- 下載並安裝 [RStudio-2022.07.1-554.dmg](https://download1.rstudio.org/desktop/macos/RStudio-2022.07.1-554.dmg)
+- 未來若想下載並安裝更新版本的 RStudio <https://www.rstudio.com/products/rstudio/download>
+- 請注意副檔名為 `.dmg`
+
+## 關於 RStudio
+
+- 在學習環境中 R 是必要的，RStudio 則不是，也有一些人喜歡用 R GUI 或其他的整合開發環境（例如 Jupyter）。
+- 開發與維護 RStudio 的公司也叫做 RStudio <https://www.rstudio.com>
+- 公司即將在 2022 年 10 月正式改名為 <https://posit.co>
+
+# 如何寫作與執行 R 語言程式
+
+## 整合開發環境 RStudio 的介面
+
+- 第一次執行 RStudio 時會顯示三個面板。
+- 點選 File > New File > R Script 新增一個 R 程式碼檔案將完整的四個面板都顯示出來。
+
+## 四個面板功能簡介
+
+1. 來源（Source）：撰寫程式的編輯器面板。
+2. 命令列（Console）：執行程式且呈現輸出的面板。
+3. 環境（Environment）會顯示出目前可以取用的物件（Objects）。
+4. 檔案（Files）：會顯示 R 語言所在的工作目錄（Working Directory）。
+5. 其他功能頁籤。
+
+## 客製化自己的 RStudio
+
+- 對調命令列與環境的面板位置 View > Panes > Console on Right
+- 挑選自己喜歡的佈景主題 Tools > Global Options > Appearance > Editor theme
+- 後續視個人偏好慢慢調整！
+
+## 寫作與執行 R 語言程式
+
+- 運用來源（Source）寫作。
+- 運用命令列（Console）執行。
+
+## 哈囉世界
+
+- 不能免俗地，第一支 R 語言程式是哈囉世界。
+- `print()` 是 R 的內建函數，可以將小括號中的輸入印出。
+- `"Hello, world!"` 是 `character` 的文字向量類別。
+
+
+```{r}
+print("Hello, World!")
+```
+
+
+來源：<https://zh.wikipedia.org/wiki/Hello_World>
+
+## 寫作與執行哈囉世界
+
+1. 在來源（Source）寫作 `print("Hello, World!")`
+2. 用滑鼠將程式反白選取。
+3. 點選右上角的 Run 執行。
+
+## 使用 `q()` 函數離開
+
+`q()` 函數是 `quit()` 函數的縮寫版。
+
+
+```{r}
+#| eval: false
+q()
+```
+
+
+## 剛開始執行 R 語言程式容易犯的錯
+
+- 反白選取不完整，導致 R 語言沒有反應，這時請按 `Esc` 跳脫。
+- 沒有注意大小寫，導致 R 語言產生錯誤訊息，請注意 R 語言對於大小寫是很敏感的（Case-sensitive）！
+  - 例如 `print("Hello, World!")` 沒問題但是 `Print("Hello, World!")` 就會出錯。
+  - 例如 `q()` 沒問題但是 `Q()` 就會出錯。
+  - 例如 `FALSE` 沒問題但是 `False` 或 `false` 就會出錯。
+
+# 如何寫作練習題並批改測試
+
+## 練習題是「R 語言的 50+ 練習」的課程重點
+
+- 練習題共分為三種：是非題、單選題以及程式題。
+- LPAA 四步驟教學模型：透過 Learn（講師觀念講解）、Practice（講師範例操作）、Apply（同學寫作練習題）與 Assess（批改測試並觀看練習題詳解）循環強化學習效果。
+
+## 如何寫作練習題
+
+- 在前幾個章節還不熟悉的時候仔細閱讀練習題指引並適時觀看練習題詳解。
+- 因為使用免費的伺服器資源，練習題閒置超過 10 分鐘會自動斷線。
+- 建議同學可以先將練習題下載到自己電腦，完成以後可以選擇在自己電腦批改測試或上傳覆蓋原本的 `exercises.Rmd` 批改測試。
+
+## 如何寫作練習題（續）
+
+- 練習題預設輸出皆為 `NA`
+- 在 `### BEGIN SOLUTION` 與 `### END SOLUTION` 之間，將答案或預期輸出寫在 `return()` 小括號之中。
+
+
+```{r}
+#| eval: false
+exercise <- function() {
+  ### BEGIN SOLUTION
+  return(your_answer_for_the_exercise)
+  ### END SOLUTION
+}
+```
+
+
+## 如何批改測試
+
+批改測試的方式為點選右上方選單的 Run -> Restart R and Run All Chunks
+
+# 重點統整
+
+- R 的前身是一個稱為 S 語言的統計程式語言。
+- R 是一個專注在資料科學應用的專門用途程式語言。
+- R 語言由紐西蘭奧克蘭大學的 Ross Ihaka 和 Robert Gentleman 所開發設計。
+
+## 重點統整（續）
+
+- R 語言學習環境的兩個安裝重點
+  - 安裝 R
+  - 安裝 RStudio
+- 注意安裝檔的副檔名
+  - Windows 作業系統安裝檔的副檔名為 `.exe`
+  - macOS 安裝檔的副檔名為 `.pkg` 或 `.dmg`
+  
+## 重點統整（續）
+
+- 第一支 R 語言程式是哈囉世界。
+- 在前幾個章節還不熟悉的時候仔細閱讀練習題指引並適時觀看練習題詳解。
+- 剛開始執行 R 語言程式容易犯的錯
+  - 反白選取不完整。
+  - 沒有注意大小寫。
