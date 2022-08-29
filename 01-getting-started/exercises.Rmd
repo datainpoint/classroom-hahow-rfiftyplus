@@ -5,7 +5,7 @@ output: html_notebook
 
 ## 練習題指引
 
-- 第一個程式碼儲存格會將可能用得到的套件以及單元測試 `testthat` 載入。
+- 第一個程式碼儲存格會將可能用得到的套件以及單元測試套件 `testthat` 載入。
 - 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作答案與函數主體即可。
 - 練習題共分為三種，預設輸出皆為 `NA`：
   1. 是非題
@@ -20,7 +20,7 @@ output: html_notebook
 - 建議同學可以先將練習題下載到自己電腦，完成以後可以選擇在自己電腦批改測試或上傳覆蓋原本的 `exercises.Rmd` 批改測試。
 
 ```{r}
-install.packages("testthat")
+install.packages("testthat") # 若已經安裝可以將這列註解
 library("testthat")
 ```
 
