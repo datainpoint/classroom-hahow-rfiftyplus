@@ -20,7 +20,8 @@ output: html_notebook
 - 建議同學可以先將練習題下載到自己電腦，完成以後可以選擇在自己電腦批改測試或上傳覆蓋原本的 `exercises.Rmd` 批改測試。
 
 ```{r}
-install.packages("testthat") # 若已經安裝可以將這列註解
+install.packages("rmarkdown") # 若已經安裝可以將這列註解
+install.packages("testthat")  # 若已經安裝可以將這列註解
 library("testthat")
 ```
 
