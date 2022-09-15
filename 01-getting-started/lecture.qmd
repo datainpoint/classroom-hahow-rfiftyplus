@@ -235,17 +235,17 @@ q8 |>
 
 - 不能免俗地，第一支 R 語言程式是哈囉世界。
 - `print()` 是 R 的內建函數，可以將小括號中的輸入印出。
-- `"Hello, World!"` 是 `character` 的文字向量類別。
+- `"Hello, world!"` 是 `character` 的文字向量類別。
 
 ```{r}
-print("Hello, World!")
+print("Hello, world!")
 ```
 
 來源：<https://zh.wikipedia.org/wiki/Hello_World>
 
 ## 寫作與執行哈囉世界
 
-1. 在來源（Source）寫作 `print("Hello, World!")`
+1. 在來源（Source）寫作 `print("Hello, world!")`
 2. 用滑鼠將程式反白選取。
 3. 點選右上角的 Run 執行。
 

@@ -1,0 +1,409 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "從 apply() 函數家族認識函數型程式設計"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "從 apply() 函數家族認識函數型程式設計"
+    scrollable: true
+    incremental: false
+---
+
+# 函數型程式設計
+
+## （複習）學好 R 語言的訣竅
+
+- 掌握不同資料結構的特性。
+- 熟練地使用函數或自行定義函數。
+- 對物件應用函數，多數的情境是對資料結構應用函數，僅有少數的情境是對函數應用函數（例如函數型程式設計，之後在「從 `apply()` 函數家族認識函數型程式設計」說明）。
+
+## 什麼是函數型程式設計
+
+- 函數型程式設計（Functional programming）可以接受函數作為輸入參數和輸出。
+- R 語言的函數型程式設計可以透過 `apply()` 函數家族實踐。
+
+## 函數型函數
+
+- `apply()` 函數家族亦稱為函數型函數（Functional functions），與一般函數最大的差異在於「接受函數作為輸入參數」。
+- 能夠將函數「應用」到不同資料結構的每個元素之上。
+
+## 重複執行程式碼的三種方式
+
+1. 向量運算
+2. 迴圈
+3. `apply()` 函數家族
+
+R 語言使用者會更偏好使用第一種與第三種方式。
+
+# `apply()` 函數
+
+## 查詢 `apply()` 函數
+
+- `help("apply")`
+  - `X` 矩陣或資料框。
+  - `MARGIN` 維度。
+  - `FUN` 欲應用之函數名稱。
+
+## `apply()` 函數接受函數作為輸入，並能選擇應用至二維資料結構的列或欄
+
+```{r}
+matrix_45 <- matrix(1:20, nrow = 4)
+apply(matrix_45, MARGIN = 1, FUN = sum) # 列總和
+apply(matrix_45, MARGIN = 2, FUN = sum) # 欄總和
+```
+
+## 欲應用的函數 `FUN` 也能指定自行定義函數
+
+```{r}
+sqr_then_sum <- function(x) {
+  sum_sqr_x <- sum(x^2)
+  return(sum_sqr_x)
+}
+apply(matrix_45, MARGIN = 1, FUN = sqr_then_sum)
+apply(matrix_45, MARGIN = 2, FUN = sqr_then_sum)
+```
+
+## 自行定義函數的「精簡版本」
+
+- 自行定義函數的傳統版本會有大括號 `{}`、換行、縮排以及 `return()`
+- 自行定義函數的精簡版本可能省略上述的元素。
+
+---
+
+```{r}
+# 傳統版本
+sqr_then_sum <- function(x) {
+  sum_sqr_x <- sum(x^2)
+  return(sum_sqr_x)
+}
+sqr_then_sum(1:4)
+# 精簡版本
+sqr_then_sum <- function(x) sum(x^2)
+sqr_then_sum(1:4)
+```
+
+## 自行定義函數的「匿名版本」
+
+- 當精簡版本自行定義函數連「函數名稱」都省略了，就稱為匿名函數（Anonymous functions）。
+- 匿名函數不會單獨存在，會與函數型函數一起登場。
+
+```{r}
+apply(matrix_45, MARGIN = 1, FUN = function(x) sum(x^2))
+```
+
+# `lapply()` 函數
+
+## 查詢 `lapply()` 函數
+
+- `help("lapply")`
+  - `X` 清單。
+  - `FUN` 欲應用之函數名稱。
+
+## `lapply()` 函數接受函數作為輸入，並能應用至 `list` 資料結構中的每個元素
+
+- `lapply()` 函數是 list apply 的縮寫。
+- 輸入與輸出結果均為 `list`
+
+## 應用 `class()` 函數至 `heterogeneous_data` 中的每個向量
+
+```{r}
+heterogeneous_data <- list(
+  c(FALSE, TRUE),
+  5566,
+  "Luke Skywalker"
+)
+class(heterogeneous_data[[1]])
+class(heterogeneous_data[[2]])
+class(heterogeneous_data[[3]])
+```
+
+## 以迴圈應用 `class()` 函數至 `heterogeneous_data` 中的每個向量
+
+```{r}
+length_heterogeneous_data <- length(heterogeneous_data)
+for (index in 1:length_heterogeneous_data) {
+  print(class(heterogeneous_data[[index]]))
+}
+```
+
+## 使用 `lapply()` 應用 `class()` 函數至 `heterogeneous_data` 中的每個向量
+
+```{r}
+lapply(heterogeneous_data, FUN = class)
+```
+
+## 使用 `lapply()` 應用自行定義函數至 `heterogeneous_data` 中的每個向量
+
+```{r}
+class_then_toupper <- function(x) {
+  toupper_class_x <- toupper(class(x))
+  return(toupper_class_x)
+}
+lapply(heterogeneous_data, FUN = class_then_toupper)
+```
+
+## 使用 `lapply()` 應用自行定義匿名函數至 `heterogeneous_data` 中的每個向量
+
+```{r}
+lapply(heterogeneous_data, FUN = function(x) toupper(class(x)))
+```
+
+# `sapply()` 函數
+
+## 查詢 `sapply()` 函數
+
+- `help("sapply")`
+  - `X` 清單。
+  - `FUN` 欲應用之函數名稱。
+
+## `sapply()` 函數運作與 `lapply()` 函數大同小異
+
+- 接受函數作為輸入，並能應用至 `list` 資料結構中的每個元素。
+- `sapply()` 函數是 simplify apply 的縮寫。
+- 輸入為 `list`、輸出為向量。
+
+## 使用 `sapply()` 應用 `class()` 函數至 `heterogeneous_data` 中的每個向量
+
+```{r}
+# lapply(heterogeneous_data, FUN = class)
+sapply(heterogeneous_data, FUN = class)
+```
+
+## 使用 `sapply()` 應用自行定義函數至 `heterogeneous_data` 中的每個向量
+
+```{r}
+sapply(heterogeneous_data, FUN = class_then_toupper)
+```
+
+## 使用 `sapply()` 應用自行定義匿名函數至 `heterogeneous_data` 中的每個向量
+
+```{r}
+sapply(heterogeneous_data, FUN = function(x) toupper(class(x)))
+```
+
+# `mapply()` 函數
+
+## 查詢 `mapply()` 函數
+
+- `help("mapply")`
+  - `FUN` 欲應用之函數名稱。
+  - `...` 多個清單。
+
+## `mapply()` 函數可以視為 `sapply()` 函數的「多變數」版本
+
+- 接受函數作為輸入，並能應用至多個 `list` 資料結構中的每個元素。
+- `mapply()` 函數是 multivariate apply 的縮寫。
+
+## 應用 `sum()` 函數至 `list_x` 與 `list_y`
+
+```{r}
+list_x <- list(1, 2, 3)
+list_y <- list(11, 12, 13)
+sum(list_x[[1]], list_y[[1]])
+sum(list_x[[2]], list_y[[2]])
+sum(list_x[[3]], list_y[[3]])
+```
+
+## 以迴圈應用 `sum()` 函數至 `list_x` 與 `list_y`
+
+```{r}
+for (index in 1:3) {
+  print(sum(list_x[[index]], list_y[[index]]))
+}
+```
+
+## 使用 `mapply()` 應用 `sum()` 函數至 `list_x` 與 `list_y`
+
+```{r}
+mapply(FUN = sum, list_x, list_y)
+```
+
+## 使用 `mapply()` 應用自行定義函數至 `list_x` 與 `list_y`
+
+```{r}
+add_then_sqr <- function(x, y) {
+  return((x + y)^2)
+}
+mapply(FUN = add_then_sqr, list_x, list_y)
+```
+
+## 使用 `mapply()` 應用自行定義匿名函數至 `list_x` 與 `list_y`
+
+```{r}
+mapply(FUN = function(x, y) (x + y)^2, list_x, list_y)
+```
+
+# `tapply()` 函數
+
+## 查詢 `tapply()` 函數
+
+- `help("tapply")`
+  - `X` 向量。
+  - `INDEX` 向量中的獨一值。
+  - `FUN` 欲應用之函數名稱。
+  
+## `tapply()` 函數可以視為 `table()` 函數基礎模板
+
+- 以向量的獨一值分組並應用函數計算該組的數值，亦即所謂的「分組聚合」。
+- `tapply()` 函數是 table apply 的縮寫。
+
+## 使用 `table()` 函數計算獨一值個數
+
+```{r}
+red_white <- c("Red", "White")
+population <- rep(red_white, times = 50)
+table(population)
+```
+
+## 使用 `tapply()` 函數計算分組獨一值個數
+
+```{r}
+tapply(population, INDEX = population, FUN = length)
+```
+
+## 使用 `tapply()` 函數計算分組平均
+
+```{r}
+titles <- c("Batman Begins", "The Dark Knight", "The Dark Knight Rises", "The Lord of the Rings: The Fellowship of the Ring", "The Lord of the Rings: The Two Towers", "The Lord of the Rings: The Return of the King")
+release_years <- c(2005, 2008, 2012, 2001:2003)
+imdb_ratings <- c(8.2, 9.0, 8.3, 8.8, 8.7, 8.9)
+directors <- c(rep("Christopher Nolan", times = 3), rep("Peter Jackson", times = 3))
+df <- data.frame(
+  "title" = titles,
+  "release_year" = release_years,
+  "imdb_rating" = imdb_ratings,
+  "director" = directors)
+df
+```
+
+---
+
+```{r}
+table(df$director)
+tapply(df$imdb_rating, INDEX = df$director, FUN = mean)
+tapply(df$release_year, INDEX = df$director, FUN = min)
+```
+
+# 個案研究：使用 `apply()` 函數家族改寫迴圈
+
+## 重複執行程式碼的三種方式，為什麼 R 語言使用者會更偏好使用第一種與第三種
+
+1. 向量運算。
+2. 迴圈。
+3. `apply()` 函數家族。
+
+## 使用 `system.time()` 函數測量執行所需時間：向量運算
+
+
+```{r}
+v <- 1:10000
+# 向量運算
+system.time(
+  sqrt_v <- v^0.5
+)
+```
+
+## 使用 `system.time()` 函數測量執行所需時間：迴圈
+
+```{r}
+# 迴圈
+sqrt_v <- c()
+system.time(
+  for (vi in v) {
+    sqrt_v <- c(sqrt_v, vi^0.5)
+  }
+)
+```
+
+## 使用 `system.time()` 函數測量執行所需時間：`apply()` 函數家族
+
+```{r}
+# apply() 函數家族
+system.time(
+  sqrt_v <- sapply(v, FUN = sqrt)
+)
+```
+
+## 以迴圈將球員的姓氏（last name）取出並把所有字母轉換為大寫
+
+```{r}
+nba_stars <- c("Steve Nash", "Michael Jordan", "LeBron James", "Dirk Nowitzski", "Hakeem Olajuwon")
+strsplit_nba_stars <- strsplit(nba_stars, split = " ")
+for (star in strsplit_nba_stars) {
+  star_lastname <- star[2]
+  toupper_star_lastname <- toupper(star_lastname)
+  print(toupper_star_lastname)
+}
+```
+
+## 使用 `apply()` 函數家族將球員的姓氏（last name）取出並把所有字母轉換為大寫
+
+```{r}
+lapply(strsplit_nba_stars, FUN = function(x) toupper(x[2]))
+sapply(strsplit_nba_stars, FUN = function(x) toupper(x[2]))
+```
+
+## 使用 `read.csv()` 函數載入現實世界資料：Covid-19 每日報告
+
+```{r}
+file_url <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-01-2022.csv"
+df <- read.csv(file_url)
+class(df)
+dim(df)
+```
+
+## 以迴圈檢視資料框每個欄位的資料類別
+
+```{r}
+colnames_df <- colnames(df)
+for (col in colnames_df) {
+  print(class(df[[col]]))
+}
+```
+
+## 使用 `apply()` 函數家族檢視資料框每個欄位的資料類別
+
+```{r}
+sapply(df, FUN = class)
+```
+
+## 以迴圈檢視資料框每個欄位有幾個未定義值 `NA`
+
+```{r}
+for (col in colnames_df) {
+  isna_col <- is.na(df[[col]])
+  print(sum(isna_col))
+}
+```
+
+## 使用 `apply()` 函數家族檢視資料框每個欄位的未定義值資料數
+
+```{r}
+sapply(df, FUN = function(x) sum(is.na(x)))
+```
+
+# 重點統整
+
+- 函數型程式設計（Functional programming）可以接受函數作為輸入參數和輸出。
+- R 語言的函數型程式設計可以透過 `apply()` 函數家族實踐。
+- `apply()` 函數家族亦稱為函數型函數（Functional functions），與一般函數最大的差異在於「接受函數作為輸入參數」，能夠將函數「應用」到不同資料結構的每個元素之上。
+
+## 重點統整（續）
+
+- 自行定義函數的傳統版本會有大括號 `{}`、換行、縮排以及 `return()`
+- 自行定義函數的精簡版本可能省略上述的元素。
+- 當精簡版本自行定義函數連「函數名稱」都省略了，就稱為匿名函數（Anonymous functions）。
+- 匿名函數不會單獨存在，會與函數型函數一起登場。
+
+## 重點統整（續）
+
+- 常用的函數型函數：
+  - `apply()`
+  - `lapply()` list apply
+  - `sapply()` simplify apply
+  - `mapply()` multivariate apply
+  - `tapply()` table apply

@@ -1,0 +1,416 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "建立因素向量、矩陣、陣列儲存同質資料"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "建立因素向量、矩陣、陣列儲存同質資料"
+    scrollable: true
+    incremental: false
+---
+
+# 因素向量 `factor`
+
+## （複習）R 語言資料結構
+
+||同質|異質|
+|-|----|----|
+|維度等於一|`vector`|`list`|
+|維度等於二|`matrix`|`data.frame`|
+|維度超過二|`array`|`list` 與其他資料結構混搭|
+
+## 什麼是因素向量 `factor`
+
+- 因素向量是 R 語言中的特殊文字向量，與文字向量 `character` 相似，但是比文字向量多了一些資訊。
+- 因素向量除了記錄文字以外，還會以層級（Levels）記錄獨一值。
+- 因素向量會給予每個獨一值對應的整數編碼。
+
+## 以 `factor()` 函數建立因素向量
+
+```{r}
+#| eval: false
+factor(x, levels, ordered, ...)
+```
+
+- `x` 文字向量 `chracter`。
+- `levels` 參數指定層級。
+- `ordered` 參數指定是否排序。
+
+```{r}
+red_white <- c("Red", "White")
+population <- rep(red_white, times = 50)
+factor_population <- factor(population)
+class(population)
+class(factor_population)
+```
+
+## 因素向量除了記錄文字以外，還會以層級（Levels）記錄獨一值
+
+```{r}
+#| eval: false
+population
+factor_population
+levels(factor_population)
+```
+
+## 因素向量會給予每個獨一值對應的整數編碼
+
+```{r}
+#| eval: false
+as.numeric(population)
+as.numeric(factor_population)
+```
+
+## 調整層級（Levels）能更改整數編碼、納入順序
+
+```{r}
+feels <- c("freezing", "cold", "cool", "warm", "hot")
+factor_feels <- factor(feels)
+original_levels <- levels(factor_feels)
+factor_feels
+as.numeric(factor_feels)
+original_levels
+factor_feels <- factor(feels, 
+                       levels = feels,
+                       ordered = TRUE)
+adjusted_levels <- levels(factor_feels)
+factor_feels
+as.numeric(factor_feels)
+adjusted_levels
+```
+
+## 從因素向量擷取資料的方式與向量相同
+
+可以使用索引值或者邏輯向量。
+
+```{r}
+factor_feels[3]
+factor_feels[1:3]
+factor_feels[c(1, 3, 5)]
+factor_feels[factor_feels == "warm"]
+```
+
+## R 為何設計因素向量？
+
+- 因素向量具有整數編碼。
+- 不需要做額外的資料處理，就能讓文字或類別資料作為模型的獨立變數（Independent variables）。
+
+# 矩陣 `matrix`
+
+## 什麼是矩陣 `matrix`
+
+- 矩陣是 R 語言中用來處理二維數值向量的資料結構。
+- 具有列（Rows）與欄（Columns）兩個維度，一個 `m` 列 `n` 欄的矩陣外型可以被描述為 `(m, n)`。
+
+## 以 `matrix()` 函數建立矩陣
+
+```{r}
+#| eval: false
+matrix(data, nrow, ncol, ...)
+```
+
+- `data` 矩陣中的資料。
+- `nrow` 參數指定列數。
+- `ncol` 參數指定欄數。
+- 列數或欄數擇一指定即可，R 會根據 `data` 的長度判斷另一個維度。
+
+```{r}
+matrix_23 <- matrix(1:6, nrow = 2)
+matrix_23
+class(matrix_23)
+```
+
+## 使用 `dim()` 函數得知矩陣的外型
+
+```{r}
+dim(matrix_23)
+matrix_64 <- matrix(1:24, ncol = 4)
+dim(matrix_64)
+```
+
+## 利用 `matrix[m, n]` 兩個索引值來搭配選擇出位於 `m` 列 `n` 欄的資料
+
+```{r}
+matrix_23[2, 1]
+matrix_23[1, 2]
+matrix_23[2, 3]
+```
+
+## 選出位於 `m` 列的資料，欄的索引值留空白
+
+```{r}
+matrix_23[1, ]
+matrix_23[2, ]
+```
+
+## 選出位於 `n` 欄的資料，列的索引值留空白
+
+```{r}
+matrix_23[, 1]
+matrix_23[, 2]
+matrix_23[, 3]
+```
+
+## 也可以利用邏輯向量挑選符合條件的資料
+
+```{r}
+is_odd <- matrix_23 %% 2 == 1
+is_odd
+matrix_23[is_odd]
+```
+
+## 使用 `matrix[m, n] <- value` 更新矩陣中的資料
+
+```{r}
+matrix_23
+matrix_23[2, 3] <- 5566
+matrix_23
+```
+
+# 陣列 `array`
+
+## 什麼是陣列 `array`
+
+陣列是 R 語言中用來處理 n 維數值向量的資料結構，具有 n 個維度儲存數值資料。
+
+## 使用 `array()` 函數建立陣列
+
+```{r}
+#| eval: false
+array(data, dim, ...)
+```
+
+- `data` 陣列中的資料。
+- `dim` 參數指定外型。
+
+```{r}
+array_432 <- array(1:24, dim = c(4, 3, 2))
+class(array_432)
+dim(array_432) # 兩個 (4, 3) 的矩陣
+```
+
+## 利用 `array[m, n, ...]` 多個索引值來搭配選擇資料
+
+```{r}
+array_432[3, 2, 1]
+array_432[3, 1, 2]
+```
+
+## 索引值亦可以留白選出指定的矩陣、列或欄
+
+```{r}
+array_432[, , 1]
+array_432[4, , 1]
+array_432[, , 2]
+array_432[, 3, 2]
+```
+
+## 也可以利用邏輯向量挑選符合條件的資料
+
+```{r}
+is_odd <- array_432 %% 2 == 1
+array_432[is_odd]
+```
+
+## 使用 `array[m, n, ...] <- value` 更新陣列中的資料
+
+```{r}
+array_432
+array_432[4, 3, 2] <- 5566
+array_432
+```
+
+# 個案研究：矩陣代數（Matrix Algebra）
+
+## 關於矩陣代數（Matrix Algebra）
+
+- 數學上，一個 `(m, n)` 的矩陣是一個由 `m` 列（row）`n` 欄（column）元素組成的矩形陣列。
+- 矩陣是代數學的常見工具，其中一個重要用途是解線性方程組，也常見於數值計算、統計分析、電腦科學等學科中。
+
+## R 語言的資料結構設計為呼應數學的資料表示方式
+
+- 純量：長度為 1 的數值向量 `numeric`
+- 向量：數值向量 `numeric`
+- 矩陣：`matrix`
+- 張量：三維以上的多維矩陣 `array`
+
+## 列向量與欄向量
+
+向量預設是欄向量。
+
+```{r}
+v <- c(5, 5, 6, 6)
+column_vector <- matrix(v)
+row_vector <- matrix(v, nrow = 1)
+column_vector
+row_vector
+```
+
+## 純量與向量相乘
+
+向量化運算（Vectorization）有時亦稱為元素對應運算（Element-wise）。
+
+```{r}
+v <- c(5, 5, 6, 6)
+v * 10
+```
+
+## 使用 `t()` 函數轉置
+
+讓 `(m, n)` 外型轉置為 `(n, m)`
+
+```{r}
+matrix_23 <- matrix(1:6, nrow = 2)
+matrix_23
+dim(matrix_23)
+matrix_32 <- t(matrix_23)
+matrix_32
+dim(matrix_32)
+```
+
+## 向量相乘
+
+- 向量相乘的前提是左側向量的欄數和右側向量的列數必須相等。
+- 運用 `%*%` 運算符。
+
+$$
+V_{m \times m} = v_{m \times 1} v_{1 \times m}^{T} \\
+s_{1 \times 1} = v_{1 \times m}^{T}v_{m \times 1}
+$$
+
+---
+
+```{r}
+v <- c(5, 5, 6, 6) # (4, 1)
+t_v <- t(v)        # (1, 4)
+V <- v %*% t_v     # (4, 4)
+s <- t_v %*% v     # (1, 1)
+V
+s
+```
+
+## 矩陣相乘
+
+- 向量相乘的前提是左側矩陣的欄數和右側矩陣的列數必須相等。
+- 運用 `%*%` 運算符。
+
+$$
+Z_{d \times n} = X_{d \times m}Y_{m \times n}
+$$
+
+---
+
+```{r}
+X <- matrix(1:6, nrow = 2) # (2, 3)
+Y <- matrix(1:6, nrow = 3) # (3, 2)
+Z <- X %*% Y
+Z
+```
+
+## 矩陣 Hadamard 乘積
+
+- 矩陣的元素對應（Element-wise）乘積。
+- Hadamard 乘積的前提是左側矩陣和右側矩陣的外型必須相同。
+- 運用 `*` 運算符。
+
+$$
+Z_{m \times n} = X_{m \times n} \odot Y_{m \times n}
+$$
+
+```{r}
+X <- matrix(1:6, nrow = 2) # (2, 3)
+Y <- matrix(1:6, nrow = 2) # (2, 3)
+Z <- X * Y
+Z
+```
+
+## 使用 `diag()` 函數建立單位矩陣
+
+```{r}
+I <- diag(nrow = 3)
+I
+```
+
+## 使用 `diag()` 函數建立對角矩陣
+
+```{r}
+D <- diag(c(1, 4, 9))
+D
+diag(D) # 取出對角線上的元素
+```
+
+## 使用 `solve()` 函數運算反矩陣
+
+若存在下列情況則稱 $A^{-1}$ 為 $A$ 的反矩陣。
+
+$$
+AA^{-1} = I
+$$
+
+```{r}
+A <- matrix(1:4, nrow = 2)
+inv_A <- solve(A)
+I <- A %*% inv_A
+I
+```
+
+## 使用 `solve()` 函數求解線性方程組
+
+$$
+AX = B \\
+A^{-1}AX = A^{-1}B \\
+X = A^{-1}B
+$$
+
+$$
+\begin{bmatrix}
+1 & 3\\
+2 & 4
+\end{bmatrix}
+\begin{bmatrix}
+x_{11}\\
+x_{21}
+\end{bmatrix}
+=
+\begin{bmatrix}
+5\\
+6
+\end{bmatrix}
+\\
+x_{11} + 3 x_{21} = 5\\
+2 x_{11} + 4 x_{21} = 6
+$$
+
+---
+
+```{r}
+A <- matrix(1:4, nrow = 2)
+B <- matrix(5:6, nrow = 2)
+X <- solve(A, B)
+X
+A %*% X == B
+```
+
+## 更多 R 語言支援的矩陣代數功能
+
+- 使用 `eigen()` 函數求解特徵值與特徵向量。
+- 使用 `svd()` 函數運算奇異值分解。
+- 透過 `matlib` 套件取得更多矩陣代數的相關函數。
+
+# 重點統整
+
+- 因素向量 `factor` 是 R 語言中的特殊文字向量，與文字向量 `character` 相似，但是比文字向量多了一些資訊。
+- 矩陣 `matrix` 是 R 語言中用來處理二維數值向量的資料結構。
+- 陣列 `array` 是 R 語言中用來處理 n 維數值向量的資料結構，具有 n 個維度儲存數值資料。
+
+## 重點統整（續）
+
+- R 語言的資料結構設計為呼應數學的資料表示方式
+  - 純量：長度為 1 的數值向量 `numeric`
+  - 向量：數值向量 `numeric`
+  - 矩陣：`matrix`
+  - 張量：三維以上的多維矩陣 `array`

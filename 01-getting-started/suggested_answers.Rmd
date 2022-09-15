@@ -126,7 +126,7 @@ exercise_008 <- function() {
 
 ## 009（程式題）哈囉世界。
 
-定義函數 `hello_world()` 回傳 `"Hello, World!"`
+定義函數 `hello_world()` 回傳 `"Hello, world!"`
 
 - 將答案寫在 `return()` 之中。
 - 文字用單引號或雙引號包括起來。
@@ -134,9 +134,9 @@ exercise_008 <- function() {
 ```{r}
 hello_world <- function() {
   # > hello_world()
-  # [1] "Hello, World!"
+  # [1] "Hello, world!"
   ### BEGIN SOLUTION
-  return("Hello, World!")
+  return("Hello, world!")
   ### END SOLUTION
 }
 ```
@@ -233,7 +233,7 @@ test_008 <- tryCatch({
 test_009 <- tryCatch({
   test_that("test_009", {
     answer <- hello_world()
-    expect_equal(answer, "Hello, World!")
+    expect_equal(answer, "Hello, world!")
   })
   }, error = function(e) {
     FALSE

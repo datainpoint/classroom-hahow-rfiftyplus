@@ -1,0 +1,761 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "自行定義函數組織 R 語言的程式碼"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "自行定義函數組織 R 語言的程式碼"
+    scrollable: true
+    incremental: false
+---
+
+# 組織程式碼的機制
+
+## 什麼是組織程式碼
+
+- 面對不同目的以及應用場景，我們會有組織程式碼的需求，希望程式碼可以簡潔且有效率地完成任務。
+- 組織程式碼希望達到的目標：
+  - 提高程式碼的「可利用性」。
+  - 減少程式碼的「重複性」。
+  
+## R 語言提供使用者組織程式碼的機制
+
+- 函數（Function）。
+- 類別（Class）。
+- 套件（Package）。
+
+## 理解程式碼組織機制的層次
+
+- 程式碼可以組織為函數或者類別。
+- 函數與類別可以組織為套件。
+
+# 常用的 R 語言函數
+
+## （複習）R 語言的核心精神，引用 Greg Martin 的一句話
+
+> The way R works is pretty straightforward, you apply functions to objects.
+> 
+> Greg Martin
+
+## 更動結果的機制
+
+- 使用函數可以讓被應用的物件所參照的值更動。
+- 更動方式是以「回傳」型態輸出結果。
+- 以 `sort()` 函數為例。
+
+```{r}
+primes <- c(11, 5, 7, 2, 3)
+sort(primes)           # 沒有將回傳更新原本命名的物件
+primes                 # 排序沒有改變
+primes <- sort(primes) # 有將回傳更新原本命名的物件
+primes                 # 改變為遞增排序
+```
+
+## 常用 R 語言函數大類
+
+- 系統功能（已經在「怎樣學好 R 語言」章節的個案研究介紹過）。
+- 數值函數。
+  - 通用函數。
+  - 聚合函數。
+- 文字函數。
+
+## 數值函數
+
+- 又可以再細分為「通用函數」與「聚合函數」。
+- 通用函數（Universal functions）輸入與輸出的資料結構會對應相同的數量、外型。
+- 聚合函數（Aggregate functions）會將輸入的資料結構摘要為輸出，因此輸出資料結構的數量或外型不會和輸入相同。
+
+## 常用的通用函數
+
+- `abs()`
+- `sqrt()`
+- `floor()` 與 `ceiling()`
+- `round()`
+- `exp()`
+- `log()`
+
+## `abs()` 函數能夠將輸入元素都轉換為絕對值，這個函數命名來自 absolute 的縮寫
+
+```{r}
+v <- -5:5
+abs(v)
+```
+
+## `sqrt()` 函數能夠將輸入元素都開根號，這個函數命名來自 square root 的縮寫
+
+```{r}
+v <- c(1, 4, 9, 16, 25)
+sqrt(v)
+```
+
+## `floor()` 函數能夠將輸入元素都無條件捨去、`ceiling()` 函數能夠將輸入元素都無條件進位
+
+```{r}
+v <- 1:10
+sqrt_v <- sqrt(v)
+sqrt_v
+floor(sqrt_v)
+ceiling(sqrt_v)
+```
+
+## `round()` 函數能夠調整元素小數位，以 5 作為基準、靠攏數線上的偶數（Rounding off a 5, go to the even digit）
+
+```{r}
+v <- c(-1.5, -0.5, 0.5, 1.5, 2.5, 3.5)
+round(v)
+```
+
+## `exp()` 函數能夠將輸入元素調整為以自然對數函數之底數 $e$ 的指數，其中 $e$ 接近 2.718282
+
+$$
+exp(x) = e^{x}
+$$
+
+```{r}
+v <- exp(1:5)
+v
+```
+
+## `log()` 函數能夠將輸入元素取以 $e$ 為底數的對數
+
+```{r}
+log(v)
+```
+
+## 常用的聚合函數
+
+- `length()`
+- `sum()`
+- `mean()`
+- `var()`
+- `sd()`
+- `median()`
+- `min()`、`max()` 與 `range()`
+
+## `length()` 函數能夠將輸入的元素個數回傳
+
+```{r}
+v <- 1:100
+length(v)
+```
+
+## `sum()` 函數能夠將輸入所有數值加總回傳
+
+```{r}
+sum(v)
+```
+
+## `mean()` 函數能夠將輸入數值平均值回傳
+
+$$
+\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
+$$
+
+```{r}
+mean(v)
+```
+
+## `var()` 函數能夠將輸入數值變異數回傳
+
+R 語言的 `var()` 函數定義為樣本變異數，在計算公式中分母使用的是 $n-1$
+
+$$
+var(x) = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}
+$$
+
+```{r}
+var(v)
+mean_v <- mean(v)
+n <- length(v)
+mean_squared_error <- sum((v - mean_v)^2)
+mean_squared_error / (n-1)
+```
+
+## `sd()` 函數能夠將輸入數值標準差回傳
+
+R 語言的 `sd()` 函數定義為樣本標準差，在計算公式中分母使用的是 $n-1$
+
+$$
+sd(x) = \sqrt\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}
+$$
+
+```{r}
+sd(v)
+mean_v <- mean(v)
+n <- length(v)
+mean_squared_error <- sum((v - mean_v)^2)
+sqrt(mean_squared_error / (n-1))
+# sqrt(sd(v))
+```
+
+## `median()` 函數能夠將輸入數值中位數回傳
+
+```{r}
+median(v)
+```
+
+## `range()` 函數能夠將輸入數值中最小值與最大值回傳、`min()` 函數能夠將輸入數值中最小值回傳、`max()` 函數能夠將輸入數值中最大值回傳
+
+```{r}
+range(v)
+min(v)
+max(v)
+```
+
+## 聚合函數都有一個共同的參數 `na.rm`
+
+- `na.rm` 參數可以指定是否將未定義值向量 `NA` 排除
+- 如果輸入帶有未定義值向量，必須要指定 `na.rm = TRUE` 才能夠回傳答案（`na.rm` 預設為 FALSE）。
+
+```{r}
+v <- c(v, NA)
+sum(v)
+sum(v, na.rm = TRUE)
+```
+
+## 文字函數
+
+- `toupper()` 與 `tolower()`
+- `nchar()`
+- `substr()`
+- `grep()`
+- `sub()`
+- `strsplit()`
+- `paste()` 與 `paste0()`
+- `trimws()`
+
+## `toupper()` 函數能夠將輸入文字全部轉換為大寫、`tolower()` 函數能夠將輸入文字全部轉換為小寫
+
+```{r}
+skywalkers <- c("Anakin Skywalker", "Luke Skywalker")
+toupper(skywalkers)
+tolower(skywalkers)
+```
+
+## `nchar()` 函數能夠回傳文字的字元數
+
+```{r}
+nchar(skywalkers)
+```
+
+## `substr()` 函數能夠擷取指定部分的文字
+
+使用的時候搭配兩個參數 `start` 參數指定要從哪一個字元位置開始擷取、`stop` 參數指定要擷取到哪一個字元位置。
+
+```{r}
+luke <- "Luke Skywalker"
+nchar_luke <- nchar(luke)
+first_name <- substr(luke, start = 1, stop = 4)
+last_name <- substr(luke, start = 6, stop = nchar_luke)
+```
+
+## `grep()` 函數能夠在文字中搜尋指定樣式並將符合所在索引值回傳
+
+使用 `pattern` 參數指定樣式，如果搜尋後沒有符合樣式的，則會回傳 `integer(0)`
+
+```{r}
+starwars_characters <- c("Luke Skywalker", "Princess Leia Organa", "Anakin Skywalker", "Darth Vader")
+grep(pattern = "Skywalker", starwars_characters)
+grep(pattern = "Leia", starwars_characters)
+grep(pattern = "Vader", starwars_characters)
+grep(pattern = "Yoda", starwars_characters)
+```
+
+## `sub()` 函數能夠在文字中搜尋到指定樣式指定替換為其他內容
+
+- 使用 `pattern` 參數指定樣式。
+- 使用 `replacement` 參數指定要替換的文字。
+
+```{r}
+anakin <- "Anakin Skywalker"
+luke <- sub(pattern = "Anakin", replacement = "Luke", anakin)
+luke
+```
+
+## `strsplit()` 函數能夠將一個文字切割成清單
+
+- 使用 `split` 參數可以指定要根據什麼分割符號來進行文字的切割。
+- 值得注意的是這個函數的輸出是以清單的資料結構儲存。
+
+```{r}
+skywalkers <- c("Anakin Skywalker", "Luke Skywalker")
+strsplit(skywalkers, split = " ")
+```
+
+## `paste()` 函數能夠將多個文字連接為一個文字向量，`paste0()` 函數作用相同，只是改為預設以空字串連接
+
+使用 `sep` 參數可以指定連接起來以後要使用什麼分隔符號，預設是以一個空格來連接。
+
+```{r}
+luke <- "Luke"
+skywalker <- "Skywalker"
+paste(luke, skywalker)
+paste0(luke, skywalker)
+```
+
+## `trimws()` 函數能夠將文字中多餘空格刪除
+
+- 所謂的多餘空格指的是
+  - 出現在文字左邊的空格（Leading blanks）
+  - 出現在文字右邊的空格（Trailing blanks）
+  - 使用 `which = "left"` 參數可以指定刪除左邊多餘空格、`which = "right"` 參數可以指定刪除右邊多餘空格，預設 `which = "both"` 即刪除左邊與右邊多餘空格。
+
+```{r}
+luke <- "   Luke Skywalker   "
+trimws(luke, which = "left")
+trimws(luke, which = "right")
+trimws(luke)
+```
+
+# 自行定義函數
+
+## （複習）什麼是函數？
+
+一段被賦予名稱的程式碼，能夠完成某一個文字處理或者數值計算任務，在使用函數之前，必須先確定這個函數在執行的環境中已經被定義妥善。
+
+## （複習）函數由五個因素組成
+
+1. 函數名稱。
+2. 輸入。
+3. 參數。
+4. 文字處理或數值計算的程式碼。
+5. 輸出。
+
+```{r}
+function_name <- function(輸入, 參數){
+  ### 程式區塊的開始
+  # 撰寫主要的程式
+  return(輸出)
+  ### 程式區塊的結束
+}
+```
+
+## 自行定義函數的過程中，必須要思考這五個因素
+
+1. 盡量以動詞為函數命名，採用蛇形命名法（Snake-case），例如 `sample_from_population()`、`create_empty_vector()`、`find_largest_number()`
+2. 利用保留字 `function` 告訴 R 語言這是一個函數。
+3. 在小括號中放入想好的輸入與參數命名。
+4. 以大括號建立程式區塊，並在其中撰寫主要的程式。
+5. 最後將輸出放在 `return()` 裡頭。
+
+## 留意輸入與參數的設計
+
+- 輸入可以設計為「無」或者「必要」。
+- 參數給予預設（Default）。
+
+```{r}
+getwd()               # 輸入為「無」
+round(pi)             # 輸入為「必要」
+round(pi, digits = 2) # 預設 digits = 0
+```
+
+## 沒有組織的程式碼不好使用
+
+- 假設 R 語言沒有 `sd()` 函數。
+- 這段計算樣本標準差的程式的「可利用性」低、「重複性」高。
+
+```{r}
+v <- 1:100
+mean_v <- mean(v)
+n <- length(v)
+mean_squared_error <- sum((v - mean_v)^2)
+sqrt(mean_squared_error / (n-1))
+v <- 1:50
+mean_v <- mean(v)
+n <- length(v)
+mean_squared_error <- sum((v - mean_v)^2)
+sqrt(mean_squared_error / (n-1))
+```
+
+## 自行定義函數 `calculate_standard_deviation()`
+
+```{r}
+calculate_standard_deviation <- function(x) {
+  mean_x <- mean(x)
+  n <- length(x)
+  mean_squared_error <- sum((x - mean_x)^2)
+  standard_deviation <- sqrt(mean_squared_error / (n-1))
+  return(standard_deviation)
+}
+calculate_standard_deviation(1:100)
+calculate_standard_deviation(1:50)
+```
+
+## 加入參數 `unbiased`
+
+分母採用 $n-1$ 為無偏誤估計（Unbiased estimate），採用 $n$ 為偏誤估計（Biased estimate）。
+
+```{r}
+calculate_standard_deviation <- function(x, unbiased = TRUE) {
+  mean_x <- mean(x)
+  n <- length(x)
+  mean_squared_error <- sum((x - mean_x)^2)
+  standard_deviation <- sqrt(mean_squared_error / (n - unbiased))
+  return(standard_deviation)
+}
+calculate_standard_deviation(1:100)
+calculate_standard_deviation(1:100, unbiased = FALSE)
+```
+
+# 區隔物件有效性的作用域
+
+## （複習）什麼是程式區塊
+
+- 程式區塊（Code blocks）指的是將一系列相關的敘述集合在一起的程式碼結構。
+- 在 R 語言中，程式區塊使用一對大括號 `{}` 將敘述包裝在裡面。
+- 條件判斷、迴圈與自行定義函數都會需要程式區塊將敘述與它們連結。
+
+## 什麼是作用域 
+
+- 附屬於函數的程式區塊具有作用域（或稱範疇）Scope 的觀念。
+- 作用域是物件名稱與參照有效的部分。
+- 附屬於函數的程式區塊稱為區域（Local scope），函數以外的部分則稱為全域（Global scope）。
+
+```{r}
+#| eval: false
+### 這裡屬於全域
+function_name <- function(輸入, 參數){
+  ### 區域的開始
+  # 撰寫主要的程式
+  return(輸出)
+  ### 區域的結束
+}
+### 這裡屬於全域
+```
+
+## 區域物件的作用域被侷限在程式區塊之中
+
+- 區域物件僅在附屬於該函數的程式區塊中才有效，包含：
+  - 函數的輸入物件命名與參數物件命名
+  - 在函數的程式區塊中建立的物件
+
+## 在全域範圍中區域物件沒有作用
+
+- 區域物件僅在附屬於該函數的程式區塊中才有效，包含：
+  - 函數的輸入物件命名與參數物件命名，例如 `x`、`unbiased`
+  - 在函數的程式區塊中建立的物件，例如 `mean_x`、`n`、`mean_squared_error`、`standard_deviation`
+- 在全域範圍內試圖運用任何區域物件都會遭遇錯誤。
+
+```{r}
+calculate_standard_deviation <- function(x, unbiased = TRUE) {
+  mean_x <- mean(x)
+  n <- length(x)
+  mean_squared_error <- sum((x - mean_x)^2)
+  standard_deviation <- sqrt(mean_squared_error / (n - unbiased))
+  return(standard_deviation)
+}
+calculate_standard_deviation(1:100)
+# x
+# unbiased
+# mean_x
+# n
+# mean_squared_error
+# standard_deviation
+```
+
+# 輸入與輸出的對應關係
+
+## 自行定義函數很重要的任務是釐清「預期輸入」與「預期輸出」的對應關係
+
+- 沒有輸入。
+- 一個輸入。
+- 多個輸入。
+- 一個輸出。
+- 多個輸出。
+
+「一個輸入」或者「一個輸出」的對應關係單純且容易理解。
+
+## 設計沒有輸入的函數
+
+在小括號中留空即可。
+
+```{r}
+hello_world <- function() {
+  return("Hello, world!")
+}
+hello_world()
+```
+
+## 設計多個輸入的函數
+
+輸入命名可以採 `x`, `y`, ... ，參數記得給預設（Default）。
+
+```{r}
+add_then_power <- function(x, y, exponent = 1) {
+  add <- (x + y)
+  power_add <- add^exponent
+  return(power_add)
+}
+add_then_power(5, 6)
+add_then_power(5, 6, exponent = 2)
+```
+
+## 設計多個輸出的函數
+
+採用適當的資料結構儲存後輸出，推薦的選擇是命名清單（Named list）。
+
+```{r}
+calculate_standard_deviation <- function(x) {
+  mean_x <- mean(x)
+  n <- length(x)
+  mean_squared_error <- sum((x - mean_x)^2)
+  unbiased_standard_deviation <- sqrt(mean_squared_error / (n-1))
+  biased_standard_deviation <- sqrt(mean_squared_error / n)
+  standard_deviations <- list(
+    "biased" = biased_standard_deviation,
+    "unbiased" = unbiased_standard_deviation
+  )
+  return(standard_deviations)
+}
+standard_deviation <- calculate_standard_deviation(1:100)
+standard_deviation[["unbiased"]] # standard_deviation$unbiased
+standard_deviation[["biased"]]   # standard_deviation$biased
+```
+
+# `return()` 的作用
+
+## `return()` 具有兩個作用
+
+1. 將函數結果「輸出」。
+2. 終止函數程式區塊的執行。
+
+## 將函數結果「輸出」
+
+R 語言為了讓使用者方便，預設會將函數程式區塊中放在最後一行的物件輸出。
+
+```{r}
+calculate_standard_deviation <- function(x) {
+  mean_x <- mean(x)
+  n <- length(x)
+  mean_squared_error <- sum((x - mean_x)^2)
+  unbiased_standard_deviation <- sqrt(mean_squared_error / (n-1))
+  biased_standard_deviation <- sqrt(mean_squared_error / n)
+  standard_deviations <- list(
+    "biased" = biased_standard_deviation,
+    "unbiased" = unbiased_standard_deviation
+  )
+  #unbiased_standard_deviation
+  #biased_standard_deviation
+  standard_deviations
+}
+calculate_standard_deviation(1:100)
+```
+
+## 終止函數程式區塊的執行
+
+在函數程式區塊中寫在 `return()` 之後的所有內容在使用函數的時候都不會有任何作用。
+
+```{r}
+calculate_standard_deviation <- function(x) {
+  mean_x <- mean(x)
+  n <- length(x)
+  mean_squared_error <- sum((x - mean_x)^2)
+  unbiased_standard_deviation <- sqrt(mean_squared_error / (n-1))
+  biased_standard_deviation <- sqrt(mean_squared_error / n)
+  standard_deviations <- list(
+    "biased" = biased_standard_deviation,
+    "unbiased" = unbiased_standard_deviation
+  )
+  return(standard_deviations)
+  print(5566)
+  print("Hello, world!")
+  print(c(FALSE, TRUE))
+}
+calculate_standard_deviation(1:100)
+```
+
+## 在函數定義結束後寫 `return()`
+
+- 明確宣告，提高程式的可讀性（Readability）。
+- 假如不是在「函數型程式設計」的應用情境，寫 `return()` 是我比較喜歡的（但確實也有很多 R 使用者偏好不寫）。
+
+# 個案研究：自行定義搜尋演算法函數
+
+## 在「使用流程控制管理程式區塊的執行」章節的個案研究是「搜尋演算法」
+
+- 與 R 語言玩「猜猜猜數字」的遊戲，請 R 語言想一個介於 1 到 100 的整數，我們來猜。
+- 我們有兩種基本的方式來猜 R 語言心中所想的整數：
+  - 簡易搜尋
+  - 二元搜尋
+  
+## 重複和 R 語言玩 100 次的時候會發現兩個缺點
+
+- 程式碼的可利用性很低。
+- 程式碼的重複性很高。
+
+## 看看那時寫的重複透過簡易搜尋和 R 語言玩 100 次「猜猜猜數字」
+
+```{r}
+# 玩 1 次的程式碼
+rs_number <- sample(1:100, size = 1)
+number_of_guess <- 0
+for (guess in 1:100) {
+  number_of_guess <- number_of_guess + 1
+  if (guess == rs_number) {
+    break
+  }
+}
+```
+
+---
+
+```{r}
+# 玩 100 次的程式碼
+number_of_guess_history <- c()
+for (game in 1:100) {
+  rs_number <- sample(1:100, size = 1)
+  number_of_guess <- 0
+  for (guess in 1:100) {
+    number_of_guess <- number_of_guess + 1
+    if (guess == rs_number) {
+      break
+    }
+  }
+  number_of_guess_history <- c(number_of_guess_history, number_of_guess)
+}
+```
+
+## 看看那時寫的重複透過二元搜尋和 R 語言玩 100 次「猜猜猜數字」
+
+```{r}
+# 玩 1 次的程式碼
+low <- 1
+high <- 100
+rs_number <- sample(low:high, size = 1)
+number_of_guess <- 1
+guess <- 50
+while (guess != rs_number) {
+  if (guess > rs_number) {
+    high <- guess
+    guess <- floor((low + high) / 2)
+  } else if (guess < rs_number) {
+    low <- guess
+    guess <- ceiling((low + high) / 2)
+  }
+  number_of_guess <- number_of_guess + 1
+}
+```
+
+---
+
+```{r}
+# 玩 100 次的程式碼
+number_of_guess_history <- c()
+for (game in 1:100) {
+  low <- 1
+  high <- 100
+  rs_number <- sample(low:high, size = 1)
+  number_of_guess <- 1
+  guess <- 50
+  while (guess != rs_number) {
+    if (guess > rs_number) {
+      high <- guess
+      guess <- floor((low + high) / 2)
+    } else if (guess < rs_number) {
+      low <- guess
+      guess <- ceiling((low + high) / 2)
+    }
+    number_of_guess <- number_of_guess + 1
+  }
+  number_of_guess_history <- c(number_of_guess_history, number_of_guess)
+}
+```
+
+## 將簡易搜尋程式碼改寫為函數 `sequential_search(low = 1, high = 100)`
+
+```{r}
+sequential_search <- function(low = 1, high = 100) {
+  rs_number <- sample(low:high, size = 1)
+  number_of_guess <- 0
+  for (guess in low:high) {
+    number_of_guess <- number_of_guess + 1
+    if (guess == rs_number) {
+      break
+    }
+  }
+  return(number_of_guess)
+}
+```
+
+## 將二元搜尋程式碼改寫為函數 `binary_search(low = 1, high = 100)`
+
+```{r}
+binary_search <- function(low = 1, high = 100) {
+  rs_number <- sample(low:high, size = 1)
+  number_of_guess <- 1
+  guess <- round((low + high) / 2)
+  while (guess != rs_number) {
+    if (guess > rs_number) {
+      high <- guess
+      guess <- floor((low + high) / 2)
+    } else if (guess < rs_number) {
+      low <- guess
+      guess <- ceiling((low + high) / 2)
+    }
+    number_of_guess <- number_of_guess + 1
+  }
+  return(number_of_guess)
+}
+```
+
+## 將重複透過簡易搜尋、二元搜尋和 R 語言玩 `n` 次「猜猜猜數字」改寫為函數 `play_n_times(n = 100)`
+
+```{r}
+play_n_times <- function(n = 100) {
+  n_guess_history_sequential <- c()
+  n_guess_history_binary <- c()
+  for (game in 1:n) {
+    n_guess_sequential <- sequential_search()
+    n_guess_binary <- binary_search()
+    n_guess_history_sequential <- c(n_guess_history_sequential, n_guess_sequential)
+    n_guess_history_binary <- c(n_guess_history_binary, n_guess_binary)
+  }
+  sequential_search_times <- mean(n_guess_history_sequential)
+  binary_search_times <- mean(n_guess_history_binary)
+  search_times <- list(
+    "sequential" = sequential_search_times,
+    "binary" = binary_search_times
+  )
+  return(search_times)
+}
+```
+
+## 使用函數 `play_n_times()`
+
+```{r}
+mean_search_times <- play_n_times()
+mean_search_times$sequential # 約 50 次左右
+mean_search_times$binary     # 約 6~7 次左右
+```
+
+# 重點統整
+
+- 組織程式碼希望達到的目標：
+  - 提高程式碼的「可利用性」。
+  - 減少程式碼的「重複性」。
+- R 語言提供使用者組織程式碼的機制
+  - 函數（Function）。
+  - 類別（Class）。
+  - 套件（Package）。
+
+## 重點統整（續）
+
+- 常用 R 語言函數大類
+  - 系統功能。
+  - 數值函數。
+    - 通用函數。
+    - 聚合函數。
+  - 文字函數。
+
+## 重點統整（續）
+
+- 附屬於函數的程式區塊具有作用域（或稱範疇）Scope 的觀念。
+  - 作用域是物件名稱與參照有效的部分。
+  - 附屬於函數的程式區塊稱為區域（Local scope），函數以外的部分則稱為全域（Global scope）。
+- `return()` 具有兩個作用
+  - 將函數結果「輸出」。
+  - 終止函數程式區塊的執行。

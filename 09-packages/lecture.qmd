@@ -1,0 +1,299 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "使用 R 語言套件獲得更多功能"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "使用 R 語言套件獲得更多功能"
+    scrollable: true
+    incremental: false
+---
+
+# 什麼是套件
+
+## （複習）R 語言提供使用者組織程式碼的機制
+
+- 函數（Function）。
+- 類別（Class）。
+- **套件（Package）**。
+
+## 關於套件（Package）
+
+- 由 [R 開發核心團隊](https://www.r-project.org)、R 語言的開發者所設計的函數與類別，可以「套件」的型態組織起來上架至 [CRAN](https://cran.r-project.org)(Comprehensive R Archive Network)，供所有的 R 語言使用者下載、安裝然後載入使用。
+- 截至目前為止（2022 年 9 月），R 語言共有 18,000+ 個套件可供使用：<https://cran.r-project.org/web/packages>
+
+## （複習）函數有四個來源
+
+1. 來自內建函數。
+2. 來自使用者自行定義函數。
+3. 來自標準套件。
+4. 來自第三方套件。
+
+## 以 RStudio Packages 頁籤檢視 R 語言套件清單
+
+- 內建函數來自於那些**預先載入**的標準套件
+  - `base`
+  - `datasets`
+  - `graphics`
+  - `grDevices`
+  - `methods`
+  - `stats`
+  - `utils`
+
+## 使用 `installed.packages()` 函數檢視所有 R 語言的標準套件
+
+安裝 R 語言同時就會安裝好的即為標準套件。
+
+```{r}
+installed_packages <- installed.packages() # 命名矩陣
+colnames_installed_packages <- colnames(installed_packages)
+is_base_recommended <- installed_packages[, "Priority"] %in% c("base", "recommended")
+standard_packages <- installed_packages[is_base_recommended, c("Package", "Priority")]
+standard_packages
+nrow(standard_packages)
+```
+
+## 如何使用內建函數
+
+由於內建函數是來自於那些**預先載入**的標準套件，所以能夠直接使用。
+
+```{r}
+getwd()       # 來自 base
+median(1:10)  # 來自 stats
+sessionInfo() # 來自 utils
+```
+
+## 如何使用自行定義的函數
+
+- 確定函數已經被定義。
+- 如果是匿名函數，要搭配函數型函數應用。
+
+```{r}
+sqr_then_sum <- function(x) {
+  return(sum(x^2))
+}
+sqr_then_sum(1:3)
+sapply(list(1:3), FUN = function(x) sum(x^2))
+```
+
+# 使用 `library()` 函數載入套件
+
+## 如何使用來自標準套件的函數
+
+- 這裡指的是其他**沒有被預先載入**的標準套件。
+- 必須先使用 `library()` 函數載入。
+- 在沒有載入前沒有辦法查詢或使用，以 `foreign` 標準套件的 `read.spss()` 函數為例。
+
+```{r}
+#| eval: false
+help("read.spss")
+```
+
+## 使用 `library()` 函數載入後就能夠查詢與使用
+
+```{r}
+#| eval: false
+library("foreign")
+help("read.spss")
+```
+
+## 使用 `detach()` 函數卸載
+
+```{r}
+#| eval: false
+detach("package:foreign", unload = TRUE)
+```
+
+## 運用 Packages 頁籤載入、卸載套件
+
+除了使用函數載入、卸載套件，亦可以運用 RStudio UI 介面 Packages 頁籤載入、卸載套件。
+
+# 使用 `install.packages()` 函數安裝套件
+
+## 如何使用來自第三方套件的函數
+
+- 第三方套件指那些沒有隨著 R 語言安裝至電腦中的套件。
+- 先使用 `install.packages()` 函數安裝。
+- 再使用 `library()` 函數載入。
+- 在沒有安裝前沒有辦法載入，以 `dplyr` 第三方套件為例。
+
+```{r}
+#| eval: false
+library("dplyr")
+```
+
+## 使用 `install.packages()` 函數安裝
+
+```{r}
+#| eval: false
+install.packages("dplyr")
+```
+
+## 使用 `remove.packages()` 函數移除
+
+```{r}
+#| eval: false
+remove.packages("dplyr")
+```
+
+## 運用 Packages 頁籤安裝、移除套件
+
+除了使用函數安裝、移除套件，亦可以運用 RStudio UI 介面 Packages 頁籤安裝、移除套件。
+
+## 載入與安裝套件的差異
+
+- 在同一個 R 語言版本中安裝第三方套件做一次即可。
+- 載入套件則是需要使用套件中的功能時都要執行。
+
+## 再使用 `library()` 函數載入
+
+```{r}
+library("dplyr")
+```
+
+# 函數名稱相同的解決方式
+
+## 載入 `dplyr` 套件時出現的訊息是什麼意思
+
+```
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+```
+
+## 這段訊息告訴我們的是
+
+- `stats` 套件的 `filter()` 與 `lag()` 函數命名被 `dplyr` 套件的 `filter()` 與 `lag()` 函數命名所覆蓋。
+- `base` 套件的 `intersect()`、`setdiff()`、`setequal()` 與 `union()` 函數命名被 `dplyr` 套件的 `intersect()`、`setdiff()`、`setequal()` 與 `union()` 函數命名所覆蓋。
+
+## CRAN 除了可以下載 R 語言主程式，也作為 R 語言的套件管理中心
+
+- CRAN 不允許套件有「相同命名」，但是不會限制函數能否「相同命名」。
+- 因此不同套件中出現命名一樣的函數是常見的。
+
+## 使用函數時再加上套件名稱
+
+使用兩個冒號 `package::function()` 同時描述套件與函數名稱。
+
+```{r}
+#| eval: false
+stats::filter()
+dplyr::filter()
+base::intersect()
+dplyr::intersect()
+```
+
+# 個案研究：常用的 R 語言套件一覽
+
+## R 語言有非常活躍的開發者社群貢獻第三方套件
+
+截至目前為止（2022 年 9 月），R 語言共有 18,000+ 個套件可供使用：<https://cran.r-project.org/web/packages>
+
+## 套件的應用領域和資料科學的應用場景貼近
+
+![](../images/r-for-data-science.png)
+
+來源：<https://r4ds.had.co.nz/program-intro.html>
+
+## 十大應用領域
+
+- 資料載入
+- 資料操作與轉換
+- 資料視覺化
+- 資料建模
+- 報告與儀表板
+- 地理圖資
+- 時間序列與財務金融
+- 高效能運算
+- 網路資料擷取
+- 開發 R 語言套件
+
+## 資料載入
+
+- 資料庫相關
+  - `DBI`、`odbc`、`RMySQL`、`RPostgresSQL`、`RSQLite` 套件。
+- 試算表相關
+  - `XLConnect`、`xlsx` 套件。
+- 其他統計軟體資料集相關
+  - `foreign`、`haven` 套件。
+
+## 資料操作與轉換
+
+- `dplyr`、`tidyr` 套件：資料清理轉置。
+- `stringr` 套件：文字資料處理。
+- `lubridate` 套件：日期時間資料處理。
+
+## 資料視覺化
+
+- `ggplot2` 套件：視覺化的文法。
+- `ggvis`、`htmlwidgets`、`googleVis` 套件：基於網頁技術的視覺化。
+- `rgl` 套件：3D 資料視覺化。
+
+## 資料建模
+
+- `tidymodels`、`caret` 套件：非常豐富的迴歸與分類模型。
+- `car` 套件：變異數分析模型。
+- `randomForest` 套件：隨機森林模型。
+- `multcomp` 套件：模型評估。
+- `vcd` 套件：類別資料模型。
+- `glmnet` 套件：正規化迴歸模型。
+- `survival` 套件：存活模型。
+
+## 報告與儀表板
+
+- `shiny` 套件：動態資料視覺化與儀表板。
+- `rmarkdown` 、`knitr` 套件：多種文件格式輸出。
+- `xtable` 套件：在 TeX 文件中輸出表格。
+
+## 地理圖資
+
+- `sp`、`maptools`、`maps` 套件：處理地理圖資的 Shapefile
+- `leaflet` 套件：基於 `leaflet.js` 的視覺化。
+- `ggmap` 套件：基於 Google Maps 的視覺化。
+
+## 時間序列與財務金融
+
+- `zoo`、`xts` 套件：處理時間序列資料。
+- `quantmod` 套件：獲取金融資料與進行技術分析。
+
+## 高效能運算
+
+- `Rcpp` 套件：透過 R 語言函數執行 C++ 程式。
+- `data.table` 套件：處理表格式的巨量資料。
+- `parallel` 套件：平行運算。
+
+## 網路資料擷取
+
+- `XML` 套件：解析 XML 格式資料。
+- `jsonlite` 套件：解析 JSON 格式資料。
+- `httr` 套件：發送 HTTP 請求。
+- `rvest` 套件：解析 HTML 格式資料。
+
+## 開發 R 語言套件
+
+- `devtools` 套件：開發套件。
+- `testthat` 套件：單元測試。
+- `roxygen2` 套件：撰寫套件說明文件。
+
+# 重點統整
+
+- 由 [R 開發核心團隊](https://www.r-project.org)、R 語言的開發者所設計的函數與類別，可以「套件」的型態組織起來上架至 [CRAN](https://cran.r-project.org)(Comprehensive R Archive Network)，供所有的 R 語言使用者下載、安裝然後載入使用。
+- 使用 `library()` 函數載入套件。
+- 使用 `install.packages()` 函數安裝套件。
+
+## 重點統整（續）
+
+- 載入與安裝套件的差異
+  - 在同一個 R 語言版本中安裝第三方套件做一次即可。
+  - 載入套件則是需要使用套件中的功能時都要執行。
+- 透過兩個冒號 `package::function()` 同時描述套件與函數名稱來使用不同套件中命名一樣的函數。

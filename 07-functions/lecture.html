@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="lecture_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lecture_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.37">
+
+  <meta name="author" content="郭耀仁">
+  <title>R 語言的 50 + 練習：統計分析的前哨站</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">R 語言的 50 + 練習：統計分析的前哨站</h1>
+  <p class="subtitle">自行定義函數組織 R 語言的程式碼</p>
+  <p class="author">郭耀仁</p>
+</section>
+
+<section>
+<section id="組織程式碼的機制" class="title-slide slide level1 center">
+<h1>組織程式碼的機制</h1>
+
+</section>
+<section id="什麼是組織程式碼" class="slide level2">
+<h2>什麼是組織程式碼</h2>
+<ul>
+<li>面對不同目的以及應用場景，我們會有組織程式碼的需求，希望程式碼可以簡潔且有效率地完成任務。</li>
+<li>組織程式碼希望達到的目標：
+<ul>
+<li>提高程式碼的「可利用性」。</li>
+<li>減少程式碼的「重複性」。</li>
+</ul></li>
+</ul>
+</section>
+<section id="r-語言提供使用者組織程式碼的機制" class="slide level2">
+<h2>R 語言提供使用者組織程式碼的機制</h2>
+<ul>
+<li>函數（Function）。</li>
+<li>類別（Class）。</li>
+<li>套件（Package）。</li>
+</ul>
+</section>
+<section id="理解程式碼組織機制的層次" class="slide level2">
+<h2>理解程式碼組織機制的層次</h2>
+<ul>
+<li>程式碼可以組織為函數或者類別。</li>
+<li>函數與類別可以組織為套件。</li>
+</ul>
+</section></section>
+<section>
+<section id="常用的-r-語言函數" class="title-slide slide level1 center">
+<h1>常用的 R 語言函數</h1>
+
+</section>
+<section id="複習r-語言的核心精神引用-greg-martin-的一句話" class="slide level2">
+<h2>（複習）R 語言的核心精神，引用 Greg Martin 的一句話</h2>
+<blockquote>
+<p>The way R works is pretty straightforward, you apply functions to objects.</p>
+<p>Greg Martin</p>
+</blockquote>
+</section>
+<section id="更動結果的機制" class="slide level2">
+<h2>更動結果的機制</h2>
+<ul>
+<li>使用函數可以讓被應用的物件所參照的值更動。</li>
+<li>更動方式是以「回傳」型態輸出結果。</li>
+<li>以 <code>sort()</code> 函數為例。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>primes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">sort</span>(primes)           <span class="co"># 沒有將回傳更新原本命名的物件</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2  3  5  7 11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>primes                 <span class="co"># 排序沒有改變</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11  5  7  2  3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>primes <span class="ot">&lt;-</span> <span class="fu">sort</span>(primes) <span class="co"># 有將回傳更新原本命名的物件</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>primes                 <span class="co"># 改變為遞增排序</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2  3  5  7 11</code></pre>
+</div>
+</div>
+</section>
+<section id="常用-r-語言函數大類" class="slide level2">
+<h2>常用 R 語言函數大類</h2>
+<ul>
+<li>系統功能（已經在「怎樣學好 R 語言」章節的個案研究介紹過）。</li>
+<li>數值函數。
+<ul>
+<li>通用函數。</li>
+<li>聚合函數。</li>
+</ul></li>
+<li>文字函數。</li>
+</ul>
+</section>
+<section id="數值函數" class="slide level2">
+<h2>數值函數</h2>
+<ul>
+<li>又可以再細分為「通用函數」與「聚合函數」。</li>
+<li>通用函數（Universal functions）輸入與輸出的資料結構會對應相同的數量、外型。</li>
+<li>聚合函數（Aggregate functions）會將輸入的資料結構摘要為輸出，因此輸出資料結構的數量或外型不會和輸入相同。</li>
+</ul>
+</section>
+<section id="常用的通用函數" class="slide level2">
+<h2>常用的通用函數</h2>
+<ul>
+<li><code>abs()</code></li>
+<li><code>sqrt()</code></li>
+<li><code>floor()</code> 與 <code>ceiling()</code></li>
+<li><code>round()</code></li>
+<li><code>exp()</code></li>
+<li><code>log()</code></li>
+</ul>
+</section>
+<section id="abs-函數能夠將輸入元素都轉換為絕對值這個函數命名來自-absolute-的縮寫" class="slide level2">
+<h2><code>abs()</code> 函數能夠將輸入元素都轉換為絕對值，這個函數命名來自 absolute 的縮寫</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>v <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">abs</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 5 4 3 2 1 0 1 2 3 4 5</code></pre>
+</div>
+</div>
+</section>
+<section id="sqrt-函數能夠將輸入元素都開根號這個函數命名來自-square-root-的縮寫" class="slide level2">
+<h2><code>sqrt()</code> 函數能夠將輸入元素都開根號，這個函數命名來自 square root 的縮寫</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">sqrt</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+</div>
+</section>
+<section id="floor-函數能夠將輸入元素都無條件捨去ceiling-函數能夠將輸入元素都無條件進位" class="slide level2">
+<h2><code>floor()</code> 函數能夠將輸入元素都無條件捨去、<code>ceiling()</code> 函數能夠將輸入元素都無條件進位</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>sqrt_v <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(v)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>sqrt_v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427
+ [9] 3.000000 3.162278</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">floor</span>(sqrt_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 1 1 2 2 2 2 2 3 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ceiling</span>(sqrt_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 2 2 2 3 3 3 3 3 4</code></pre>
+</div>
+</div>
+</section>
+<section id="round-函數能夠調整元素小數位以-5-作為基準靠攏數線上的偶數rounding-off-a-5-go-to-the-even-digit" class="slide level2">
+<h2><code>round()</code> 函數能夠調整元素小數位，以 5 作為基準、靠攏數線上的偶數（Rounding off a 5, go to the even digit）</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">round</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2  0  0  2  2  4</code></pre>
+</div>
+</div>
+</section>
+<section id="exp-函數能夠將輸入元素調整為以自然對數函數之底數-e-的指數其中-e-接近-2.718282" class="slide level2">
+<h2><code>exp()</code> 函數能夠將輸入元素調整為以自然對數函數之底數 <span class="math inline">\(e\)</span> 的指數，其中 <span class="math inline">\(e\)</span> 接近 2.718282</h2>
+<p><span class="math display">\[
+exp(x) = e^{x}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>v <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb19-2"><a href="#cb19-2"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   2.718282   7.389056  20.085537  54.598150 148.413159</code></pre>
+</div>
+</div>
+</section>
+<section id="log-函數能夠將輸入元素取以-e-為底數的對數" class="slide level2">
+<h2><code>log()</code> 函數能夠將輸入元素取以 <span class="math inline">\(e\)</span> 為底數的對數</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">log</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+</div>
+</section>
+<section id="常用的聚合函數" class="slide level2">
+<h2>常用的聚合函數</h2>
+<ul>
+<li><code>length()</code></li>
+<li><code>sum()</code></li>
+<li><code>mean()</code></li>
+<li><code>var()</code></li>
+<li><code>sd()</code></li>
+<li><code>median()</code></li>
+<li><code>min()</code>、<code>max()</code> 與 <code>range()</code></li>
+</ul>
+</section>
+<section id="length-函數能夠將輸入的元素個數回傳" class="slide level2">
+<h2><code>length()</code> 函數能夠將輸入的元素個數回傳</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">length</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100</code></pre>
+</div>
+</div>
+</section>
+<section id="sum-函數能夠將輸入所有數值加總回傳" class="slide level2">
+<h2><code>sum()</code> 函數能夠將輸入所有數值加總回傳</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">sum</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5050</code></pre>
+</div>
+</div>
+</section>
+<section id="mean-函數能夠將輸入數值平均值回傳" class="slide level2">
+<h2><code>mean()</code> 函數能夠將輸入數值平均值回傳</h2>
+<p><span class="math display">\[
+\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">mean</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50.5</code></pre>
+</div>
+</div>
+</section>
+<section id="var-函數能夠將輸入數值變異數回傳" class="slide level2">
+<h2><code>var()</code> 函數能夠將輸入數值變異數回傳</h2>
+<p>R 語言的 <code>var()</code> 函數定義為樣本變異數，在計算公式中分母使用的是 <span class="math inline">\(n-1\)</span></p>
+<p><span class="math display">\[
+var(x) = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">var</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 841.6667</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>mean_v <span class="ot">&lt;-</span> <span class="fu">mean</span>(v)</span>
+<span id="cb31-2"><a href="#cb31-2"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(v)</span>
+<span id="cb31-3"><a href="#cb31-3"></a>mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((v <span class="sc">-</span> mean_v)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb31-4"><a href="#cb31-4"></a>mean_squared_error <span class="sc">/</span> (n<span class="dv">-1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 841.6667</code></pre>
+</div>
+</div>
+</section>
+<section id="sd-函數能夠將輸入數值標準差回傳" class="slide level2">
+<h2><code>sd()</code> 函數能夠將輸入數值標準差回傳</h2>
+<p>R 語言的 <code>sd()</code> 函數定義為樣本標準差，在計算公式中分母使用的是 <span class="math inline">\(n-1\)</span></p>
+<p><span class="math display">\[
+sd(x) = \sqrt\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">sd</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.01149</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>mean_v <span class="ot">&lt;-</span> <span class="fu">mean</span>(v)</span>
+<span id="cb35-2"><a href="#cb35-2"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(v)</span>
+<span id="cb35-3"><a href="#cb35-3"></a>mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((v <span class="sc">-</span> mean_v)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> (n<span class="dv">-1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.01149</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># sqrt(sd(v))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="median-函數能夠將輸入數值中位數回傳" class="slide level2">
+<h2><code>median()</code> 函數能夠將輸入數值中位數回傳</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">median</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50.5</code></pre>
+</div>
+</div>
+</section>
+<section id="range-函數能夠將輸入數值中最小值與最大值回傳min-函數能夠將輸入數值中最小值回傳max-函數能夠將輸入數值中最大值回傳" class="slide level2">
+<h2><code>range()</code> 函數能夠將輸入數值中最小值與最大值回傳、<code>min()</code> 函數能夠將輸入數值中最小值回傳、<code>max()</code> 函數能夠將輸入數值中最大值回傳</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">range</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   1 100</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">min</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">max</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100</code></pre>
+</div>
+</div>
+</section>
+<section id="聚合函數都有一個共同的參數-na.rm" class="slide level2">
+<h2>聚合函數都有一個共同的參數 <code>na.rm</code></h2>
+<ul>
+<li><code>na.rm</code> 參數可以指定是否將未定義值向量 <code>NA</code> 排除</li>
+<li>如果輸入帶有未定義值向量，必須要指定 <code>na.rm = TRUE</code> 才能夠回傳答案（<code>na.rm</code> 預設為 FALSE）。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(v, <span class="cn">NA</span>)</span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="fu">sum</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">sum</span>(v, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5050</code></pre>
+</div>
+</div>
+</section>
+<section id="文字函數" class="slide level2">
+<h2>文字函數</h2>
+<ul>
+<li><code>toupper()</code> 與 <code>tolower()</code></li>
+<li><code>nchar()</code></li>
+<li><code>substr()</code></li>
+<li><code>grep()</code></li>
+<li><code>sub()</code></li>
+<li><code>strsplit()</code></li>
+<li><code>paste()</code> 與 <code>paste0()</code></li>
+<li><code>trimws()</code></li>
+</ul>
+</section>
+<section id="toupper-函數能夠將輸入文字全部轉換為大寫tolower-函數能夠將輸入文字全部轉換為小寫" class="slide level2">
+<h2><code>toupper()</code> 函數能夠將輸入文字全部轉換為大寫、<code>tolower()</code> 函數能夠將輸入文字全部轉換為小寫</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>skywalkers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Anakin Skywalker"</span>, <span class="st">"Luke Skywalker"</span>)</span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="fu">toupper</span>(skywalkers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "ANAKIN SKYWALKER" "LUKE SKYWALKER"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">tolower</span>(skywalkers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "anakin skywalker" "luke skywalker"  </code></pre>
+</div>
+</div>
+</section>
+<section id="nchar-函數能夠回傳文字的字元數" class="slide level2">
+<h2><code>nchar()</code> 函數能夠回傳文字的字元數</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">nchar</span>(skywalkers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16 14</code></pre>
+</div>
+</div>
+</section>
+<section id="substr-函數能夠擷取指定部分的文字" class="slide level2">
+<h2><code>substr()</code> 函數能夠擷取指定部分的文字</h2>
+<p>使用的時候搭配兩個參數 <code>start</code> 參數指定要從哪一個字元位置開始擷取、<code>stop</code> 參數指定要擷取到哪一個字元位置。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>luke <span class="ot">&lt;-</span> <span class="st">"Luke Skywalker"</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>nchar_luke <span class="ot">&lt;-</span> <span class="fu">nchar</span>(luke)</span>
+<span id="cb56-3"><a href="#cb56-3"></a>first_name <span class="ot">&lt;-</span> <span class="fu">substr</span>(luke, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop =</span> <span class="dv">4</span>)</span>
+<span id="cb56-4"><a href="#cb56-4"></a>last_name <span class="ot">&lt;-</span> <span class="fu">substr</span>(luke, <span class="at">start =</span> <span class="dv">6</span>, <span class="at">stop =</span> nchar_luke)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="grep-函數能夠在文字中搜尋指定樣式並將符合所在索引值回傳" class="slide level2">
+<h2><code>grep()</code> 函數能夠在文字中搜尋指定樣式並將符合所在索引值回傳</h2>
+<p>使用 <code>pattern</code> 參數指定樣式，如果搜尋後沒有符合樣式的，則會回傳 <code>integer(0)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>starwars_characters <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Luke Skywalker"</span>, <span class="st">"Princess Leia Organa"</span>, <span class="st">"Anakin Skywalker"</span>, <span class="st">"Darth Vader"</span>)</span>
+<span id="cb57-2"><a href="#cb57-2"></a><span class="fu">grep</span>(<span class="at">pattern =</span> <span class="st">"Skywalker"</span>, starwars_characters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">grep</span>(<span class="at">pattern =</span> <span class="st">"Leia"</span>, starwars_characters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">grep</span>(<span class="at">pattern =</span> <span class="st">"Vader"</span>, starwars_characters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">grep</span>(<span class="at">pattern =</span> <span class="st">"Yoda"</span>, starwars_characters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>integer(0)</code></pre>
+</div>
+</div>
+</section>
+<section id="sub-函數能夠在文字中搜尋到指定樣式指定替換為其他內容" class="slide level2">
+<h2><code>sub()</code> 函數能夠在文字中搜尋到指定樣式指定替換為其他內容</h2>
+<ul>
+<li>使用 <code>pattern</code> 參數指定樣式。</li>
+<li>使用 <code>replacement</code> 參數指定要替換的文字。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>anakin <span class="ot">&lt;-</span> <span class="st">"Anakin Skywalker"</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>luke <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"Anakin"</span>, <span class="at">replacement =</span> <span class="st">"Luke"</span>, anakin)</span>
+<span id="cb65-3"><a href="#cb65-3"></a>luke</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Luke Skywalker"</code></pre>
+</div>
+</div>
+</section>
+<section id="strsplit-函數能夠將一個文字切割成清單" class="slide level2">
+<h2><code>strsplit()</code> 函數能夠將一個文字切割成清單</h2>
+<ul>
+<li>使用 <code>split</code> 參數可以指定要根據什麼分割符號來進行文字的切割。</li>
+<li>值得注意的是這個函數的輸出是以清單的資料結構儲存。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>skywalkers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Anakin Skywalker"</span>, <span class="st">"Luke Skywalker"</span>)</span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="fu">strsplit</span>(skywalkers, <span class="at">split =</span> <span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "Anakin"    "Skywalker"
+
+[[2]]
+[1] "Luke"      "Skywalker"</code></pre>
+</div>
+</div>
+</section>
+<section id="paste-函數能夠將多個文字連接為一個文字向量paste0-函數作用相同只是改為預設以空字串連接" class="slide level2">
+<h2><code>paste()</code> 函數能夠將多個文字連接為一個文字向量，<code>paste0()</code> 函數作用相同，只是改為預設以空字串連接</h2>
+<p>使用 <code>sep</code> 參數可以指定連接起來以後要使用什麼分隔符號，預設是以一個空格來連接。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>luke <span class="ot">&lt;-</span> <span class="st">"Luke"</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a>skywalker <span class="ot">&lt;-</span> <span class="st">"Skywalker"</span></span>
+<span id="cb69-3"><a href="#cb69-3"></a><span class="fu">paste</span>(luke, skywalker)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Luke Skywalker"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="fu">paste0</span>(luke, skywalker)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "LukeSkywalker"</code></pre>
+</div>
+</div>
+</section>
+<section id="trimws-函數能夠將文字中多餘空格刪除" class="slide level2">
+<h2><code>trimws()</code> 函數能夠將文字中多餘空格刪除</h2>
+<ul>
+<li>所謂的多餘空格指的是
+<ul>
+<li>出現在文字左邊的空格（Leading blanks）</li>
+<li>出現在文字右邊的空格（Trailing blanks）</li>
+<li>使用 <code>which = "left"</code> 參數可以指定刪除左邊多餘空格、<code>which = "right"</code> 參數可以指定刪除右邊多餘空格，預設 <code>which = "both"</code> 即刪除左邊與右邊多餘空格。</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>luke <span class="ot">&lt;-</span> <span class="st">"   Luke Skywalker   "</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a><span class="fu">trimws</span>(luke, <span class="at">which =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Luke Skywalker   "</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="fu">trimws</span>(luke, <span class="at">which =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "   Luke Skywalker"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a><span class="fu">trimws</span>(luke)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Luke Skywalker"</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="自行定義函數" class="title-slide slide level1 center">
+<h1>自行定義函數</h1>
+
+</section>
+<section id="複習什麼是函數" class="slide level2">
+<h2>（複習）什麼是函數？</h2>
+<p>一段被賦予名稱的程式碼，能夠完成某一個文字處理或者數值計算任務，在使用函數之前，必須先確定這個函數在執行的環境中已經被定義妥善。</p>
+</section>
+<section id="複習函數由五個因素組成" class="slide level2">
+<h2>（複習）函數由五個因素組成</h2>
+<ol type="1">
+<li>函數名稱。</li>
+<li>輸入。</li>
+<li>參數。</li>
+<li>文字處理或數值計算的程式碼。</li>
+<li>輸出。</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(輸入, 參數){</span>
+<span id="cb79-2"><a href="#cb79-2"></a>  <span class="do">### 程式區塊的開始</span></span>
+<span id="cb79-3"><a href="#cb79-3"></a>  <span class="co"># 撰寫主要的程式</span></span>
+<span id="cb79-4"><a href="#cb79-4"></a>  <span class="fu">return</span>(輸出)</span>
+<span id="cb79-5"><a href="#cb79-5"></a>  <span class="do">### 程式區塊的結束</span></span>
+<span id="cb79-6"><a href="#cb79-6"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="自行定義函數的過程中必須要思考這五個因素" class="slide level2">
+<h2>自行定義函數的過程中，必須要思考這五個因素</h2>
+<ol type="1">
+<li>盡量以動詞為函數命名，採用蛇形命名法（Snake-case），例如 <code>sample_from_population()</code>、<code>create_empty_vector()</code>、<code>find_largest_number()</code></li>
+<li>利用保留字 <code>function</code> 告訴 R 語言這是一個函數。</li>
+<li>在小括號中放入想好的輸入與參數命名。</li>
+<li>以大括號建立程式區塊，並在其中撰寫主要的程式。</li>
+<li>最後將輸出放在 <code>return()</code> 裡頭。</li>
+</ol>
+</section>
+<section id="留意輸入與參數的設計" class="slide level2">
+<h2>留意輸入與參數的設計</h2>
+<ul>
+<li>輸入可以設計為「無」或者「必要」。</li>
+<li>參數給予預設（Default）。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="fu">getwd</span>()               <span class="co"># 輸入為「無」</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/kuoyaojen/classroom-hahow-rfiftyplus/07-functions"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="fu">round</span>(pi)             <span class="co"># 輸入為「必要」</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="fu">round</span>(pi, <span class="at">digits =</span> <span class="dv">2</span>) <span class="co"># 預設 digits = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+</div>
+</section>
+<section id="沒有組織的程式碼不好使用" class="slide level2">
+<h2>沒有組織的程式碼不好使用</h2>
+<ul>
+<li>假設 R 語言沒有 <code>sd()</code> 函數。</li>
+<li>這段計算樣本標準差的程式的「可利用性」低、「重複性」高。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
+<span id="cb86-2"><a href="#cb86-2"></a>mean_v <span class="ot">&lt;-</span> <span class="fu">mean</span>(v)</span>
+<span id="cb86-3"><a href="#cb86-3"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(v)</span>
+<span id="cb86-4"><a href="#cb86-4"></a>mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((v <span class="sc">-</span> mean_v)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb86-5"><a href="#cb86-5"></a><span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> (n<span class="dv">-1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.01149</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span></span>
+<span id="cb88-2"><a href="#cb88-2"></a>mean_v <span class="ot">&lt;-</span> <span class="fu">mean</span>(v)</span>
+<span id="cb88-3"><a href="#cb88-3"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(v)</span>
+<span id="cb88-4"><a href="#cb88-4"></a>mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((v <span class="sc">-</span> mean_v)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb88-5"><a href="#cb88-5"></a><span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> (n<span class="dv">-1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14.57738</code></pre>
+</div>
+</div>
+</section>
+<section id="自行定義函數-calculate_standard_deviation" class="slide level2">
+<h2>自行定義函數 <code>calculate_standard_deviation()</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a>calculate_standard_deviation <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb90-2"><a href="#cb90-2"></a>  mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb90-3"><a href="#cb90-3"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb90-4"><a href="#cb90-4"></a>  mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> mean_x)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb90-5"><a href="#cb90-5"></a>  standard_deviation <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> (n<span class="dv">-1</span>))</span>
+<span id="cb90-6"><a href="#cb90-6"></a>  <span class="fu">return</span>(standard_deviation)</span>
+<span id="cb90-7"><a href="#cb90-7"></a>}</span>
+<span id="cb90-8"><a href="#cb90-8"></a><span class="fu">calculate_standard_deviation</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.01149</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a><span class="fu">calculate_standard_deviation</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14.57738</code></pre>
+</div>
+</div>
+</section>
+<section id="加入參數-unbiased" class="slide level2">
+<h2>加入參數 <code>unbiased</code></h2>
+<p>分母採用 <span class="math inline">\(n-1\)</span> 為無偏誤估計（Unbiased estimate），採用 <span class="math inline">\(n\)</span> 為偏誤估計（Biased estimate）。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a>calculate_standard_deviation <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">unbiased =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb94-2"><a href="#cb94-2"></a>  mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb94-3"><a href="#cb94-3"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb94-4"><a href="#cb94-4"></a>  mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> mean_x)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb94-5"><a href="#cb94-5"></a>  standard_deviation <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> (n <span class="sc">-</span> unbiased))</span>
+<span id="cb94-6"><a href="#cb94-6"></a>  <span class="fu">return</span>(standard_deviation)</span>
+<span id="cb94-7"><a href="#cb94-7"></a>}</span>
+<span id="cb94-8"><a href="#cb94-8"></a><span class="fu">calculate_standard_deviation</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.01149</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a><span class="fu">calculate_standard_deviation</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">unbiased =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 28.86607</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="區隔物件有效性的作用域" class="title-slide slide level1 center">
+<h1>區隔物件有效性的作用域</h1>
+
+</section>
+<section id="複習什麼是程式區塊" class="slide level2">
+<h2>（複習）什麼是程式區塊</h2>
+<ul>
+<li>程式區塊（Code blocks）指的是將一系列相關的敘述集合在一起的程式碼結構。</li>
+<li>在 R 語言中，程式區塊使用一對大括號 <code>{}</code> 將敘述包裝在裡面。</li>
+<li>條件判斷、迴圈與自行定義函數都會需要程式區塊將敘述與它們連結。</li>
+</ul>
+</section>
+<section id="什麼是作用域" class="slide level2">
+<h2>什麼是作用域</h2>
+<ul>
+<li>附屬於函數的程式區塊具有作用域（或稱範疇）Scope 的觀念。</li>
+<li>作用域是物件名稱與參照有效的部分。</li>
+<li>附屬於函數的程式區塊稱為區域（Local scope），函數以外的部分則稱為全域（Global scope）。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a><span class="do">### 這裡屬於全域</span></span>
+<span id="cb98-2"><a href="#cb98-2"></a>function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(輸入, 參數){</span>
+<span id="cb98-3"><a href="#cb98-3"></a>  <span class="do">### 區域的開始</span></span>
+<span id="cb98-4"><a href="#cb98-4"></a>  <span class="co"># 撰寫主要的程式</span></span>
+<span id="cb98-5"><a href="#cb98-5"></a>  <span class="fu">return</span>(輸出)</span>
+<span id="cb98-6"><a href="#cb98-6"></a>  <span class="do">### 區域的結束</span></span>
+<span id="cb98-7"><a href="#cb98-7"></a>}</span>
+<span id="cb98-8"><a href="#cb98-8"></a><span class="do">### 這裡屬於全域</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="區域物件的作用域被侷限在程式區塊之中" class="slide level2">
+<h2>區域物件的作用域被侷限在程式區塊之中</h2>
+<ul>
+<li>區域物件僅在附屬於該函數的程式區塊中才有效，包含：
+<ul>
+<li>函數的輸入物件命名與參數物件命名</li>
+<li>在函數的程式區塊中建立的物件</li>
+</ul></li>
+</ul>
+</section>
+<section id="在全域範圍中區域物件沒有作用" class="slide level2">
+<h2>在全域範圍中區域物件沒有作用</h2>
+<ul>
+<li>區域物件僅在附屬於該函數的程式區塊中才有效，包含：
+<ul>
+<li>函數的輸入物件命名與參數物件命名，例如 <code>x</code>、<code>unbiased</code></li>
+<li>在函數的程式區塊中建立的物件，例如 <code>mean_x</code>、<code>n</code>、<code>mean_squared_error</code>、<code>standard_deviation</code></li>
+</ul></li>
+<li>在全域範圍內試圖運用任何區域物件都會遭遇錯誤。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a>calculate_standard_deviation <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">unbiased =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb99-2"><a href="#cb99-2"></a>  mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb99-3"><a href="#cb99-3"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb99-4"><a href="#cb99-4"></a>  mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> mean_x)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb99-5"><a href="#cb99-5"></a>  standard_deviation <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> (n <span class="sc">-</span> unbiased))</span>
+<span id="cb99-6"><a href="#cb99-6"></a>  <span class="fu">return</span>(standard_deviation)</span>
+<span id="cb99-7"><a href="#cb99-7"></a>}</span>
+<span id="cb99-8"><a href="#cb99-8"></a><span class="fu">calculate_standard_deviation</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.01149</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="co"># x</span></span>
+<span id="cb101-2"><a href="#cb101-2"></a><span class="co"># unbiased</span></span>
+<span id="cb101-3"><a href="#cb101-3"></a><span class="co"># mean_x</span></span>
+<span id="cb101-4"><a href="#cb101-4"></a><span class="co"># n</span></span>
+<span id="cb101-5"><a href="#cb101-5"></a><span class="co"># mean_squared_error</span></span>
+<span id="cb101-6"><a href="#cb101-6"></a><span class="co"># standard_deviation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="輸入與輸出的對應關係" class="title-slide slide level1 center">
+<h1>輸入與輸出的對應關係</h1>
+
+</section>
+<section id="自行定義函數很重要的任務是釐清預期輸入與預期輸出的對應關係" class="slide level2">
+<h2>自行定義函數很重要的任務是釐清「預期輸入」與「預期輸出」的對應關係</h2>
+<ul>
+<li>沒有輸入。</li>
+<li>一個輸入。</li>
+<li>多個輸入。</li>
+<li>一個輸出。</li>
+<li>多個輸出。</li>
+</ul>
+<p>「一個輸入」或者「一個輸出」的對應關係單純且容易理解。</p>
+</section>
+<section id="設計沒有輸入的函數" class="slide level2">
+<h2>設計沒有輸入的函數</h2>
+<p>在小括號中留空即可。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a>hello_world <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb102-2"><a href="#cb102-2"></a>  <span class="fu">return</span>(<span class="st">"Hello, world!"</span>)</span>
+<span id="cb102-3"><a href="#cb102-3"></a>}</span>
+<span id="cb102-4"><a href="#cb102-4"></a><span class="fu">hello_world</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello, world!"</code></pre>
+</div>
+</div>
+</section>
+<section id="設計多個輸入的函數" class="slide level2">
+<h2>設計多個輸入的函數</h2>
+<p>輸入命名可以採 <code>x</code>, <code>y</code>, … ，參數記得給預設（Default）。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a>add_then_power <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">exponent =</span> <span class="dv">1</span>) {</span>
+<span id="cb104-2"><a href="#cb104-2"></a>  add <span class="ot">&lt;-</span> (x <span class="sc">+</span> y)</span>
+<span id="cb104-3"><a href="#cb104-3"></a>  power_add <span class="ot">&lt;-</span> add<span class="sc">^</span>exponent</span>
+<span id="cb104-4"><a href="#cb104-4"></a>  <span class="fu">return</span>(power_add)</span>
+<span id="cb104-5"><a href="#cb104-5"></a>}</span>
+<span id="cb104-6"><a href="#cb104-6"></a><span class="fu">add_then_power</span>(<span class="dv">5</span>, <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a><span class="fu">add_then_power</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="at">exponent =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 121</code></pre>
+</div>
+</div>
+</section>
+<section id="設計多個輸出的函數" class="slide level2">
+<h2>設計多個輸出的函數</h2>
+<p>採用適當的資料結構儲存後輸出，推薦的選擇是命名清單（Named list）。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1"></a>calculate_standard_deviation <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb108-2"><a href="#cb108-2"></a>  mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb108-3"><a href="#cb108-3"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb108-4"><a href="#cb108-4"></a>  mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> mean_x)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb108-5"><a href="#cb108-5"></a>  unbiased_standard_deviation <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> (n<span class="dv">-1</span>))</span>
+<span id="cb108-6"><a href="#cb108-6"></a>  biased_standard_deviation <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> n)</span>
+<span id="cb108-7"><a href="#cb108-7"></a>  standard_deviations <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb108-8"><a href="#cb108-8"></a>    <span class="st">"biased"</span> <span class="ot">=</span> biased_standard_deviation,</span>
+<span id="cb108-9"><a href="#cb108-9"></a>    <span class="st">"unbiased"</span> <span class="ot">=</span> unbiased_standard_deviation</span>
+<span id="cb108-10"><a href="#cb108-10"></a>  )</span>
+<span id="cb108-11"><a href="#cb108-11"></a>  <span class="fu">return</span>(standard_deviations)</span>
+<span id="cb108-12"><a href="#cb108-12"></a>}</span>
+<span id="cb108-13"><a href="#cb108-13"></a>standard_deviation <span class="ot">&lt;-</span> <span class="fu">calculate_standard_deviation</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
+<span id="cb108-14"><a href="#cb108-14"></a>standard_deviation[[<span class="st">"unbiased"</span>]] <span class="co"># standard_deviation$unbiased</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.01149</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a>standard_deviation[[<span class="st">"biased"</span>]]   <span class="co"># standard_deviation$biased</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 28.86607</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="return-的作用" class="title-slide slide level1 center">
+<h1><code>return()</code> 的作用</h1>
+
+</section>
+<section id="return-具有兩個作用" class="slide level2">
+<h2><code>return()</code> 具有兩個作用</h2>
+<ol type="1">
+<li>將函數結果「輸出」。</li>
+<li>終止函數程式區塊的執行。</li>
+</ol>
+</section>
+<section id="將函數結果輸出" class="slide level2">
+<h2>將函數結果「輸出」</h2>
+<p>R 語言為了讓使用者方便，預設會將函數程式區塊中放在最後一行的物件輸出。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a>calculate_standard_deviation <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb112-2"><a href="#cb112-2"></a>  mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb112-3"><a href="#cb112-3"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb112-4"><a href="#cb112-4"></a>  mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> mean_x)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb112-5"><a href="#cb112-5"></a>  unbiased_standard_deviation <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> (n<span class="dv">-1</span>))</span>
+<span id="cb112-6"><a href="#cb112-6"></a>  biased_standard_deviation <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> n)</span>
+<span id="cb112-7"><a href="#cb112-7"></a>  standard_deviations <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb112-8"><a href="#cb112-8"></a>    <span class="st">"biased"</span> <span class="ot">=</span> biased_standard_deviation,</span>
+<span id="cb112-9"><a href="#cb112-9"></a>    <span class="st">"unbiased"</span> <span class="ot">=</span> unbiased_standard_deviation</span>
+<span id="cb112-10"><a href="#cb112-10"></a>  )</span>
+<span id="cb112-11"><a href="#cb112-11"></a>  <span class="co">#unbiased_standard_deviation</span></span>
+<span id="cb112-12"><a href="#cb112-12"></a>  <span class="co">#biased_standard_deviation</span></span>
+<span id="cb112-13"><a href="#cb112-13"></a>  standard_deviations</span>
+<span id="cb112-14"><a href="#cb112-14"></a>}</span>
+<span id="cb112-15"><a href="#cb112-15"></a><span class="fu">calculate_standard_deviation</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$biased
+[1] 28.86607
+
+$unbiased
+[1] 29.01149</code></pre>
+</div>
+</div>
+</section>
+<section id="終止函數程式區塊的執行" class="slide level2">
+<h2>終止函數程式區塊的執行</h2>
+<p>在函數程式區塊中寫在 <code>return()</code> 之後的所有內容在使用函數的時候都不會有任何作用。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1"></a>calculate_standard_deviation <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb114-2"><a href="#cb114-2"></a>  mean_x <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb114-3"><a href="#cb114-3"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb114-4"><a href="#cb114-4"></a>  mean_squared_error <span class="ot">&lt;-</span> <span class="fu">sum</span>((x <span class="sc">-</span> mean_x)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb114-5"><a href="#cb114-5"></a>  unbiased_standard_deviation <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> (n<span class="dv">-1</span>))</span>
+<span id="cb114-6"><a href="#cb114-6"></a>  biased_standard_deviation <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mean_squared_error <span class="sc">/</span> n)</span>
+<span id="cb114-7"><a href="#cb114-7"></a>  standard_deviations <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb114-8"><a href="#cb114-8"></a>    <span class="st">"biased"</span> <span class="ot">=</span> biased_standard_deviation,</span>
+<span id="cb114-9"><a href="#cb114-9"></a>    <span class="st">"unbiased"</span> <span class="ot">=</span> unbiased_standard_deviation</span>
+<span id="cb114-10"><a href="#cb114-10"></a>  )</span>
+<span id="cb114-11"><a href="#cb114-11"></a>  <span class="fu">return</span>(standard_deviations)</span>
+<span id="cb114-12"><a href="#cb114-12"></a>  <span class="fu">print</span>(<span class="dv">5566</span>)</span>
+<span id="cb114-13"><a href="#cb114-13"></a>  <span class="fu">print</span>(<span class="st">"Hello, world!"</span>)</span>
+<span id="cb114-14"><a href="#cb114-14"></a>  <span class="fu">print</span>(<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb114-15"><a href="#cb114-15"></a>}</span>
+<span id="cb114-16"><a href="#cb114-16"></a><span class="fu">calculate_standard_deviation</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$biased
+[1] 28.86607
+
+$unbiased
+[1] 29.01149</code></pre>
+</div>
+</div>
+</section>
+<section id="在函數定義結束後寫-return" class="slide level2">
+<h2>在函數定義結束後寫 <code>return()</code></h2>
+<ul>
+<li>明確宣告，提高程式的可讀性（Readability）。</li>
+<li>假如不是在「函數型程式設計」的應用情境，寫 <code>return()</code> 是我比較喜歡的（但確實也有很多 R 使用者偏好不寫）。</li>
+</ul>
+</section></section>
+<section>
+<section id="個案研究自行定義搜尋演算法函數" class="title-slide slide level1 center">
+<h1>個案研究：自行定義搜尋演算法函數</h1>
+
+</section>
+<section id="在使用流程控制管理程式區塊的執行章節的個案研究是搜尋演算法" class="slide level2">
+<h2>在「使用流程控制管理程式區塊的執行」章節的個案研究是「搜尋演算法」</h2>
+<ul>
+<li>與 R 語言玩「猜猜猜數字」的遊戲，請 R 語言想一個介於 1 到 100 的整數，我們來猜。</li>
+<li>我們有兩種基本的方式來猜 R 語言心中所想的整數：
+<ul>
+<li>簡易搜尋</li>
+<li>二元搜尋</li>
+</ul></li>
+</ul>
+</section>
+<section id="重複和-r-語言玩-100-次的時候會發現兩個缺點" class="slide level2">
+<h2>重複和 R 語言玩 100 次的時候會發現兩個缺點</h2>
+<ul>
+<li>程式碼的可利用性很低。</li>
+<li>程式碼的重複性很高。</li>
+</ul>
+</section>
+<section id="看看那時寫的重複透過簡易搜尋和-r-語言玩-100-次猜猜猜數字" class="slide level2">
+<h2>看看那時寫的重複透過簡易搜尋和 R 語言玩 100 次「猜猜猜數字」</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1"></a><span class="co"># 玩 1 次的程式碼</span></span>
+<span id="cb116-2"><a href="#cb116-2"></a>rs_number <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb116-3"><a href="#cb116-3"></a>number_of_guess <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb116-4"><a href="#cb116-4"></a><span class="cf">for</span> (guess <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb116-5"><a href="#cb116-5"></a>  number_of_guess <span class="ot">&lt;-</span> number_of_guess <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb116-6"><a href="#cb116-6"></a>  <span class="cf">if</span> (guess <span class="sc">==</span> rs_number) {</span>
+<span id="cb116-7"><a href="#cb116-7"></a>    <span class="cf">break</span></span>
+<span id="cb116-8"><a href="#cb116-8"></a>  }</span>
+<span id="cb116-9"><a href="#cb116-9"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="co"># 玩 100 次的程式碼</span></span>
+<span id="cb117-2"><a href="#cb117-2"></a>number_of_guess_history <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb117-3"><a href="#cb117-3"></a><span class="cf">for</span> (game <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb117-4"><a href="#cb117-4"></a>  rs_number <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb117-5"><a href="#cb117-5"></a>  number_of_guess <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb117-6"><a href="#cb117-6"></a>  <span class="cf">for</span> (guess <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb117-7"><a href="#cb117-7"></a>    number_of_guess <span class="ot">&lt;-</span> number_of_guess <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb117-8"><a href="#cb117-8"></a>    <span class="cf">if</span> (guess <span class="sc">==</span> rs_number) {</span>
+<span id="cb117-9"><a href="#cb117-9"></a>      <span class="cf">break</span></span>
+<span id="cb117-10"><a href="#cb117-10"></a>    }</span>
+<span id="cb117-11"><a href="#cb117-11"></a>  }</span>
+<span id="cb117-12"><a href="#cb117-12"></a>  number_of_guess_history <span class="ot">&lt;-</span> <span class="fu">c</span>(number_of_guess_history, number_of_guess)</span>
+<span id="cb117-13"><a href="#cb117-13"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="看看那時寫的重複透過二元搜尋和-r-語言玩-100-次猜猜猜數字" class="slide level2">
+<h2>看看那時寫的重複透過二元搜尋和 R 語言玩 100 次「猜猜猜數字」</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1"></a><span class="co"># 玩 1 次的程式碼</span></span>
+<span id="cb118-2"><a href="#cb118-2"></a>low <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb118-3"><a href="#cb118-3"></a>high <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb118-4"><a href="#cb118-4"></a>rs_number <span class="ot">&lt;-</span> <span class="fu">sample</span>(low<span class="sc">:</span>high, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb118-5"><a href="#cb118-5"></a>number_of_guess <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb118-6"><a href="#cb118-6"></a>guess <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb118-7"><a href="#cb118-7"></a><span class="cf">while</span> (guess <span class="sc">!=</span> rs_number) {</span>
+<span id="cb118-8"><a href="#cb118-8"></a>  <span class="cf">if</span> (guess <span class="sc">&gt;</span> rs_number) {</span>
+<span id="cb118-9"><a href="#cb118-9"></a>    high <span class="ot">&lt;-</span> guess</span>
+<span id="cb118-10"><a href="#cb118-10"></a>    guess <span class="ot">&lt;-</span> <span class="fu">floor</span>((low <span class="sc">+</span> high) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb118-11"><a href="#cb118-11"></a>  } <span class="cf">else</span> <span class="cf">if</span> (guess <span class="sc">&lt;</span> rs_number) {</span>
+<span id="cb118-12"><a href="#cb118-12"></a>    low <span class="ot">&lt;-</span> guess</span>
+<span id="cb118-13"><a href="#cb118-13"></a>    guess <span class="ot">&lt;-</span> <span class="fu">ceiling</span>((low <span class="sc">+</span> high) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb118-14"><a href="#cb118-14"></a>  }</span>
+<span id="cb118-15"><a href="#cb118-15"></a>  number_of_guess <span class="ot">&lt;-</span> number_of_guess <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb118-16"><a href="#cb118-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1"></a><span class="co"># 玩 100 次的程式碼</span></span>
+<span id="cb119-2"><a href="#cb119-2"></a>number_of_guess_history <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb119-3"><a href="#cb119-3"></a><span class="cf">for</span> (game <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb119-4"><a href="#cb119-4"></a>  low <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb119-5"><a href="#cb119-5"></a>  high <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb119-6"><a href="#cb119-6"></a>  rs_number <span class="ot">&lt;-</span> <span class="fu">sample</span>(low<span class="sc">:</span>high, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb119-7"><a href="#cb119-7"></a>  number_of_guess <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb119-8"><a href="#cb119-8"></a>  guess <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb119-9"><a href="#cb119-9"></a>  <span class="cf">while</span> (guess <span class="sc">!=</span> rs_number) {</span>
+<span id="cb119-10"><a href="#cb119-10"></a>    <span class="cf">if</span> (guess <span class="sc">&gt;</span> rs_number) {</span>
+<span id="cb119-11"><a href="#cb119-11"></a>      high <span class="ot">&lt;-</span> guess</span>
+<span id="cb119-12"><a href="#cb119-12"></a>      guess <span class="ot">&lt;-</span> <span class="fu">floor</span>((low <span class="sc">+</span> high) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb119-13"><a href="#cb119-13"></a>    } <span class="cf">else</span> <span class="cf">if</span> (guess <span class="sc">&lt;</span> rs_number) {</span>
+<span id="cb119-14"><a href="#cb119-14"></a>      low <span class="ot">&lt;-</span> guess</span>
+<span id="cb119-15"><a href="#cb119-15"></a>      guess <span class="ot">&lt;-</span> <span class="fu">ceiling</span>((low <span class="sc">+</span> high) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb119-16"><a href="#cb119-16"></a>    }</span>
+<span id="cb119-17"><a href="#cb119-17"></a>    number_of_guess <span class="ot">&lt;-</span> number_of_guess <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb119-18"><a href="#cb119-18"></a>  }</span>
+<span id="cb119-19"><a href="#cb119-19"></a>  number_of_guess_history <span class="ot">&lt;-</span> <span class="fu">c</span>(number_of_guess_history, number_of_guess)</span>
+<span id="cb119-20"><a href="#cb119-20"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="將簡易搜尋程式碼改寫為函數-sequential_searchlow-1-high-100" class="slide level2">
+<h2>將簡易搜尋程式碼改寫為函數 <code>sequential_search(low = 1, high = 100)</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1"></a>sequential_search <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">low =</span> <span class="dv">1</span>, <span class="at">high =</span> <span class="dv">100</span>) {</span>
+<span id="cb120-2"><a href="#cb120-2"></a>  rs_number <span class="ot">&lt;-</span> <span class="fu">sample</span>(low<span class="sc">:</span>high, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb120-3"><a href="#cb120-3"></a>  number_of_guess <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb120-4"><a href="#cb120-4"></a>  <span class="cf">for</span> (guess <span class="cf">in</span> low<span class="sc">:</span>high) {</span>
+<span id="cb120-5"><a href="#cb120-5"></a>    number_of_guess <span class="ot">&lt;-</span> number_of_guess <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb120-6"><a href="#cb120-6"></a>    <span class="cf">if</span> (guess <span class="sc">==</span> rs_number) {</span>
+<span id="cb120-7"><a href="#cb120-7"></a>      <span class="cf">break</span></span>
+<span id="cb120-8"><a href="#cb120-8"></a>    }</span>
+<span id="cb120-9"><a href="#cb120-9"></a>  }</span>
+<span id="cb120-10"><a href="#cb120-10"></a>  <span class="fu">return</span>(number_of_guess)</span>
+<span id="cb120-11"><a href="#cb120-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="將二元搜尋程式碼改寫為函數-binary_searchlow-1-high-100" class="slide level2">
+<h2>將二元搜尋程式碼改寫為函數 <code>binary_search(low = 1, high = 100)</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1"></a>binary_search <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">low =</span> <span class="dv">1</span>, <span class="at">high =</span> <span class="dv">100</span>) {</span>
+<span id="cb121-2"><a href="#cb121-2"></a>  rs_number <span class="ot">&lt;-</span> <span class="fu">sample</span>(low<span class="sc">:</span>high, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb121-3"><a href="#cb121-3"></a>  number_of_guess <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb121-4"><a href="#cb121-4"></a>  guess <span class="ot">&lt;-</span> <span class="fu">round</span>((low <span class="sc">+</span> high) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb121-5"><a href="#cb121-5"></a>  <span class="cf">while</span> (guess <span class="sc">!=</span> rs_number) {</span>
+<span id="cb121-6"><a href="#cb121-6"></a>    <span class="cf">if</span> (guess <span class="sc">&gt;</span> rs_number) {</span>
+<span id="cb121-7"><a href="#cb121-7"></a>      high <span class="ot">&lt;-</span> guess</span>
+<span id="cb121-8"><a href="#cb121-8"></a>      guess <span class="ot">&lt;-</span> <span class="fu">floor</span>((low <span class="sc">+</span> high) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb121-9"><a href="#cb121-9"></a>    } <span class="cf">else</span> <span class="cf">if</span> (guess <span class="sc">&lt;</span> rs_number) {</span>
+<span id="cb121-10"><a href="#cb121-10"></a>      low <span class="ot">&lt;-</span> guess</span>
+<span id="cb121-11"><a href="#cb121-11"></a>      guess <span class="ot">&lt;-</span> <span class="fu">ceiling</span>((low <span class="sc">+</span> high) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb121-12"><a href="#cb121-12"></a>    }</span>
+<span id="cb121-13"><a href="#cb121-13"></a>    number_of_guess <span class="ot">&lt;-</span> number_of_guess <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb121-14"><a href="#cb121-14"></a>  }</span>
+<span id="cb121-15"><a href="#cb121-15"></a>  <span class="fu">return</span>(number_of_guess)</span>
+<span id="cb121-16"><a href="#cb121-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="將重複透過簡易搜尋二元搜尋和-r-語言玩-n-次猜猜猜數字改寫為函數-play_n_timesn-100" class="slide level2">
+<h2>將重複透過簡易搜尋、二元搜尋和 R 語言玩 <code>n</code> 次「猜猜猜數字」改寫為函數 <code>play_n_times(n = 100)</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1"></a>play_n_times <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>) {</span>
+<span id="cb122-2"><a href="#cb122-2"></a>  n_guess_history_sequential <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb122-3"><a href="#cb122-3"></a>  n_guess_history_binary <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb122-4"><a href="#cb122-4"></a>  <span class="cf">for</span> (game <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb122-5"><a href="#cb122-5"></a>    n_guess_sequential <span class="ot">&lt;-</span> <span class="fu">sequential_search</span>()</span>
+<span id="cb122-6"><a href="#cb122-6"></a>    n_guess_binary <span class="ot">&lt;-</span> <span class="fu">binary_search</span>()</span>
+<span id="cb122-7"><a href="#cb122-7"></a>    n_guess_history_sequential <span class="ot">&lt;-</span> <span class="fu">c</span>(n_guess_history_sequential, n_guess_sequential)</span>
+<span id="cb122-8"><a href="#cb122-8"></a>    n_guess_history_binary <span class="ot">&lt;-</span> <span class="fu">c</span>(n_guess_history_binary, n_guess_binary)</span>
+<span id="cb122-9"><a href="#cb122-9"></a>  }</span>
+<span id="cb122-10"><a href="#cb122-10"></a>  sequential_search_times <span class="ot">&lt;-</span> <span class="fu">mean</span>(n_guess_history_sequential)</span>
+<span id="cb122-11"><a href="#cb122-11"></a>  binary_search_times <span class="ot">&lt;-</span> <span class="fu">mean</span>(n_guess_history_binary)</span>
+<span id="cb122-12"><a href="#cb122-12"></a>  search_times <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb122-13"><a href="#cb122-13"></a>    <span class="st">"sequential"</span> <span class="ot">=</span> sequential_search_times,</span>
+<span id="cb122-14"><a href="#cb122-14"></a>    <span class="st">"binary"</span> <span class="ot">=</span> binary_search_times</span>
+<span id="cb122-15"><a href="#cb122-15"></a>  )</span>
+<span id="cb122-16"><a href="#cb122-16"></a>  <span class="fu">return</span>(search_times)</span>
+<span id="cb122-17"><a href="#cb122-17"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="使用函數-play_n_times" class="slide level2">
+<h2>使用函數 <code>play_n_times()</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1"></a>mean_search_times <span class="ot">&lt;-</span> <span class="fu">play_n_times</span>()</span>
+<span id="cb123-2"><a href="#cb123-2"></a>mean_search_times<span class="sc">$</span>sequential <span class="co"># 約 50 次左右</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50.42</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1"></a>mean_search_times<span class="sc">$</span>binary     <span class="co"># 約 6~7 次左右</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.01</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="重點統整" class="title-slide slide level1 center">
+<h1>重點統整</h1>
+<ul>
+<li>組織程式碼希望達到的目標：
+<ul>
+<li>提高程式碼的「可利用性」。</li>
+<li>減少程式碼的「重複性」。</li>
+</ul></li>
+<li>R 語言提供使用者組織程式碼的機制
+<ul>
+<li>函數（Function）。</li>
+<li>類別（Class）。</li>
+<li>套件（Package）。</li>
+</ul></li>
+</ul>
+</section>
+<section id="重點統整續" class="slide level2">
+<h2>重點統整（續）</h2>
+<ul>
+<li>常用 R 語言函數大類
+<ul>
+<li>系統功能。</li>
+<li>數值函數。
+<ul>
+<li>通用函數。</li>
+<li>聚合函數。</li>
+</ul></li>
+<li>文字函數。</li>
+</ul></li>
+</ul>
+</section>
+<section id="重點統整續-1" class="slide level2">
+<h2>重點統整（續）</h2>
+<ul>
+<li>附屬於函數的程式區塊具有作用域（或稱範疇）Scope 的觀念。
+<ul>
+<li>作用域是物件名稱與參照有效的部分。</li>
+<li>附屬於函數的程式區塊稱為區域（Local scope），函數以外的部分則稱為全域（Global scope）。</li>
+</ul></li>
+<li><code>return()</code> 具有兩個作用
+<ul>
+<li>將函數結果「輸出」。</li>
+<li>終止函數程式區塊的執行。</li>
+</ul></li>
+</ul>
+<div class="footer footer-default">
+<p>自行定義函數組織 R 語言的程式碼</p>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="lecture_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="lecture_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          let href = ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>

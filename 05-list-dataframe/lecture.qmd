@@ -1,0 +1,428 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "建立清單、資料框儲存異質資料"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "建立清單、資料框儲存異質資料"
+    scrollable: true
+    incremental: false
+---
+
+# 清單 `list`
+
+## （複習）R 語言資料結構
+
+||同質|異質|
+|-|----|----|
+|維度等於一|`vector`|`list`|
+|維度等於二|`matrix`|`data.frame`|
+|維度超過二|`array`|`list` 與其他資料結構混搭|
+
+## 什麼是清單 `list`
+
+清單是 R 語言中的「彈性」資料結構，用來儲存異質（不同類別）、不同長度與不同維度的資料。
+
+## 向量只能儲存同質（相同類別）資料
+
+- 向量著重運算效率因此設計為同質。
+- 在 `c()` 函數中合併異質資料會自動轉換。
+
+## `c(logical, numeric)` 會自動轉換為 `numeric`
+
+- `FALSE` 轉換為 0
+- `TRUE` 轉換為 1
+
+```{r}
+mixed_vector <- c(FALSE, TRUE, 5566)
+mixed_vector
+class(mixed_vector)
+```
+
+## `c(logical, numeric, character)` 會自動轉換為 `character`
+
+- `FALSE` 轉換為 `"FALSE"`
+- `TRUE` 轉換為 `"TRUE"`
+
+```{r}
+mixed_vector <- c(FALSE, TRUE, 5566, "Luke Skywalker")
+mixed_vector
+class(mixed_vector)
+```
+
+## 因此我們會以清單 `list` 面對異質資料的儲存
+
+使用 `list()` 函數建立清單。
+
+```{r}
+heterogeneous_data <- list(
+  c(FALSE, TRUE),
+  5566,
+  "Luke Skywalker"
+)
+heterogeneous_data
+class(heterogeneous_data)
+```
+
+## 建立清單時可以為資料命名
+
+- 稱為有命名的清單（Named list）。
+- 有命名的清單對應了泛用程式語言的「鍵値配對」資料結構，鍵値配對資料結構又稱字典（Dictionary）或者雜湊表（Hash table）。
+
+---
+
+## 「鍵値配對」的意思：以 `named_list` 為例
+
+|鍵 Key|值 Value|
+|------|--------|
+|`"logicals"`|`c(FALSE, TRUE)`|
+|`"numerics"`|`5566`|
+|`"characters"`|`"Luke Skywalker"`|
+
+```{r}
+named_list <- list(
+  "logicals" = c(FALSE, TRUE),
+  "numerics" = 5566,
+  "characters" = "Luke Skywalker"
+)
+named_list
+```
+
+## 使用 `names()` 函數取得命名清單的「鍵」
+
+```{r}
+names(named_list)
+```
+
+## 操作未命名清單
+
+- 擷取未命名清單的片段。
+- 選擇未命名清單中的資料。
+
+## 擷取未命名清單的片段
+
+以一組中括號 `list[c(index, ...)]` 擷取。
+
+```{r}
+heterogeneous_data[c(1, 3)]
+```
+## 選擇未命名清單中的資料
+
+以兩組中括號 `list[[index]]` 選擇。
+
+```{r}
+heterogeneous_data[[1]]
+heterogeneous_data[[2]]
+heterogeneous_data[[3]]
+```
+
+## 使用 `class()` 函數檢視清單的「異質」特性
+
+```{r}
+class(heterogeneous_data[[1]])
+class(heterogeneous_data[[2]])
+class(heterogeneous_data[[3]])
+```
+
+## 操作命名清單
+
+- 擷取命名清單的片段。
+- 選擇命名清單中的資料。
+
+## 擷取命名清單的片段
+
+- 以一組中括號 `list[c(index, ...)]` 擷取。
+- 以一組中括號 `list[c(key, ...)]` 擷取。
+
+```{r}
+named_list[c(1, 3)]
+named_list[c("logicals", "characters")]
+```
+
+## 選擇命名清單中的資料
+
+- 以兩組中括號 `list[[index]]` 選擇。
+- 以兩組中括號 `list[[key]]` 選擇。
+- 以錢字號 `list$key` 選擇。
+
+```{r}
+named_list[[1]]
+named_list[["logicals"]]
+named_list$logicals
+```
+
+## 將命名清單的「鍵」選擇出來使用賦值運算符更新「鍵」 `names(named_list) <- c(key, ...)`
+
+```{r}
+names(named_list) <- c("logi", "num", "char")
+named_list
+```
+
+## 將清單的「值」選擇出來使用賦值運算符更新「值」
+
+```{r}
+heterogeneous_data[[2]] <- c(5, 5, 6, 6)
+heterogeneous_data
+named_list[["num"]] <- c(5, 5, 6, 6)
+named_list
+```
+
+## 刪除清單資料的方式
+
+- 以負索引值 `list[-c(index, ...)]`
+- 將資料選擇出來並以 `NULL` 更新即可刪除。
+
+```{r}
+named_list[-c(1, 3)]
+named_list[2] <- NULL
+named_list
+```
+
+# 資料框 `data.frame`
+
+## 什麼是資料框 `data.frame`
+
+- 資料框是 R 語言中用來處理表格式資料的資料結構。
+- 資料框和矩陣一樣具有列（Rows）與欄（Columns）兩個維度儲存資料，列常被稱為觀測值、欄常被稱為變數。
+- 一個 m 列 n 欄的資料框外型可以被描述為 `(m, n)`
+
+## 資料框 `data.frame` 與矩陣 `matrix` 不同的地方
+
+- 資料框不同的欄能夠儲存異質（不同類別）的資料。
+- 資料框的每一列與每一欄都預設有索引值和命名。
+
+## 使用 `data.frame()` 函數建立資料框
+
+```{r}
+titles <- c("Batman Begins", "The Dark Knight", "The Dark Knight Rises")
+release_years <- c(2005, 2008, 2012)
+imdb_ratings <- c(8.2, 9.0, 8.3)
+director <- "Christopher Nolan"
+df <- data.frame(titles, release_years, imdb_ratings, director)
+df
+class(df)
+```
+
+## 在建立資料框時可以命名欄位名稱
+
+```{r}
+df <- data.frame(
+  "title" = titles,
+  "release_year" = release_years,
+  "imdb_rating" = imdb_ratings,
+  "director" = director)
+df
+```
+
+## 常用來檢視資料框的函數
+
+- `View()`：在 RStudio 顯示漂亮的資料框外觀。
+- `head(n)`：顯示資料框前 `n` 列。
+- `tail(n)`：顯示資料框後 `n` 列。
+- `colnames()`：取得所有欄命名。
+- `row.names()`：取得所有列命名。
+
+---
+
+```{r}
+View(df)
+head(df)
+tail(df, n = 1)
+colnames(df)
+row.names(df)
+```
+
+## 常用來檢視資料框的函數（續）
+
+- `summary()`：顯示資料框欄位的描述性統計。
+- `str()`：顯示資料框的結構。
+- `dim()`：顯示資料框的維度。
+- `nrow()`：顯示資料框的列數。
+- `ncol()`：顯示資料框的欄數。
+
+---
+
+```{r}
+summary(df)
+str(df)
+dim(df)
+nrow(df)
+ncol(df)
+```
+
+## 選擇資料框的變數
+
+- 以兩組中括號 `data.frame[[index]]` 選擇。
+- 以兩組中括號 `data.frame[[column_name]]` 選擇。
+- 以錢字號 `data.frame$column_name` 選擇。
+
+```{r}
+df[[1]]
+df[["title"]]
+df$title
+```
+
+## 選擇資料框的多個變數
+
+- 在列的索引值留空
+  - `data.frame[, c(index, ...)]`
+  - `data.frame[, c(column_name, ...)]`
+  
+```{r}
+df[, c(1, 3)]
+df[,c("title", "imdb_rating")]
+```
+
+## 篩選資料框的觀測值
+
+- 在欄的索引值留空
+  - 以索引值篩選 `data.frame[c(index, ...), ...]`
+  - 以邏輯向量篩選 `data.frame[logical, ]`
+
+```{r}
+df[2, ]
+df[df$title == "The Dark Knight", ]
+```
+
+## 子集（Subset）操作：同時選擇、篩選資料框
+
+```{r}
+df[2, c(1, 3)]
+df[df$title == "The Dark Knight", c("release_year", "imdb_rating")]
+```
+
+## 將資料框的欄命名選擇出來使用賦值運算符更新
+
+```{r}
+colnames(df) <- c("title", "year", "rating", "director")
+df
+```
+
+## 將資料框的列命名選擇出來使用賦值運算符更新
+
+```{r}
+row.names(df) <- c("Episode 1", "Episode 2", "Episode 3")
+df
+```
+
+## 使用 `cbind()` 函數新增變數
+
+`cbind()` 函數是 Column bind 的縮寫。
+
+```{r}
+episode <- 1:3
+df <- cbind(df, episode)
+df
+```
+
+## 使用 `rbind()` 函數新增觀測值
+
+- `rbind()` 函數是 Row bind 的縮寫。
+- 因為每筆觀測值都是由不同資料類別的欄位組成，要用 `list` 新增。
+- 先重設列命名再新增觀測值。
+
+```{r}
+row_to_bind <- list(
+  "title" = "Lord of the Rings: The Fellowship of the Ring",
+  "year" = 2001,
+  "rating" = 8.8,
+  "director" = "Peter Jackson",
+  "episode" = 1
+)
+row.names(df) <- NULL
+df <- rbind(df, row_to_bind)
+df
+```
+
+## 以 `data.frame[, -c(index, ...)]` 刪除資料框的變數
+
+```{r}
+df <- df[, -5]
+df
+```
+
+## 以 `data.frame[-c(index, ...), ]` 刪除資料框觀測值
+
+```{r}
+df <- df[-4, ]
+df
+```
+
+# 個案研究：不同資料來源格式
+
+## 至此我們認識了 R 語言基礎的資料結構
+
+||同質|異質|
+|-|----|----|
+|維度等於一|`vector`|`list`|
+|維度等於二|`matrix`|`data.frame`|
+|維度超過二|`array`|`list` 與其他資料結構混搭|
+
+## 資料科學應用的第一步是資料載入
+
+- R 語言以基礎資料結構面對不同資料來源格式。
+- 現實世界許多資料來源都混雜著數值與文字，因此能儲存異質資料的清單與資料框在資料載入時常常登場。
+
+![](../images/r-for-data-science.png)
+
+來源：<https://r4ds.had.co.nz/program-intro.html>
+
+## 常見的不同資料來源格式
+
+- 純文字檔案
+  - 非結構化純文字檔案
+  - 結構化純文字檔案
+    - CSV
+    - JSON
+    - HTML
+- 試算表
+- 關聯式資料庫管理系統中的資料表
+
+## R 語言如何面對這些不同資料來源格式
+
+|資料來源格式|R 的資料結構|
+|:-----------|:-----------|
+|非結構化純文字檔案|`character`|
+|CSV|`data.frame`|
+|JSON|`list`|
+|HTML（解析前）|`character`|
+|HTML（解析後）|套件自訂的資料結構類別|
+|試算表|`data.frame`|
+|關聯式資料庫管理系統中的資料表|`data.frame`|
+
+## 舉我在 Hahow 上的另一堂課：[SQL 的五十道練習](https://hahow.in/cr/sqlfifty)為例
+
+- 在課程中我們設計了四個學習資料庫：`covid19`、`imdb`、`nba` 與 `twElection2020`
+- 資料來源格式恰好都不同。
+
+## 其中 CSV、JSON 與試算表載入後就會以 `data.frame` 及 `list` 去面對
+
+|資料庫|來源|格式|
+|:-----|:---|:---|
+|`covid19`|<https://github.com/CSSEGISandData/COVID-19>|CSV|
+|`imdb`|<https://www.imdb.com>|HTML|
+|`nba`|<https://data.nba.net/10s/prod/v1/today.json>|JSON|
+|`twElection2020`|<https://db.cec.gov.tw/ElecTable/Election>|試算表|
+
+# 重點統整
+
+- 清單 `list` 是 R 語言中的「彈性」資料結構，用來儲存異質（不同類別）、不同長度與不同維度的資料。
+- 向量只能儲存同質（相同類別）資料，著重運算效率因此設計為同質。
+- 有命名的清單對應了泛用程式語言的「鍵値配對」資料結構，鍵値配對資料結構又稱字典（Dictionary）或者雜湊表（Hash table）。
+
+## 重點統整（續）
+
+- 資料框是 R 語言中用來處理表格式資料的資料結構。
+- 資料框和矩陣一樣具有列（Rows）與欄（Columns）兩個維度儲存資料，列常被稱為觀測值、欄常被稱為變數。
+- 一個 m 列 n 欄的資料框外型可以被描述為 `(m, n)`
+
+## 重點統整（續）
+
+- 資料框 `data.frame` 與矩陣 `matrix` 不同的地方：
+  - 資料框不同的欄能夠儲存異質（不同類別）的資料。
+  - 資料框的每一列與每一欄都預設有索引值和命名。
+- 現實世界許多資料來源都混雜著數值與文字，因此能儲存異質資料的清單與資料框在資料載入時常常登場。

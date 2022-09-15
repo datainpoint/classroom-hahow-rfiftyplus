@@ -1,0 +1,344 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "怎樣學好 R 語言"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "怎樣學好 R 語言"
+    scrollable: true
+    incremental: false
+---
+
+# R 語言的核心精神
+
+## 引用 Greg Martin 的一句話
+
+> The way R works is pretty straightforward, you apply functions to objects.
+> 
+> Greg Martin
+
+來源：<https://youtu.be/ANMuuq502rE>
+
+## 什麼是函數？
+
+一段被賦予名稱的程式碼，能夠完成某一個文字處理或者數值計算任務，在使用函數之前，必須先確定這個函數在執行的環境中已經被定義妥善。
+
+## 函數由五個因素組成
+
+1. 函數名稱。
+2. 輸入。
+3. 參數。
+4. 文字處理或數值計算的程式碼。
+5. 輸出。
+
+## 例如買珍珠奶茶
+
+1. 函數名稱：`buy_a_bubble_tea()`
+2. 輸入：`NT$50`
+3. 參數：`ice`, `sugar`
+4. 文字處理或數值計算的程式碼：`generate_receipt()`, `make_tea()`, `add_bubbles()`, `add_milk()`, `add_ice_sugar()`, `shake()`
+5. 輸出：`return(bubble_tea)`
+
+## `buy_a_bubble_tea()` 函數
+
+```{r}
+#| eval: false
+buy_a_bubble_tea <- function(price, ice, sugar) {
+  generate_receipt(price)
+  make_tea()
+  add_bubbles()
+  add_milk()
+  add_ice_sugar(ice, sugar)
+  shake()
+  return(bubble_tea)
+}
+
+```
+
+## 什麼是物件？
+
+- 物件是一個記憶體位址，這個位址名稱可以作為一個值的參照。
+- 在 R 語言中，物件可以是一個資料結構或是一個函數。
+
+```{r}
+#| eval: false
+an_object <- data_structure
+another_object <- function() {
+  ...
+}
+```
+
+## 學好 R 語言的訣竅
+
+- 掌握不同資料結構的特性。
+- 熟練地使用函數或自行定義函數。
+- 對物件應用函數，多數的情境是對資料結構應用函數，僅有少數的情境是對函數應用函數（例如函數型程式設計，之後在「從 `apply()` 函數家族認識函數型程式設計」說明）。
+
+## 稍微調整一下哈囉世界程式碼
+
+- `<-` 是 R 語言慣用的賦值運算符，作用等同 `=`，在 RStudio 中可以用 `Alt + -` 打出來。
+- `#` 註解符號，作用是略過接續其後的文字，不會被 R 語言執行。
+- `character_vector` 物件參照 `"Hello, world!"` 文字向量。
+
+```{r}
+# 調整一下哈囉世界程式碼
+character_vector <- "Hello, world!" # character_vector 物件參照 "Hello, World!" 文字向量
+```
+
+## 運用哈囉世界解釋何謂「對物件應用函數」
+
+對 `character_vector` 物件應用 `print()` 函數。
+
+```{r}
+character_vector <- "Hello, world!" # character_vector 物件參照 "Hello, world!" 文字向量
+print(character_vector)             # 對 character_vector 物件應用 print() 函數
+```
+
+# R 語言資料結構一覽
+
+## R 與廣泛用途的程式語言還有一點不同的設計
+
+- 廣泛用途的程式語言一般會分「變數」與「資料結構」，變數參照單個資料值、資料結構參照多個資料值。
+- R 語言略過「變數」層級，用長度 1 的資料結構參照單個資料值、長度超過 1 的資料結構參照多個資料值。
+
+## R 語言資料結構的設計理念
+
+$$
+\text{維度個數} \times \text{資料同質或異質}
+$$
+
+## 預習 R 語言資料結構
+
+||同質|異質|
+|-|----|----|
+|維度等於一|`vector`|`list`|
+|維度等於二|`matrix`|`data.frame`|
+|維度超過二|`array`|`list` 與其他資料結構混搭|
+
+# 如何使用函數
+
+## （複習）函數由五個因素組成
+
+1. 函數名稱。
+2. 輸入。
+3. 參數。
+4. 文字處理或數值計算的程式碼。
+5. 輸出。
+
+## 函數有四個來源
+
+1. 來自內建函數。
+2. 來自標準套件。
+3. 來自第三方套件。
+4. 來自使用者自行定義函數。
+
+## 目前還沒有標準/第三方套件/使用者自行定義函數的需求
+
+- 之後在「自行定義函數組織 R 語言的程式碼」說明使用者自行定義函數。
+- 之後在「使用 R 語言套件獲得更多功能」說明標準/第三方套件。
+
+## 練習題就是來自使用者自行定義函數
+
+```{r}
+#| eval: false
+exercise <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 查詢函數的說明文件
+
+```{r}
+#| eval: false
+help("builtin_function")
+```
+
+## 查詢函數的說明文件：`abs()` 函數
+
+```{r}
+#| eval: false
+help("abs")
+```
+
+## 一般對物件應用函數的語法
+
+```{r}
+#| eval: false
+function_name(object_name)
+```
+
+## 一般對物件應用函數的語法：`abs()` 函數
+
+```{r}
+negative_number <- -81
+abs(negative_number)
+```
+
+## 使用 `|>` 運算符對物件應用函數的語法
+
+- `|>` 運算符發音為 Pipe 運算符。
+- 是 R4.0 版本之後內建支援的運算符。
+
+```{r}
+#| eval: false
+object_name |> function_name()
+```
+
+## 使用 `|>` 運算符對物件應用函數的語法：`abs()` 函數
+
+```{r}
+negative_number <- -81
+negative_number |> abs()
+```
+
+## 使用 `|>` 運算符的優勢
+
+需要對物件連續應用多個函數的時候，具有更高的可讀性（Readability）。
+
+```{r}
+negative_number <- -81
+# 一般對物件應用函數的語法
+sqrt(abs(negative_number))
+# 使用 |> 運算符對物件應用函數的語法
+negative_number |>
+  abs() |>
+  sqrt()
+```
+
+## 使用函數的時候可以搭配參數來調整輸出
+
+- 參數通常有預設值，不指定的狀況下就採用預設值。
+  - 像是調整小數位數 `round()` 函數的 `digits` 參數預設為 `digits = 0`
+  - 像是能夠連接文字 `paste()` 函數的 `sep` 參數預設為 `sep = " "`
+
+## 調整小數位數 `round()` 函數的 `digits` 參數預設為 `digits = 0`
+
+```{r}
+e <- exp(1) # 2.718282
+round(e)
+round(e, digits = 3)
+```
+
+## 連接文字 `paste()` 函數的 `sep` 參數預設為 `sep = " "`
+
+```{r}
+first_name <- "Luke"
+last_name <- "Skywalker"
+paste(first_name, last_name)
+paste(last_name, first_name, sep = ", ")
+```
+
+## 使用某些函數的時候不需要輸入或參數
+
+- 像是取得目前電腦系統日期的 `Sys.Date()` 函數。
+- 像是取得目前工作目錄的 `getwd()` 函數。
+
+```{r}
+Sys.Date()
+getwd()
+```
+
+# 個案研究：常用系統功能函數
+
+## 瞭解函數的使用觀念之後，我們可以認識一些好用的系統功能函數
+
+- `sessionInfo()` 
+- `Sys.Date()`
+- `Sys.time()` 與 `Sys.timezone()`
+- `getwd()`
+- `setwd()`
+- `help()`
+- `ls()`
+- `rm()`
+
+## 顯示 R 語言版本以及作業系統相關資訊的 `sessionInfo()`
+
+```{r}
+sessionInfo()
+```
+
+## 取得目前電腦系統日期的 `Sys.Date()`
+
+```{r}
+sys_date <- Sys.Date()
+sys_date
+```
+
+## 取得目前電腦系統時間與時區的 `Sys.time()` 與 `Sys.timezone()`
+
+```{r}
+sys_time <- Sys.time()
+sys_timezone <- Sys.timezone()
+sys_time
+sys_timezone
+```
+
+## 取得目前工作目錄的 `getwd()`
+
+```{r}
+working_directory <- getwd()
+working_directory
+```
+
+## 設定目前工作目錄的 `setwd()`
+
+- 路徑要用單引號或雙引號包括。
+- Windows 使用者要特別注意路徑斜線要使用正斜線 `/`（而非 Windows 作業系統使用的反斜線 `\`）
+- 避免在路徑設定上出現空格與非英文的文字。
+
+```{r}
+#| eval: false
+working_directory <- "path_to_your_working_directory"
+setwd(working_directory)
+```
+
+## 查詢函數或者資料說明的 `help()`
+
+```{r}
+#| eval: false
+help("function_name")
+```
+
+## 取得目前環境中所有物件名稱的 `ls()`
+
+```{r}
+#| eval: false
+object_list <- ls()
+object_list
+```
+
+## 移除目前環境中物件的 `rm()`
+
+```{r}
+#| eval: false
+rm(object_name)
+```
+
+# 重點統整
+
+R 語言的核心精神
+
+> The way R works is pretty straightforward, you apply functions to objects.
+>
+> Greg Martin
+
+## 重點統整（續）
+
+- 函數是一段被賦予名稱的程式碼，能夠完成某一個文字處理或者數值計算任務，在使用函數之前，必須先確定這個函數在執行的環境中已經被定義妥善。
+- 在 R 語言中，物件可以是一個資料結構或是一個函數。
+
+## 重點統整（續）
+
+- 學好 R 語言的訣竅
+  - 掌握不同資料結構的特性。
+  - 熟練地使用函數或自行定義函數。
+  - 對物件應用函數。
+- 對物件應用函數的兩種語法
+  - `function_name(object_name)`
+  - `object_name |> function_name()`

@@ -1,0 +1,621 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "建立向量儲存同質資料"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "建立向量儲存同質資料"
+    scrollable: true
+    incremental: false
+---
+
+# 關於向量
+
+## （複習）R 語言資料結構
+
+||同質|異質|
+|-|----|----|
+|維度等於一|`vector`|`list`|
+|維度等於二|`matrix`|`data.frame`|
+|維度超過二|`array`|`list` 與其他資料結構混搭|
+
+## 什麼是向量
+
+- 向量是 R 語言基本的資料結構，包含許多相同類別、同質的資料。
+- 所有 R 語言的進階應用都建構在向量之上，例如其他資料結構以及函數都由向量組成。
+- R 語言的「向量」有相當多不同的類別。
+
+## 不同類別的向量
+
+- 文字向量 `character`
+- 數值向量 `numeric`
+- 邏輯向量 `logical`
+- 日期時間向量 `Date` 與 `POSIXct`
+- 未定義值向量 `NA` 與 `NULL`
+
+# 文字向量
+
+## 如何建立文字向量
+
+- 使用雙引號 `""` 或單引號 `''` 包括定義。
+- 使用函數的輸出定義。
+
+## 命名 R 語言物件的風格
+
+- 採用蛇形命名法（snake-case），例如 `hello_world`, `dear_john`, `happy_birthday`
+- 採用 `<-`（在 RStudio 中可以用 `Alt + -` 打出）
+
+來源：<https://style.tidyverse.org/syntax.html>
+
+## 使用雙引號 `""` 或單引號 `''` 包括定義
+
+使用 `class()` 函數確認是文字向量 `character`
+
+```{r}
+hello_world <- "Hello, world!"
+luke_skywalker <- 'Luke Skywalker'
+class(hello_world)
+class(luke_skywalker)
+```
+
+## 什麼時候選擇使用雙引號或單引號
+
+- 多數時候 R 語言使用者習慣使用雙引號 `""`
+- 但是當文字中有出現雙引號的時候，就要用單引號 `''` 包括。
+
+```{r}
+#| eval: false
+character_with_double_quotes <- "Text with "quotes"" # 錯誤
+character_with_double_quotes <- 'Text with "quotes"' # 正確
+```
+
+## 更複雜的情況：雙引號單引號同時出現在文字中
+
+透過反斜線 `\`（也被稱為跳脫字元）標註。
+
+```{r}
+character_with_quotes <- "I \"think\" I'm lovin' it!"
+class(character_with_quotes)
+```
+
+## 使用函數的輸出定義
+
+使用 `class()` 函數確認是文字向量 `character`
+
+```{r}
+working_directory <- getwd()
+object_list <- ls()
+class(working_directory)
+class(object_list)
+```
+
+# 數值向量與數值運算符
+
+## 使用 `class()` 函數確認是數值向量 `numeric`
+
+```{r}
+a <- 55
+b <- 66
+class(a)
+class(b)
+```
+
+## 將 R 語言當作計算機一般運用
+
+常用的數值運算符：
+
+```{r}
+a + b
+a - b
+a * b
+a / 5
+a^2
+a %% 6
+(a + b)^(1/2)
+```
+
+## R 語言預設以 `numeric` 來對待整數或浮點數
+
+```{r}
+a <- 5566
+b <- 55.66
+class(a)
+class(b)
+```
+
+## 如果想要特別指定「整數」，要在數字尾端加上 `L`
+
+```{r}
+numeric_a <- 5566
+integer_a <- 5566L
+class(numeric_a)
+class(integer_a)
+```
+## 假如在有小數點的數字後加 `L` 就會回傳警告並自動以 `numeric` 輸出
+
+```{r}
+a <- 55.66L
+class(a)
+```
+
+## 特殊的數值向量 `Inf`
+
+除法運算中若遭遇到分母為零的情況就會出現。
+
+```{r}
+a <- 5566
+zero <- 0
+zero_division <- a / zero
+zero_division
+class(zero_division)
+```
+
+## 特殊的數值向量 `NaN`
+
+- 意指 Not a Number
+- 某些數值運算的結果無法使用數值或者 `Inf` 表示，就採用 `NaN` 表示
+
+```{r}
+inf_divides_inf <- Inf / Inf
+inf_divides_inf
+class(inf_divides_inf)
+```
+
+# 邏輯向量與關係、邏輯運算符
+
+## 進行條件判斷或者資料篩選的時候會需要仰賴邏輯向量 `logical`
+
+邏輯向量只有 `FALSE` 與 `TRUE` 這兩個值，亦可以簡寫為 `F` 與 `T`
+
+```{r}
+class(FALSE)
+class(TRUE)
+class(F)
+class(T)
+```
+
+## R 語言對大小寫敏感，因此以下的寫法都會產生錯誤
+
+```{r}
+#| eval: false
+class(False) # R 會在環境中尋找 False 物件
+class(true)  # R 會在環境中尋找 true 物件
+class(f)     # R 會在環境中尋找 f 物件
+```
+
+## 運用關係運算符生成邏輯向量
+
+關係運算符能夠比較兩個物件所參照的值。
+
+```{r}
+a <- 5566
+b <- 5566
+a == b # 等於
+a != b # 不等於
+a > b  # 大於
+a >= b # 大於等於
+a < b  # 小於
+a <= b # 小於等於
+```
+
+## 運用邏輯運算符生成邏輯向量
+
+- 邏輯運算符能夠結合多個邏輯向量。
+- 在 `&`（and）的兩側都要是 `TRUE` 結果才會生成為 `TRUE`
+
+```{r}
+FALSE & FALSE
+FALSE & TRUE
+TRUE & FALSE
+TRUE & TRUE
+```
+
+## 運用邏輯運算符生成邏輯向量（續）
+
+在 `|`（or）的兩側都要是 `FALSE` 結果才會生成為 `FALSE`
+
+```{r}
+FALSE | FALSE
+FALSE | TRUE
+TRUE | FALSE
+TRUE | TRUE
+```
+
+## 運用邏輯運算符生成邏輯向量（續）
+
+在邏輯向量前加入 `!`（not）反轉。
+
+```{r}
+!TRUE
+!FALSE
+```
+
+# 日期時間向量
+
+## 日期向量 `Date`
+
+- 外觀看起來跟文字向量沒有什麼差別。
+- 運用 `class()` 函數檢驗，就會發現並不是文字向量。
+
+```{r}
+sys_date <- Sys.Date()
+sys_date
+class(sys_date)
+```
+
+## 日期向量與數值向量可以互相轉換
+
+- 以 1970-01-01 作為原點 0，在這天以後的每天都 +1 來記錄，而這天以前的每天都 -1 來記錄。
+- 日期向量可以進行數值運算。
+
+```{r}
+sys_date + 1
+sys_date - 1
+```
+
+## 日期時間向量 `POSIXct`
+
+- 外觀看起來跟文字向量沒有什麼差別。
+- 運用 `class()` 函數檢驗，就會發現並不是文字向量。
+
+```{r}
+sys_time <- Sys.time()
+sys_time
+class(sys_time)
+```
+
+## 日期時間向量與數值向量可以互相轉換
+
+- 以 1970-01-01 00:00:00 GMT+0 作為原點 0，在這個時間點以後的每秒都 +1 來記錄，而這個時間點以前的每秒都 -1 來記錄。
+- 日期時間向量可以進行數值運算。
+
+```{r}
+sys_time + 1
+sys_time - 1
+```
+
+# 未定義值向量
+
+## 兩種未定義值向量
+
+- 佔有一個長度 `NA`，通常用來表示「遺漏的資料」。
+- 不佔有長度的 `NULL`，通常用來表示「空值」。
+
+```{r}
+na <- NA
+null <- NULL
+length(na)
+length(null)
+```
+
+# 向量類別的判斷與轉換
+
+## 使用 `is.向量類別()` 函數判斷向量類別
+
+- `is.character()` 函數判斷是否為文字向量。
+- `is.numeric()` 函數判斷是否為數值向量。
+- `is.logical()` 函數判斷是否為邏輯向量。
+
+---
+
+```{r}
+a <- "0"
+b <- 0
+c <- FALSE
+is.character(a)
+is.character(b)
+is.character(c)
+is.numeric(a)
+is.numeric(b)
+is.numeric(c)
+is.logical(a)
+is.logical(b)
+is.logical(c)
+```
+
+## 使用 `as.向量類別()` 函數轉換向量類別
+
+- `as.character()` 函數轉換輸入為文字向量。
+- `as.numeric()` 函數轉換輸入為數值向量。
+- `as.logical()` 函數轉換輸入為邏輯向量。
+
+---
+
+```{r}
+a <- "0"
+b <- 0
+c <- FALSE
+as.character(b)
+as.character(c)
+as.numeric(a)
+as.numeric(c)
+as.logical(a)
+as.logical(b)
+```
+
+# 向量的操作
+
+## 如何建立長度超過 1 的向量
+
+- 使用 `c()` 函數。
+- 使用 `seq()` 函數。
+- 使用 `rep()` 函數。
+- 使用內建的向量常數。
+
+## 使用 `c()` 函數
+
+- `c()` 函數是 Combine 的縮寫。
+- 用逗號 `,` 分隔不同資料。
+
+```{r}
+weekend <- c("Saturday", "Sunday")
+first_quarter <- c("January", "February", "March")
+first_five_primes <- c(2, 3, 5, 7, 11)
+weekend
+first_quarter
+first_five_primes
+```
+
+## 以 `length()` 函數檢視向量長度
+
+```{r}
+length(weekend)
+length(first_quarter)
+length(first_five_primes)
+```
+
+## 向量化運算
+
+- 一但開始接觸長度超過 1 的向量，就可以體會「向量化運算」的優勢。
+- 不論任何類別的向量，都可以向量化運算。
+
+```{r}
+toupper(weekend)
+first_quarter == "February"
+first_five_primes * 10
+```
+
+## 對長度超過 1 的向量應用的關係運算符 `%in%`
+
+```{r}
+"Friday" %in% weekend
+1 %in% first_five_primes
+```
+
+## 使用 `seq()` 函數
+
+- `seq()` 函數是 Sequence 的縮寫。
+- 可以指定參數 `from` 起始值, `to` 終止值, `by` 間隔, `length.out` 長度來建立數列向量。
+
+```{r}
+first_ten_numbers <- seq(from = 0, to = 9, by = 1)
+first_five_odds <- seq(from = 1, to = 9, by = 2)
+first_five_evens <- seq(from = 0, by = 2, length.out = 5)
+first_ten_numbers
+first_five_odds
+first_five_evens
+```
+
+## 採用 `by = 1` 的時候，可以用 `:` 更快生成
+
+```{r}
+first_ten_numbers <- 0:9
+first_ten_numbers
+```
+
+## 使用 `rep()` 函數
+
+- `rep()` 函數是 Replicate 的縮寫。
+- 可以指定參數 `times = n` 複製 `n` 次輸入的向量。
+
+```{r}
+a <- 55
+weekend <- c("Saturday", "Sunday")
+rep(a, times = 6)
+rep(weekend, times = 2)
+```
+
+## 使用內建的向量常數
+
+- `LETTERS` vs. `letters`
+- `month.abb` vs. `month.name`
+
+```{r}
+LETTERS
+letters
+month.abb
+month.name
+pi
+```
+
+## 從向量中擷取資料
+
+- 使用 `vector[index]` 擷取為長度 1 的向量。
+- 使用 `vector[from_index:to_index]` 擷取。
+- 使用 `vector[c(index_1, index_2, ...)]` 擷取。
+- 使用邏輯向量擷取。
+
+## 使用 `vector[index]` 擷取為長度 1 的向量
+
+- `index` 稱為索引值，由左邊自 1 起始算起。
+- 末端的索引值常以向量長度表示。
+
+```{r}
+LETTERS[1]  # A 是第 1 個英文字母
+LETTERS[18] # R 是第 18 個英文字母
+length_letters <- length(LETTERS)
+LETTERS[length_letters] # Z 是末端的英文字母
+```
+
+## 使用 `vector[from_index:to_index]` 擷取
+
+`from_index` 與 `to_index` 均會包含在部分長度的向量中。
+
+```{r}
+R_and_S <- LETTERS[18:19]
+first_five_LETTERS <- LETTERS[1:5]
+R_and_S
+first_five_LETTERS
+```
+
+## 使用 `vector[c(index_1, index_2, ...)]` 擷取
+
+```{r}
+C_R_and_S <- LETTERS[c(3, 18, 19)]
+C_R_and_S
+```
+
+## 使用邏輯向量擷取
+
+與 `TRUE` 相同索引值位置的會被保留。
+
+```{R}
+is_november <- month.name == "November"
+is_november
+month.name[is_november]
+```
+
+---
+
+```{r}
+R_or_S_logical <- LETTERS == "R" | LETTERS == "S"
+R_or_S_logical
+LETTERS[R_or_S_logical]
+```
+
+## 使用 `vector[index] <- value` 更新向量中的資料
+
+```{r}
+odds <- seq(from = 1, to = 5, by = 2)
+odds
+odds[3] <- 7
+odds
+```
+
+## 使用 `vector[-index]` 刪除向量中的資料
+
+```{r}
+odds <- seq(from = 11, to = 19, by = 2)
+odds
+primes <- odds[-3]
+primes
+```
+
+# 個案研究：抽樣
+
+## 什麼是抽樣
+
+在統計學中，抽樣（Sampling）是一種推論統計方法，它是指從母體（Population）中抽取一部分個體作為樣本（Sample），通過觀察樣本的屬性，對母體得出估計判斷，從而達到對母體的認識。
+
+來源：<https://en.wikipedia.org/wiki/Sampling_(statistics)>
+
+## 使用「函數」與「向量」實作抽樣
+
+- 在「怎樣學好 R 語言」我們已經懂得如何使用函數。
+- 在本章節我們已經懂得向量。
+- 結合兩個觀念就能夠實作抽樣。
+
+## 使用 `sample()` 函數做抽樣
+
+- `x` 輸入母體。
+- `size` 樣本數。
+- `replace` 抽樣後是否放回，預設為 `FALSE`。
+- `prob` 抽樣的機率。
+
+## 母體為 50 個紅球、50 個白球
+
+```{r}
+red_white <- c("Red", "White")
+population <- rep(red_white, times = 50)
+length(population)
+table(population)
+```
+
+## 從母體中抽出 30 個樣本
+
+```{r}
+samples <- sample(population, size = 30)
+length(samples)
+table(samples)
+```
+
+## 利用 `sample()` 函數模擬投擲公正硬幣
+
+設定 `replace = TRUE`，就能模擬投擲公正硬幣。
+
+```{r}
+coin <- c("Head", "Tail")
+samples <- sample(coin, size = 100, replace = TRUE)
+length(samples)
+table(samples)
+```
+
+## 指定 `prob` 參數模擬投擲「不」公正硬幣
+
+```{r}
+coin <- c("Head", "Tail")
+designated_prob <- c(0.7, 0.3)
+samples <- sample(coin, size = 100, replace = TRUE,
+                  prob = designated_prob)
+length(samples)
+table(samples)
+```
+
+## 利用 `sample()` 函數模擬投擲公正骰子
+
+設定 `replace = TRUE`，就能模擬投擲公正骰子。
+
+```{r}
+dice <- 1:6
+samples <- sample(dice, size = 1000, replace = TRUE)
+length(samples)
+table(samples)
+```
+
+## 指定 `prob` 參數模擬投擲「不」公正骰子
+
+```{r}
+dice <- 1:6
+designated_prob <- c(0.1, 0.1, 0.1, 0.1, 0.1, 0.5)
+samples <- sample(dice, size = 1000, replace = TRUE,
+                  prob = designated_prob)
+length(samples)
+table(samples)
+```
+
+# 重點統整
+
+- 向量是 R 語言基本的資料結構，包含許多相同類別、同質的資料。
+- 不同類型的向量
+  - 文字向量 `character`
+  - 數值向量 `numeric`
+  - 邏輯向量 `logical`
+  - 日期時間向量 `Date` 與 `POSIXct`
+  - 未定義值向量 `NA` 與 `NULL`
+
+## 重點統整（續）
+
+- 使用 `class()` 函數檢視向量類別。
+- 向量類別的判斷與轉換：
+  - 使用 `is.向量類別()` 函數判斷向量類別。
+  - 使用 `as.向量類別()` 函數轉換向量類別。
+  
+## 重點統整（續）
+
+- 如何建立長度超過 1 的向量：
+  - 使用 `c()` 函數。
+  - 使用 `seq()` 函數。
+  - 使用 `rep()` 函數。
+  - 使用內建的向量常數。
+  
+## 重點統整（續）
+
+- 從向量中擷取資料：
+  - 使用 `vector[index]` 擷取為長度 1 的向量。
+  - 使用 `vector[from_index:to_index]` 擷取。
+  - 使用 `vector[c(index_1, index_2, ...)]` 擷取。
+  - 使用邏輯向量擷取。

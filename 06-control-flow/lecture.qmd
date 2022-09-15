@@ -1,0 +1,598 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "使用流程控制管理程式區塊的執行"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "使用流程控制管理程式區塊的執行"
+    scrollable: true
+    incremental: false
+---
+
+# 關於流程控制
+
+## 什麼是流程控制
+
+- 多數程式語言都是從程式碼的第一列開始往下讀取並且執行。
+- 在某些情況下，我們會希望程式碼可以依照需求來決定是否執行或者重複執行多次，流程控制的技巧就是用來滿足這樣的需求。
+- 流程控制能夠依賴條件來決定程式區塊（Code blocks）中的指令、敘述或者使用函數的執行次數。
+
+## 在 R 語言進行流程控制的主要機制
+
+- 條件判斷：依賴條件為 `FALSE` 或 `TRUE` 決定執行程式區塊 0 次或 1 次。
+- 迴圈：依賴條件為 `FALSE` 或 `TRUE` 決定執行程式區塊的次數。
+
+## 什麼是程式區塊
+
+- 程式區塊（Code blocks）指的是將一系列相關的敘述集合在一起的程式碼結構。
+- 在 R 語言中，程式區塊使用一對大括號 `{}` 將敘述包裝在裡面。
+- 條件判斷、迴圈與自行定義函數都會需要程式區塊將敘述與它們連結。
+
+## 預覽不同的程式區塊
+
+```{r}
+#| eval: false
+if (條件) {
+  # 依條件決定執行與否的程式區塊
+}
+while (條件) {
+  # 依條件決定執行幾次的程式區塊
+}
+for (元素 in 資料結構) {
+  # 依資料結構的長度決定執行幾次的程式區塊
+}
+function_name <- function() {
+  # 使用自行定義函數時候會執行的程式區塊
+}
+```
+
+# 決定程式區塊是否被執行的條件判斷
+
+## 什麼是條件判斷
+
+- 條件判斷是依條件為 `FALSE` 或 `TRUE` 來決定是否執行程式區塊。
+- 條件可以由「關係運算符」或「邏輯運算符」生成。
+- 運用 `if`、`else if` 以及 `else` 連結程式區塊。
+
+## `if` 敘述
+
+條件為 `FALSE`「不」執行程式區塊，條件為 `TRUE` 執行程式區塊 1 次。
+
+```{r}
+if (FALSE) {
+  print("一定不會執行的程式區塊")
+}
+if (TRUE) {
+  print("一定會執行的程式區塊")
+}
+```
+
+## 依據物件參照的值決定是否執行程式區塊
+
+```{r}
+x <- 5566
+if (x > 0) {
+  print("x 是正數")
+}
+```
+
+## 如果希望在條件 `FALSE` 的時候有對應的程式區塊
+
+- 再新增一個 `if` 敘述。
+- 串連一個 `else if` 或 `else` 敘述。
+
+## 再新增一個 `if` 敘述
+
+```{r}
+x <- -5566
+if (x > 0) {
+  print("x 是正數")
+}
+if (x <= 0) {
+  print("x 不是正數")
+}
+```
+
+## 串連一個 `else if` 敘述
+
+如果 `if` 敘述的條件為 `FALSE`，改檢視 `else if` 敘述的條件，再決定是否執行程式區塊。
+
+```{r}
+x <- -5566
+if (x > 0) {
+  print("x 是正數")
+} else if (x <= 0) {
+  print("x 不是正數")
+}
+```
+
+## 串連一個 `else` 敘述
+
+如果 `if` 的條件為 `FALSE` 就「逕自」執行程式區塊。
+
+```{r}
+if (x > 0) {
+  print("x 是正數")
+} else {
+  print("x 不是正數")
+}
+```
+
+## `else if` 敘述與 `else` 敘述的差異
+
+- `else if` 敘述仍然會檢視條件決定是否執行程式區塊。
+- `else` 會逕自執行程式區塊。
+
+```{r}
+x <- 0
+if (x > 0) {
+  print("x 是正數")
+} else if (x < 0) {
+  print("x 是負數")
+} else {
+  print("x 是零")
+}
+```
+
+## 新增 `if` 敘述與串連 `else if` 敘述/`else` 敘述的差異
+
+- 新增 `if` 敘述是一個獨立的條件判斷。
+- 串連 `else if` 敘述/`else` 敘述則是會依賴前面的條件判斷決定是否執行程式區塊。
+
+---
+
+```{r}
+x <- 5566
+if (x > 0) {
+  print("x 大於零")
+}
+if (x > 10) {
+  print("x 大於十")
+}
+```
+
+---
+
+```{r}
+x <- 5566
+if (x > 0) {
+  print("x 大於零")
+} else if (x > 10) {
+  print("x 大於十")
+}
+
+if (x > 0) {
+  print("x 大於零")
+} else {
+  print("x 大於十")
+}
+```
+
+## 新增 `if` 敘述與串連 `else if` 敘述/`else` 敘述的差異（續）
+
+- 新增 `if` 敘述會檢視「每一個」條件決定是否執行程式區塊。
+- 串連 `else if` 敘述/`else` 敘述只要碰到「先寫的」條件為 `TRUE` 的時候就執行程式區塊並且離開條件判斷。
+
+## 以 Fizz buzz 複習條件判斷
+
+- 從 1 數到 100，碰到 3 的倍數改為 Fizz、碰到 5 的倍數改為 Buzz，碰到 15 的倍數改為 Fizz Buzz，其餘情況不改動。
+- 值得注意的地方：條件之間非互斥，15 是 3 與 5 的公倍數。
+
+來源：<https://en.wikipedia.org/wiki/Fizz_buzz>
+
+## 用 `if`/`else if` 敘述寫寫看
+
+```{r}
+x <- 15
+if (x %% 15 == 0) {
+  print("Fizz Buzz")
+} else if (x %% 3 == 0) {
+  print("Fizz")
+} else if (x %% 5 == 0) {
+  print("Buzz")
+} else if (x %% 3 != 0 & x %% 5 != 0) {
+  print(x)
+}
+```
+
+## 用 `if`/`else if/else` 敘述寫寫看
+
+```{r}
+x <- 15
+if (x %% 15 == 0) {
+  print("Fizz Buzz")
+} else if (x %% 3 == 0) {
+  print("Fizz")
+} else if (x %% 5 == 0) {
+  print("Buzz")
+} else {
+  print(x)
+}
+```
+
+## 只用 `if` 敘述寫寫看
+
+```{r}
+x <- 15
+if (x %% 15 == 0) {
+  print("Fizz Buzz")
+} 
+if (x %% 3 == 0 & x %% 15 != 0) {
+  print("Fizz")
+}
+if (x %% 5 == 0 & x %% 15 != 0) {
+  print("Buzz")
+}
+if (x %% 3 != 0 & x %% 5 != 0) {
+  print(x)
+}
+```
+
+## 條件判斷小結
+
+- `if` 敘述：用來處理條件 `FALSE` 不需執行的需求，可獨立存在。
+- `else` 敘述：用來處理條件 `FALSE` 逕自執行的需求，必須與 `if` 串連。
+- `else if` 敘述：用來處理條件 `FALSE` 但要檢視別的條件的需求，必須與 `if` 串連。
+
+# 讓程式區塊被重複執行的迴圈
+
+## 什麼是迴圈
+
+迴圈（Loops）是流程控制的其中一種技巧，可以讓寫作一次的程式區塊被重複執行，常見的應用是重複執行直到條件不成立時或走訪完資料結構中的所有元素。
+
+來源：<https://en.wikipedia.org/wiki/Control_flow#Loops>
+
+## 兩種常見的迴圈
+
+1. `while` 迴圈：重複執行程式區塊直到條件判斷 `FALSE` 為止。
+2. `for` 迴圈：重複執行程式區塊直到走訪至資料結構中最後一個元素為止。
+
+```{r}
+#| eval: false
+while (條件) {
+  # 依條件決定執行幾次的程式區塊
+}
+for (元素 in 資料結構) {
+  # 依資料結構的長度決定執行幾次的程式區塊
+}
+```
+
+## 如何寫作一個 `while` 迴圈
+
+- 在開始寫迴圈程式區塊之前，先定義一個物件設定起始值。
+- 設計條件讓程式區塊重複執行的次數符合我們的需求。
+- 記得在程式區塊中更新物件的值。
+
+## 檢視 `list` 的異質特性
+
+- 在「建立清單、資料框儲存異質資料」章節我們有將 `list` 的所有元素取出並應用 `class()` 函數。
+- 最後三列程式基本上相同，除了索引值由 1 更改到 3
+
+```{r}
+heterogeneous_data <- list(
+  c(FALSE, TRUE),
+  5566,
+  "Luke Skywalker"
+)
+class(heterogeneous_data[[1]])
+class(heterogeneous_data[[2]])
+class(heterogeneous_data[[3]])
+```
+
+## 如何寫作一個 `while` 迴圈：從 1 更改到 3
+
+- 在開始寫迴圈程式區塊之前，先定義一個物件設定起始值：`index <- 1`
+- 設計條件讓程式區塊重複執行的次數符合我們的需求：`index <= 3`
+- 記得在程式區塊中更新物件的值 `index <- index + 1`
+
+```{r}
+index <- 1
+while (index <= 3) {
+  print(index)
+  index <- index + 1
+}
+```
+
+## 將 `print(index)` 改成 `print(class(heterogeneous_data[[index]]))`
+
+```{r}
+index <- 1
+while (index <= 3) {
+  print(class(heterogeneous_data[[index]]))
+  index <- index + 1
+}
+```
+
+## 如果清單的長度可能更動，我們可以使用 `length()` 函數提高程式的泛用性
+
+```{r}
+heterogeneous_data <- list(
+  c(FALSE, TRUE),
+  5566,
+  "Luke Skywalker",
+  Sys.Date(),
+  Sys.time()
+)
+class(heterogeneous_data[[1]])
+class(heterogeneous_data[[2]])
+class(heterogeneous_data[[3]])
+class(heterogeneous_data[[4]])
+class(heterogeneous_data[[5]])
+```
+
+## 如何寫作一個 `while` 迴圈：從 1 更改到 `length_list`
+
+- 在開始寫迴圈程式區塊之前，先定義一個物件設定起始值：`index <- 1`
+- 設計條件讓程式區塊重複執行的次數符合我們的需求：`index <= length_list`
+- 記得在程式區塊中更新物件的值 `index <- index + 1`
+
+```{r}
+index <- 1
+length_list <- length(heterogeneous_data)
+while (index <= length_list) {
+  print(index)
+  index <- index + 1
+}
+```
+
+## 將 `print(index)` 改成 `print(class(heterogeneous_data[[index]]))`
+
+```{r}
+index <- 1
+length_list <- length(heterogeneous_data)
+while (index <= length_list) {
+  print(class(heterogeneous_data[[index]]))
+  index <- index + 1
+}
+```
+## 如何寫作一個 `for` 迴圈
+
+- 建立一個長度與重複執行次數相符的資料結構。
+- 資料結構如果是數列，可以使用 `seq()` 函數或 `from:to` 建立。
+
+## 如何寫作一個 `for` 迴圈：從 1 更改到 3
+
+建立一個長度與重複執行次數相符的資料結構：`1:3`
+
+```{r}
+for (index in 1:3) {
+  print(index)
+}
+```
+
+## 將 `print(index)` 改成 `print(class(heterogeneous_data[[index]]))`
+
+```{r}
+for (index in 1:3) {
+  print(class(heterogeneous_data[[index]]))
+}
+```
+
+## 如何寫作一個 `for` 迴圈：從 1 更改到 `length_list`
+
+- 使用 `length()` 函數提高程式的泛用性。
+- 建立一個長度與重複執行次數相符的資料結構：`1:length_list`
+
+```{r}
+length_list <- length(heterogeneous_data)
+for (index in 1:length_list) {
+  print(index)
+}
+```
+
+## 將 `print(index)` 改成 `print(class(heterogeneous_data[[index]]))`
+
+```{r}
+for (index in 1:length_list) {
+  print(class(heterogeneous_data[[index]]))
+}
+```
+
+## 常見的迴圈應用：將資料合併為另一個資料結構
+
+- 在開始寫迴圈程式區塊之前，先定義一個空的資料結構。
+- 在程式區塊中運用 `data_structure <- c(data_structure, element)` 語法將資料合併到資料結構的物件中。
+- 迴圈終止之後即可得到合併結果。
+
+---
+
+```{r}
+# 在開始寫迴圈程式區塊之前，先定義一個空的資料結構
+combined_data_structure <- c() 
+for (index in 1:length_list) {
+  element <- class(heterogeneous_data[[index]])
+  combined_data_structure <- c(combined_data_structure, element) # 將資料合併到資料結構的物件中
+}
+combined_data_structure # 合併結果
+```
+
+## 以 `break` 或 `next` 調整迴圈的重複執行次數
+
+- `break` 可以提早結束。
+- `next` 可以略過指定幾次的重複執行次數。
+
+## 碰到 `character` 類別時提早結束
+
+```{r}
+index <- 1
+while (index <= length_list) {
+  if (is.character(heterogeneous_data[[index]])) {
+    break
+  }
+  print(class(heterogeneous_data[[index]]))
+  index <- index + 1
+}
+```
+
+## 碰到 `character` 類別時略過
+
+```{r}
+for (index in 1:length_list) {
+  if (is.character(heterogeneous_data[[index]])) {
+    next
+  }
+  print(class(heterogeneous_data[[index]]))
+}
+```
+
+# 個案研究：搜尋演算法
+
+## 這個章節我們學會了兩種常見的迴圈
+
+1. `while` 迴圈：重複執行程式區塊直到條件判斷 `FALSE` 為止。
+2. `for` 迴圈：重複執行程式區塊直到走訪至資料結構中最後一個元素為止。
+
+## 我們發現同樣一個問題，可以用兩種迴圈來實作
+
+例如：從 1 更改到 3。
+
+```{r}
+index <- 1
+while (index <= 3) {
+  print(index)
+  index <- index + 1
+}
+for (index in 1:3) {
+  print(index)
+}
+```
+
+## 那麼在應用的時候，該如何區別與採用呢？
+
+- 我們可以藉由判斷程式區塊「重複執行的次數是否已知」來決定。
+- 已知重複執行次數的情境可以用 `for` 迴圈，未知重複執行次數的情境採用 `while` 迴圈。
+
+## 以搜尋演算法為例
+
+- 假設我們現在與 R 語言玩「猜猜猜數字」的遊戲，請 R 語言想一個介於 1 到 100 的整數，我們來猜。
+- 我們有兩種基本的方式來猜 R 語言心中所想的整數：
+  - 簡易搜尋
+  - 二元搜尋
+  
+## 簡易搜尋
+
+- 使用 `sample()` 函數讓 R 語言在 1 到 100 之間挑一個整數。
+- 從 1 開始猜，每次都加 1，一直猜到對為止。
+
+```{r}
+rs_number <- sample(1:100, size = 1)
+number_of_guess <- 0
+for (guess in 1:100) {
+  number_of_guess <- number_of_guess + 1
+  if (guess == rs_number) {
+    break
+  }
+}
+number_of_guess
+```
+
+## 我們重複透過簡易搜尋和 R 語言玩 100 次「猜猜猜數字」
+
+- 記錄每一次共猜了多少次才猜對。
+- 使用 `mean()` 函數計算平均要猜幾次才能猜中。
+
+---
+
+```{r}
+number_of_guess_history <- c()
+for (game in 1:100) {
+  rs_number <- sample(1:100, size = 1)
+  number_of_guess <- 0
+  for (guess in 1:100) {
+    number_of_guess <- number_of_guess + 1
+    if (guess == rs_number) {
+      break
+    }
+  }
+  number_of_guess_history <- c(number_of_guess_history, number_of_guess)
+}
+sequential_search_times <- mean(number_of_guess_history)
+sequential_search_times
+```
+
+## 二元搜尋
+
+- 使用 `sample()` 函數讓 R 語言在 1 到 100 之間挑一個整數。
+- 從 50 開始猜，R 語言會告訴我們太大或太小。
+- 如果太大，下一次就猜 25；如果太小，下一次就猜 75，以此類推一直猜到對為止。
+
+---
+
+```{r}
+low <- 1
+high <- 100
+rs_number <- sample(low:high, size = 1)
+number_of_guess <- 1
+guess <- 50
+while (guess != rs_number) {
+  if (guess > rs_number) {
+    high <- guess
+    guess <- floor((low + high) / 2)
+  } else if (guess < rs_number) {
+    low <- guess
+    guess <- ceiling((low + high) / 2)
+  }
+  number_of_guess <- number_of_guess + 1
+}
+```
+
+## 我們重複透過二元搜尋和 R 語言玩 100 次「猜猜猜數字」
+
+- 記錄每一次共猜了多少次才猜對。
+- 使用 `mean()` 函數計算平均要猜幾次才能猜中。
+
+---
+
+```{r}
+number_of_guess_history <- c()
+for (game in 1:100) {
+  low <- 1
+  high <- 100
+  rs_number <- sample(low:high, size = 1)
+  number_of_guess <- 1
+  guess <- 50
+  while (guess != rs_number) {
+    if (guess > rs_number) {
+      high <- guess
+      guess <- floor((low + high) / 2)
+    } else if (guess < rs_number) {
+      low <- guess
+      guess <- ceiling((low + high) / 2)
+    }
+    number_of_guess <- number_of_guess + 1
+  }
+  number_of_guess_history <- c(number_of_guess_history, number_of_guess)
+}
+binary_search_times <- mean(number_of_guess_history)
+binary_search_times
+```
+
+## 二元搜尋的效率遠高於簡易搜尋
+
+- 簡易搜尋的演算法耗時 $O(n)$；二元搜尋的演算法耗時 $O(log_{2}n)$
+- 即便不懂 Big O notation，透過流程控制我們也可以很明顯地觀察到二元搜尋的效率遠高於簡易搜尋。
+- 這個效率優勢，會隨著搜尋範圍變大差距愈明顯，例如若是將「猜猜猜數字」的遊戲規則改為請 R 語言想一個介於 1 到 1000 的整數，簡易搜尋的耗時會增為 10 倍，但二元搜尋的耗時僅會增為 1.5 倍。
+
+```{r}
+sequential_search_times # 約 50 次左右
+binary_search_times     # 約 6~7 次左右 
+```
+
+# 重點統整
+
+- 在 R 語言進行流程控制的主要機制
+  - 條件判斷
+  - 迴圈
+- 在 R 語言中，程式區塊使用一對大括號 `{}` 將敘述包裝在裡面。
+- 條件判斷、迴圈與自行定義函數都會需要程式區塊將敘述與它們連結。
+
+## 重點統整（續）
+
+- 條件判斷是依條件為 `FALSE` 或 `TRUE` 來決定是否執行程式區塊。
+- 條件可以由「關係運算符」或「邏輯運算符」生成。
+- 迴圈可以讓寫作一次的程式區塊被重複執行，常見的應用是重複執行直到條件不成立時或走訪完資料結構中的所有元素。
+- 兩種常見的迴圈為 `while` 迴圈與 `for` 迴圈。
