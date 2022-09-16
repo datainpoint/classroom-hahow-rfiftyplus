@@ -177,13 +177,13 @@ q8 |>
 
 ## 安裝 R（Windows 作業系統）
 
-- 下載並安裝 [R4.2.1-win.exe](https://cran.r-project.org/bin/windows/base/R-4.2.1-win.exe)
+- 下載並安裝 [R4.2.1-win.exe](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/R-4.2.1-win.exe)
 - 未來若想下載並安裝更新版本的 R <https://cran.r-project.org/bin/windows/base>
 - 請注意副檔名為 `.exe`
 
 ## 安裝 R（macOS）
 
-- 下載並安裝 [R4.2.1.pkg](https://cran.r-project.org/bin/macosx/base/R-4.2.1.pkg)
+- 下載並安裝 [R4.2.1.pkg](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/R-4.2.1.pkg)
 - 未來若想下載並安裝更新版本的 R <https://cran.r-project.org/bin/macosx>
 - 請注意副檔名為 `.pkg`
 
