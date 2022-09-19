@@ -1,0 +1,385 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "資料的載入"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "資料的載入"
+    scrollable: true
+    incremental: false
+---
+
+# 關於資料科學的應用場景
+
+## （複習）課程目標：以 R 語言程式設計做資料科學的應用
+
+資料科學是一門將資料（Data）提煉為資訊（Information）的學科，提煉過程中包含資料載入、清理、轉換、視覺化、建模以及溝通。
+
+![](../images/r-for-data-science.png)
+
+來源：<https://r4ds.had.co.nz/program-intro.html>
+
+## 資料科學的應用場景有哪些
+
+- **Import 資料的載入**。
+- Tidy 資料清理。
+- Transform 資料外型與類別的轉換。
+- Visualize 資料視覺化。
+- Model 分析與預測建模。
+- Communicate 溝通分享。
+
+## 常見的資料來源格式
+
+- 純文字檔案
+  - 非結構化純文字檔案
+  - 結構化純文字檔案
+    - CSV
+    - JSON
+    - HTML
+- 試算表
+- 關聯式資料庫管理系統中的資料表
+
+# 純文字檔案
+
+## 什麼是純文字檔案
+
+- 只有文字所構成的電腦檔案，不包含字型的樣式或者段落標記，能夠使用最簡單的文字編輯器（例如 Windows 的「記事本」、macOS 的 TextEdit）直接開啟檢視。
+- RStudio 就能夠作為文字編輯器，File > Open File... > 開啟電腦中的純文字檔案。
+
+## 不同格式的純文字檔案
+
+- 非結構化純文字檔案
+- 結構化純文字檔案
+  - JSON
+  - CSV
+  - HTML
+
+## 如何載入不同格式的純文字檔案
+
+1. 將檔案下載至電腦的指定路徑。
+2. 以 RStudio 作為文字編輯器開啟檔案檢視。
+3. 使用 `setwd()` 函數設定 R 語言的工作目錄為 1.；或者設定絕對路徑。
+4. 因應不同格式使用對應的函數載入，如果有設定工作目錄，指定檔案相對路徑即可；否則就要指定檔案絕對路徑。
+5. 載入與解析 HTML 需要網頁相關知識，我們這堂課程不討論。
+
+## 載入非結構化的純文字檔案
+
+使用 `readLines()` 函數載入 [the_shawshank_redemption_summaries.txt](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/data/the_shawshank_redemption_summaries.txt)
+
+```{r}
+working_directory <- "/Users/kuoyaojen/Desktop/ch10/"
+file_name <- "the_shawshank_redemption_summaries.txt"
+file_path <- paste0(working_directory, file_name)
+the_shawshank_redemption_summaries <- readLines(file_path)
+# setwd(working_directory)
+# the_shawshank_redemption_summaries <- readLines(file_name)
+class(the_shawshank_redemption_summaries)
+length(the_shawshank_redemption_summaries)
+```
+
+## 什麼是 JSON
+
+- JSON(JavaScript Object Notation) 是一種輕量的資料交換格式，是一種對人類與電腦都友善的純文字格式。
+- JSON 雖然源於 JavaScript，但卻是獨立於該程式語言之外，能夠被眾多程式語言輕鬆解析和建立的一種理想資料交換格式。
+- JSON 可能由兩種資料結構組成：鍵值對應關係與有序列表，可以用 R 語言的命名清單（named `list`） 與清單 `list` 來理解。
+
+## 載入 JSON
+
+使用 `jsonlite` 套件的 `fromJSON()` 函數載入 [players.json](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/data/players.json)
+
+```{r}
+#| eval: false
+install.packages("jsonlite")
+```
+
+```{r}
+library("jsonlite")
+
+file_name <- "players.json"
+file_path <- paste0(working_directory, file_name)
+players_json <- jsonlite::fromJSON(file_path)
+# setwd(working_directory)
+# players_json <- jsonlite::fromJSON(file_name)
+class(players_json)
+names(players_json)
+```
+
+## 特定符號分隔的純文字檔案
+
+- 透過特定符號分隔欄位的結構化資料。
+- 常見的有逗號（`,`）、分號（`;`）、Tab 鍵（`\t`）等。
+- 最廣泛使用的是逗號，因此有特定的副檔名 `.csv` 意指逗號分隔值（Comma-separated values）。
+
+## 載入特定符號分隔的純文字檔案
+
+使用 `read.csv()` 函數載入 [movies.csv](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/data/movies.csv)
+
+```{r}
+file_name <- "movies.csv"
+file_path <- paste0(working_directory, file_name)
+movies_csv <- read.csv(file_path)
+# setwd(working_directory)
+# movies_csv <- read.csv(file_name)
+class(movies_csv)
+dim(movies_csv)
+head(movies_csv)
+```
+
+# 試算表
+
+## 什麼是試算表
+
+> 試算表是類比紙本計算表格的電腦軟體，由許多列與欄所構成的儲存格，其中可以存放數值、算式或文字。常見的試算表軟體有 Microsoft Excel、macOS Numbers 與 Google Sheets
+
+來源：<https://en.wikipedia.org/wiki/Spreadsheet>
+
+## 載入試算表
+
+使用 `readxl` 套件的 `read_excel()` 函數載入 [imdb.xlsx](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/data/imdb.xlsx)
+
+```{r}
+#| eval: false
+install.packages("readxl")
+```
+
+```{r}
+file_name <- "imdb.xlsx"
+file_path <- paste0(working_directory, file_name)
+movies_xlsx <- readxl::read_excel(file_path)
+# setwd(working_directory)
+# movies_xlsx <- readxl::read_excel(file_name)
+class(movies_xlsx)
+dim(movies_xlsx)
+head(movies_xlsx)
+```
+
+## 試算表檔案的組成
+
+- 試算表的檔案為一個活頁簿（Workbook）、活頁簿中可以有多個試算表（Spreadsheets）
+- `readxl` 套件的 `read_excel()` 函數預設讀取第一張試算表。
+- 可以透過 `readxl` 套件的 `excel_sheets()` 函數取得活頁簿中的試算表名稱。
+
+```{r}
+sheet_names <- readxl::excel_sheets(file_path)
+# setwd(working_directory)
+# sheet_names <- readxl::excel_sheets(file_name)
+sheet_names
+```
+
+## 指定參數 `sheet` 載入特定試算表
+
+```{r}
+casting_xlsx <- readxl::read_excel(file_path, sheet = "casting")
+actors_xlsx <- readxl::read_excel(file_path, sheet = "actors")
+# setwd(working_directory)
+# casting_xlsx <- readxl::read_excel(file_name, sheet = "casting")
+# actors_xlsx <- readxl::read_excel(file_name, sheet = "casting")
+dim(casting_xlsx)
+dim(actors_xlsx)
+```
+
+# 關聯式資料庫中的資料表
+
+## 什麼是關聯式資料庫中的資料表
+
+> 關聯式資料庫（Relational database）是基於關聯模型所建構的資料庫，是儲存在電腦中的資料集合。一個資料庫中通常會有多個資料表（Table）能夠藉助集合運算（Set operation）等數學方法來處理資料表之間的操作和關聯，也能夠用來表示現實世界中的商業邏輯，並能夠接受結構化查詢語言 SQL 來進行檢索和操作。
+
+來源：<https://en.wikipedia.org/wiki/Relational_database>
+
+## 如何載入關聯式資料庫中的資料表
+
+- 使用 `RSQLite` 套件的 `SQLite()` 函數建立連線驅動（Driver）。
+- 使用 `DBI` 套件的 `dbConnect()` 函數建立與 [imdb.db](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/data/imdb.db) 的連線。
+
+```{r}
+#| eval: false
+install.packages("RSQLite")
+```
+
+```{r}
+library("DBI")
+
+file_name <- "imdb.db"
+file_path <- paste0(working_directory, file_name)
+connection <- DBI::dbConnect(RSQLite::SQLite(), file_path)
+# setwd(working_directory)
+# connection <- DBI::dbConnect(RSQLite::SQLite(), file_name)
+```
+
+## 關聯式資料庫 `imdb.db` 中的資料表
+
+- 使用 `DBI` 套件的 `dbListTables()` 函數顯示資料庫中所有資料表。
+  - `movies`
+  - `casting`
+  - `actors`
+
+```{r}
+DBI::dbListTables(connection)
+```
+
+## 載入 `movies` 資料表
+
+使用 `DBI` 套件的 `dbReadTable()` 函數。
+
+```{r}
+movies_db <- DBI::dbReadTable(connection, name = "movies")
+dim(movies_db)
+head(movies_db)
+```
+
+## 載入 `casting` 資料表
+
+使用 `DBI` 套件的 `dbReadTable()` 函數。
+
+```{r}
+casting_db <- DBI::dbReadTable(connection, name = "casting")
+dim(casting_db)
+head(casting_db)
+```
+
+## 載入 `actors` 資料表
+
+使用 `DBI` 套件的 `dbReadTable()` 函數。
+
+```{r}
+actors_db <- DBI::dbReadTable(connection, name = "actors")
+dim(actors_db)
+head(actors_db)
+```
+
+## 運用文字向量儲存結構化查詢語言 SQL
+
+使用 `DBI` 套件的 `dbGetQuery()` 函數。
+
+```{r}
+sql_statement <- "SELECT * FROM movies WHERE director = 'Christopher Nolan'"
+christopher_nolans_movies <- DBI::dbGetQuery(conn = connection, statement = sql_statement)
+christopher_nolans_movies
+```
+
+## 使用完畢之後關閉資料庫連線
+
+使用 `DBI` 套件的 `dbDisconnect()` 函數。
+
+```{r}
+DBI::dbDisconnect(connection)
+```
+
+# 個案研究：範例資料與學習資料庫
+
+## 課程出現過的範例資料與學習資料庫
+
+- 「R 語言起步走」引用的 Kaggle 問卷。
+- 「建立清單、資料框儲存異質資料」提及的學習資料庫。
+
+## 資料來源格式
+
+- CSV：Kaggle 問卷、`covid19`
+- JSON：`nba`
+- HTML：`imdb`（載入與解析 HTML 需要網頁相關知識，我們這堂課程不討論）
+- 試算表：`twElection2020`
+
+## 載入 Kaggle 問卷
+
+使用 `read.csv()` 函數載入 [kaggle_survey_2021_responses.csv](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/data/kaggle_survey_2021_responses.csv)
+
+```{r}
+file_name <- "kaggle_survey_2021_responses.csv"
+file_path <- paste0(working_directory, file_name)
+kaggle_survey <- read.csv(file_path)
+# setwd(working_directory)
+# kaggle_survey <- read.csv(file_name)
+class(kaggle_survey)
+dim(kaggle_survey)
+head(kaggle_survey)
+```
+
+## 載入 `covid19` 原始資料來源
+
+- `read.csv()` 函數除了可以指定本機電腦中的檔案路徑，也可以指定網址。
+- 原始資料來源：[JHU CSSE COVID-19 Dataset](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data)
+
+---
+
+```{r}
+lookup_table_url <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv"
+daily_report_url <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-01-2022.csv"
+time_series_url <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+lookup_table <- read.csv(lookup_table_url)
+daily_report <- read.csv(daily_report_url)
+time_series <- read.csv(time_series_url)
+dim(lookup_table)
+dim(daily_report)
+dim(time_series)
+```
+
+## 載入 `nba` 原始資料來源
+
+- `jsonlite` 套件的 `fromJSON()` 函數除了可以指定本機電腦中的檔案路徑，也可以指定網址。
+- 原始資料來源：[data.nba.net](https://data.nba.net/10s/prod/v1/today.json)
+
+---
+
+```{r}
+players_url <- "https://data.nba.net/prod/v1/2022/players.json"
+teams_url <- "https://data.nba.net/prod/v1/2022/teams.json"
+players <- jsonlite::fromJSON(players_url)
+teams <- jsonlite::fromJSON(teams_url)
+class(players)
+class(teams)
+```
+
+## 載入 `twElection2020` 原始資料來源
+
+- 使用 `readxl` 套件的 `read_excel()` 函數載入[總統-A05-4-候選人得票數一覽表-各投開票所(臺北市).xls](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/data/%E7%B8%BD%E7%B5%B1-A05-4-%E5%80%99%E9%81%B8%E4%BA%BA%E5%BE%97%E7%A5%A8%E6%95%B8%E4%B8%80%E8%A6%BD%E8%A1%A8-%E5%90%84%E6%8A%95%E9%96%8B%E7%A5%A8%E6%89%80(%E8%87%BA%E5%8C%97%E5%B8%82).xls)
+- 原始資料來源：[中央選舉委員會選舉資料庫](https://db.cec.gov.tw/ElecTable/Election)
+
+```{r}
+file_name <- "總統-A05-4-候選人得票數一覽表-各投開票所(臺北市).xls"
+file_path <- paste0(working_directory, file_name)
+presidential_votes_detail <- readxl::read_excel(file_path)
+# setwd(working_directory)
+# presidential_votes_detail <- readxl::read_excel(file_name)
+dim(presidential_votes_detail)
+```
+
+# 重點統整
+
+- 資料科學的應用場景：
+  - Import 資料的載入。
+  - Tidy 資料清理。
+  - Transform 資料外型與類別的轉換。
+  - Visualize 資料視覺化。
+  - Model 分析與預測建模。
+  - Communicate 溝通分享。
+
+## 重點統整（續）
+
+- 常見的資料來源格式
+  - 純文字檔案
+    - 非結構化純文字檔案
+    - 結構化純文字檔案
+      - CSV
+      - JSON
+      - HTML
+  - 試算表
+  - 關聯式資料庫管理系統中的資料表
+
+## 重點統整（續）
+
+- 使用 `readLines()` 函數載入非結構化的純文字檔案。
+- 使用 `jsonlite` 套件的 `fromJSON()` 函數載入 JSON
+- 使用 `read.csv()` 函數載入特定符號分隔的純文字檔案。
+- 使用 `readxl` 套件的 `read_excel()` 函數載入試算表。
+
+## 重點統整（續）
+
+- 如何載入關聯式資料庫中的資料表
+  - 使用 `RSQLite` 套件的 `SQLite()` 函數建立連線驅動（Driver）。
+  - 使用 `DBI` 套件的 `dbConnect()` 函數建立連線。
+  - 使用 `DBI` 套件的 `dbReadTable()` 函數載入資料表。
+  - 使用 `DBI` 套件的 `dbGetQuery()` 函數查詢。
