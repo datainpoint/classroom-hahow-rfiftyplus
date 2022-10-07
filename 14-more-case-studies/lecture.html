@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="lecture_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lecture_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.37">
+
+  <meta name="author" content="郭耀仁">
+  <title>R 語言的 50 + 練習：統計分析的前哨站</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">R 語言的 50 + 練習：統計分析的前哨站</h1>
+  <p class="subtitle">更多個案研究</p>
+  <p class="author">郭耀仁</p>
+</section>
+
+<section>
+<section id="關於更多個案研究" class="title-slide slide level1 center">
+<h1>關於更多個案研究</h1>
+
+</section>
+<section id="更多個案研究一覽" class="slide level2">
+<h2>更多個案研究一覽</h2>
+<ol type="1">
+<li>生日問題（The Birthday Problem）</li>
+<li>蒙提霍爾問題（The Monty Hall Problem）</li>
+<li>快艇骰子（Yahtzee）</li>
+<li>硬幣是否公正（Fairness of a Coin）</li>
+</ol>
+</section></section>
+<section>
+<section id="個案研究生日問題the-birthday-problem" class="title-slide slide level1 center">
+<h1>個案研究：生日問題（The Birthday Problem）</h1>
+
+</section>
+<section id="關於生日問題" class="slide level2">
+<h2>關於生日問題</h2>
+<blockquote>
+<p>生日問題是指最少需要幾人，當中的兩個人生日相同的機率才會大於 50%，這個題目的答案是 23 人。這意味著在一個小班級（30人）中，存在兩人生日相同可能性很高。對於一個大班級 （60 人以上），機率會大於 99%。這個問題有時也被稱作生日悖論，它被稱作悖論是因為這個事實與一般直覺相牴觸，大多數人會認為，23 人中有 2 人生日相同的機率應該遠小於 50%。</p>
+</blockquote>
+<p>來源：<a href="https://en.wikipedia.org/wiki/Birthday_problem" class="uri">https://en.wikipedia.org/wiki/Birthday_problem</a></p>
+</section>
+<section id="生日問題的假設" class="slide level2">
+<h2>生日問題的假設</h2>
+<ul>
+<li>忽略閏年才會有的 2 月 29 日。</li>
+<li>班級中的同學都是獨立、來自不同家庭的。</li>
+</ul>
+</section>
+<section id="建立一年中的每一天日期" class="slide level2">
+<h2>建立一年中的每一天日期</h2>
+<p>2022 年不是閏年，所以就以 2022 年的 365 天建立每一天日期。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>dates_in_a_year <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">364</span> <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">as.Date</span>(<span class="at">origin =</span> <span class="st">"2022-01-01"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">format</span>(<span class="st">"%m-%d"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>dates_in_a_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "01-01" "01-02" "01-03" "01-04" "01-05" "01-06" "01-07" "01-08" "01-09"
+ [10] "01-10" "01-11" "01-12" "01-13" "01-14" "01-15" "01-16" "01-17" "01-18"
+ [19] "01-19" "01-20" "01-21" "01-22" "01-23" "01-24" "01-25" "01-26" "01-27"
+ [28] "01-28" "01-29" "01-30" "01-31" "02-01" "02-02" "02-03" "02-04" "02-05"
+ [37] "02-06" "02-07" "02-08" "02-09" "02-10" "02-11" "02-12" "02-13" "02-14"
+ [46] "02-15" "02-16" "02-17" "02-18" "02-19" "02-20" "02-21" "02-22" "02-23"
+ [55] "02-24" "02-25" "02-26" "02-27" "02-28" "03-01" "03-02" "03-03" "03-04"
+ [64] "03-05" "03-06" "03-07" "03-08" "03-09" "03-10" "03-11" "03-12" "03-13"
+ [73] "03-14" "03-15" "03-16" "03-17" "03-18" "03-19" "03-20" "03-21" "03-22"
+ [82] "03-23" "03-24" "03-25" "03-26" "03-27" "03-28" "03-29" "03-30" "03-31"
+ [91] "04-01" "04-02" "04-03" "04-04" "04-05" "04-06" "04-07" "04-08" "04-09"
+[100] "04-10" "04-11" "04-12" "04-13" "04-14" "04-15" "04-16" "04-17" "04-18"
+[109] "04-19" "04-20" "04-21" "04-22" "04-23" "04-24" "04-25" "04-26" "04-27"
+[118] "04-28" "04-29" "04-30" "05-01" "05-02" "05-03" "05-04" "05-05" "05-06"
+[127] "05-07" "05-08" "05-09" "05-10" "05-11" "05-12" "05-13" "05-14" "05-15"
+[136] "05-16" "05-17" "05-18" "05-19" "05-20" "05-21" "05-22" "05-23" "05-24"
+[145] "05-25" "05-26" "05-27" "05-28" "05-29" "05-30" "05-31" "06-01" "06-02"
+[154] "06-03" "06-04" "06-05" "06-06" "06-07" "06-08" "06-09" "06-10" "06-11"
+[163] "06-12" "06-13" "06-14" "06-15" "06-16" "06-17" "06-18" "06-19" "06-20"
+[172] "06-21" "06-22" "06-23" "06-24" "06-25" "06-26" "06-27" "06-28" "06-29"
+[181] "06-30" "07-01" "07-02" "07-03" "07-04" "07-05" "07-06" "07-07" "07-08"
+[190] "07-09" "07-10" "07-11" "07-12" "07-13" "07-14" "07-15" "07-16" "07-17"
+[199] "07-18" "07-19" "07-20" "07-21" "07-22" "07-23" "07-24" "07-25" "07-26"
+[208] "07-27" "07-28" "07-29" "07-30" "07-31" "08-01" "08-02" "08-03" "08-04"
+[217] "08-05" "08-06" "08-07" "08-08" "08-09" "08-10" "08-11" "08-12" "08-13"
+[226] "08-14" "08-15" "08-16" "08-17" "08-18" "08-19" "08-20" "08-21" "08-22"
+[235] "08-23" "08-24" "08-25" "08-26" "08-27" "08-28" "08-29" "08-30" "08-31"
+[244] "09-01" "09-02" "09-03" "09-04" "09-05" "09-06" "09-07" "09-08" "09-09"
+[253] "09-10" "09-11" "09-12" "09-13" "09-14" "09-15" "09-16" "09-17" "09-18"
+[262] "09-19" "09-20" "09-21" "09-22" "09-23" "09-24" "09-25" "09-26" "09-27"
+[271] "09-28" "09-29" "09-30" "10-01" "10-02" "10-03" "10-04" "10-05" "10-06"
+[280] "10-07" "10-08" "10-09" "10-10" "10-11" "10-12" "10-13" "10-14" "10-15"
+[289] "10-16" "10-17" "10-18" "10-19" "10-20" "10-21" "10-22" "10-23" "10-24"
+[298] "10-25" "10-26" "10-27" "10-28" "10-29" "10-30" "10-31" "11-01" "11-02"
+[307] "11-03" "11-04" "11-05" "11-06" "11-07" "11-08" "11-09" "11-10" "11-11"
+[316] "11-12" "11-13" "11-14" "11-15" "11-16" "11-17" "11-18" "11-19" "11-20"
+[325] "11-21" "11-22" "11-23" "11-24" "11-25" "11-26" "11-27" "11-28" "11-29"
+[334] "11-30" "12-01" "12-02" "12-03" "12-04" "12-05" "12-06" "12-07" "12-08"
+[343] "12-09" "12-10" "12-11" "12-12" "12-13" "12-14" "12-15" "12-16" "12-17"
+[352] "12-18" "12-19" "12-20" "12-21" "12-22" "12-23" "12-24" "12-25" "12-26"
+[361] "12-27" "12-28" "12-29" "12-30" "12-31"</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-sample-函數挑選-n-個日期" class="slide level2">
+<h2>使用 <code>sample()</code> 函數挑選 <code>n</code> 個日期</h2>
+<ul>
+<li>指定 <code>size</code> 參數為 <code>n</code> 表示班級中 <code>n</code> 個學生的生日。</li>
+<li>指定 <code>replace</code> 參數為 <code>TRUE</code> 如此才能表示同一天生日的學生。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>birthdays <span class="ot">&lt;-</span> <span class="fu">sample</span>(dates_in_a_year, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>birthdays</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "08-21" "04-25" "07-13" "03-02" "08-22" "03-21" "05-28" "04-17" "02-25"
+[10] "06-20" "04-11" "12-03" "12-26" "05-03" "02-01" "05-31" "06-06" "08-02"
+[19] "05-29" "02-28" "07-04" "06-19" "02-10" "01-03" "05-11" "10-09" "08-24"
+[28] "05-11" "01-16" "08-21"</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-unique-與-length-函數判斷是否有學生同一天生日" class="slide level2">
+<h2>使用 <code>unique()</code> 與 <code>length()</code> 函數判斷是否有學生同一天生日</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>length_birthdays <span class="ot">&lt;-</span> <span class="fu">length</span>(birthdays)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>length_unique_birthdays <span class="ot">&lt;-</span> birthdays <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">unique</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">length</span>()</span>
+<span id="cb5-5"><a href="#cb5-5"></a>same_birthday <span class="ot">&lt;-</span> length_unique_birthdays <span class="sc">&lt;</span> length_birthdays</span>
+<span id="cb5-6"><a href="#cb5-6"></a>same_birthday</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="使用迴圈模擬-simulation_times-個學生人數為-n-的班級" class="slide level2">
+<h2>使用迴圈模擬 <code>simulation_times</code> 個學生人數為 <code>n</code> 的班級</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>simulation_times <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>counter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>simulation_times) {</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  birthdays <span class="ot">&lt;-</span> <span class="fu">sample</span>(dates_in_a_year, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  length_birthdays <span class="ot">&lt;-</span> <span class="fu">length</span>(birthdays)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  length_unique_birthdays <span class="ot">&lt;-</span> birthdays <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="fu">unique</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="fu">length</span>()</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  same_birthday <span class="ot">&lt;-</span> length_unique_birthdays <span class="sc">&lt;</span> length_birthdays</span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="cf">if</span> (same_birthday) {</span>
+<span id="cb7-11"><a href="#cb7-11"></a>    counter <span class="ot">&lt;-</span> counter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  }</span>
+<span id="cb7-13"><a href="#cb7-13"></a>}</span>
+<span id="cb7-14"><a href="#cb7-14"></a>p_same_birthday <span class="ot">&lt;-</span> counter <span class="sc">/</span> simulation_times</span>
+<span id="cb7-15"><a href="#cb7-15"></a>p_same_birthday</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7074</code></pre>
+</div>
+</div>
+</section>
+<section id="自行定義-simulate_same_birthday_prob-函數" class="slide level2">
+<h2>自行定義 <code>simulate_same_birthday_prob()</code> 函數</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>simulate_same_birthday_prob <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">simulation_times =</span> <span class="dv">10000</span>) {</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  dates_in_a_year <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">364</span> <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="fu">as.Date</span>(<span class="at">origin =</span> <span class="st">"2022-01-01"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="fu">format</span>(<span class="st">"%m-%d"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  counter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>simulation_times) {</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    birthdays <span class="ot">&lt;-</span> <span class="fu">sample</span>(dates_in_a_year, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a>    length_birthdays <span class="ot">&lt;-</span> <span class="fu">length</span>(birthdays)</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    length_unique_birthdays <span class="ot">&lt;-</span> birthdays <span class="sc">|&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>      <span class="fu">unique</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>      <span class="fu">length</span>()</span>
+<span id="cb9-12"><a href="#cb9-12"></a>    same_birthday <span class="ot">&lt;-</span> length_unique_birthdays <span class="sc">&lt;</span> length_birthdays</span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="cf">if</span> (same_birthday) {</span>
+<span id="cb9-14"><a href="#cb9-14"></a>      counter <span class="ot">&lt;-</span> counter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    }</span>
+<span id="cb9-16"><a href="#cb9-16"></a>  }</span>
+<span id="cb9-17"><a href="#cb9-17"></a>  p_same_birthday <span class="ot">&lt;-</span> counter <span class="sc">/</span> simulation_times</span>
+<span id="cb9-18"><a href="#cb9-18"></a>  <span class="fu">return</span>(p_same_birthday)</span>
+<span id="cb9-19"><a href="#cb9-19"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="讓-n-從-1-變化到-60" class="slide level2">
+<h2>讓 <code>n</code> 從 1 變化到 60</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>same_birthday_probs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>, simulate_same_birthday_prob)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">plot</span>(same_birthday_probs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>same_birthday_probs[<span class="dv">23</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5117</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>same_birthday_probs[<span class="dv">60</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9943</code></pre>
+</div>
+</div>
+<img data-src="lecture_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section></section>
+<section>
+<section id="個案研究蒙提霍爾問題the-monty-hall-problem" class="title-slide slide level1 center">
+<h1>個案研究：蒙提霍爾問題（The Monty Hall Problem）</h1>
+
+</section>
+<section id="關於蒙提霍爾問題" class="slide level2">
+<h2>關於蒙提霍爾問題</h2>
+<blockquote>
+<p>蒙提霍爾問題是一個源自賽局理論的數學遊戲問題，參賽者會被主持人要求在三扇門中選一扇門，其中一扇門後有一輛汽車、另外兩扇門後則都是一隻山羊。選中汽車的可以得到該輛汽車，選中山羊的可以得到山羊。當參賽者選定了一扇門，主持人會開啟一扇是山羊的門；並問參賽者：「要不要換一扇門？」參賽者換一扇門贏得汽車的機率是 2/3、不換贏得汽車的機率是 1/3。亦被稱作蒙提霍爾悖論，因為這個事實與一般直覺相牴觸，大多數人會認為在主持人開啟一扇是山羊的門之後，換或不換贏得汽車的機率均為 1/2。</p>
+</blockquote>
+<p>來源：<a href="https://en.wikipedia.org/wiki/Monty_Hall_problem" class="uri">https://en.wikipedia.org/wiki/Monty_Hall_problem</a></p>
+</section>
+<section id="蒙提霍爾問題是決戰-21-點這部電影的開場" class="slide level2">
+<h2>蒙提霍爾問題是<a href="https://www.imdb.com/title/tt0478087">決戰 21 點</a>這部電影的開場</h2>
+
+<img data-src="../images/21.jpeg" class="r-stretch"><p>來源：<a href="https://www.imdb.com/title/tt0478087" class="uri">https://www.imdb.com/title/tt0478087</a></p>
+</section>
+<section id="蒙提霍爾問題的遊戲進行步驟" class="slide level2">
+<h2>蒙提霍爾問題的遊戲進行步驟</h2>
+<ul>
+<li>參賽者隨機在三扇門中挑選一扇，參賽者並不知道門後有什麼。</li>
+<li>主持人知道每扇門後面有什麼。</li>
+<li>主持人必須開啟剩下其中一扇門，並且必須提供換門的機會。</li>
+<li>主持人<strong>必定</strong>會開啟一扇有山羊的門。
+<ul>
+<li>如果參賽者挑了一扇有汽車的門，主持人隨機在另外兩扇門中開啟一扇。</li>
+<li>如果參賽者挑了一扇有山羊的門，主持人開啟另一扇有山羊的門。</li>
+</ul></li>
+<li>參賽者會被問是否保持他的原來選擇（stick），還是更換選擇（switch）。</li>
+</ul>
+</section>
+<section id="以數值向量表示三扇門使用-sample-函數為參賽者選一扇門" class="slide level2">
+<h2>以數值向量表示三扇門、使用 <code>sample()</code> 函數為參賽者選一扇門</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>doors <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>initial_pick <span class="ot">&lt;-</span> <span class="fu">sample</span>(doors, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>initial_pick</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</section>
+<section id="模擬-simulation_times-次在主持人開啟一扇是山羊的門之後不換-stick贏得汽車的機率" class="slide level2">
+<h2>模擬 <code>simulation_times</code> 次在主持人開啟一扇是山羊的門之後「不換 stick」贏得汽車的機率</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>simulate_winning_prob_of_stick <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">simulation_times =</span> <span class="dv">10000</span>) {</span>
+<span id="cb17-2"><a href="#cb17-2"></a>  doors <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  n_wins <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>simulation_times) {</span>
+<span id="cb17-5"><a href="#cb17-5"></a>    car <span class="ot">&lt;-</span> <span class="fu">sample</span>(doors, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb17-6"><a href="#cb17-6"></a>    initial_pick <span class="ot">&lt;-</span> <span class="fu">sample</span>(doors, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb17-7"><a href="#cb17-7"></a>    <span class="cf">if</span> (initial_pick <span class="sc">==</span> car) {</span>
+<span id="cb17-8"><a href="#cb17-8"></a>      n_wins <span class="ot">&lt;-</span> n_wins <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>    }</span>
+<span id="cb17-10"><a href="#cb17-10"></a>  }</span>
+<span id="cb17-11"><a href="#cb17-11"></a>  winning_prob <span class="ot">&lt;-</span> n_wins <span class="sc">/</span> simulation_times</span>
+<span id="cb17-12"><a href="#cb17-12"></a>  <span class="fu">return</span>(winning_prob)</span>
+<span id="cb17-13"><a href="#cb17-13"></a>}</span>
+<span id="cb17-14"><a href="#cb17-14"></a>winning_prob_of_stick <span class="ot">&lt;-</span> <span class="fu">simulate_winning_prob_of_stick</span>()</span>
+<span id="cb17-15"><a href="#cb17-15"></a>winning_prob_of_stick</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3247</code></pre>
+</div>
+</div>
+</section>
+<section id="主持人開啟剩下其中一扇門的策略" class="slide level2">
+<h2>主持人開啟剩下其中一扇門的策略</h2>
+<ul>
+<li>主持人<strong>必定</strong>會開啟一扇有山羊的門。
+<ul>
+<li>如果參賽者挑了一扇有汽車的門，主持人隨機在另外兩扇門中開啟一扇。</li>
+<li>如果參賽者挑了一扇有山羊的門，主持人開啟另一扇有山羊的門。</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>reveal_strategy <span class="ot">&lt;-</span> <span class="cf">function</span>(doors, car, initial_pick){</span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="cf">if</span> (initial_pick <span class="sc">==</span> car) {</span>
+<span id="cb19-3"><a href="#cb19-3"></a>    remaining_doors <span class="ot">&lt;-</span> doors[<span class="sc">-</span>car]</span>
+<span id="cb19-4"><a href="#cb19-4"></a>    reveal <span class="ot">&lt;-</span> <span class="fu">sample</span>(remaining_doors, <span class="at">size =</span> <span class="dv">1</span>) <span class="co"># 主持人隨機在另外兩扇門中開啟一扇</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  } <span class="cf">else</span> {</span>
+<span id="cb19-6"><a href="#cb19-6"></a>    remaining_doors <span class="ot">&lt;-</span> doors[<span class="sc">-</span><span class="fu">c</span>(car, initial_pick)]</span>
+<span id="cb19-7"><a href="#cb19-7"></a>    reveal <span class="ot">&lt;-</span> remaining_doors <span class="co"># 主持人開啟另一扇有山羊的門</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>  }</span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">return</span>(reveal)</span>
+<span id="cb19-10"><a href="#cb19-10"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="模擬-simulation_times-次在主持人開啟一扇是山羊的門之後換-switch贏得汽車的機率" class="slide level2">
+<h2>模擬 <code>simulation_times</code> 次在主持人開啟一扇是山羊的門之後「換 switch」贏得汽車的機率</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>simulate_winning_prob_of_switch <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">simulation_times =</span> <span class="dv">10000</span>) {</span>
+<span id="cb20-2"><a href="#cb20-2"></a>  doors <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  n_wins <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>simulation_times) {</span>
+<span id="cb20-5"><a href="#cb20-5"></a>    car <span class="ot">&lt;-</span> <span class="fu">sample</span>(doors, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    initial_pick <span class="ot">&lt;-</span> <span class="fu">sample</span>(doors, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb20-7"><a href="#cb20-7"></a>    reveal <span class="ot">&lt;-</span> <span class="fu">reveal_strategy</span>(doors, car, initial_pick)</span>
+<span id="cb20-8"><a href="#cb20-8"></a>    remaining_door <span class="ot">&lt;-</span> doors[<span class="sc">-</span><span class="fu">c</span>(initial_pick, reveal)]</span>
+<span id="cb20-9"><a href="#cb20-9"></a>    final_pick <span class="ot">&lt;-</span> remaining_door</span>
+<span id="cb20-10"><a href="#cb20-10"></a>    <span class="cf">if</span> (final_pick <span class="sc">==</span> car) {</span>
+<span id="cb20-11"><a href="#cb20-11"></a>      n_wins <span class="ot">&lt;-</span> n_wins <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>    }</span>
+<span id="cb20-13"><a href="#cb20-13"></a>  }</span>
+<span id="cb20-14"><a href="#cb20-14"></a>  winning_prob <span class="ot">&lt;-</span> n_wins <span class="sc">/</span> simulation_times</span>
+<span id="cb20-15"><a href="#cb20-15"></a>  <span class="fu">return</span>(winning_prob)</span>
+<span id="cb20-16"><a href="#cb20-16"></a>}</span>
+<span id="cb20-17"><a href="#cb20-17"></a>winning_prob_of_switch <span class="ot">&lt;-</span> <span class="fu">simulate_winning_prob_of_switch</span>()</span>
+<span id="cb20-18"><a href="#cb20-18"></a>winning_prob_of_switch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6587</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="個案研究快艇骰子yahtzee" class="title-slide slide level1 center">
+<h1>個案研究：快艇骰子（Yahtzee）</h1>
+
+</section>
+<section id="關於快艇骰子" class="slide level2">
+<h2>關於快艇骰子</h2>
+<blockquote>
+<p>快艇骰子是由 Milton Bradley 公司發明的一款骰子遊戲，最初由商人Edwin S. Lowe 在 1956 年推入市場。遊戲使用投擲五個骰子判斷得分，第一次投擲後可以兩次選擇重新投擲部分的骰子，最後由骰子數字的組合來判斷得分。如果某次投擲出的骰子都是相同的數字朝上，就是 Yahtzee，得分最高。</p>
+</blockquote>
+<p>來源：<a href="https://en.wikipedia.org/wiki/Yahtzee" class="uri">https://en.wikipedia.org/wiki/Yahtzee</a></p>
+</section>
+<section id="快艇骰子的其中幾個特別得分種類" class="slide level2">
+<h2>快艇骰子的其中幾個特別得分種類</h2>
+<ul>
+<li>Yahtzee：五個點數相同骰子的組合，分數得 50 分。</li>
+<li>Large Straight：骰子點數排列為 <span class="math inline">\(\{1, 2, 3, 4, 5\}\)</span>、<span class="math inline">\(\{2, 3, 4, 5, 6\}\)</span>，分數得 40 分。</li>
+<li>Full House：三個點數相同骰子和另外兩個點數相同骰子的組合，分數得 25 分。</li>
+</ul>
+</section>
+<section id="擲出-yahtzee-的機率" class="slide level2">
+<h2>擲出 Yahtzee 的機率</h2>
+<p>五個點數相同骰子的組合。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>calculate_p_yahtzee <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb22-2"><a href="#cb22-2"></a>  five_dices <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">^</span><span class="dv">5</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  p_all_ones <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> five_dices</span>
+<span id="cb22-4"><a href="#cb22-4"></a>  p_all_twos <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> five_dices</span>
+<span id="cb22-5"><a href="#cb22-5"></a>  p_all_threes <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> five_dices</span>
+<span id="cb22-6"><a href="#cb22-6"></a>  p_all_fours <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> five_dices</span>
+<span id="cb22-7"><a href="#cb22-7"></a>  p_all_fives <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> five_dices</span>
+<span id="cb22-8"><a href="#cb22-8"></a>  p_all_sixes <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> five_dices</span>
+<span id="cb22-9"><a href="#cb22-9"></a>  p_yahtzee <span class="ot">&lt;-</span> p_all_ones <span class="sc">+</span> p_all_twos <span class="sc">+</span> p_all_threes <span class="sc">+</span> p_all_fours <span class="sc">+</span> p_all_fives <span class="sc">+</span> p_all_sixes</span>
+<span id="cb22-10"><a href="#cb22-10"></a>  <span class="fu">return</span>(p_yahtzee)</span>
+<span id="cb22-11"><a href="#cb22-11"></a>}</span>
+<span id="cb22-12"><a href="#cb22-12"></a>p_yahtzee <span class="ot">&lt;-</span> <span class="fu">calculate_p_yahtzee</span>()</span>
+<span id="cb22-13"><a href="#cb22-13"></a>p_yahtzee <span class="co"># 0.077%</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0007716049</code></pre>
+</div>
+</div>
+</section>
+<section id="擲出-large-straight-的機率" class="slide level2">
+<h2>擲出 Large Straight 的機率</h2>
+<ul>
+<li>骰子點數排列為 <span class="math inline">\(\{1, 2, 3, 4, 5\}\)</span>、<span class="math inline">\(\{2, 3, 4, 5, 6\}\)</span></li>
+<li>使用 <code>factorial(n)</code> 函數計算階乘 <span class="math inline">\(n!\)</span>。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>calculate_p_large_straight <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb24-2"><a href="#cb24-2"></a>  five_dices <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">^</span><span class="dv">5</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  p_12345 <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">5</span>) <span class="sc">/</span> five_dices</span>
+<span id="cb24-4"><a href="#cb24-4"></a>  p_23456 <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">5</span>) <span class="sc">/</span> five_dices</span>
+<span id="cb24-5"><a href="#cb24-5"></a>  p_large_straight <span class="ot">&lt;-</span> p_12345 <span class="sc">+</span> p_23456</span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">return</span>(p_large_straight)</span>
+<span id="cb24-7"><a href="#cb24-7"></a>}</span>
+<span id="cb24-8"><a href="#cb24-8"></a>p_large_straight <span class="ot">&lt;-</span> <span class="fu">calculate_p_large_straight</span>()</span>
+<span id="cb24-9"><a href="#cb24-9"></a>p_large_straight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0308642</code></pre>
+</div>
+</div>
+</section>
+<section id="擲出-full-house-的機率" class="slide level2">
+<h2>擲出 Full House 的機率</h2>
+<ul>
+<li>骰子點數排列為 <span class="math inline">\(\{1, 1, 1, x, x\}\)</span>、<span class="math inline">\(x\)</span> 為 <span class="math inline">\({2, 3, 4, 5, 6}\)</span></li>
+<li>骰子點數排列為 <span class="math inline">\(\{2, 2, 2, x, x\}\)</span>、<span class="math inline">\(x\)</span> 為 <span class="math inline">\({1, 3, 4, 5, 6}\)</span></li>
+<li>骰子點數排列為 <span class="math inline">\(\{3, 3, 3, x, x\}\)</span>、<span class="math inline">\(x\)</span> 為 <span class="math inline">\({1, 2, 4, 5, 6}\)</span></li>
+<li>骰子點數排列為 <span class="math inline">\(\{4, 4, 4, x, x\}\)</span>、<span class="math inline">\(x\)</span> 為 <span class="math inline">\({1, 2, 3, 5, 6}\)</span></li>
+<li>骰子點數排列為 <span class="math inline">\(\{5, 5, 5, x, x\}\)</span>、<span class="math inline">\(x\)</span> 為 <span class="math inline">\({1, 2, 3, 4, 6}\)</span></li>
+<li>骰子點數排列為 <span class="math inline">\(\{6, 6, 6, x, x\}\)</span>、<span class="math inline">\(x\)</span> 為 <span class="math inline">\({1, 2, 3, 4, 5}\)</span></li>
+</ul>
+</section>
+<section id="擲出-full-house-的機率續" class="slide level2">
+<h2>擲出 Full House 的機率（續）</h2>
+<p>兩個獨一值的排列組合個數：</p>
+<p><span class="math display">\[
+\frac{n!}{p_1!p_2!}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>calculate_p_full_house <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb26-2"><a href="#cb26-2"></a>  five_dices <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">^</span><span class="dv">5</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  perm_111xx <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">5</span>)<span class="sc">/</span>(<span class="fu">factorial</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">factorial</span>(<span class="dv">2</span>)) <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>  perm_222xx <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">5</span>)<span class="sc">/</span>(<span class="fu">factorial</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">factorial</span>(<span class="dv">2</span>)) <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  perm_333xx <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">5</span>)<span class="sc">/</span>(<span class="fu">factorial</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">factorial</span>(<span class="dv">2</span>)) <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>  perm_444xx <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">5</span>)<span class="sc">/</span>(<span class="fu">factorial</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">factorial</span>(<span class="dv">2</span>)) <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  perm_555xx <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">5</span>)<span class="sc">/</span>(<span class="fu">factorial</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">factorial</span>(<span class="dv">2</span>)) <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>  perm_666xx <span class="ot">&lt;-</span> <span class="fu">factorial</span>(<span class="dv">5</span>)<span class="sc">/</span>(<span class="fu">factorial</span>(<span class="dv">3</span>)<span class="sc">*</span><span class="fu">factorial</span>(<span class="dv">2</span>)) <span class="sc">*</span> <span class="dv">5</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a>  p_full_house <span class="ot">&lt;-</span> (perm_111xx <span class="sc">+</span> perm_222xx <span class="sc">+</span> perm_333xx <span class="sc">+</span> perm_444xx <span class="sc">+</span> perm_555xx <span class="sc">+</span> perm_666xx) <span class="sc">/</span> five_dices</span>
+<span id="cb26-10"><a href="#cb26-10"></a>  <span class="fu">return</span>(p_full_house)</span>
+<span id="cb26-11"><a href="#cb26-11"></a>}</span>
+<span id="cb26-12"><a href="#cb26-12"></a>p_full_house <span class="ot">&lt;-</span> <span class="fu">calculate_p_full_house</span>()</span>
+<span id="cb26-13"><a href="#cb26-13"></a>p_full_house</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03858025</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="個案研究硬幣是否公正fairness-of-a-coin" class="title-slide slide level1 center">
+<h1>個案研究：硬幣是否公正（Fairness of a Coin）</h1>
+
+</section>
+<section id="建立公正硬幣" class="slide level2">
+<h2>建立公正硬幣</h2>
+<ul>
+<li>以邏輯向量建立正（<code>TRUE</code>）反（<code>FALSE</code>）面集合。</li>
+<li>使用 <code>sample()</code> 函數指定 <code>replace</code> 參數為 <code>TRUE</code> 投擲硬幣 <code>n</code> 次。</li>
+<li>使用 <code>set.seed()</code> 函數指定一個整數將 <code>sample()</code> 函數的結果固定。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>coin <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb28-2"><a href="#cb28-2"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="fu">set.seed</span>(<span class="dv">140</span>)</span>
+<span id="cb28-4"><a href="#cb28-4"></a>fair_coin_flip <span class="ot">&lt;-</span> coin <span class="sc">|&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">sample</span>(<span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>  <span class="fu">table</span>()</span>
+<span id="cb28-7"><a href="#cb28-7"></a>fair_coin_flip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+FALSE  TRUE 
+   46    54 </code></pre>
+</div>
+</div>
+</section>
+<section id="建立不公正硬幣" class="slide level2">
+<h2>建立「不」公正硬幣</h2>
+<ul>
+<li>使用 <code>sample()</code> 函數指定 <code>prob</code> 參數為 <code>c(prob_tail, prob_head)</code></li>
+<li>使用 <code>set.seed()</code> 函數指定一個整數將 <code>sample()</code> 函數的結果固定。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>probs_tail_head <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>)</span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="fu">set.seed</span>(<span class="dv">140</span>)</span>
+<span id="cb30-4"><a href="#cb30-4"></a>unfair_coin_flip <span class="ot">&lt;-</span> coin <span class="sc">|&gt;</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a>  <span class="fu">sample</span>(<span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> probs_tail_head) <span class="sc">|&gt;</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">table</span>()</span>
+<span id="cb30-7"><a href="#cb30-7"></a>unfair_coin_flip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+FALSE  TRUE 
+   51    49 </code></pre>
+</div>
+</div>
+</section>
+<section id="在一次的模擬中不一定能夠辨識" class="slide level2">
+<h2>在一次的模擬中不一定能夠辨識</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>fair_coin_flip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+FALSE  TRUE 
+   46    54 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>unfair_coin_flip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+FALSE  TRUE 
+   51    49 </code></pre>
+</div>
+</div>
+</section>
+<section id="或者在不公正性很微小的時候也不容易辨識" class="slide level2">
+<h2>或者在「不公正性」很微小的時候也不容易辨識</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>probs_tail_head <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.49</span>, <span class="fl">0.51</span>)</span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="fu">set.seed</span>(<span class="dv">126</span>)</span>
+<span id="cb36-4"><a href="#cb36-4"></a>unfair_coin_flip <span class="ot">&lt;-</span> coin <span class="sc">|&gt;</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">sample</span>(<span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> probs_tail_head) <span class="sc">|&gt;</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>  <span class="fu">table</span>()</span>
+<span id="cb36-7"><a href="#cb36-7"></a>unfair_coin_flip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+FALSE  TRUE 
+   50    50 </code></pre>
+</div>
+</div>
+</section>
+<section id="以統計分析來檢定硬幣是否公正" class="slide level2">
+<h2>以統計分析來檢定硬幣是否公正</h2>
+<ul>
+<li>提高模擬次數，以 <span class="math inline">\(\bar{p}_{tail}\)</span> <span class="math inline">\(\bar{p}_{head}\)</span> 來取代 <span class="math inline">\(p_{tail}\)</span> <span class="math inline">\(p_{head}\)</span></li>
+<li>以信賴係數 <span class="math inline">\(\alpha\)</span> 與信賴區間決定對微小「不公正性」的容忍度多寡。</li>
+</ul>
+<p><span class="math display">\[
+H_0: p_{head} = \frac{1}{2} \\
+H_1: p_{head} \neq \frac{1}{2}
+\]</span></p>
+</section>
+<section id="以-z-統計值來判斷兩個機率之間的差距是否足夠顯著" class="slide level2">
+<h2>以 z 統計值來判斷兩個機率之間的差距是否足夠「顯著」</h2>
+<p><span class="math display">\[
+z = \frac{x - np_{head}}{\sqrt{np_{head}(1-p_{head})}}
+\]</span></p>
+</section>
+<section id="計算公正硬幣的-z-統計值" class="slide level2">
+<h2>計算公正硬幣的 z 統計值</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>calculate_zstats_of_a_fair_coin <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">10000</span>) {</span>
+<span id="cb38-2"><a href="#cb38-2"></a>  coin <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb38-3"><a href="#cb38-3"></a>  fair_coin_flip <span class="ot">&lt;-</span> coin <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a>    <span class="fu">sample</span>(<span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-5"><a href="#cb38-5"></a>  n_heads <span class="ot">&lt;-</span> <span class="fu">sum</span>(fair_coin_flip)</span>
+<span id="cb38-6"><a href="#cb38-6"></a>  z_stats <span class="ot">&lt;-</span> (n_heads <span class="sc">-</span> n<span class="sc">*</span><span class="fl">0.5</span>) <span class="sc">/</span> (n<span class="sc">*</span><span class="fl">0.5</span><span class="sc">*</span><span class="fl">0.5</span>)<span class="sc">^</span>(<span class="fl">0.5</span>)</span>
+<span id="cb38-7"><a href="#cb38-7"></a>  <span class="fu">return</span>(z_stats)</span>
+<span id="cb38-8"><a href="#cb38-8"></a>}</span>
+<span id="cb38-9"><a href="#cb38-9"></a>zstats_of_a_fair_coin <span class="ot">&lt;-</span> <span class="fu">calculate_zstats_of_a_fair_coin</span>()</span>
+<span id="cb38-10"><a href="#cb38-10"></a>zstats_of_a_fair_coin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.96</code></pre>
+</div>
+</div>
+</section>
+<section id="計算非公正硬幣的-z-統計值" class="slide level2">
+<h2>計算非公正硬幣的 z 統計值</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>calculate_zstats_of_an_unfair_coin <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">10000</span>, <span class="at">p_head =</span> <span class="fl">0.6</span>) {</span>
+<span id="cb40-2"><a href="#cb40-2"></a>  coin <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb40-3"><a href="#cb40-3"></a>  probs_tail_head <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">-</span> p_head, p_head)</span>
+<span id="cb40-4"><a href="#cb40-4"></a>  unfair_coin_flip <span class="ot">&lt;-</span> coin <span class="sc">|&gt;</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a>    <span class="fu">sample</span>(<span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> probs_tail_head)</span>
+<span id="cb40-6"><a href="#cb40-6"></a>  n_heads <span class="ot">&lt;-</span> <span class="fu">sum</span>(unfair_coin_flip)</span>
+<span id="cb40-7"><a href="#cb40-7"></a>  z_stats <span class="ot">&lt;-</span> (n_heads <span class="sc">-</span> n<span class="sc">*</span><span class="fl">0.5</span>) <span class="sc">/</span> (n<span class="sc">*</span><span class="fl">0.5</span><span class="sc">*</span><span class="fl">0.5</span>)<span class="sc">^</span>(<span class="fl">0.5</span>)</span>
+<span id="cb40-8"><a href="#cb40-8"></a>  <span class="fu">return</span>(z_stats)</span>
+<span id="cb40-9"><a href="#cb40-9"></a>}</span>
+<span id="cb40-10"><a href="#cb40-10"></a>zstats_of_an_unfair_coin <span class="ot">&lt;-</span> <span class="fu">calculate_zstats_of_an_unfair_coin</span>()</span>
+<span id="cb40-11"><a href="#cb40-11"></a>zstats_of_an_unfair_coin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20.96</code></pre>
+</div>
+</div>
+</section>
+<section id="計算信賴係數-alpha-0.05信賴區間-95-時的分界點" class="slide level2">
+<h2>計算信賴係數 <span class="math inline">\(\alpha = 0.05\)</span>、信賴區間 95% 時的分界點</h2>
+
+<img data-src="../images/two-tailed.png" class="r-stretch"><p>來源：<a href="https://www.investopedia.com/terms/t/two-tailed-test.asp" class="uri">https://www.investopedia.com/terms/t/two-tailed-test.asp</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>z_half_alpha <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb42-3"><a href="#cb42-3"></a>cut_off_points <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span>z_half_alpha, z_half_alpha)</span>
+<span id="cb42-4"><a href="#cb42-4"></a>cut_off_points</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.959964  1.959964</code></pre>
+</div>
+</div>
+</section>
+<section id="檢定公正與非公正硬幣" class="slide level2">
+<h2>檢定公正與非公正硬幣</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># 公正硬幣</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>(zstats_of_a_fair_coin <span class="sc">&lt;</span> <span class="fu">max</span>(cut_off_points)) <span class="sc">&amp;</span> (zstats_of_a_fair_coin <span class="sc">&gt;</span> <span class="fu">min</span>(cut_off_points))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># 非公正硬幣</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>(zstats_of_an_unfair_coin <span class="sc">&lt;</span> <span class="fu">max</span>(cut_off_points)) <span class="sc">&amp;</span> (zstats_of_an_unfair_coin <span class="sc">&gt;</span> <span class="fu">min</span>(cut_off_points))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="檢定不公正性很微小的硬幣" class="slide level2">
+<h2>檢定「不公正性」很微小的硬幣</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>zstats_of_an_unfair_coin <span class="ot">&lt;-</span> <span class="fu">calculate_zstats_of_an_unfair_coin</span>(<span class="at">p_head =</span> <span class="fl">0.501</span>)</span>
+<span id="cb48-2"><a href="#cb48-2"></a>zstats_of_an_unfair_coin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.24</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>(zstats_of_an_unfair_coin <span class="sc">&lt;</span> <span class="fu">max</span>(cut_off_points)) <span class="sc">&amp;</span> (zstats_of_an_unfair_coin <span class="sc">&gt;</span> <span class="fu">min</span>(cut_off_points))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="完課以後的延伸閱讀與進修方向" class="title-slide slide level1 center">
+<h1>完課以後的延伸閱讀與進修方向</h1>
+
+</section>
+<section id="r-語言的-50-練習涵蓋兩個核心" class="slide level2">
+<h2>「R 語言的 50+ 練習」涵蓋兩個核心</h2>
+<ol type="1">
+<li>R 語言程式設計。</li>
+<li>R 語言資料科學應用。</li>
+</ol>
+</section>
+<section id="延伸閱讀與進修方向有三條路" class="slide level2">
+<h2>延伸閱讀與進修方向有三條路</h2>
+<ul>
+<li>精進程式設計。</li>
+<li>精進資料科學、統計分析與統計學習。</li>
+<li>精進 R 語言的其他應用。</li>
+</ul>
+</section>
+<section id="精進程式設計" class="slide level2">
+<h2>精進程式設計</h2>
+<ul>
+<li>適合對象：在學習章節 1 到章節 8 對 R 語言程式設計特別有興趣的學員。</li>
+<li>延伸閱讀：
+<ul>
+<li><a href="https://www.amazon.com/Art-Programming-Statistical-Software-Design/dp/1593273843">The Art of R Programming</a></li>
+<li><a href="https://adv-r.hadley.nz/">Advanced R</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="精進資料科學統計分析與統計學習" class="slide level2">
+<h2>精進資料科學、統計分析與統計學習</h2>
+<ul>
+<li>適合對象：在學習章節 9 到章節 14 對 R 語言資料科學應用特別有興趣的學員。</li>
+<li>延伸閱讀：
+<ul>
+<li><a href="https://www.amazon.com/Introduction-Statistical-Learning-Applications-Statistics/dp/1461471370">An Introduction to Statistical Learning</a></li>
+<li><a href="https://www.books.com.tw/products/0010886713">愛上統計學：使用 R 語言</a></li>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="精進-r-語言的其他應用" class="slide level2">
+<h2>精進 R 語言的其他應用</h2>
+<ul>
+<li>適合對象：希望學習其他 R 語言應用的學員。</li>
+<li>延伸閱讀：
+<ul>
+<li><a href="https://shiny.rstudio.com/">Shiny</a></li>
+<li><a href="https://quarto.org/">Quarto</a></li>
+<li><a href="https://www.rplumber.io/">Plumber</a></li>
+</ul></li>
+</ul>
+<div class="footer footer-default">
+<p>更多個案研究</p>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="lecture_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="lecture_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          let href = ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>

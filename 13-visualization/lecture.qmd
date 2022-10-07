@@ -1,0 +1,448 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "視覺化文法"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "視覺化文法"
+    scrollable: true
+    incremental: false
+---
+
+# 關於視覺化文法
+
+## （複習）資料科學的應用場景有哪些
+
+- Import 資料的載入。
+- Tidy 資料清理。
+- Transform 資料外型與類別的轉換。
+- **Visualize 資料視覺化**。
+- Model 分析與預測建模。
+- Communicate 溝通分享。
+
+![](../images/r-for-data-science.png)
+
+來源：<https://r4ds.had.co.nz/program-intro.html>
+
+## 為什麼資料需要視覺化
+
+視覺化在資料分析中佔有舉足輕重的地位，因為對人來說原始資料是相當抽象的。
+
+```{r}
+x <- seq(0, 2 * pi, length.out = 100)
+sinx <- sin(x)
+sinx
+```
+
+## 為什麼資料需要視覺化（續）
+
+視覺化可以弭平「資料」與「人」之間存在的代溝。
+
+```{r}
+plot(x, sinx, type = "l")
+```
+
+## 好的視覺化
+
+- 有資訊價值、簡潔與美觀。
+- 經典視覺化：
+  - [Charles Minard's map of Napoleon's disastrous Russian campaign of 1812](https://en.wikipedia.org/wiki/Charles_Joseph_Minard#/media/File:Minard.png)
+  - [Hans Rosling's 200 Countries, 200 Years, 4 Minutes](https://youtu.be/jbkSRLYSojo)
+
+## 安裝與載入 `gapminder` 套件
+
+以 R 語言的套件 `gapminder` 載入一個簡易版視覺化的示範資料 `gapminder`
+
+```{r}
+#| eval: false
+install.packages("gapminder")
+```
+
+```{r}
+library("gapminder")
+dim(gapminder)
+head(gapminder)
+```
+
+## 兩種 R 語言視覺化工具
+
+1. Base plotting system
+2. `ggplot2` 套件。
+
+# Base plotting system
+
+## 關於 Base plotting system
+
+- 由 R 語言標準套件 `graphics` 與 `grDevices` 所提供的視覺化函數。
+- 使用不同函數繪製不同視覺化。
+
+## Base plotting system 作圖流程
+
+1. 準備資料，包含載入、建立、清理與轉換。
+2. 使用函數建立主要圖形，指定參數來添加圖形元素。
+3. 使用其他函數添加圖形元素。
+4. 顯示或者儲存圖形。
+
+## 觀察分配的直方圖
+
+- 使用 `hist()` 函數繪製觀察分配的直方圖。
+- 指定 `main`、`xlab` 與 `ylab` 這三個參數添加標題、X 軸標籤與 Y 軸標籤。
+
+```{r}
+hist(gapminder$gdpPercap,
+     main = "GDP Per Capita in Gapminder is left-skewed",
+     xlab = "GDP Per Capita", ylab = "Frequency")
+```
+
+## 觀察趨勢的線圖
+
+使用 `plot(..., type = "l")` 函數繪製觀察趨勢的線圖。
+
+```{r}
+library("dplyr")
+
+world_population <- gapminder |>
+  dplyr::group_by(year) |>
+  dplyr::summarise(population = sum(pop))
+head(world_population)
+```
+
+---
+
+```{r}
+plot(x = world_population$year, y = world_population$population,
+     type = "l", main = "World population by year in Gapminder",
+     xlab = "Every 5 year from 1952 to 2007", ylab = "Population")
+```
+
+## 觀察相關的散佈圖
+
+使用 `plot()` 函數繪製觀察相關的散佈圖。
+
+```{r}
+plot(x = gapminder$gdpPercap, y = gapminder$lifeExp,
+     main = "GDP Per Capita vs. Life Expectancy",
+     xlab = "GDP Per Capita", ylab = "Life Expectancy")
+```
+
+## 觀察排序的長條圖
+
+- 使用 `barplot()` 函數繪製觀察排序的長條圖。
+- 指定 `names.arg` 參數標註長條下的名稱標籤。
+
+```{r}
+world_population_by_continents <- gapminder |>
+  dplyr::filter(year == 2007) |>
+  dplyr::group_by(continent) |>
+  dplyr::summarise(population = sum(pop))
+world_population_by_continents
+```
+
+---
+
+```{r}
+barplot(world_population_by_continents$population,
+        names.arg = world_population_by_continents$continent,
+        main = "Population by Continents, 2007",
+        xlab = "Continent", ylab = "Population")
+```
+
+## 儲存視覺化
+
+- 使用 `jpeg()` 函數或 `png()` 函數指定儲存圖檔路徑。
+- 以 Base plotting system 繪製視覺化。
+- 使用 `dev.off()` 函數關閉繪圖系統。
+
+```{r}
+#| eval: false
+setwd("/Users/kuoyaojen/Desktop/ch13/")
+jpeg(file = "barplot.jpeg")
+barplot(world_population_by_continents$population,
+        names.arg = world_population_by_continents$continent,
+        main = "Population by Continents, 2007",
+        xlab = "Continent", ylab = "Population")
+dev.off()
+```
+
+---
+
+```{r}
+#| eval: false
+setwd("/Users/kuoyaojen/Desktop/ch13/")
+png(file = "barplot.png")
+barplot(world_population_by_continents$population,
+        names.arg = world_population_by_continents$continent,
+        main = "Population by Continents, 2007",
+        xlab = "Continent", "Population")
+dev.off()
+```
+
+# 視覺化文法
+
+## 關於 `ggplot2`
+
+- 極高比例的 R 語言使用者依賴 `ggplot2` 作為視覺化工具。
+- gg 為視覺化文法 grammar of graphics 的縮寫。
+- 利用正規、有結構的函數堆疊來繪製視覺化。
+
+## 安裝與載入 `ggplot2` 套件
+
+```{r}
+#| eval: false
+install.packages("ggplot2")
+```
+
+```{r}
+library("ggplot2")
+```
+
+## `ggplot2` 作圖流程
+
+1. 準備資料，包含載入、建立、清理與轉換。
+2. 使用 `ggplot()` 函數與 `aes()` 函數建立座標系統。
+3. 以 `+` 堆疊圖形函數與添加圖形元素。
+4. 顯示或者儲存圖形。
+
+## 觀察分配的直方圖
+
+- 使用 `ggplot()` 函數與 `aes()` 函數建立座標系統。
+- 使用 `geom_histogram()` 函數堆疊觀察分配的直方圖。
+- 使用 `ggtitle()` 函數堆疊標題、使用 `xlab()` 函數堆疊 X 軸標籤、使用 `ylab()` 函數堆疊 Y 軸標籤。
+
+---
+
+```{r}
+ggplot2::ggplot(gapminder, aes(x = gdpPercap)) +
+  ggplot2::geom_histogram(bins = 30) +
+  ggplot2::ggtitle("GDP Per Capita in Gapminder is left-skewed") +
+  ggplot2::xlab("GDP Per Capita") + 
+  ggplot2::ylab("Frequency")
+```
+
+## 觀察趨勢的線圖
+
+- 使用 `ggplot()` 函數與 `aes()` 函數建立座標系統。
+- 使用 `geom_line()` 函數堆疊觀察趨勢的線圖。
+
+```{r}
+ggplot2::ggplot(world_population, aes(x = year, y = population)) +
+  ggplot2::geom_line() +
+  ggplot2::ggtitle("World population by year in Gapminder") +
+  ggplot2::xlab("Every 5 year from 1952 to 2007") + 
+  ggplot2::ylab("Population")
+```
+
+## 觀察相關的散佈圖
+
+- 使用 `ggplot()` 函數與 `aes()` 函數建立座標系統。
+- 使用 `geom_point()` 函數繪製觀察相關的散佈圖。
+
+```{r}
+ggplot2::ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
+  ggplot2::geom_point() + 
+  ggplot2::ggtitle("GDP Per Capita vs. Life Expectancy") +
+  ggplot2::xlab("GDP Per Capita") + 
+  ggplot2::ylab("Life Expectancy")
+```
+
+## 觀察排序的長條圖
+
+- 使用 `ggplot()` 函數與 `aes()` 函數建立座標系統。
+- 使用 `geom_bar(stat = "identity")` 函數繪製觀察排序的長條圖。
+- 使用 `coord_flip()` 函數將長條圖反轉為水平。
+
+```{r}
+ggplot2::ggplot(world_population_by_continents, aes(x = continent, y = population)) +
+  ggplot2::geom_bar(stat = "identity") +
+  ggplot2::coord_flip() +
+  ggplot2::ggtitle("World population by continent, 2007") +
+  ggplot2::xlab("Continents") +
+  ggplot2::ylab("Population")
+```
+
+## 調整幾何的形狀與顏色
+
+在 `aes()` 函數指定 `shape`、`colour` 或 `fill` 參數調整幾何圖形的形狀與顏色。
+
+```{r}
+ggplot2::ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, shape = continent, colour = continent)) +
+  ggplot2::geom_point() + 
+  ggplot2::ggtitle("GDP Per Capita vs. Life Expectancy") +
+  ggplot2::xlab("GDP Per Capita") + 
+  ggplot2::ylab("Life Expectancy")
+```
+
+---
+
+```{r}
+ggplot2::ggplot(world_population_by_continents, aes(x = continent, y = population, fill = continent)) +
+  ggplot2::geom_bar(stat = "identity") +
+  ggplot2::coord_flip() + 
+  ggplot2::ggtitle("World population by continent, 2007") +
+  ggplot2::xlab("Continents") +
+  ggplot2::ylab("Population")
+```
+
+## 調整類別變數的順序
+
+- `ggplot2` 套件以因素向量 `factor` 處理類別變數。
+- 使用 `factor()` 函數的 `levels` 參數調整順序。
+
+```{r}
+world_population_by_continents <- world_population_by_continents |>
+  dplyr::arrange(population)
+bar_order <- as.character(world_population_by_continents$continent)
+world_population_by_continents$continent <- factor(world_population_by_continents$continent, levels = bar_order)
+ggplot2::ggplot(world_population_by_continents, aes(x = continent, y = population, fill = continent)) +
+  ggplot2::geom_bar(stat = "identity") +
+  ggplot2::coord_flip() + 
+  ggplot2::ggtitle("World population by continent, 2007") +
+  ggplot2::xlab("Continents") +
+  ggplot2::ylab("Population")
+```
+
+## 儲存視覺化
+
+使用 `ggsave()` 函數儲存視覺化。
+
+```{r}
+#| eval: false
+setwd("/Users/kuoyaojen/Desktop/ch13/")
+ggplot2::ggplot(world_population_by_continents, aes(x = continent, y = population, fill = continent)) +
+  ggplot2::geom_bar(stat = "identity") +
+  ggplot2::coord_flip() + 
+  ggplot2::ggtitle("World population by continent, 2007") +
+  ggplot2::xlab("Continents") +
+  ggplot2::ylab("Population")
+ggplot2::ggsave("barplot.png")
+```
+
+# 個案研究：Covid-19 每日報告與時間序列
+
+## （複習）載入 `covid19` 原始資料來源
+
+- `read.csv()` 函數除了可以指定本機電腦中的檔案路徑，也可以指定網址。
+- 原始資料來源：[JHU CSSE COVID-19 Dataset](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data)
+
+## （複習）自行定義函數 `import_daily_report()` 函數
+
+```{r}
+import_daily_report <- function(days = 2) {
+  sys_date <- Sys.Date()
+  file_date <- sys_date - days
+  format_file_date <- format(file_date, format = "%m-%d-%Y")
+  file_name <- paste0(format_file_date, ".csv")
+  daily_report_route <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
+  daily_report_url <- paste0(daily_report_route, file_name)
+  daily_report <- read.csv(daily_report_url)
+  return(daily_report)
+}
+```
+
+## （複習）自行定義 `import_time_series()` 函數
+
+```{r}
+import_time_series <- function() {
+  time_series_route <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/"
+  confirmed_file_name <- "time_series_covid19_confirmed_global.csv"
+  deaths_file_name <- "time_series_covid19_deaths_global.csv"
+  confirmed_file_url <- paste0(time_series_route, confirmed_file_name)
+  deaths_file_url <- paste0(time_series_route, deaths_file_name)
+  time_series_confirmed <- read.csv(confirmed_file_url)
+  time_series_deaths <- read.csv(deaths_file_url)
+  cols_not_to_pivot <- c("Province.State", "Country.Region", "Lat", "Long")
+  time_series_confirmed_long <- time_series_confirmed |>
+    tidyr::pivot_longer(cols = !all_of(cols_not_to_pivot), names_to = "Date", values_to = "Confirmed")
+  time_series_deaths_long <- time_series_deaths |>
+    tidyr::pivot_longer(cols = !all_of(cols_not_to_pivot), names_to = "Date", values_to = "Deaths")
+  time_series_confirmed_long$Date <- sub(pattern = "X", replacement = "", time_series_confirmed_long$Date)
+  time_series_deaths_long$Date <- sub(pattern = "X", replacement = "", time_series_deaths_long$Date)
+  from_format <- "%m.%d.%y"
+time_series_confirmed_long$Date <- as.Date(time_series_confirmed_long$Date, format = from_format)
+time_series_deaths_long$Date <- as.Date(time_series_deaths_long$Date, format = from_format)
+  time_series <- dplyr::inner_join(time_series_confirmed_long, time_series_deaths_long, by = c("Province.State" = "Province.State",
+                                "Country.Region" = "Country.Region",
+                                "Lat" = "Lat",
+                                "Long" = "Long",
+                                "Date" = "Date"))
+  return(time_series)
+}
+```
+
+## 使用 `import_daily_report()` 與 `import_time_series()` 函數載入 Covid-19 每日報告、時間序列
+
+```{r}
+daily_report <- import_daily_report()
+time_series <- import_time_series()
+```
+
+## 觀察排序的長條圖：準備資料
+
+```{r}
+confirmed_by_countries <- daily_report |>
+  dplyr::group_by(Country_Region) |>
+  dplyr::summarise(Confirmed = sum(Confirmed)) |>
+  dplyr::arrange(Confirmed) |>
+  tail(10)
+bar_order <- as.character(confirmed_by_countries$Country_Region)
+confirmed_by_countries$Country_Region <- factor(confirmed_by_countries$Country_Region, levels = bar_order)
+```
+
+## 觀察排序的長條圖：視覺化
+
+```{r}
+ggplot2::ggplot(confirmed_by_countries, aes(x = Country_Region, y = Confirmed, fill = Country_Region)) +
+  ggplot2::geom_bar(stat = "identity") +
+  ggplot2::coord_flip() + 
+  ggplot2::ggtitle("Top 10 Confirmed by Countries") +
+  ggplot2::xlab("Country") + 
+  ggplot2::ylab("Cases")
+```
+
+## 觀察趨勢的線圖：準備資料
+
+```{r}
+confirmed_by_countries_dates <- time_series |>
+  dplyr::group_by(Country.Region, Date) |>
+  dplyr::summarise(Confirmed = sum(Confirmed)) |>
+  dplyr::filter(Country.Region %in% bar_order)
+```
+
+## 觀察趨勢的線圖：視覺化
+
+```{r}
+ggplot2::ggplot(confirmed_by_countries_dates, aes(x = Date, y = Confirmed, colour = Country.Region)) +
+  ggplot2::geom_line() +
+  ggplot2::ggtitle("Top 10 Confirmed by Countries Trend") +
+  ggplot2::xlab("Date") + 
+  ggplot2::ylab("Cases")
+```
+
+# 重點統整
+
+- 為什麼資料需要視覺化
+  - 視覺化在資料分析中佔有舉足輕重的地位，因為對人來說原始資料是相當抽象的。
+  - 視覺化可以弭平「資料」與「人」之間存在的代溝。
+  
+## 重點統整（續）
+
+- 兩種 R 語言視覺化工具
+  - Base plotting system
+  - `ggplot2` 套件。
+- Base plotting system 作圖流程
+  - 準備資料，包含載入、建立、清理與轉換。
+  - 使用函數建立主要圖形，指定參數來添加圖形元素。
+  - 使用其他函數添加圖形元素。
+  - 顯示或者儲存圖形。
+  
+## 重點統整（續）
+
+- `ggplot2` 作圖流程
+  - 準備資料，包含載入、建立、清理與轉換。
+  - 使用 `ggplot()` 函數與 `aes()` 函數建立座標系統。
+  - 以 `+` 堆疊圖形函數與添加圖形元素。
+  - 顯示或者儲存圖形。

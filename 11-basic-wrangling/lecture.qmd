@@ -1,0 +1,414 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "基礎資料框操作"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "基礎資料框操作"
+    scrollable: true
+    incremental: false
+---
+
+# 關於基礎的資料框操作
+
+## （複習）資料科學的應用場景有哪些
+
+- **Import 資料的載入**。
+- **Tidy 資料清理**。
+- **Transform 資料外型與類別的轉換**。
+- Visualize 資料視覺化。
+- Model 分析與預測建模。
+- Communicate 溝通分享。
+
+![](../images/wrangle.png)
+
+來源：<https://r4ds.had.co.nz/program-intro.html>
+
+## （沒什麼用的冷知識）Wrangle
+
+![](https://media.giphy.com/media/MnlZWRFHR4xruE4N2Z/giphy.gif)
+
+來源：<https://media.giphy.com/media/MnlZWRFHR4xruE4N2Z/giphy.gif>
+
+## 機器學習專案花費 50% 的時間處理 Wrangle 的相關任務
+
+![](../images/average-time-allocated.png)
+
+來源：<https://www.economist.com/technology-quarterly/2020/06/11/for-ai-data-are-harder-to-come-by-than-you-think>
+
+## 多數的資料清理、資料外型與類別的轉換是面對 `data.frame`
+
+-  `data.frame` 是有兩個維度的資料結構。
+- 第一個維度稱為觀測值（Observations），有時亦稱為列（Rows）。
+- 第二個維度稱為變數（Variables），有時亦稱為欄（Columns）。
+- 我們習慣以 `(m, n)` 或者 `m x n` 來描述一個具有 `m` 列觀測值、`n` 欄變數的 `data.frame`
+
+## 清理過後的資料應該符合 Tidy data 原則
+
+1. 每個變數有自己的欄位。
+2. 每個觀測值有自己的資料列。
+3. 每列、每欄對應值有自己的儲存格。
+
+![](../images/tidy-data.png)
+
+來源：<https://r4ds.had.co.nz/tidy-data.html>
+
+## 基礎的資料框操作
+
+- 選擇欄位。
+- 篩選觀測值。
+- 排序資料框。
+- 分組聚合欄位。
+- 衍生計算欄位。
+
+## 兩種操作方式
+
+1. 運用 R `data.frame` 的原生操作。
+2. 使用 `dplyr` 套件的函數。
+
+# `dplyr` 套件
+
+## 關於 `dplyr` 套件
+
+- 資料處理的文法：A grammar of data manipulation
+- 使用函數解決常見的資料處理需求。
+- 搭配 `|>` 運算符串連函數按順序作用。
+
+## 安裝與載入
+
+```{r}
+#| eval: false
+install.packages("dplyr")
+```
+
+```{r}
+library("dplyr")
+```
+
+## 載入特定符號分隔的純文字檔案
+
+使用 `read.csv()` 函數載入 [movies.csv](https://classroom-hahow-rfiftyplus.s3.ap-northeast-3.amazonaws.com/data/movies.csv)
+
+```{r}
+working_directory <- "/Users/kuoyaojen/Desktop/ch11/"
+file_name <- "movies.csv"
+file_path <- paste0(working_directory, file_name)
+movies <- read.csv(file_path)
+# setwd(working_directory)
+# movies <- read.csv(file_name)
+class(movies)
+dim(movies)
+head(movies)
+```
+
+# 選擇欄位
+
+## 選擇資料框的欄位：原生操作
+
+- 以兩組中括號 `data.frame[[index]]` 選擇。
+- 以兩組中括號 `data.frame[[column_name]]` 選擇。
+- 以錢字號 `data.frame$column_name` 選擇。
+
+```{r}
+colnames(movies)
+movies[[2]]
+movies[["title"]]
+movies$title
+```
+
+## 選擇資料框的欄位：使用 `dplyr` 套件的 `select()` 函數
+
+```{r}
+movies |>
+  dplyr::select(title)
+```
+
+## 選擇資料框的多個欄位：原生操作
+
+- 在列的索引值留空
+  - `data.frame[, c(index, ...)]`
+  - `data.frame[, c(column_name, ...)]`
+  
+```{r}
+movies[, c(2, 3)]
+movies[,c("title", "release_year")]
+```
+
+## 選擇資料框的多個欄位：使用 `dplyr` 套件的 `select()` 函數
+
+```{r}
+movies |>
+  dplyr::select(title, release_year)
+```
+
+# 篩選觀測值
+
+## 篩選資料框的觀測值：原生操作
+
+- 在欄的索引值留空
+  - 以索引值篩選 `data.frame[c(index, ...), ...]`
+  - 以邏輯向量篩選 `data.frame[logical, ]`
+  
+```{r}
+movies[c(4, 71, 127), ]
+is_batman_trilogy <- movies$title %in% c("Batman Begins",
+                                         "The Dark Knight", 
+                                         "The Dark Knight Rises")
+movies[is_batman_trilogy, ]
+```
+
+## 篩選資料框的觀測值：使用 `dplyr` 套件的 `filter()` 函數
+
+```{r}
+movies |>
+  dplyr::filter(title %in% c("Batman Begins", "The Dark Knight", "The Dark Knight Rises"))
+```
+
+## 篩選資料框的觀測值：使用 `dplyr` 套件的 `filter()` 函數（續）
+
+```{r}
+movies |>
+  dplyr::filter(rating >= 9)
+```
+
+# 排序資料框
+
+## 排序資料框：原生操作
+
+- 使用 `order()` 函數取得觀測值順序。
+- 將排好的順序傳到列索引值 `data.frame[c(index, ...), ...]`
+
+```{r}
+order_by_release_year <- order(movies[["release_year"]])
+movies[order_by_release_year, c("release_year", "title")]
+```
+
+## 排序資料框：使用 `dplyr` 套件的 `arrange()` 函數
+
+```{r}
+movies |>
+  dplyr::arrange(release_year) |>
+  dplyr::select(release_year, title)
+```
+
+## 預設遞增排序，以 `desc()` 函數指定遞減排序
+
+```{r}
+movies |>
+  dplyr::arrange(desc(release_year)) |>
+  dplyr::select(release_year, title)
+```
+
+## 指定多個欄位排序
+
+`release_year` 遞減排序、`rating`（預設）遞增排序。
+
+```{r}
+movies |>
+  dplyr::arrange(desc(release_year), rating) |>
+  dplyr::select(release_year, rating, title)
+```
+
+# 分組聚合欄位
+
+## 聚合欄位
+
+直接對資料框的欄位使用聚合函數。
+
+```{r}
+mean(movies$rating)
+```
+
+## 分組聚合欄位：原生操作
+
+使用 `tapply()` 函數應用聚合函數。
+
+```{r}
+tapply(movies$rating, INDEX = movies$release_year, FUN = mean)
+```
+
+## 分組聚合欄位：使用 `dplyr` 套件的 `group_by()` 函數與 `summarise()` 函數
+
+```{r}
+movies |>
+  dplyr::group_by(release_year) |>
+  dplyr::summarise(mean_rating = mean(rating))
+```
+
+# 衍生計算欄位
+
+## 衍生計算欄位：原生操作
+
+- 善用向量運算。
+- 使用 `cbind()` 函數新增衍生計算之欄位。
+
+```{r}
+runtime_hours <- movies$runtime %/% 60  # 商數
+runtime_minutes <- movies$runtime %% 60 # 餘數
+movies <- cbind(movies, runtime_hours)
+movies <- cbind(movies, runtime_minutes)
+head(movies)
+```
+
+## 衍生計算欄位：使用 `dplyr` 套件的 `mutate()` 函數
+
+```{r}
+movies <- read.csv(file_path)
+movies <- movies |>
+  dplyr::mutate(runtime_hours = runtime %/% 60,
+                runtime_minutes = runtime %% 60)
+head(movies)
+```
+
+# 個案研究：Covid-19 每日報告
+
+## （複習）載入 `covid19` 原始資料來源
+
+- `read.csv()` 函數除了可以指定本機電腦中的檔案路徑，也可以指定網址。
+- 原始資料來源：[JHU CSSE COVID-19 Dataset](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data)
+
+## 兩天前的每日報告
+
+- [JHU CSSE COVID-19 Dataset](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data) 大約是在台灣時間 14:00（GMT + 08:00）左右更新上傳前一天的每日報告。
+- 因此載入兩天前的每日報告確定能獲得資料（在 Repository 持續每日更新的前提下）。
+
+## 取得兩天前的系統日期
+
+```{r}
+sys_date <- Sys.Date()
+file_date <- sys_date - 2
+file_date
+```
+
+## 將兩天前的系統日期調整外型並加上副檔名
+
+使用 `format()` 函數搭配參數 `format = "%m-%d-%Y"`。
+
+```{r}
+format_file_date <- format(file_date, format = "%m-%d-%Y")
+file_name <- paste0(format_file_date, ".csv")
+file_name
+```
+
+## 建立兩天前的每日報告載入網址
+
+```{r}
+daily_report_route <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
+daily_report_url <- paste0(daily_report_route, file_name)
+daily_report_url
+```
+
+## 自行定義函數 `import_daily_report()` 函數
+
+```{r}
+import_daily_report <- function(days = 2) {
+  sys_date <- Sys.Date()
+  file_date <- sys_date - days
+  format_file_date <- format(file_date, format = "%m-%d-%Y")
+  file_name <- paste0(format_file_date, ".csv")
+  daily_report_route <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
+  daily_report_url <- paste0(daily_report_route, file_name)
+  daily_report <- read.csv(daily_report_url)
+  return(daily_report)
+}
+```
+
+## 使用 `import_daily_report()` 函數載入兩天前的每日報告
+
+```{r}
+daily_report <- import_daily_report()
+class(daily_report)
+dim(daily_report)
+```
+
+## 使用 `dplyr` 套件的 `select()` 函數選擇欄位
+
+選擇五個欄位檢視。
+
+```{r}
+colnames(daily_report)
+daily_report |>
+  dplyr::select(Admin2, Province_State, Country_Region, Confirmed, Deaths)
+```
+
+## 使用 `dplyr` 套件的 `filter()` 函數篩選資料框的觀測值
+
+選擇五個欄位檢視、篩選美國的觀測值。
+
+```{r}
+daily_report |>
+  dplyr::select(Admin2, Province_State, Country_Region, Confirmed, Deaths) |>
+  dplyr::filter(Country_Region == "US")
+```
+
+## 使用 `dplyr` 套件的 `arrange()` 函數排序資料框
+
+選擇五個欄位檢視、篩選美國的觀測值、以死亡人數遞減排序。
+
+```{r}
+daily_report |>
+  dplyr::select(Admin2, Province_State, Country_Region, Confirmed, Deaths) |>
+  dplyr::filter(Country_Region == "US") |>
+  dplyr::arrange(desc(Deaths))
+```
+
+## 使用 `dplyr` 套件的 `group_by()` 函數與 `summarise()` 函數分組聚合欄位
+
+以國家區域分組、加總確診人數與死亡人數、以死亡人數遞減排序。
+
+```{r}
+daily_report |>
+  dplyr::group_by(Country_Region) |>
+  dplyr::summarise(Confirmed = sum(Confirmed),
+                   Deaths = sum(Deaths)) |>
+  dplyr::arrange(desc(Deaths))
+```
+
+## 使用 `dplyr` 套件的 `mutate()` 函數衍生計算欄位
+
+$$
+\text{Case Fatality Ratio} = \frac{\text{Deaths}}{\text{Confirmed}}
+$$
+
+以國家區域分組、加總確診人數與死亡人數、衍生計算確診死亡率、剔除比例大於 1 的不合理資料、以確診死亡率遞減排序。
+
+```{r}
+daily_report |>
+  dplyr::group_by(Country_Region) |>
+  dplyr::summarise(Confirmed = sum(Confirmed),
+                   Deaths = sum(Deaths)) |>
+  dplyr::mutate(Case_Fatality_Ratio = Deaths / Confirmed) |>
+  dplyr::filter(Case_Fatality_Ratio <= 1) |>
+  dplyr::arrange(desc(Case_Fatality_Ratio))
+```
+
+# 重點統整
+
+- 基礎的資料框操作
+  - 選擇欄位。
+  - 篩選觀測值。
+  - 排序資料框。
+  - 分組聚合欄位。
+  - 衍生計算欄位。
+
+## 重點統整（續）
+
+- 兩種資料框操作方式
+  - 運用 R `data.frame` 的原生操作。
+  - 使用 `dplyr` 套件的函數。
+- 關於 `dplyr` 套件
+  - 資料處理的文法：A grammar of data manipulation
+  - 使用函數解決常見的資料處理需求。
+  - 搭配 `|>` 運算符串連函數按順序作用。
+
+## 重點統整（續）
+
+- 使用 `dplyr` 套件的 `select()` 函數選擇欄位。
+- 使用 `dplyr` 套件的 `filter()` 函數篩選資料框的觀測值。
+- 使用 `dplyr` 套件的 `arrange()` 函數排序資料框。
+- 使用 `dplyr` 套件的 `group_by()` 函數與 `summarise()` 函數分組聚合欄位。
+- 使用 `dplyr` 套件的 `mutate()` 函數衍生計算欄位。

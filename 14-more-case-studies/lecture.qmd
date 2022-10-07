@@ -1,0 +1,466 @@
+---
+title: "R 語言的 50 + 練習：統計分析的前哨站"
+subtitle: "更多個案研究"
+author: "郭耀仁"
+title-block-banner: true
+execute:
+  echo: true
+format: 
+  revealjs:
+    theme: dark
+    footer: "更多個案研究"
+    scrollable: true
+    incremental: false
+---
+
+# 關於更多個案研究
+
+## 更多個案研究一覽
+
+1. 生日問題（The Birthday Problem）
+2. 蒙提霍爾問題（The Monty Hall Problem）
+3. 快艇骰子（Yahtzee）
+4. 硬幣是否公正（Fairness of a Coin）
+
+# 個案研究：生日問題（The Birthday Problem）
+
+## 關於生日問題
+
+> 生日問題是指最少需要幾人，當中的兩個人生日相同的機率才會大於 50%，這個題目的答案是 23 人。這意味著在一個小班級（30人）中，存在兩人生日相同可能性很高。對於一個大班級 （60 人以上），機率會大於 99%。這個問題有時也被稱作生日悖論，它被稱作悖論是因為這個事實與一般直覺相牴觸，大多數人會認為，23 人中有 2 人生日相同的機率應該遠小於 50%。
+
+來源：<https://en.wikipedia.org/wiki/Birthday_problem>
+
+## 生日問題的假設
+
+- 忽略閏年才會有的 2 月 29 日。
+- 班級中的同學都是獨立、來自不同家庭的。
+
+## 建立一年中的每一天日期
+
+2022 年不是閏年，所以就以 2022 年的 365 天建立每一天日期。
+
+```{r}
+dates_in_a_year <- 0:364 |>
+  as.Date(origin = "2022-01-01") |>
+  format("%m-%d")
+dates_in_a_year
+```
+
+## 使用 `sample()` 函數挑選 `n` 個日期
+
+- 指定 `size` 參數為 `n` 表示班級中 `n` 個學生的生日。
+- 指定 `replace` 參數為 `TRUE` 如此才能表示同一天生日的學生。
+
+```{r}
+n <- 30
+birthdays <- sample(dates_in_a_year, size = n, replace = TRUE)
+birthdays
+```
+
+## 使用 `unique()` 與 `length()` 函數判斷是否有學生同一天生日
+
+```{r}
+length_birthdays <- length(birthdays)
+length_unique_birthdays <- birthdays |>
+  unique() |>
+  length()
+same_birthday <- length_unique_birthdays < length_birthdays
+same_birthday
+```
+
+## 使用迴圈模擬 `simulation_times` 個學生人數為 `n` 的班級
+
+```{r}
+simulation_times <- 10000
+counter <- 0
+for (i in 1:simulation_times) {
+  birthdays <- sample(dates_in_a_year, size = n, replace = TRUE)
+  length_birthdays <- length(birthdays)
+  length_unique_birthdays <- birthdays |>
+    unique() |>
+    length()
+  same_birthday <- length_unique_birthdays < length_birthdays
+  if (same_birthday) {
+    counter <- counter + 1
+  }
+}
+p_same_birthday <- counter / simulation_times
+p_same_birthday
+```
+
+## 自行定義 `simulate_same_birthday_prob()` 函數
+
+```{r}
+simulate_same_birthday_prob <- function(n, simulation_times = 10000) {
+  dates_in_a_year <- 0:364 |>
+    as.Date(origin = "2022-01-01") |>
+    format("%m-%d")
+  counter <- 0
+  for (i in 1:simulation_times) {
+    birthdays <- sample(dates_in_a_year, size = n, replace = TRUE)
+    length_birthdays <- length(birthdays)
+    length_unique_birthdays <- birthdays |>
+      unique() |>
+      length()
+    same_birthday <- length_unique_birthdays < length_birthdays
+    if (same_birthday) {
+      counter <- counter + 1
+    }
+  }
+  p_same_birthday <- counter / simulation_times
+  return(p_same_birthday)
+}
+```
+
+## 讓 `n` 從 1 變化到 60
+
+```{r}
+same_birthday_probs <- sapply(1:60, simulate_same_birthday_prob)
+plot(same_birthday_probs)
+same_birthday_probs[23]
+same_birthday_probs[60]
+```
+
+# 個案研究：蒙提霍爾問題（The Monty Hall Problem）
+
+## 關於蒙提霍爾問題
+
+> 蒙提霍爾問題是一個源自賽局理論的數學遊戲問題，參賽者會被主持人要求在三扇門中選一扇門，其中一扇門後有一輛汽車、另外兩扇門後則都是一隻山羊。選中汽車的可以得到該輛汽車，選中山羊的可以得到山羊。當參賽者選定了一扇門，主持人會開啟一扇是山羊的門；並問參賽者：「要不要換一扇門？」參賽者換一扇門贏得汽車的機率是 2/3、不換贏得汽車的機率是 1/3。亦被稱作蒙提霍爾悖論，因為這個事實與一般直覺相牴觸，大多數人會認為在主持人開啟一扇是山羊的門之後，換或不換贏得汽車的機率均為 1/2。
+
+來源：<https://en.wikipedia.org/wiki/Monty_Hall_problem>
+
+## 蒙提霍爾問題是[決戰 21 點](https://www.imdb.com/title/tt0478087)這部電影的開場
+
+![](../images/21.jpeg)
+
+來源：<https://www.imdb.com/title/tt0478087>
+
+## 蒙提霍爾問題的遊戲進行步驟
+
+- 參賽者隨機在三扇門中挑選一扇，參賽者並不知道門後有什麼。
+- 主持人知道每扇門後面有什麼。
+- 主持人必須開啟剩下其中一扇門，並且必須提供換門的機會。
+- 主持人**必定**會開啟一扇有山羊的門。
+  - 如果參賽者挑了一扇有汽車的門，主持人隨機在另外兩扇門中開啟一扇。
+  - 如果參賽者挑了一扇有山羊的門，主持人開啟另一扇有山羊的門。
+  
+- 參賽者會被問是否保持他的原來選擇（stick），還是更換選擇（switch）。
+
+## 以數值向量表示三扇門、使用 `sample()` 函數為參賽者選一扇門
+
+```{r}
+doors <- 1:3
+initial_pick <- sample(doors, size = 1)
+initial_pick
+```
+
+## 模擬 `simulation_times` 次在主持人開啟一扇是山羊的門之後「不換 stick」贏得汽車的機率
+
+```{r}
+simulate_winning_prob_of_stick <- function(simulation_times = 10000) {
+  doors <- 1:3
+  n_wins <- 0
+  for (i in 1:simulation_times) {
+    car <- sample(doors, size = 1)
+    initial_pick <- sample(doors, size = 1)
+    if (initial_pick == car) {
+      n_wins <- n_wins + 1
+    }
+  }
+  winning_prob <- n_wins / simulation_times
+  return(winning_prob)
+}
+winning_prob_of_stick <- simulate_winning_prob_of_stick()
+winning_prob_of_stick
+```
+
+## 主持人開啟剩下其中一扇門的策略
+
+- 主持人**必定**會開啟一扇有山羊的門。
+  - 如果參賽者挑了一扇有汽車的門，主持人隨機在另外兩扇門中開啟一扇。
+  - 如果參賽者挑了一扇有山羊的門，主持人開啟另一扇有山羊的門。
+
+```{r}
+reveal_strategy <- function(doors, car, initial_pick){
+  if (initial_pick == car) {
+    remaining_doors <- doors[-car]
+    reveal <- sample(remaining_doors, size = 1) # 主持人隨機在另外兩扇門中開啟一扇
+  } else {
+    remaining_doors <- doors[-c(car, initial_pick)]
+    reveal <- remaining_doors # 主持人開啟另一扇有山羊的門
+  }
+  return(reveal)
+}
+```
+
+## 模擬 `simulation_times` 次在主持人開啟一扇是山羊的門之後「換 switch」贏得汽車的機率
+
+```{r}
+simulate_winning_prob_of_switch <- function(simulation_times = 10000) {
+  doors <- 1:3
+  n_wins <- 0
+  for (i in 1:simulation_times) {
+    car <- sample(doors, size = 1)
+    initial_pick <- sample(doors, size = 1)
+    reveal <- reveal_strategy(doors, car, initial_pick)
+    remaining_door <- doors[-c(initial_pick, reveal)]
+    final_pick <- remaining_door
+    if (final_pick == car) {
+      n_wins <- n_wins + 1
+    }
+  }
+  winning_prob <- n_wins / simulation_times
+  return(winning_prob)
+}
+winning_prob_of_switch <- simulate_winning_prob_of_switch()
+winning_prob_of_switch
+```
+
+# 個案研究：快艇骰子（Yahtzee）
+
+## 關於快艇骰子
+
+> 快艇骰子是由 Milton Bradley 公司發明的一款骰子遊戲，最初由商人Edwin S. Lowe 在 1956 年推入市場。遊戲使用投擲五個骰子判斷得分，第一次投擲後可以兩次選擇重新投擲部分的骰子，最後由骰子數字的組合來判斷得分。如果某次投擲出的骰子都是相同的數字朝上，就是 Yahtzee，得分最高。
+
+來源：<https://en.wikipedia.org/wiki/Yahtzee>
+
+## 快艇骰子的其中幾個特別得分種類
+
+- Yahtzee：五個點數相同骰子的組合，分數得 50 分。
+- Large Straight：骰子點數排列為 $\{1, 2, 3, 4, 5\}$、$\{2, 3, 4, 5, 6\}$，分數得 40 分。
+- Full House：三個點數相同骰子和另外兩個點數相同骰子的組合，分數得 25 分。
+
+## 擲出 Yahtzee 的機率
+
+五個點數相同骰子的組合。
+
+```{r}
+calculate_p_yahtzee <- function() {
+  five_dices <- 6^5
+  p_all_ones <- 1 / five_dices
+  p_all_twos <- 1 / five_dices
+  p_all_threes <- 1 / five_dices
+  p_all_fours <- 1 / five_dices
+  p_all_fives <- 1 / five_dices
+  p_all_sixes <- 1 / five_dices
+  p_yahtzee <- p_all_ones + p_all_twos + p_all_threes + p_all_fours + p_all_fives + p_all_sixes
+  return(p_yahtzee)
+}
+p_yahtzee <- calculate_p_yahtzee()
+p_yahtzee # 0.077%
+```
+
+## 擲出 Large Straight 的機率
+
+- 骰子點數排列為 $\{1, 2, 3, 4, 5\}$、$\{2, 3, 4, 5, 6\}$
+- 使用 `factorial(n)` 函數計算階乘 $n!$。
+
+```{r}
+calculate_p_large_straight <- function() {
+  five_dices <- 6^5
+  p_12345 <- factorial(5) / five_dices
+  p_23456 <- factorial(5) / five_dices
+  p_large_straight <- p_12345 + p_23456
+  return(p_large_straight)
+}
+p_large_straight <- calculate_p_large_straight()
+p_large_straight
+```
+
+## 擲出 Full House 的機率
+
+- 骰子點數排列為 $\{1, 1, 1, x, x\}$、$x$ 為 ${2, 3, 4, 5, 6}$
+- 骰子點數排列為 $\{2, 2, 2, x, x\}$、$x$ 為 ${1, 3, 4, 5, 6}$
+- 骰子點數排列為 $\{3, 3, 3, x, x\}$、$x$ 為 ${1, 2, 4, 5, 6}$
+- 骰子點數排列為 $\{4, 4, 4, x, x\}$、$x$ 為 ${1, 2, 3, 5, 6}$
+- 骰子點數排列為 $\{5, 5, 5, x, x\}$、$x$ 為 ${1, 2, 3, 4, 6}$
+- 骰子點數排列為 $\{6, 6, 6, x, x\}$、$x$ 為 ${1, 2, 3, 4, 5}$
+
+## 擲出 Full House 的機率（續）
+
+兩個獨一值的排列組合個數：
+
+$$
+\frac{n!}{p_1!p_2!}
+$$
+
+```{r}
+calculate_p_full_house <- function() {
+  five_dices <- 6^5
+  perm_111xx <- factorial(5)/(factorial(3)*factorial(2)) * 5
+  perm_222xx <- factorial(5)/(factorial(3)*factorial(2)) * 5
+  perm_333xx <- factorial(5)/(factorial(3)*factorial(2)) * 5
+  perm_444xx <- factorial(5)/(factorial(3)*factorial(2)) * 5
+  perm_555xx <- factorial(5)/(factorial(3)*factorial(2)) * 5
+  perm_666xx <- factorial(5)/(factorial(3)*factorial(2)) * 5
+  p_full_house <- (perm_111xx + perm_222xx + perm_333xx + perm_444xx + perm_555xx + perm_666xx) / five_dices
+  return(p_full_house)
+}
+p_full_house <- calculate_p_full_house()
+p_full_house
+```
+
+# 個案研究：硬幣是否公正（Fairness of a Coin）
+
+## 建立公正硬幣
+
+- 以邏輯向量建立正（`TRUE`）反（`FALSE`）面集合。
+- 使用 `sample()` 函數指定 `replace` 參數為 `TRUE` 投擲硬幣 `n` 次。
+- 使用 `set.seed()` 函數指定一個整數將 `sample()` 函數的結果固定。
+
+```{r}
+coin <- c(FALSE, TRUE)
+n <- 100
+set.seed(140)
+fair_coin_flip <- coin |>
+  sample(size = n, replace = TRUE) |>
+  table()
+fair_coin_flip
+```
+
+## 建立「不」公正硬幣
+
+- 使用 `sample()` 函數指定 `prob` 參數為 `c(prob_tail, prob_head)`
+- 使用 `set.seed()` 函數指定一個整數將 `sample()` 函數的結果固定。
+
+```{r}
+n <- 100
+probs_tail_head <- c(0.4, 0.6)
+set.seed(140)
+unfair_coin_flip <- coin |>
+  sample(size = n, replace = TRUE, prob = probs_tail_head) |>
+  table()
+unfair_coin_flip
+```
+
+## 在一次的模擬中不一定能夠辨識
+
+```{r}
+fair_coin_flip
+unfair_coin_flip
+```
+
+## 或者在「不公正性」很微小的時候也不容易辨識
+
+```{r}
+n <- 100
+probs_tail_head <- c(0.49, 0.51)
+set.seed(126)
+unfair_coin_flip <- coin |>
+  sample(size = n, replace = TRUE, prob = probs_tail_head) |>
+  table()
+unfair_coin_flip
+```
+
+## 以統計分析來檢定硬幣是否公正
+
+- 提高模擬次數，以 $\bar{p}_{tail}$ $\bar{p}_{head}$ 來取代 $p_{tail}$ $p_{head}$
+- 以信賴係數 $\alpha$ 與信賴區間決定對微小「不公正性」的容忍度多寡。
+
+$$
+H_0: p_{head} = \frac{1}{2} \\
+H_1: p_{head} \neq \frac{1}{2}
+$$
+
+## 以 z 統計值來判斷兩個機率之間的差距是否足夠「顯著」
+
+$$
+z = \frac{x - np_{head}}{\sqrt{np_{head}(1-p_{head})}}
+$$
+
+## 計算公正硬幣的 z 統計值
+
+```{r}
+calculate_zstats_of_a_fair_coin <- function(n = 10000) {
+  coin <- c(FALSE, TRUE)
+  fair_coin_flip <- coin |>
+    sample(size = n, replace = TRUE)
+  n_heads <- sum(fair_coin_flip)
+  z_stats <- (n_heads - n*0.5) / (n*0.5*0.5)^(0.5)
+  return(z_stats)
+}
+zstats_of_a_fair_coin <- calculate_zstats_of_a_fair_coin()
+zstats_of_a_fair_coin
+```
+
+## 計算非公正硬幣的 z 統計值
+
+```{r}
+calculate_zstats_of_an_unfair_coin <- function(n = 10000, p_head = 0.6) {
+  coin <- c(FALSE, TRUE)
+  probs_tail_head <- c(1 - p_head, p_head)
+  unfair_coin_flip <- coin |>
+    sample(size = n, replace = TRUE, prob = probs_tail_head)
+  n_heads <- sum(unfair_coin_flip)
+  z_stats <- (n_heads - n*0.5) / (n*0.5*0.5)^(0.5)
+  return(z_stats)
+}
+zstats_of_an_unfair_coin <- calculate_zstats_of_an_unfair_coin()
+zstats_of_an_unfair_coin
+```
+
+## 計算信賴係數 $\alpha = 0.05$、信賴區間 95% 時的分界點
+
+![](../images/two-tailed.png)
+
+來源：<https://www.investopedia.com/terms/t/two-tailed-test.asp>
+
+```{r}
+alpha <- 0.05
+z_half_alpha <- qnorm(1 - alpha/2)
+cut_off_points <- c(-z_half_alpha, z_half_alpha)
+cut_off_points
+```
+
+## 檢定公正與非公正硬幣
+
+```{r}
+# 公正硬幣
+(zstats_of_a_fair_coin < max(cut_off_points)) & (zstats_of_a_fair_coin > min(cut_off_points))
+# 非公正硬幣
+(zstats_of_an_unfair_coin < max(cut_off_points)) & (zstats_of_an_unfair_coin > min(cut_off_points))
+```
+
+## 檢定「不公正性」很微小的硬幣
+
+```{r}
+zstats_of_an_unfair_coin <- calculate_zstats_of_an_unfair_coin(p_head = 0.501)
+zstats_of_an_unfair_coin
+(zstats_of_an_unfair_coin < max(cut_off_points)) & (zstats_of_an_unfair_coin > min(cut_off_points))
+```
+
+# 完課以後的延伸閱讀與進修方向
+
+## 「R 語言的 50+ 練習」涵蓋兩個核心
+
+1. R 語言程式設計。
+2. R 語言資料科學應用。
+
+## 延伸閱讀與進修方向有三條路
+
+- 精進程式設計。
+- 精進資料科學、統計分析與統計學習。
+- 精進 R 語言的其他應用。
+
+## 精進程式設計
+
+- 適合對象：在學習章節 1 到章節 8 對 R 語言程式設計特別有興趣的學員。
+- 延伸閱讀：
+    - [The Art of R Programming](https://www.amazon.com/Art-Programming-Statistical-Software-Design/dp/1593273843)
+    - [Advanced R](https://adv-r.hadley.nz/)
+
+## 精進資料科學、統計分析與統計學習
+
+- 適合對象：在學習章節 9 到章節 14 對 R 語言資料科學應用特別有興趣的學員。
+- 延伸閱讀：
+    - [An Introduction to Statistical Learning](https://www.amazon.com/Introduction-Statistical-Learning-Applications-Statistics/dp/1461471370)
+    - [愛上統計學：使用 R 語言](https://www.books.com.tw/products/0010886713)
+    - [R for Data Science](https://r4ds.had.co.nz/)
+    
+## 精進 R 語言的其他應用
+
+- 適合對象：希望學習其他 R 語言應用的學員。
+- 延伸閱讀：
+    - [Shiny](https://shiny.rstudio.com/)
+    - [Quarto](https://quarto.org/)
+    - [Plumber](https://www.rplumber.io/)

@@ -1,0 +1,2498 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="lecture_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lecture_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.37">
+
+  <meta name="author" content="郭耀仁">
+  <title>R 語言的 50 + 練習：統計分析的前哨站</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="lecture_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">R 語言的 50 + 練習：統計分析的前哨站</h1>
+  <p class="subtitle">進階資料框操作</p>
+  <p class="author">郭耀仁</p>
+</section>
+
+<section>
+<section id="關於進階的資料框操作" class="title-slide slide level1 center">
+<h1>關於進階的資料框操作</h1>
+
+</section>
+<section id="複習資料科學的應用場景有哪些" class="slide level2">
+<h2>（複習）資料科學的應用場景有哪些</h2>
+<ul>
+<li><strong>Import 資料的載入</strong>。</li>
+<li><strong>Tidy 資料清理</strong>。</li>
+<li><strong>Transform 資料外型與類別的轉換</strong>。</li>
+<li>Visualize 資料視覺化。</li>
+<li>Model 分析與預測建模。</li>
+<li>Communicate 溝通分享。</li>
+</ul>
+
+<img data-src="../images/wrangle.png" class="r-stretch"><p>來源：<a href="https://r4ds.had.co.nz/program-intro.html" class="uri">https://r4ds.had.co.nz/program-intro.html</a></p>
+</section>
+<section id="進階的資料框操作" class="slide level2">
+<h2>進階的資料框操作</h2>
+<ul>
+<li>以迴圈走訪資料框的列或欄。</li>
+<li>處理遺漏值。</li>
+<li>轉置資料框。</li>
+<li>單純合併資料框。</li>
+<li>關聯資料框。</li>
+</ul>
+</section>
+<section id="與關聯式資料庫-imdb.db-連線" class="slide level2">
+<h2>與關聯式資料庫 <code>imdb.db</code> 連線</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"RSQLite"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(<span class="st">"DBI"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>working_directory <span class="ot">&lt;-</span> <span class="st">"/Users/kuoyaojen/Desktop/ch12/"</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>file_name <span class="ot">&lt;-</span> <span class="st">"imdb.db"</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>file_path <span class="ot">&lt;-</span> <span class="fu">paste0</span>(working_directory, file_name)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>connection <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), file_path)</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># setwd(working_directory)</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># connection &lt;- DBI::dbConnect(RSQLite::SQLite(), file_name)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="載入關聯式資料庫-imdb.db-中的資料表" class="slide level2">
+<h2>載入關聯式資料庫 <code>imdb.db</code> 中的資料表</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>DBI<span class="sc">::</span><span class="fu">dbListTables</span>(connection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "actors"  "casting" "movies" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>movies <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbReadTable</span>(connection, <span class="at">name =</span> <span class="st">"movies"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>casting <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbReadTable</span>(connection, <span class="at">name =</span> <span class="st">"casting"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(connection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="以迴圈走訪資料框的列或欄" class="title-slide slide level1 center">
+<h1>以迴圈走訪資料框的列或欄</h1>
+
+</section>
+<section id="如何以迴圈走訪資料框的欄" class="slide level2">
+<h2>如何以迴圈走訪資料框的欄</h2>
+<ul>
+<li>使用 <code>colnames()</code> 函數取得所有的欄名。</li>
+<li>讓欄名從第一個更改至最後一個。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>col_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(movies)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="cf">for</span> (col_name <span class="cf">in</span> col_names) {</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">print</span>(col_name)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "id"
+[1] "title"
+[1] "release_year"
+[1] "rating"
+[1] "director"
+[1] "runtime"</code></pre>
+</div>
+</div>
+</section>
+<section id="如何以迴圈走訪資料框的欄續" class="slide level2">
+<h2>如何以迴圈走訪資料框的欄（續）</h2>
+<p>顯示每一欄的資料。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">for</span> (col_name <span class="cf">in</span> col_names) {</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  each_column <span class="ot">&lt;-</span> movies[[col_name]]</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">print</span>(each_column)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="如何以迴圈走訪資料框的列" class="slide level2">
+<h2>如何以迴圈走訪資料框的列</h2>
+<ul>
+<li>使用 <code>nrow()</code> 函數取得列數。</li>
+<li>讓列索引從 <code>1</code> 更改至 <code>nrow(df)</code>。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>n_row <span class="ot">&lt;-</span> <span class="fu">nrow</span>(movies)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="cf">for</span> (row_i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_row) {</span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">print</span>(row_i)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+[1] 11
+[1] 12
+[1] 13
+[1] 14
+[1] 15
+[1] 16
+[1] 17
+[1] 18
+[1] 19
+[1] 20
+[1] 21
+[1] 22
+[1] 23
+[1] 24
+[1] 25
+[1] 26
+[1] 27
+[1] 28
+[1] 29
+[1] 30
+[1] 31
+[1] 32
+[1] 33
+[1] 34
+[1] 35
+[1] 36
+[1] 37
+[1] 38
+[1] 39
+[1] 40
+[1] 41
+[1] 42
+[1] 43
+[1] 44
+[1] 45
+[1] 46
+[1] 47
+[1] 48
+[1] 49
+[1] 50
+[1] 51
+[1] 52
+[1] 53
+[1] 54
+[1] 55
+[1] 56
+[1] 57
+[1] 58
+[1] 59
+[1] 60
+[1] 61
+[1] 62
+[1] 63
+[1] 64
+[1] 65
+[1] 66
+[1] 67
+[1] 68
+[1] 69
+[1] 70
+[1] 71
+[1] 72
+[1] 73
+[1] 74
+[1] 75
+[1] 76
+[1] 77
+[1] 78
+[1] 79
+[1] 80
+[1] 81
+[1] 82
+[1] 83
+[1] 84
+[1] 85
+[1] 86
+[1] 87
+[1] 88
+[1] 89
+[1] 90
+[1] 91
+[1] 92
+[1] 93
+[1] 94
+[1] 95
+[1] 96
+[1] 97
+[1] 98
+[1] 99
+[1] 100
+[1] 101
+[1] 102
+[1] 103
+[1] 104
+[1] 105
+[1] 106
+[1] 107
+[1] 108
+[1] 109
+[1] 110
+[1] 111
+[1] 112
+[1] 113
+[1] 114
+[1] 115
+[1] 116
+[1] 117
+[1] 118
+[1] 119
+[1] 120
+[1] 121
+[1] 122
+[1] 123
+[1] 124
+[1] 125
+[1] 126
+[1] 127
+[1] 128
+[1] 129
+[1] 130
+[1] 131
+[1] 132
+[1] 133
+[1] 134
+[1] 135
+[1] 136
+[1] 137
+[1] 138
+[1] 139
+[1] 140
+[1] 141
+[1] 142
+[1] 143
+[1] 144
+[1] 145
+[1] 146
+[1] 147
+[1] 148
+[1] 149
+[1] 150
+[1] 151
+[1] 152
+[1] 153
+[1] 154
+[1] 155
+[1] 156
+[1] 157
+[1] 158
+[1] 159
+[1] 160
+[1] 161
+[1] 162
+[1] 163
+[1] 164
+[1] 165
+[1] 166
+[1] 167
+[1] 168
+[1] 169
+[1] 170
+[1] 171
+[1] 172
+[1] 173
+[1] 174
+[1] 175
+[1] 176
+[1] 177
+[1] 178
+[1] 179
+[1] 180
+[1] 181
+[1] 182
+[1] 183
+[1] 184
+[1] 185
+[1] 186
+[1] 187
+[1] 188
+[1] 189
+[1] 190
+[1] 191
+[1] 192
+[1] 193
+[1] 194
+[1] 195
+[1] 196
+[1] 197
+[1] 198
+[1] 199
+[1] 200
+[1] 201
+[1] 202
+[1] 203
+[1] 204
+[1] 205
+[1] 206
+[1] 207
+[1] 208
+[1] 209
+[1] 210
+[1] 211
+[1] 212
+[1] 213
+[1] 214
+[1] 215
+[1] 216
+[1] 217
+[1] 218
+[1] 219
+[1] 220
+[1] 221
+[1] 222
+[1] 223
+[1] 224
+[1] 225
+[1] 226
+[1] 227
+[1] 228
+[1] 229
+[1] 230
+[1] 231
+[1] 232
+[1] 233
+[1] 234
+[1] 235
+[1] 236
+[1] 237
+[1] 238
+[1] 239
+[1] 240
+[1] 241
+[1] 242
+[1] 243
+[1] 244
+[1] 245
+[1] 246
+[1] 247
+[1] 248
+[1] 249
+[1] 250</code></pre>
+</div>
+</div>
+</section>
+<section id="如何以迴圈走訪資料框的列續" class="slide level2">
+<h2>如何以迴圈走訪資料框的列（續）</h2>
+<p>顯示每一列的資料。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="cf">for</span> (row_i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_row) {</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  each_row <span class="ot">&lt;-</span> movies[row_i, ]</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">print</span>(each_row)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="處理遺漏值" class="title-slide slide level1 center">
+<h1>處理遺漏值</h1>
+
+</section>
+<section id="檢查遺漏值是否存在" class="slide level2">
+<h2>檢查遺漏值是否存在</h2>
+<p>使用 <code>is.na()</code> 函數檢查。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>primes_with_na <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">11</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">is.na</span>(primes_with_na)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE FALSE  TRUE FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="以篩選觀測值的技巧刪除遺漏值" class="slide level2">
+<h2>以篩選觀測值的技巧刪除遺漏值</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="st">"row_index"</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="st">"prime"</span> <span class="ot">=</span> primes_with_na</span>
+<span id="cb14-4"><a href="#cb14-4"></a>)</span>
+<span id="cb14-5"><a href="#cb14-5"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  row_index prime
+1         1     2
+2         2    NA
+3         3     5
+4         4    NA
+5         5    11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>is_not_na <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(df[[<span class="st">"prime"</span>]])</span>
+<span id="cb16-2"><a href="#cb16-2"></a>df[is_not_na, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  row_index prime
+1         1     2
+3         3     5
+5         5    11</code></pre>
+</div>
+</div>
+</section>
+<section id="填補遺漏值" class="slide level2">
+<h2>填補遺漏值</h2>
+<ul>
+<li>使用 <code>tidyr</code> 套件的 <code>replace_na()</code> 函數與 <code>fill()</code> 函數。</li>
+<li><code>tidyr</code> 套件包含許多資料清理、轉置的函數。</li>
+<li>與 <code>dplyr</code> 套件同屬於 <code>tidyverse</code> 套件組合。</li>
+</ul>
+</section>
+<section id="安裝與載入" class="slide level2">
+<h2>安裝與載入</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(<span class="st">"tidyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="使用-tidyr-套件的-replace_na-函數填補遺漏值" class="slide level2">
+<h2>使用 <code>tidyr</code> 套件的 <code>replace_na()</code> 函數填補遺漏值</h2>
+<p>填補為指定資料。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>primes_with_na <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  tidyr<span class="sc">::</span><span class="fu">replace_na</span>(<span class="dv">5566</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]    2 5566    5 5566   11</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-tidyr-套件的-fill-函數填補遺漏值" class="slide level2">
+<h2>使用 <code>tidyr</code> 套件的 <code>fill()</code> 函數填補遺漏值</h2>
+<ul>
+<li>指定參數 <code>.direction = "down"</code> 遇到遺漏值就用前一個值來填補。</li>
+<li>指定參數 <code>.direction = "up"</code> 遇到遺漏值就用後一個值來填補。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  tidyr<span class="sc">::</span><span class="fu">fill</span>(prime, <span class="at">.direction =</span> <span class="st">"down"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  row_index prime
+1         1     2
+2         2     2
+3         3     5
+4         4     5
+5         5    11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  tidyr<span class="sc">::</span><span class="fu">fill</span>(prime, <span class="at">.direction =</span> <span class="st">"up"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  row_index prime
+1         1     2
+2         2     5
+3         3     5
+4         4    11
+5         5    11</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="轉置資料框" class="title-slide slide level1 center">
+<h1>轉置資料框</h1>
+
+</section>
+<section id="轉置資料框的函數" class="slide level2">
+<h2>轉置資料框的函數</h2>
+<ul>
+<li>使用 <code>tidyr</code> 套件的 <code>pivot_longer()</code> 函數可以將資料框由寬格式轉換為長格式。</li>
+<li>使用 <code>tidyr</code> 套件的 <code>pivot_wider()</code> 函數可以將資料框由長格式轉換為寬格式。</li>
+</ul>
+</section>
+<section id="什麼是寬格式長格式" class="slide level2">
+<h2>什麼是寬格式、長格式</h2>
+<ul>
+<li>寬格式使用一個欄位儲存資料，欄位名稱記錄變數類別、觀測值記錄數值。</li>
+<li>長格式使用兩個欄位儲存資料，一個欄位記錄變數類別、一個欄位記錄數值。</li>
+</ul>
+<p>來源：<a href="https://en.wikipedia.org/wiki/Wide_and_narrow_data" class="uri">https://en.wikipedia.org/wiki/Wide_and_narrow_data</a></p>
+</section>
+<section id="寬格式使用欄位名稱記錄變數類別觀測值記錄其數值" class="slide level2">
+<h2>寬格式使用欄位名稱記錄變數類別、觀測值記錄其數值</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>persons <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Bob"</span>, <span class="st">"Alice"</span>, <span class="st">"Steve"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">24</span>, <span class="dv">64</span>)</span>
+<span id="cb26-3"><a href="#cb26-3"></a>weights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">168</span>, <span class="dv">150</span>, <span class="dv">144</span>)</span>
+<span id="cb26-4"><a href="#cb26-4"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">175</span>, <span class="dv">165</span>)</span>
+<span id="cb26-5"><a href="#cb26-5"></a>wide_format <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="st">"person"</span> <span class="ot">=</span> persons,</span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="st">"age"</span> <span class="ot">=</span> ages,</span>
+<span id="cb26-8"><a href="#cb26-8"></a>  <span class="st">"weight"</span> <span class="ot">=</span> weights,</span>
+<span id="cb26-9"><a href="#cb26-9"></a>  <span class="st">"height"</span> <span class="ot">=</span> heights</span>
+<span id="cb26-10"><a href="#cb26-10"></a>)</span>
+<span id="cb26-11"><a href="#cb26-11"></a>wide_format</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  person age weight height
+1    Bob  32    168    180
+2  Alice  24    150    175
+3  Steve  64    144    165</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-tidyr-套件的-pivot_longer-函數可以將資料框由寬格式轉換為長格式" class="slide level2">
+<h2>使用 <code>tidyr</code> 套件的 <code>pivot_longer()</code> 函數可以將資料框由寬格式轉換為長格式</h2>
+<ul>
+<li><code>cols</code> 參數指定數值的欄位。</li>
+<li><code>names_to</code> 參數指定變數類別的欄命名。</li>
+<li><code>values_to</code> 參數指定數值的欄命名。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>long_format <span class="ot">&lt;-</span> wide_format <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"weight"</span>, <span class="st">"height"</span>),</span>
+<span id="cb28-3"><a href="#cb28-3"></a>                      <span class="at">names_to =</span> <span class="st">"variable"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4"></a>                      <span class="at">values_to =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="長格式使用一個欄位記錄變數類別一個欄位記錄數值" class="slide level2">
+<h2>長格式使用一個欄位記錄變數類別、一個欄位記錄數值</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>long_format</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  person variable value
+  &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;
+1 Bob    age         32
+2 Bob    weight     168
+3 Bob    height     180
+4 Alice  age         24
+5 Alice  weight     150
+6 Alice  height     175
+7 Steve  age         64
+8 Steve  weight     144
+9 Steve  height     165</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-tidyr-套件的-pivot_wider-函數可以將資料框由長格式轉換為寬格式" class="slide level2">
+<h2>使用 <code>tidyr</code> 套件的 <code>pivot_wider()</code> 函數可以將資料框由長格式轉換為寬格式</h2>
+<ul>
+<li><code>id_cols</code> 參數指定「非」數值的欄位。</li>
+<li><code>names_from</code> 參數指定變數類別的欄命名。</li>
+<li><code>values_from</code> 參數指定數值的欄命名。</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>long_format <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="st">"person"</span>,</span>
+<span id="cb31-3"><a href="#cb31-3"></a>                     <span class="at">names_from =</span> <span class="st">"variable"</span>,</span>
+<span id="cb31-4"><a href="#cb31-4"></a>                     <span class="at">values_from =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  person   age weight height
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 Bob       32    168    180
+2 Alice     24    150    175
+3 Steve     64    144    165</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="單純合併資料框" class="title-slide slide level1 center">
+<h1>單純合併資料框</h1>
+
+</section>
+<section id="單純合併資料框的函數" class="slide level2">
+<h2>單純合併資料框的函數</h2>
+<ul>
+<li>使用 <code>rbind()</code> 函數單純垂直合併。</li>
+<li>使用 <code>cbind()</code> 函數單純水平合併。</li>
+</ul>
+</section>
+<section id="要進行單純垂直合併的資料框" class="slide level2">
+<h2>要進行單純垂直合併的資料框</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>upper_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="st">"title"</span> <span class="ot">=</span> <span class="st">"The Lord of the Rings: The Fellowship of the Rings"</span>,</span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="st">"release_year"</span> <span class="ot">=</span> <span class="dv">2001</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>)</span>
+<span id="cb33-5"><a href="#cb33-5"></a>lower_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="st">"title"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"The Lord of the Rings: The Two Towers"</span>, <span class="st">"The Lord of the Rings: The Return of the King"</span>),</span>
+<span id="cb33-7"><a href="#cb33-7"></a>  <span class="st">"release_year"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2002</span>, <span class="dv">2003</span>)</span>
+<span id="cb33-8"><a href="#cb33-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="使用-rbind-函數單純垂直合併" class="slide level2">
+<h2>使用 <code>rbind()</code> 函數單純垂直合併</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>rbind_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(upper_df, lower_df)</span>
+<span id="cb34-2"><a href="#cb34-2"></a>rbind_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                               title release_year
+1 The Lord of the Rings: The Fellowship of the Rings         2001
+2              The Lord of the Rings: The Two Towers         2002
+3      The Lord of the Rings: The Return of the King         2003</code></pre>
+</div>
+</div>
+</section>
+<section id="要進行單純水平合併的資料框" class="slide level2">
+<h2>要進行單純水平合併的資料框</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>left_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="st">"title"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"The Lord of the Rings: The Fellowship of the Rings"</span>, <span class="st">"The Lord of the Rings: The Two Towers"</span>, <span class="st">"The Lord of the Rings: The Return of the King"</span>)</span>
+<span id="cb36-3"><a href="#cb36-3"></a>)</span>
+<span id="cb36-4"><a href="#cb36-4"></a>right_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="st">"release_year"</span> <span class="ot">=</span> <span class="dv">2001</span><span class="sc">:</span><span class="dv">2003</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="使用-cbind-函數單純水平合併" class="slide level2">
+<h2>使用 <code>cbind()</code> 函數單純水平合併</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>cbind_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(left_df, right_df)</span>
+<span id="cb37-2"><a href="#cb37-2"></a>cbind_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                               title release_year
+1 The Lord of the Rings: The Fellowship of the Rings         2001
+2              The Lord of the Rings: The Two Towers         2002
+3      The Lord of the Rings: The Return of the King         2003</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="關聯資料框" class="title-slide slide level1 center">
+<h1>關聯資料框</h1>
+
+</section>
+<section id="什麼是關聯資料框" class="slide level2">
+<h2>什麼是關聯資料框</h2>
+<p>資料框之間能夠進行觀測值與變數的交集、聯集的運算，實踐類似資料庫的關聯式模型，包含與交集對應的內部連接（Inner join）、左外部連接（Left join）、右外部連接（Right join）以及與聯集對應的全外部連接（Full join）。</p>
+</section>
+<section id="四種連接" class="slide level2">
+<h2>四種連接</h2>
+<ol type="1">
+<li>內部連接（Inner join），保留兩個關聯資料框交集的觀測值。</li>
+<li>左外部連接（Left join），保留左資料框所有的觀測值。</li>
+<li>右外部連接（Right join），保留右資料框所有的觀測值。</li>
+<li>全外部連接（Full join），保留兩個關聯資料框聯集的觀測值。</li>
+</ol>
+</section>
+<section id="關聯資料框的兩種操作" class="slide level2">
+<h2>關聯資料框的兩種操作</h2>
+<ol type="1">
+<li>使用 <code>merge()</code> 函數進行四種連接。</li>
+<li>使用 <code>dplyr</code> 套件的函數進行四種連接。</li>
+</ol>
+</section>
+<section id="欲關聯的兩個資料框" class="slide level2">
+<h2>欲關聯的兩個資料框</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>left_df <span class="ot">&lt;-</span> movies[movies<span class="sc">$</span>id <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span>
+<span id="cb39-2"><a href="#cb39-2"></a>right_df <span class="ot">&lt;-</span> casting[casting<span class="sc">$</span>movie_id <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">6</span>), ]</span>
+<span id="cb39-3"><a href="#cb39-3"></a>left_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id                    title release_year rating             director runtime
+1  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+2  2            The Godfather         1972    9.2 Francis Ford Coppola     175
+3  3   The Godfather: Part II         1974    9.0 Francis Ford Coppola     202
+4  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+5  5             12 Angry Men         1957    9.0         Sidney Lumet      96</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>right_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   movie_id actor_id ord
+1         1     2853   1
+2         1     2097   2
+3         1      333   3
+4         1     3029   4
+5         1      533   5
+6         1     1042   6
+7         1     1923   7
+8         1     1319   8
+9         1     1370   9
+10        1     1724  10
+11        1     2151  11
+12        1      363  12
+13        1      659  13
+14        1     1530  14
+15        1     1553  15
+46        4      502   1
+47        4     1155   2
+48        4        2   3
+49        4     2015   4
+50        4     1855   5
+51        4      985   6
+52        4     2097   7
+53        4     2095   8
+54        4     2520   9
+55        4      528  10
+56        4      482  11
+57        4     2157  12
+58        4      838  13
+59        4     2458  14
+60        4      179  15
+73        6     1783   1
+74        6      272   2
+75        6     2376   3
+76        6      424   4
+77        6     1511   5
+78        6      817   6
+79        6     1867   7
+80        6     2685   8
+81        6     1919   9
+82        6      400  10
+83        6      135  11
+84        6      963  12
+85        6     1696  13
+86        6     1138  14
+87        6     2191  15</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-merge-函數進行四種連接" class="slide level2">
+<h2>使用 <code>merge()</code> 函數進行四種連接</h2>
+<ul>
+<li>以參數 <code>by.x</code> 與 <code>by.y</code> 分別指定關聯所依據的左資料框、右資料框變數。</li>
+<li>以參數 <code>all.x</code> 與 <code>all.y</code> 排列組合實踐四種連接。</li>
+</ul>
+</section>
+<section id="以參數-all.x-與-all.y-排列組合實踐四種連接" class="slide level2">
+<h2>以參數 <code>all.x</code> 與 <code>all.y</code> 排列組合實踐四種連接</h2>
+<ul>
+<li><code>all.x = FALSE</code>、<code>all.y = FALSE</code> 實踐內部連接（預設）。</li>
+<li><code>all.x = TRUE</code>、<code>all.y = FALSE</code> 實踐左外部連接。</li>
+<li><code>all.x = FALSE</code>、<code>all.y = TRUE</code> 實踐右外部連接。</li>
+<li><code>all.x = TRUE</code>、<code>all.y = TRUE</code> 實踐全外部連接。</li>
+</ul>
+</section>
+<section id="使用-merge-函數進行內部連接" class="slide level2">
+<h2>使用 <code>merge()</code> 函數進行內部連接</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>merge_df <span class="ot">&lt;-</span> <span class="fu">merge</span>(left_df, right_df, <span class="at">by.x =</span> <span class="st">"id"</span>, <span class="at">by.y =</span> <span class="st">"movie_id"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2"></a>merge_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id                    title release_year rating          director runtime
+1   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+2   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+3   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+4   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+5   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+6   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+7   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+8   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+9   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+10  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+11  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+12  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+13  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+14  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+15  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+16  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+17  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+18  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+19  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+20  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+21  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+22  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+23  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+24  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+25  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+26  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+27  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+28  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+29  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+30  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+   actor_id ord
+1       333   3
+2      3029   4
+3      2853   1
+4      2097   2
+5      1923   7
+6      1319   8
+7      1370   9
+8      1724  10
+9      2151  11
+10      363  12
+11      659  13
+12     1530  14
+13     1553  15
+14      533   5
+15     1042   6
+16      502   1
+17     1155   2
+18     1855   5
+19      985   6
+20     2097   7
+21     2095   8
+22     2520   9
+23      528  10
+24      482  11
+25     2157  12
+26      838  13
+27     2458  14
+28      179  15
+29        2   3
+30     2015   4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">unique</span>(merge_df<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The Shawshank Redemption" "The Dark Knight"         </code></pre>
+</div>
+</div>
+</section>
+<section id="使用-merge-函數進行左外部連接" class="slide level2">
+<h2>使用 <code>merge()</code> 函數進行左外部連接</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>merge_df <span class="ot">&lt;-</span> <span class="fu">merge</span>(left_df, right_df, <span class="at">by.x =</span> <span class="st">"id"</span>, <span class="at">by.y =</span> <span class="st">"movie_id"</span>,</span>
+<span id="cb47-2"><a href="#cb47-2"></a>                  <span class="at">all.x =</span> <span class="cn">TRUE</span>, <span class="at">all.y =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb47-3"><a href="#cb47-3"></a>merge_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id                    title release_year rating             director runtime
+1   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+2   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+3   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+4   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+5   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+6   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+7   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+8   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+9   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+10  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+11  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+12  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+13  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+14  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+15  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+16  2            The Godfather         1972    9.2 Francis Ford Coppola     175
+17  3   The Godfather: Part II         1974    9.0 Francis Ford Coppola     202
+18  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+19  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+20  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+21  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+22  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+23  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+24  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+25  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+26  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+27  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+28  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+29  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+30  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+31  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+32  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+33  5             12 Angry Men         1957    9.0         Sidney Lumet      96
+   actor_id ord
+1       333   3
+2      3029   4
+3      2853   1
+4      2097   2
+5      1923   7
+6      1319   8
+7      1370   9
+8      1724  10
+9      2151  11
+10      363  12
+11      659  13
+12     1530  14
+13     1553  15
+14      533   5
+15     1042   6
+16       NA  NA
+17       NA  NA
+18      502   1
+19     1155   2
+20     1855   5
+21      985   6
+22     2097   7
+23     2095   8
+24     2520   9
+25      528  10
+26      482  11
+27     2157  12
+28      838  13
+29     2458  14
+30      179  15
+31        2   3
+32     2015   4
+33       NA  NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">unique</span>(merge_df<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The Shawshank Redemption" "The Godfather"           
+[3] "The Godfather: Part II"   "The Dark Knight"         
+[5] "12 Angry Men"            </code></pre>
+</div>
+</div>
+</section>
+<section id="使用-merge-函數進行右外部連接" class="slide level2">
+<h2>使用 <code>merge()</code> 函數進行右外部連接</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>merge_df <span class="ot">&lt;-</span> <span class="fu">merge</span>(left_df, right_df, <span class="at">by.x =</span> <span class="st">"id"</span>, <span class="at">by.y =</span> <span class="st">"movie_id"</span>,</span>
+<span id="cb51-2"><a href="#cb51-2"></a>                  <span class="at">all.x =</span> <span class="cn">FALSE</span>, <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb51-3"><a href="#cb51-3"></a>merge_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id                    title release_year rating          director runtime
+1   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+2   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+3   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+4   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+5   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+6   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+7   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+8   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+9   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+10  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+11  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+12  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+13  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+14  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+15  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+16  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+17  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+18  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+19  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+20  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+21  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+22  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+23  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+24  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+25  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+26  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+27  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+28  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+29  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+30  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+31  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+32  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+33  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+34  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+35  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+36  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+37  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+38  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+39  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+40  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+41  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+42  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+43  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+44  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+45  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+   actor_id ord
+1       333   3
+2      3029   4
+3      2853   1
+4      2097   2
+5      1923   7
+6      1319   8
+7      1370   9
+8      1724  10
+9      2151  11
+10      363  12
+11      659  13
+12     1530  14
+13     1553  15
+14      533   5
+15     1042   6
+16      502   1
+17     1155   2
+18     1855   5
+19      985   6
+20     2097   7
+21     2095   8
+22     2520   9
+23      528  10
+24      482  11
+25     2157  12
+26      838  13
+27     2458  14
+28      179  15
+29        2   3
+30     2015   4
+31      400  10
+32      135  11
+33      963  12
+34     1696  13
+35     1783   1
+36      272   2
+37     2376   3
+38      424   4
+39     1511   5
+40      817   6
+41     1867   7
+42     2685   8
+43     1919   9
+44     1138  14
+45     2191  15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">unique</span>(merge_df<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The Shawshank Redemption" "The Dark Knight"         
+[3] NA                        </code></pre>
+</div>
+</div>
+</section>
+<section id="使用-merge-函數進行全外部連接" class="slide level2">
+<h2>使用 <code>merge()</code> 函數進行全外部連接</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>merge_df <span class="ot">&lt;-</span> <span class="fu">merge</span>(left_df, right_df, <span class="at">by.x =</span> <span class="st">"id"</span>, <span class="at">by.y =</span> <span class="st">"movie_id"</span>,</span>
+<span id="cb55-2"><a href="#cb55-2"></a>                  <span class="at">all.x =</span> <span class="cn">TRUE</span>, <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb55-3"><a href="#cb55-3"></a>merge_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id                    title release_year rating             director runtime
+1   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+2   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+3   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+4   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+5   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+6   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+7   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+8   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+9   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+10  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+11  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+12  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+13  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+14  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+15  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+16  2            The Godfather         1972    9.2 Francis Ford Coppola     175
+17  3   The Godfather: Part II         1974    9.0 Francis Ford Coppola     202
+18  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+19  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+20  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+21  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+22  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+23  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+24  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+25  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+26  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+27  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+28  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+29  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+30  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+31  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+32  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+33  5             12 Angry Men         1957    9.0         Sidney Lumet      96
+34  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+35  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+36  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+37  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+38  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+39  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+40  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+41  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+42  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+43  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+44  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+45  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+46  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+47  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+48  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+   actor_id ord
+1       333   3
+2      3029   4
+3      2853   1
+4      2097   2
+5      1923   7
+6      1319   8
+7      1370   9
+8      1724  10
+9      2151  11
+10      363  12
+11      659  13
+12     1530  14
+13     1553  15
+14      533   5
+15     1042   6
+16       NA  NA
+17       NA  NA
+18      502   1
+19     1155   2
+20     1855   5
+21      985   6
+22     2097   7
+23     2095   8
+24     2520   9
+25      528  10
+26      482  11
+27     2157  12
+28      838  13
+29     2458  14
+30      179  15
+31        2   3
+32     2015   4
+33       NA  NA
+34      400  10
+35      135  11
+36      963  12
+37     1696  13
+38     1783   1
+39      272   2
+40     2376   3
+41      424   4
+42     1511   5
+43      817   6
+44     1867   7
+45     2685   8
+46     1919   9
+47     1138  14
+48     2191  15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">unique</span>(merge_df<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The Shawshank Redemption" "The Godfather"           
+[3] "The Godfather: Part II"   "The Dark Knight"         
+[5] "12 Angry Men"             NA                        </code></pre>
+</div>
+</div>
+</section>
+<section id="使用-dplyr-套件的函數進行四種連接" class="slide level2">
+<h2>使用 <code>dplyr</code> 套件的函數進行四種連接</h2>
+<ul>
+<li>以參數 <code>by</code> 指定關聯所依據的左資料框、右資料框變數。</li>
+<li>使用 <code>dplyr</code> 套件的 <code>inner_join()</code> 函數實踐內部連接。</li>
+<li>使用 <code>dplyr</code> 套件的 <code>left_join()</code> 函數實踐左外部連接。</li>
+<li>使用 <code>dplyr</code> 套件的 <code>right_join()</code> 函數實踐右外部連接。</li>
+<li>使用 <code>dplyr</code> 套件的 <code>full_join()</code> 函數實踐全外部連接。</li>
+</ul>
+</section>
+<section id="使用-dplyr-套件的-inner_join-函數實踐內部連接" class="slide level2">
+<h2>使用 <code>dplyr</code> 套件的 <code>inner_join()</code> 函數實踐內部連接</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>merge_df <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">inner_join</span>(left_df, right_df,</span>
+<span id="cb59-2"><a href="#cb59-2"></a>                              <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span> <span class="ot">=</span> <span class="st">"movie_id"</span>))</span>
+<span id="cb59-3"><a href="#cb59-3"></a>merge_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id                    title release_year rating          director runtime
+1   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+2   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+3   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+4   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+5   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+6   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+7   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+8   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+9   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+10  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+11  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+12  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+13  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+14  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+15  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+16  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+17  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+18  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+19  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+20  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+21  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+22  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+23  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+24  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+25  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+26  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+27  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+28  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+29  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+30  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+   actor_id ord
+1      2853   1
+2      2097   2
+3       333   3
+4      3029   4
+5       533   5
+6      1042   6
+7      1923   7
+8      1319   8
+9      1370   9
+10     1724  10
+11     2151  11
+12      363  12
+13      659  13
+14     1530  14
+15     1553  15
+16      502   1
+17     1155   2
+18        2   3
+19     2015   4
+20     1855   5
+21      985   6
+22     2097   7
+23     2095   8
+24     2520   9
+25      528  10
+26      482  11
+27     2157  12
+28      838  13
+29     2458  14
+30      179  15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">unique</span>(merge_df<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The Shawshank Redemption" "The Dark Knight"         </code></pre>
+</div>
+</div>
+</section>
+<section id="使用-dplyr-套件的-left_join-函數實踐左外部連接" class="slide level2">
+<h2>使用 <code>dplyr</code> 套件的 <code>left_join()</code> 函數實踐左外部連接</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>merge_df <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(left_df, right_df,</span>
+<span id="cb63-2"><a href="#cb63-2"></a>                             <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span> <span class="ot">=</span> <span class="st">"movie_id"</span>))</span>
+<span id="cb63-3"><a href="#cb63-3"></a>merge_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id                    title release_year rating             director runtime
+1   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+2   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+3   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+4   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+5   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+6   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+7   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+8   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+9   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+10  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+11  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+12  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+13  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+14  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+15  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+16  2            The Godfather         1972    9.2 Francis Ford Coppola     175
+17  3   The Godfather: Part II         1974    9.0 Francis Ford Coppola     202
+18  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+19  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+20  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+21  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+22  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+23  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+24  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+25  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+26  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+27  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+28  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+29  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+30  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+31  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+32  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+33  5             12 Angry Men         1957    9.0         Sidney Lumet      96
+   actor_id ord
+1      2853   1
+2      2097   2
+3       333   3
+4      3029   4
+5       533   5
+6      1042   6
+7      1923   7
+8      1319   8
+9      1370   9
+10     1724  10
+11     2151  11
+12      363  12
+13      659  13
+14     1530  14
+15     1553  15
+16       NA  NA
+17       NA  NA
+18      502   1
+19     1155   2
+20        2   3
+21     2015   4
+22     1855   5
+23      985   6
+24     2097   7
+25     2095   8
+26     2520   9
+27      528  10
+28      482  11
+29     2157  12
+30      838  13
+31     2458  14
+32      179  15
+33       NA  NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">unique</span>(merge_df<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The Shawshank Redemption" "The Godfather"           
+[3] "The Godfather: Part II"   "The Dark Knight"         
+[5] "12 Angry Men"            </code></pre>
+</div>
+</div>
+</section>
+<section id="使用-dplyr-套件的-right_join-函數實踐右外部連接" class="slide level2">
+<h2>使用 <code>dplyr</code> 套件的 <code>right_join()</code> 函數實踐右外部連接</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>merge_df <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">right_join</span>(left_df, right_df,</span>
+<span id="cb67-2"><a href="#cb67-2"></a>                              <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span> <span class="ot">=</span> <span class="st">"movie_id"</span>))</span>
+<span id="cb67-3"><a href="#cb67-3"></a>merge_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id                    title release_year rating          director runtime
+1   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+2   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+3   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+4   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+5   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+6   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+7   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+8   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+9   1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+10  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+11  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+12  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+13  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+14  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+15  1 The Shawshank Redemption         1994    9.3    Frank Darabont     142
+16  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+17  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+18  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+19  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+20  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+21  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+22  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+23  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+24  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+25  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+26  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+27  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+28  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+29  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+30  4          The Dark Knight         2008    9.0 Christopher Nolan     152
+31  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+32  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+33  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+34  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+35  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+36  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+37  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+38  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+39  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+40  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+41  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+42  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+43  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+44  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+45  6                     &lt;NA&gt;           NA     NA              &lt;NA&gt;      NA
+   actor_id ord
+1      2853   1
+2      2097   2
+3       333   3
+4      3029   4
+5       533   5
+6      1042   6
+7      1923   7
+8      1319   8
+9      1370   9
+10     1724  10
+11     2151  11
+12      363  12
+13      659  13
+14     1530  14
+15     1553  15
+16      502   1
+17     1155   2
+18        2   3
+19     2015   4
+20     1855   5
+21      985   6
+22     2097   7
+23     2095   8
+24     2520   9
+25      528  10
+26      482  11
+27     2157  12
+28      838  13
+29     2458  14
+30      179  15
+31     1783   1
+32      272   2
+33     2376   3
+34      424   4
+35     1511   5
+36      817   6
+37     1867   7
+38     2685   8
+39     1919   9
+40      400  10
+41      135  11
+42      963  12
+43     1696  13
+44     1138  14
+45     2191  15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="fu">unique</span>(merge_df<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The Shawshank Redemption" "The Dark Knight"         
+[3] NA                        </code></pre>
+</div>
+</div>
+</section>
+<section id="使用-dplyr-套件的-full_join-函數實踐全外部連接" class="slide level2">
+<h2>使用 <code>dplyr</code> 套件的 <code>full_join()</code> 函數實踐全外部連接</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>merge_df <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">full_join</span>(left_df, right_df,</span>
+<span id="cb71-2"><a href="#cb71-2"></a>                              <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span> <span class="ot">=</span> <span class="st">"movie_id"</span>))</span>
+<span id="cb71-3"><a href="#cb71-3"></a>merge_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id                    title release_year rating             director runtime
+1   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+2   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+3   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+4   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+5   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+6   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+7   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+8   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+9   1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+10  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+11  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+12  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+13  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+14  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+15  1 The Shawshank Redemption         1994    9.3       Frank Darabont     142
+16  2            The Godfather         1972    9.2 Francis Ford Coppola     175
+17  3   The Godfather: Part II         1974    9.0 Francis Ford Coppola     202
+18  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+19  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+20  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+21  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+22  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+23  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+24  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+25  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+26  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+27  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+28  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+29  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+30  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+31  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+32  4          The Dark Knight         2008    9.0    Christopher Nolan     152
+33  5             12 Angry Men         1957    9.0         Sidney Lumet      96
+34  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+35  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+36  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+37  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+38  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+39  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+40  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+41  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+42  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+43  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+44  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+45  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+46  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+47  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+48  6                     &lt;NA&gt;           NA     NA                 &lt;NA&gt;      NA
+   actor_id ord
+1      2853   1
+2      2097   2
+3       333   3
+4      3029   4
+5       533   5
+6      1042   6
+7      1923   7
+8      1319   8
+9      1370   9
+10     1724  10
+11     2151  11
+12      363  12
+13      659  13
+14     1530  14
+15     1553  15
+16       NA  NA
+17       NA  NA
+18      502   1
+19     1155   2
+20        2   3
+21     2015   4
+22     1855   5
+23      985   6
+24     2097   7
+25     2095   8
+26     2520   9
+27      528  10
+28      482  11
+29     2157  12
+30      838  13
+31     2458  14
+32      179  15
+33       NA  NA
+34     1783   1
+35      272   2
+36     2376   3
+37      424   4
+38     1511   5
+39      817   6
+40     1867   7
+41     2685   8
+42     1919   9
+43      400  10
+44      135  11
+45      963  12
+46     1696  13
+47     1138  14
+48     2191  15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="fu">unique</span>(merge_df<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The Shawshank Redemption" "The Godfather"           
+[3] "The Godfather: Part II"   "The Dark Knight"         
+[5] "12 Angry Men"             NA                        </code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="個案研究covid-19-時間序列" class="title-slide slide level1 center">
+<h1>個案研究：Covid-19 時間序列</h1>
+
+</section>
+<section id="複習載入-covid19-原始資料來源" class="slide level2">
+<h2>（複習）載入 <code>covid19</code> 原始資料來源</h2>
+<ul>
+<li><code>read.csv()</code> 函數除了可以指定本機電腦中的檔案路徑，也可以指定網址。</li>
+<li>原始資料來源：<a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data">JHU CSSE COVID-19 Dataset</a></li>
+</ul>
+</section>
+<section id="建立時間序列載入網址" class="slide level2">
+<h2>建立時間序列載入網址</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>time_series_route <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/"</span></span>
+<span id="cb75-2"><a href="#cb75-2"></a>confirmed_file_name <span class="ot">&lt;-</span> <span class="st">"time_series_covid19_confirmed_global.csv"</span></span>
+<span id="cb75-3"><a href="#cb75-3"></a>deaths_file_name <span class="ot">&lt;-</span> <span class="st">"time_series_covid19_deaths_global.csv"</span></span>
+<span id="cb75-4"><a href="#cb75-4"></a>confirmed_file_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(time_series_route, confirmed_file_name)</span>
+<span id="cb75-5"><a href="#cb75-5"></a>deaths_file_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(time_series_route, deaths_file_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="分別載入確診與死亡數的時間序列資料" class="slide level2">
+<h2>分別載入確診與死亡數的時間序列資料</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>time_series_confirmed <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(confirmed_file_url)</span>
+<span id="cb76-2"><a href="#cb76-2"></a>time_series_deaths <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(deaths_file_url)</span>
+<span id="cb76-3"><a href="#cb76-3"></a><span class="fu">dim</span>(time_series_confirmed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 289 982</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="fu">dim</span>(time_series_deaths)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 289 982</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-tidyr-套件的-pivot_longer-函數將時間序列資料由寬格式轉換為長格式" class="slide level2">
+<h2>使用 <code>tidyr</code> 套件的 <code>pivot_longer()</code> 函數將時間序列資料由寬格式轉換為長格式</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>cols_not_to_pivot <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Province.State"</span>, <span class="st">"Country.Region"</span>, <span class="st">"Lat"</span>, <span class="st">"Long"</span>)</span>
+<span id="cb80-2"><a href="#cb80-2"></a>time_series_confirmed_long <span class="ot">&lt;-</span> time_series_confirmed <span class="sc">|&gt;</span></span>
+<span id="cb80-3"><a href="#cb80-3"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span><span class="fu">all_of</span>(cols_not_to_pivot), <span class="at">names_to =</span> <span class="st">"Date"</span>, <span class="at">values_to =</span> <span class="st">"Confirmed"</span>)</span>
+<span id="cb80-4"><a href="#cb80-4"></a>time_series_deaths_long <span class="ot">&lt;-</span> time_series_deaths <span class="sc">|&gt;</span></span>
+<span id="cb80-5"><a href="#cb80-5"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span><span class="fu">all_of</span>(cols_not_to_pivot), <span class="at">names_to =</span> <span class="st">"Date"</span>, <span class="at">values_to =</span> <span class="st">"Deaths"</span>)</span>
+<span id="cb80-6"><a href="#cb80-6"></a><span class="fu">head</span>(time_series_confirmed_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  Province.State Country.Region   Lat  Long Date     Confirmed
+  &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;
+1 ""             Afghanistan     33.9  67.7 X1.22.20         0
+2 ""             Afghanistan     33.9  67.7 X1.23.20         0
+3 ""             Afghanistan     33.9  67.7 X1.24.20         0
+4 ""             Afghanistan     33.9  67.7 X1.25.20         0
+5 ""             Afghanistan     33.9  67.7 X1.26.20         0
+6 ""             Afghanistan     33.9  67.7 X1.27.20         0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="fu">head</span>(time_series_deaths_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  Province.State Country.Region   Lat  Long Date     Deaths
+  &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;int&gt;
+1 ""             Afghanistan     33.9  67.7 X1.22.20      0
+2 ""             Afghanistan     33.9  67.7 X1.23.20      0
+3 ""             Afghanistan     33.9  67.7 X1.24.20      0
+4 ""             Afghanistan     33.9  67.7 X1.25.20      0
+5 ""             Afghanistan     33.9  67.7 X1.26.20      0
+6 ""             Afghanistan     33.9  67.7 X1.27.20      0</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-sub-函數將日期欄位中的-x-取代為空字串" class="slide level2">
+<h2>使用 <code>sub()</code> 函數將日期欄位中的 <code>X</code> 取代為空字串</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a>time_series_confirmed_long<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"X"</span>, <span class="at">replacement =</span> <span class="st">""</span>, time_series_confirmed_long<span class="sc">$</span>Date)</span>
+<span id="cb84-2"><a href="#cb84-2"></a>time_series_deaths_long<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"X"</span>, <span class="at">replacement =</span> <span class="st">""</span>, time_series_deaths_long<span class="sc">$</span>Date)</span>
+<span id="cb84-3"><a href="#cb84-3"></a><span class="fu">head</span>(time_series_confirmed_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  Province.State Country.Region   Lat  Long Date    Confirmed
+  &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;int&gt;
+1 ""             Afghanistan     33.9  67.7 1.22.20         0
+2 ""             Afghanistan     33.9  67.7 1.23.20         0
+3 ""             Afghanistan     33.9  67.7 1.24.20         0
+4 ""             Afghanistan     33.9  67.7 1.25.20         0
+5 ""             Afghanistan     33.9  67.7 1.26.20         0
+6 ""             Afghanistan     33.9  67.7 1.27.20         0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="fu">head</span>(time_series_deaths_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  Province.State Country.Region   Lat  Long Date    Deaths
+  &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
+1 ""             Afghanistan     33.9  67.7 1.22.20      0
+2 ""             Afghanistan     33.9  67.7 1.23.20      0
+3 ""             Afghanistan     33.9  67.7 1.24.20      0
+4 ""             Afghanistan     33.9  67.7 1.25.20      0
+5 ""             Afghanistan     33.9  67.7 1.26.20      0
+6 ""             Afghanistan     33.9  67.7 1.27.20      0</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-as.date-函數將日期欄位轉換為-date-日期向量" class="slide level2">
+<h2>使用 <code>as.Date()</code> 函數將日期欄位轉換為 <code>Date</code> 日期向量</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a>from_format <span class="ot">&lt;-</span> <span class="st">"%m.%d.%y"</span></span>
+<span id="cb88-2"><a href="#cb88-2"></a>time_series_confirmed_long<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(time_series_confirmed_long<span class="sc">$</span>Date, <span class="at">format =</span> from_format)</span>
+<span id="cb88-3"><a href="#cb88-3"></a>time_series_deaths_long<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(time_series_deaths_long<span class="sc">$</span>Date, <span class="at">format =</span> from_format)</span>
+<span id="cb88-4"><a href="#cb88-4"></a><span class="fu">head</span>(time_series_confirmed_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  Province.State Country.Region   Lat  Long Date       Confirmed
+  &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;         &lt;int&gt;
+1 ""             Afghanistan     33.9  67.7 2020-01-22         0
+2 ""             Afghanistan     33.9  67.7 2020-01-23         0
+3 ""             Afghanistan     33.9  67.7 2020-01-24         0
+4 ""             Afghanistan     33.9  67.7 2020-01-25         0
+5 ""             Afghanistan     33.9  67.7 2020-01-26         0
+6 ""             Afghanistan     33.9  67.7 2020-01-27         0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a><span class="fu">head</span>(time_series_deaths_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  Province.State Country.Region   Lat  Long Date       Deaths
+  &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;      &lt;int&gt;
+1 ""             Afghanistan     33.9  67.7 2020-01-22      0
+2 ""             Afghanistan     33.9  67.7 2020-01-23      0
+3 ""             Afghanistan     33.9  67.7 2020-01-24      0
+4 ""             Afghanistan     33.9  67.7 2020-01-25      0
+5 ""             Afghanistan     33.9  67.7 2020-01-26      0
+6 ""             Afghanistan     33.9  67.7 2020-01-27      0</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-dplyr-套件的-inner_join-函數合併確診與死亡數的時間序列資料" class="slide level2">
+<h2>使用 <code>dplyr</code> 套件的 <code>inner_join()</code> 函數合併確診與死亡數的時間序列資料</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a>time_series <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">inner_join</span>(time_series_confirmed_long, time_series_deaths_long,</span>
+<span id="cb92-2"><a href="#cb92-2"></a>                                 <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Province.State"</span> <span class="ot">=</span> <span class="st">"Province.State"</span>,</span>
+<span id="cb92-3"><a href="#cb92-3"></a>                                        <span class="st">"Country.Region"</span> <span class="ot">=</span> <span class="st">"Country.Region"</span>,</span>
+<span id="cb92-4"><a href="#cb92-4"></a>                                        <span class="st">"Lat"</span> <span class="ot">=</span> <span class="st">"Lat"</span>,</span>
+<span id="cb92-5"><a href="#cb92-5"></a>                                        <span class="st">"Long"</span> <span class="ot">=</span> <span class="st">"Long"</span>,</span>
+<span id="cb92-6"><a href="#cb92-6"></a>                                        <span class="st">"Date"</span> <span class="ot">=</span> <span class="st">"Date"</span>))</span>
+<span id="cb92-7"><a href="#cb92-7"></a><span class="fu">dim</span>(time_series)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 282642      7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a><span class="fu">head</span>(time_series)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+  Province.State Country.Region   Lat  Long Date       Confirmed Deaths
+  &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;         &lt;int&gt;  &lt;int&gt;
+1 ""             Afghanistan     33.9  67.7 2020-01-22         0      0
+2 ""             Afghanistan     33.9  67.7 2020-01-23         0      0
+3 ""             Afghanistan     33.9  67.7 2020-01-24         0      0
+4 ""             Afghanistan     33.9  67.7 2020-01-25         0      0
+5 ""             Afghanistan     33.9  67.7 2020-01-26         0      0
+6 ""             Afghanistan     33.9  67.7 2020-01-27         0      0</code></pre>
+</div>
+</div>
+</section>
+<section id="自行定義-import_time_series-函數" class="slide level2">
+<h2>自行定義 <code>import_time_series()</code> 函數</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a>import_time_series <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb96-2"><a href="#cb96-2"></a>  time_series_route <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/"</span></span>
+<span id="cb96-3"><a href="#cb96-3"></a>  confirmed_file_name <span class="ot">&lt;-</span> <span class="st">"time_series_covid19_confirmed_global.csv"</span></span>
+<span id="cb96-4"><a href="#cb96-4"></a>  deaths_file_name <span class="ot">&lt;-</span> <span class="st">"time_series_covid19_deaths_global.csv"</span></span>
+<span id="cb96-5"><a href="#cb96-5"></a>  confirmed_file_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(time_series_route, confirmed_file_name)</span>
+<span id="cb96-6"><a href="#cb96-6"></a>  deaths_file_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(time_series_route, deaths_file_name)</span>
+<span id="cb96-7"><a href="#cb96-7"></a>  time_series_confirmed <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(confirmed_file_url)</span>
+<span id="cb96-8"><a href="#cb96-8"></a>  time_series_deaths <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(deaths_file_url)</span>
+<span id="cb96-9"><a href="#cb96-9"></a>  cols_not_to_pivot <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Province.State"</span>, <span class="st">"Country.Region"</span>, <span class="st">"Lat"</span>, <span class="st">"Long"</span>)</span>
+<span id="cb96-10"><a href="#cb96-10"></a>  time_series_confirmed_long <span class="ot">&lt;-</span> time_series_confirmed <span class="sc">|&gt;</span></span>
+<span id="cb96-11"><a href="#cb96-11"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span><span class="fu">all_of</span>(cols_not_to_pivot), <span class="at">names_to =</span> <span class="st">"Date"</span>, <span class="at">values_to =</span> <span class="st">"Confirmed"</span>)</span>
+<span id="cb96-12"><a href="#cb96-12"></a>  time_series_deaths_long <span class="ot">&lt;-</span> time_series_deaths <span class="sc">|&gt;</span></span>
+<span id="cb96-13"><a href="#cb96-13"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span><span class="fu">all_of</span>(cols_not_to_pivot), <span class="at">names_to =</span> <span class="st">"Date"</span>, <span class="at">values_to =</span> <span class="st">"Deaths"</span>)</span>
+<span id="cb96-14"><a href="#cb96-14"></a>  time_series_confirmed_long<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"X"</span>, <span class="at">replacement =</span> <span class="st">""</span>, time_series_confirmed_long<span class="sc">$</span>Date)</span>
+<span id="cb96-15"><a href="#cb96-15"></a>  time_series_deaths_long<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"X"</span>, <span class="at">replacement =</span> <span class="st">""</span>, time_series_deaths_long<span class="sc">$</span>Date)</span>
+<span id="cb96-16"><a href="#cb96-16"></a>  time_series <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">inner_join</span>(time_series_confirmed_long, time_series_deaths_long, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Province.State"</span> <span class="ot">=</span> <span class="st">"Province.State"</span>,</span>
+<span id="cb96-17"><a href="#cb96-17"></a>                                <span class="st">"Country.Region"</span> <span class="ot">=</span> <span class="st">"Country.Region"</span>,</span>
+<span id="cb96-18"><a href="#cb96-18"></a>                                <span class="st">"Lat"</span> <span class="ot">=</span> <span class="st">"Lat"</span>,</span>
+<span id="cb96-19"><a href="#cb96-19"></a>                                <span class="st">"Long"</span> <span class="ot">=</span> <span class="st">"Long"</span>,</span>
+<span id="cb96-20"><a href="#cb96-20"></a>                                <span class="st">"Date"</span> <span class="ot">=</span> <span class="st">"Date"</span>))</span>
+<span id="cb96-21"><a href="#cb96-21"></a>  <span class="fu">return</span>(time_series)</span>
+<span id="cb96-22"><a href="#cb96-22"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="使用-import_time_series-函數" class="slide level2">
+<h2>使用 <code>import_time_series()</code> 函數</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a>time_series <span class="ot">&lt;-</span> <span class="fu">import_time_series</span>()</span>
+<span id="cb97-2"><a href="#cb97-2"></a><span class="fu">dim</span>(time_series)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 282642      7</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="重點統整" class="title-slide slide level1 center">
+<h1>重點統整</h1>
+<ul>
+<li>進階的資料框操作：
+<ul>
+<li>以迴圈走訪資料框的列或欄。</li>
+<li>處理遺漏值。</li>
+<li>轉置資料框。</li>
+<li>單純合併資料框。</li>
+<li>關聯資料框。</li>
+</ul></li>
+</ul>
+</section>
+<section id="重點統整續" class="slide level2">
+<h2>重點統整（續）</h2>
+<ul>
+<li>寬格式使用一個欄位儲存資料，欄位名稱記錄變數類別、觀測值記錄數值。</li>
+<li>長格式使用兩個欄位儲存資料，一個欄位記錄變數類別、一個欄位記錄數值。</li>
+<li>使用 <code>tidyr</code> 套件的 <code>pivot_longer()</code> 函數可以將資料框由寬格式轉換為長格式。</li>
+<li>使用 <code>tidyr</code> 套件的 <code>pivot_wider()</code> 函數可以將資料框由長格式轉換為寬格式。</li>
+</ul>
+</section>
+<section id="重點統整續-1" class="slide level2">
+<h2>重點統整（續）</h2>
+<ul>
+<li>關聯資料框的四種連接：
+<ul>
+<li>內部連接（Inner join），保留兩個關聯資料框交集的觀測值。</li>
+<li>左外部連接（Left join），保留左資料框所有的觀測值。</li>
+<li>右外部連接（Right join），保留右資料框所有的觀測值。</li>
+<li>全外部連接（Full join），保留兩個關聯資料框聯集的觀測值。</li>
+</ul></li>
+</ul>
+</section>
+<section id="重點統整續-2" class="slide level2">
+<h2>重點統整（續）</h2>
+<ul>
+<li>關聯資料框的兩種操作：
+<ul>
+<li>使用 <code>merge()</code> 函數進行四種連接。</li>
+<li>使用 <code>dplyr</code> 套件的函數進行四種連接。
+<ul>
+<li><code>dplyr::inner_join()</code> 函數實踐內部連接。</li>
+<li><code>dplyr::left_join()</code> 函數實踐左外部連接。</li>
+<li><code>dplyr::right_join()</code> 函數實踐右外部連接。</li>
+<li><code>dplyr::full_join()</code> 函數實踐全外部連接。</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="footer footer-default">
+<p>進階資料框操作</p>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="lecture_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="lecture_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          let href = ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>
