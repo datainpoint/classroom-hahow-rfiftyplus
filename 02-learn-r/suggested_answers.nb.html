@@ -11,7 +11,7 @@
 
 
 
-<title>練習題 021-030</title>
+<title>練習題詳解 011-020</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1746,7 +1746,7 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">練習題 021-030</h1>
+<h1 class="title toc-ignore">練習題詳解 011-020</h1>
 
 </div>
 
@@ -1777,480 +1777,382 @@ All Chunks</li>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGtncyA8LSBjKFxccm1hcmtkb3duXFwsIFxcdGVzdHRoYXRcXClcbmluc3RhbGwucGFja2FnZXMocGtncykgIyDoi6XkuI3mmK/nrKzkuIDmrKHlr6vkvZzmpa3vvIzlj6/ku6XlsIfpgJnliJfoqLvop6PmjolcbmxpYnJhcnkoXFx0ZXN0dGhhdFxcKVxuYGBgXG5gYGAifQ== -->
-<pre class="r"><code>```r
-pkgs &lt;- c(\rmarkdown\, \testthat\)
-install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
-library(\testthat\)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGtncyA8LSBjKFwicm1hcmtkb3duXCIsIFwidGVzdHRoYXRcIilcbmluc3RhbGwucGFja2FnZXMocGtncykgIyDoi6XkuI3mmK/nrKzkuIDmrKHlr6vkvZzmpa3vvIzlj6/ku6XlsIfpgJnliJfoqLvop6PmjolcbmBgYCJ9 -->
+<pre class="r"><code>pkgs &lt;- c(&quot;rmarkdown&quot;, &quot;testthat&quot;)
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoidHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvY29udHJpYi80LjIvcm1hcmtkb3duXzIuMTcudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCAzNjUzMjc2IGJ5dGVzICgzLjUgTUIpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAzLjUgTUJcblxudHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvY29udHJpYi80LjIvdGVzdHRoYXRfMy4xLjUudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCAyOTkyMTYzIGJ5dGVzICgyLjkgTUIpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAyLjkgTUJcbiJ9 -->
+<pre><code>trying URL &#39;https://cran.rstudio.com/bin/macosx/contrib/4.2/rmarkdown_2.17.tgz&#39;
+Content type &#39;application/x-gzip&#39; length 3653276 bytes (3.5 MB)
+==================================================
+downloaded 3.5 MB
+
+trying URL &#39;https://cran.rstudio.com/bin/macosx/contrib/4.2/testthat_3.1.5.tgz&#39;
+Content type &#39;application/x-gzip&#39; length 2992163 bytes (2.9 MB)
+==================================================
+downloaded 2.9 MB</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaGUgZG93bmxvYWRlZCBiaW5hcnkgcGFja2FnZXMgYXJlIGluXG5cdC92YXIvZm9sZGVycy8wYi9yX196NW1wbjZsZGdiX3cyajdfeV9udHIwMDAwZ24vVC8vUnRtcGVPMDRkTS9kb3dubG9hZGVkX3BhY2thZ2VzXG4ifQ== -->
 <pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 021（是非題）R 語言的向量資料結構可以用來儲存異質資料。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMDIxIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-exercise_021 &lt;- function() {
+The downloaded binary packages are in
+    /var/folders/0b/r__z5mpn6ldgb_w2j7_y_ntr0000gn/T//RtmpeO04dM/downloaded_packages</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcInRlc3R0aGF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>library(&quot;testthat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="是非題--是-r-語言慣用的賦值運算符" class="section level2">
+<h2>011（是非題）<code>&lt;-</code> 是 R 語言慣用的賦值運算符。</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMDExIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKFRSVUUpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
+<pre class="r"><code>exercise_011 &lt;- function() {
   ### BEGIN SOLUTION
-  return(NA)
+  return(TRUE)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 022（是非題）我們可以使用 R 語言的 `c()` 函數建立向量，`c()` 函數是 combine 的縮寫。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMDIyIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-exercise_022 &lt;- function() {
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="是非題-是-r-語言中用來標註重要程式的符號可以特別強調該列程式碼的重要性" class="section level2">
+<h2>012（是非題）<code>#</code> 是 R
+語言中用來標註重要程式的符號，可以特別強調該列程式碼的重要性。</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMDEyIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKEZBTFNFKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGAifQ== -->
+<pre class="r"><code>exercise_012 &lt;- function() {
   ### BEGIN SOLUTION
-  return(NA)
+  return(FALSE)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 023（是非題）向量是 R 語言基本的資料結構。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMDIzIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-exercise_023 &lt;- function() {
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="是非題ls-函數能夠建立-r-語言的資料結構-list" class="section level2">
+<h2>013（是非題）<code>ls()</code> 函數能夠建立 R 語言的資料結構
+<code>list</code></h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMDEzIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKEZBTFNFKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGAifQ== -->
+<pre class="r"><code>exercise_013 &lt;- function() {
   ### BEGIN SOLUTION
-  return(NA)
+  return(FALSE)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 024（單選題）我們在本章節介紹的向量類別不包含下列哪一個？
-
-1. 文字。
-2. 清單。
-3. 數值。
-4. 未定義值。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMDI0IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-exercise_024 &lt;- function() {
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="是非題sys.date-函數能夠取得目前電腦系統日期" class="section level2">
+<h2>014（是非題）<code>Sys.Date()</code>
+函數能夠取得目前電腦系統日期。</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMDE0IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKFRSVUUpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
+<pre class="r"><code>exercise_014 &lt;- function() {
   ### BEGIN SOLUTION
-  return(NA)
+  return(TRUE)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 025（單選題）我們可以使用哪個函數建立「等差數列」型態的數值向量？
-
-1. `s()`。
-2. `series()`。
-3. `set()`。
-4. `seq()`。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMDI1IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-exercise_025 &lt;- function() {
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="單選題下列何者不是-r-語言的資料結構類別命名" class="section level2">
+<h2>015（單選題）下列何者不是 R 語言的資料結構類別命名？</h2>
+<ol style="list-style-type: decimal">
+<li><code>data.frame</code></li>
+<li><code>dict</code></li>
+<li><code>list</code></li>
+<li><code>matrix</code></li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMDE1IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDIpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
+<pre class="r"><code>exercise_015 &lt;- function() {
   ### BEGIN SOLUTION
-  return(NA)
+  return(2)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 026（程式題）前十個偶數。
-
-定義函數 `return_first_ten_evens()` 回傳前十個偶數。
-
-- 使用 `seq()` 函數。
-- 將答案寫在 `return()` 之中。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucmV0dXJuX2ZpcnN0X3Rlbl9ldmVucyA8LSBmdW5jdGlvbigpIHtcbiAgIyA+IHJldHVybl9maXJzdF90ZW5fZXZlbnMoKVxuICAjIFsxXSAgMCAgMiAgNCAgNiAgOCAxMCAxMiAxNCAxNiAxOFxuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-return_first_ten_evens &lt;- function() {
-  # &gt; return_first_ten_evens()
-  # [1]  0  2  4  6  8 10 12 14 16 18
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="單選題r-語言的核心精神-the-way-r-works-is-pretty-straightforward-you-apply-functions-to-objects.-是引用自下列哪一位" class="section level2">
+<h2>016（單選題）R 語言的核心精神 “The way R works is pretty
+straightforward, you apply functions to objects.”
+是引用自下列哪一位？</h2>
+<ol style="list-style-type: decimal">
+<li>Hadley Wickham</li>
+<li>John Chambers</li>
+<li>Winston Chang</li>
+<li>Greg Martin</li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMDE2IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDQpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
+<pre class="r"><code>exercise_016 &lt;- function() {
   ### BEGIN SOLUTION
-  return(NA)
+  return(4)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 027（程式題）第一個與最後一個元素。
-
-定義函數 `return_first_last_elements()` 回傳向量中的第一個與最後一個元素。
-
-- 從向量中擷取資料。
-- 使用 `length()` 函數。
-- 將答案寫在 `return()` 之中。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucmV0dXJuX2ZpcnN0X2xhc3RfZWxlbWVudHMgPC0gZnVuY3Rpb24oeCkge1xuICAjID4gcmV0dXJuX2ZpcnN0X2xhc3RfZWxlbWVudHMoMTo1KVxuICAjIFsxXSAxIDVcbiAgIyA+IHJldHVybl9maXJzdF9sYXN0X2VsZW1lbnRzKDY6MTApXG4gICMgWzFdICA2IDEwXG4gICMgPiByZXR1cm5fZmlyc3RfbGFzdF9lbGVtZW50cyhjKDIsIDMsIDUsIDcpKVxuICAjIFsxXSAgMiA3IFxuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-return_first_last_elements &lt;- function(x) {
-  # &gt; return_first_last_elements(1:5)
-  # [1] 1 5
-  # &gt; return_first_last_elements(6:10)
-  # [1]  6 10
-  # &gt; return_first_last_elements(c(2, 3, 5, 7))
-  # [1]  2 7 
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="單選題下列何者不是-r-語言設計資料結構的考量" class="section level2">
+<h2>017（單選題）下列何者不是 R 語言設計資料結構的考量？</h2>
+<ol style="list-style-type: decimal">
+<li>外觀是否漂亮</li>
+<li>資料是否同質</li>
+<li>資料是否異質</li>
+<li>維度個數</li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMDE3IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDEpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
+<pre class="r"><code>exercise_017 &lt;- function() {
   ### BEGIN SOLUTION
-  return(NA)
+  return(1)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 028（程式題）所有元素都是 0。
-
-定義函數 `return_n_zeros()` 能夠回傳長度為 `n`、所有元素都是 0 的數值向量。
-
-- 使用 `rep()` 函數。
-- 將答案寫在 `return()` 之中。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucmV0dXJuX25femVyb3MgPC0gZnVuY3Rpb24obikge1xuICAjID4gcmV0dXJuX25femVyb3MoMylcbiAgIyBbMV0gMCAwIDBcbiAgIyA+IHJldHVybl9uX3plcm9zKDUpXG4gICMgWzFdIDAgMCAwIDAgMFxuICAjID4gcmV0dXJuX25femVyb3MoNylcbiAgIyBbMV0gMCAwIDAgMCAwIDAgMFxuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-return_n_zeros &lt;- function(n) {
-  # &gt; return_n_zeros(3)
-  # [1] 0 0 0
-  # &gt; return_n_zeros(5)
-  # [1] 0 0 0 0 0
-  # &gt; return_n_zeros(7)
-  # [1] 0 0 0 0 0 0 0
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="單選題下列哪一個函數能夠讓我們查詢函數或者資料說明" class="section level2">
+<h2>018（單選題）下列哪一個函數能夠讓我們查詢函數或者資料說明？</h2>
+<ol style="list-style-type: decimal">
+<li><code>Sys.Date()</code></li>
+<li><code>Sys.time()</code></li>
+<li><code>help()</code></li>
+<li><code>setwd()</code></li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMDE4IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDMpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
+<pre class="r"><code>exercise_018 &lt;- function() {
   ### BEGIN SOLUTION
-  return(NA)
+  return(3)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 029（程式題）篩選輸入向量中的正數。
-
-定義函數 `filter_positives()` 回傳輸入向量中的正數。
-
-- 使用邏輯值索引。
-- 將答案寫在 `return()` 之中。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZmlsdGVyX3Bvc2l0aXZlcyA8LSBmdW5jdGlvbih4KSB7XG4gICMgPiBmaWx0ZXJfcG9zaXRpdmVzKC0yOjIpXG4gICMgWzFdIDEgMlxuICAjID4gZmlsdGVyX3Bvc2l0aXZlcygtMzozKVxuICAjIFsxXSAxIDIgM1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-filter_positives &lt;- function(x) {
-  # &gt; filter_positives(-2:2)
-  # [1] 1 2
-  # &gt; filter_positives(-3:3)
-  # [1] 1 2 3
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="程式題環境中所有物件名稱" class="section level2">
+<h2>019（程式題）環境中所有物件名稱。</h2>
+<p>定義函數 <code>return_environment_object_names()</code>
+回傳環境中所有物件名稱。</p>
+<ul>
+<li>將答案寫在 <code>return()</code> 之中。</li>
+<li>使用 <code>ls()</code> 函數。</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmV0dXJuX2Vudmlyb25tZW50X29iamVjdF9uYW1lcyA8LSBmdW5jdGlvbigpIHtcbiAgIyA+IHJldHVybl9lbnZpcm9ubWVudF9vYmplY3RfbmFtZXMoKVxuICAjIFsxXSBcIk9iamVjdCBuYW1lcyBpbiBlbnZpcm9ubWVudC5cIlxuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgYW5zd2VyIDwtIGxzKClcbiAgcmV0dXJuKGFuc3dlcilcbiAgIyMjIEVORCBTT0xVVElPTlxufVxuYGBgIn0= -->
+<pre class="r"><code>return_environment_object_names &lt;- function() {
+  # &gt; return_environment_object_names()
+  # [1] &quot;Object names in environment.&quot;
   ### BEGIN SOLUTION
-  return(NA)
+  answer &lt;- ls()
+  return(answer)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 030（程式題）計算日數差距。
-
-定義函數 `count_day_difference()` 回傳輸入文字向量間的日數差距。
-
-- 使用 `as.Date()` 函數。
-- 運用數值運算符。
-- 使用 `as.numeric()` 函數。
-- 將答案寫在 `return()` 之中。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuY291bnRfZGF5X2RpZmZlcmVuY2UgPC0gZnVuY3Rpb24oeCwgeSkge1xuICAjID4gY291bnRfZGF5X2RpZmZlcmVuY2UoXFwyMDIzLTAxLTAxXFwsIFxcMjAyMy0wMS0zMVxcKVxuICAjIFsxXSAzMFxuICAjID4gY291bnRfZGF5X2RpZmZlcmVuY2UoXFwyMDIzLTAyLTAxXFwsIFxcMjAyMy0wMi0yOFxcKVxuICAjIFsxXSAyN1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKE5BKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-count_day_difference &lt;- function(x, y) {
-  # &gt; count_day_difference(\2023-01-01\, \2023-01-31\)
-  # [1] 30
-  # &gt; count_day_difference(\2023-02-01\, \2023-02-28\)
-  # [1] 27
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="程式題電腦系統日期" class="section level2">
+<h2>020（程式題）電腦系統日期。</h2>
+<p>定義函數 <code>return_sys_date()</code> 回傳電腦系統日期。</p>
+<ul>
+<li>將答案寫在 <code>return()</code> 之中。</li>
+<li>使用 <code>Sys.Date()</code> 函數。</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmV0dXJuX3N5c19kYXRlIDwtIGZ1bmN0aW9uKCkge1xuICAjID4gcmV0dXJuX3N5c19kYXRlKClcbiAgIyBbMV0gXCJTeXN0ZW0gZGF0ZSBvZiB5b3VyIGNvbXB1dGVyLlwiXG4gICMgPiByZXR1cm5fc3lzX2RhdGUoKVxuICAjIFsxXSBcIjIwMjItMTItMzFcIlxuICAjID4gcmV0dXJuX3N5c19kYXRlKClcbiAgIyBbMV0gXCIyMDIzLTAxLTAxXCJcbiAgIyMjIEJFR0lOIFNPTFVUSU9OXG4gIGFuc3dlciA8LSBTeXMuRGF0ZSgpXG4gIHJldHVybihhbnN3ZXIpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
+<pre class="r"><code>return_sys_date &lt;- function() {
+  # &gt; return_sys_date()
+  # [1] &quot;System date of your computer.&quot;
+  # &gt; return_sys_date()
+  # [1] &quot;2022-12-31&quot;
+  # &gt; return_sys_date()
+  # [1] &quot;2023-01-01&quot;
   ### BEGIN SOLUTION
-  return(NA)
+  answer &lt;- Sys.Date()
+  return(answer)
   ### END SOLUTION
 }</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-## 執行測試
-
-- 點選右上方選單的 Run -&gt; Restart R and Run All Chunks
-- 下方為測試程式，請同學忽略並且不要更動。
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudGVzdF8wMjEgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzAyMVxcLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAyMSgpXG4gICAgZXhwZWN0X2ZhbHNlKGFuc3dlcilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG50ZXN0XzAyMiA8LSB0cnlDYXRjaCh7XG4gIHRlc3RfdGhhdChcXHRlc3RfMDIyXFwsIHtcbiAgICBhbnN3ZXIgPC0gZXhlcmNpc2VfMDIyKClcbiAgICBleHBlY3RfdHJ1ZShhbnN3ZXIpXG4gIH0pXG4gIH0sIGVycm9yID0gZnVuY3Rpb24oZSkge1xuICAgIEZBTFNFXG59KVxudGVzdF8wMjMgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzAyM1xcLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAyMygpXG4gICAgZXhwZWN0X3RydWUoYW5zd2VyKVxuICB9KVxuICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHtcbiAgICBGQUxTRVxufSlcbnRlc3RfMDI0IDwtIHRyeUNhdGNoKHtcbiAgdGVzdF90aGF0KFxcdGVzdF8wMjRcXCwge1xuICAgIGFuc3dlciA8LSBleGVyY2lzZV8wMjQoKVxuICAgIGV4cGVjdF9lcXVhbChhbnN3ZXIsIDIpXG4gIH0pXG4gIH0sIGVycm9yID0gZnVuY3Rpb24oZSkge1xuICAgIEZBTFNFXG59KVxudGVzdF8wMjUgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzAyNVxcLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAyNSgpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgNClcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG50ZXN0XzAyNiA8LSB0cnlDYXRjaCh7XG4gIHRlc3RfdGhhdChcXHRlc3RfMDI2XFwsIHtcbiAgICBhbnN3ZXIgPC0gcmV0dXJuX2ZpcnN0X3Rlbl9ldmVucygpXG4gICAgZmlyc3RfdGVuX2V2ZW5zIDwtIHNlcSgwLCAxOCwgYnkgPSAyKVxuICAgIGV4cGVjdF9lcXVhbChhbnN3ZXIsIGZpcnN0X3Rlbl9ldmVucylcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG50ZXN0XzAyNyA8LSB0cnlDYXRjaCh7XG4gIHRlc3RfdGhhdChcXHRlc3RfMDI3XFwsIHtcbiAgICBleHBlY3RfZXF1YWwocmV0dXJuX2ZpcnN0X2xhc3RfZWxlbWVudHMoMTo1KSwgYygxLCA1KSlcbiAgICBleHBlY3RfZXF1YWwocmV0dXJuX2ZpcnN0X2xhc3RfZWxlbWVudHMoNjoxMCksIGMoNiwgMTApKVxuICAgIGV4cGVjdF9lcXVhbChyZXR1cm5fZmlyc3RfbGFzdF9lbGVtZW50cyhjKDIsIDMsIDUsIDcpKSwgYygyLCA3KSlcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5cbnRlc3RfMDI4IDwtIHRyeUNhdGNoKHtcbiAgdGVzdF90aGF0KFxcdGVzdF8wMjhcXCwge1xuICAgIGV4cGVjdF9lcXVhbChyZXR1cm5fbl96ZXJvcygxKSwgMClcbiAgICBleHBlY3RfZXF1YWwocmV0dXJuX25femVyb3MoMiksIGMoMCwgMCkpXG4gICAgZXhwZWN0X2VxdWFsKHJldHVybl9uX3plcm9zKDMpLCBjKDAsIDAsIDApKVxuICAgIGV4cGVjdF9lcXVhbChyZXR1cm5fbl96ZXJvcyg1KSwgYygwLCAwLCAwLCAwLCAwKSlcbiAgICBleHBlY3RfZXF1YWwocmV0dXJuX25femVyb3MoNyksIGMoMCwgMCwgMCwgMCwgMCwgMCwgMCkpXG4gIH0pXG4gIH0sIGVycm9yID0gZnVuY3Rpb24oZSkge1xuICAgIEZBTFNFXG59KVxudGVzdF8wMjkgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzAyOVxcLCB7XG4gICAgZXhwZWN0X2VxdWFsKGZpbHRlcl9wb3NpdGl2ZXMoLTI6MiksIDE6MilcbiAgICBleHBlY3RfZXF1YWwoZmlsdGVyX3Bvc2l0aXZlcygtMzozKSwgMTozKVxuICAgIGV4cGVjdF9lcXVhbChmaWx0ZXJfcG9zaXRpdmVzKGMoLTUsIDUsIC02LCA2KSksIGMoNSwgNikpXG4gICAgZXhwZWN0X2VxdWFsKGZpbHRlcl9wb3NpdGl2ZXMoLTQ6NCksIDE6NClcbiAgICBleHBlY3RfZXF1YWwoZmlsdGVyX3Bvc2l0aXZlcygtNTo1KSwgMTo1KVxuICB9KVxuICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHtcbiAgICBGQUxTRVxufSlcbnRlc3RfMDMwIDwtIHRyeUNhdGNoKHtcbiAgdGVzdF90aGF0KFxcdGVzdF8wMzBcXCwge1xuICAgIGFuc3dlciA8LSBjb3VudF9kYXlfZGlmZmVyZW5jZShcXDIwMjMtMDEtMDFcXCwgXFwyMDIzLTAxLTMxXFwpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMzApXG4gICAgYW5zd2VyIDwtIGNvdW50X2RheV9kaWZmZXJlbmNlKFxcMjAyMy0wMi0wMVxcLCBcXDIwMjMtMDItMjhcXClcbiAgICBleHBlY3RfZXF1YWwoYW5zd2VyLCAyNylcbiAgICBhbnN3ZXIgPC0gY291bnRfZGF5X2RpZmZlcmVuY2UoXFwyMDIzLTAzLTAxXFwsIFxcMjAyMy0wMy0zMVxcKVxuICAgIGV4cGVjdF9lcXVhbChhbnN3ZXIsIDMwKVxuICAgIGFuc3dlciA8LSBjb3VudF9kYXlfZGlmZmVyZW5jZShcXDIwMjMtMDQtMDFcXCwgXFwyMDIzLTA0LTMwXFwpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMjkpXG4gIH0pXG4gIH0sIGVycm9yID0gZnVuY3Rpb24oZSkge1xuICAgIEZBTFNFXG59KVxuYWxsX3Rlc3RzIDwtIGModGVzdF8wMjEsIFxuICAgICAgICAgICAgICAgdGVzdF8wMjIsXG4gICAgICAgICAgICAgICB0ZXN0XzAyMyxcbiAgICAgICAgICAgICAgIHRlc3RfMDI0LFxuICAgICAgICAgICAgICAgdGVzdF8wMjUsXG4gICAgICAgICAgICAgICB0ZXN0XzAyNiwgXG4gICAgICAgICAgICAgICB0ZXN0XzAyNyxcbiAgICAgICAgICAgICAgIHRlc3RfMDI4LFxuICAgICAgICAgICAgICAgdGVzdF8wMjksXG4gICAgICAgICAgICAgICB0ZXN0XzAzMFxuICAgICAgICAgICAgICApXG5wYXNzZWRfdGVzdHMgPC0gc3VtKGFsbF90ZXN0cylcbnNwcmludGYoXFzlnKjlu7rnq4vlkJHph4/lhLLlrZjlkIzos6ros4fmlpnnmoQgJXMg6aGM57e057+S5Lit77yM5oKo57i95YWx562U5bCN5LqGICVzIOmhjOOAglxcLCBsZW5ndGgoYWxsX3Rlc3RzKSwgcGFzc2VkX3Rlc3RzKVxuYGBgXG5gYGAifQ== --&gt;
-
-```r
-```r
-test_021 &lt;- tryCatch({
-  test_that(\test_021\, {
-    answer &lt;- exercise_021()
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="執行測試" class="section level2">
+<h2>執行測試</h2>
+<ul>
+<li>點選右上方選單的 Run -&gt; Restart R and Run All Chunks</li>
+<li>下方為測試程式，請同學忽略並且不要更動。</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMTEgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAxMVwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxMSgpXG4gICAgZXhwZWN0X3RydWUoYW5zd2VyKVxuICB9KVxuICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHtcbiAgICBGQUxTRVxufSlcbmBgYCJ9 -->
+<pre class="r"><code>test_011 &lt;- tryCatch({
+  test_that(&quot;test_011&quot;, {
+    answer &lt;- exercise_011()
+    expect_true(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+YuFxuIn0= -->
+<pre><code>Test passed 😸</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMTIgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAxMlwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxMigpXG4gICAgZXhwZWN0X2ZhbHNlKGFuc3dlcilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
+<pre class="r"><code>test_012 &lt;- tryCatch({
+  test_that(&quot;test_012&quot;, {
+    answer &lt;- exercise_012()
     expect_false(answer)
   })
   }, error = function(e) {
     FALSE
-})
-test_022 &lt;- tryCatch({
-  test_that(\test_022\, {
-    answer &lt;- exercise_022()
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+MiFxuIn0= -->
+<pre><code>Test passed 🌈</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMTMgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAxM1wiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxMygpXG4gICAgZXhwZWN0X2ZhbHNlKGFuc3dlcilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
+<pre class="r"><code>test_013 &lt;- tryCatch({
+  test_that(&quot;test_013&quot;, {
+    answer &lt;- exercise_013()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+lh1xuIn0= -->
+<pre><code>Test passed 🥇</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMTQgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAxNFwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxNCgpXG4gICAgZXhwZWN0X3RydWUoYW5zd2VyKVxuICB9KVxuICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHtcbiAgICBGQUxTRVxufSlcbmBgYCJ9 -->
+<pre class="r"><code>test_014 &lt;- tryCatch({
+  test_that(&quot;test_014&quot;, {
+    answer &lt;- exercise_014()
     expect_true(answer)
   })
   }, error = function(e) {
     FALSE
-})
-test_023 &lt;- tryCatch({
-  test_that(\test_023\, {
-    answer &lt;- exercise_023()
-    expect_true(answer)
-  })
-  }, error = function(e) {
-    FALSE
-})
-test_024 &lt;- tryCatch({
-  test_that(\test_024\, {
-    answer &lt;- exercise_024()
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+OiVxuIn0= -->
+<pre><code>Test passed 🎉</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMTUgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAxNVwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxNSgpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
+<pre class="r"><code>test_015 &lt;- tryCatch({
+  test_that(&quot;test_015&quot;, {
+    answer &lt;- exercise_015()
     expect_equal(answer, 2)
   })
   }, error = function(e) {
     FALSE
-})
-test_025 &lt;- tryCatch({
-  test_that(\test_025\, {
-    answer &lt;- exercise_025()
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+YgFxuIn0= -->
+<pre><code>Test passed 😀</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMTYgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAxNlwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxNigpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgNClcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
+<pre class="r"><code>test_016 &lt;- tryCatch({
+  test_that(&quot;test_016&quot;, {
+    answer &lt;- exercise_016()
     expect_equal(answer, 4)
   })
   }, error = function(e) {
     FALSE
-})
-test_026 &lt;- tryCatch({
-  test_that(\test_026\, {
-    answer &lt;- return_first_ten_evens()
-    first_ten_evens &lt;- seq(0, 18, by = 2)
-    expect_equal(answer, first_ten_evens)
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+MiFxuIn0= -->
+<pre><code>Test passed 🌈</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMTcgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAxN1wiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxNygpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMSlcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
+<pre class="r"><code>test_017 &lt;- tryCatch({
+  test_that(&quot;test_017&quot;, {
+    answer &lt;- exercise_017()
+    expect_equal(answer, 1)
   })
   }, error = function(e) {
     FALSE
-})
-test_027 &lt;- tryCatch({
-  test_that(\test_027\, {
-    expect_equal(return_first_last_elements(1:5), c(1, 5))
-    expect_equal(return_first_last_elements(6:10), c(6, 10))
-    expect_equal(return_first_last_elements(c(2, 3, 5, 7)), c(2, 7))
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+lh1xuIn0= -->
+<pre><code>Test passed 🥇</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMTggPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAxOFwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxOCgpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMylcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
+<pre class="r"><code>test_018 &lt;- tryCatch({
+  test_that(&quot;test_018&quot;, {
+    answer &lt;- exercise_018()
+    expect_equal(answer, 3)
   })
   }, error = function(e) {
     FALSE
-})
-
-test_028 &lt;- tryCatch({
-  test_that(\test_028\, {
-    expect_equal(return_n_zeros(1), 0)
-    expect_equal(return_n_zeros(2), c(0, 0))
-    expect_equal(return_n_zeros(3), c(0, 0, 0))
-    expect_equal(return_n_zeros(5), c(0, 0, 0, 0, 0))
-    expect_equal(return_n_zeros(7), c(0, 0, 0, 0, 0, 0, 0))
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+MiFxuIn0= -->
+<pre><code>Test passed 🌈</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMTkgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAxOVwiLCB7XG4gICAgYW5zd2VyIDwtIHJldHVybl9lbnZpcm9ubWVudF9vYmplY3RfbmFtZXMoKVxuICAgIGV4cGVjdF90eXBlKGFuc3dlciwgXCJjaGFyYWN0ZXJcIilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
+<pre class="r"><code>test_019 &lt;- tryCatch({
+  test_that(&quot;test_019&quot;, {
+    answer &lt;- return_environment_object_names()
+    expect_type(answer, &quot;character&quot;)
   })
   }, error = function(e) {
     FALSE
-})
-test_029 &lt;- tryCatch({
-  test_that(\test_029\, {
-    expect_equal(filter_positives(-2:2), 1:2)
-    expect_equal(filter_positives(-3:3), 1:3)
-    expect_equal(filter_positives(c(-5, 5, -6, 6)), c(5, 6))
-    expect_equal(filter_positives(-4:4), 1:4)
-    expect_equal(filter_positives(-5:5), 1:5)
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+MiFxuIn0= -->
+<pre><code>Test passed 🌈</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8wMjAgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzAyMFwiLCB7XG4gICAgYW5zd2VyIDwtIHJldHVybl9zeXNfZGF0ZSgpXG4gICAgZXhwZWN0X3MzX2NsYXNzKGFuc3dlciwgXCJEYXRlXCIpXG4gIH0pXG4gIH0sIGVycm9yID0gZnVuY3Rpb24oZSkge1xuICAgIEZBTFNFXG59KVxuYGBgIn0= -->
+<pre class="r"><code>test_020 &lt;- tryCatch({
+  test_that(&quot;test_020&quot;, {
+    answer &lt;- return_sys_date()
+    expect_s3_class(answer, &quot;Date&quot;)
   })
   }, error = function(e) {
     FALSE
-})
-test_030 &lt;- tryCatch({
-  test_that(\test_030\, {
-    answer &lt;- count_day_difference(\2023-01-01\, \2023-01-31\)
-    expect_equal(answer, 30)
-    answer &lt;- count_day_difference(\2023-02-01\, \2023-02-28\)
-    expect_equal(answer, 27)
-    answer &lt;- count_day_difference(\2023-03-01\, \2023-03-31\)
-    expect_equal(answer, 30)
-    answer &lt;- count_day_difference(\2023-04-01\, \2023-04-30\)
-    expect_equal(answer, 29)
-  })
-  }, error = function(e) {
-    FALSE
-})
-all_tests &lt;- c(test_021, 
-               test_022,
-               test_023,
-               test_024,
-               test_025,
-               test_026, 
-               test_027,
-               test_028,
-               test_029,
-               test_030
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+OilxuIn0= -->
+<pre><code>Test passed 🎊</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWxsX3Rlc3RzIDwtIGModGVzdF8wMTEsIFxuICAgICAgICAgICAgICAgdGVzdF8wMTIsXG4gICAgICAgICAgICAgICB0ZXN0XzAxMyxcbiAgICAgICAgICAgICAgIHRlc3RfMDE0LFxuICAgICAgICAgICAgICAgdGVzdF8wMTUsXG4gICAgICAgICAgICAgICB0ZXN0XzAxNiwgXG4gICAgICAgICAgICAgICB0ZXN0XzAxNyxcbiAgICAgICAgICAgICAgIHRlc3RfMDE4LFxuICAgICAgICAgICAgICAgdGVzdF8wMTksXG4gICAgICAgICAgICAgICB0ZXN0XzAyMFxuICAgICAgICAgICAgICApXG5wYXNzZWRfdGVzdHMgPC0gc3VtKGFsbF90ZXN0cylcbnNwcmludGYoXCLlnKjmgI7mqKPlrbjlpb0gUiDoqp7oqIDnmoQgJXMg6aGM57e057+S5Lit77yM5oKo57i95YWx562U5bCN5LqGICVzIOmhjOOAglwiLCBsZW5ndGgoYWxsX3Rlc3RzKSwgcGFzc2VkX3Rlc3RzKVxuYGBgIn0= -->
+<pre class="r"><code>all_tests &lt;- c(test_011, 
+               test_012,
+               test_013,
+               test_014,
+               test_015,
+               test_016, 
+               test_017,
+               test_018,
+               test_019,
+               test_020
               )
 passed_tests &lt;- sum(all_tests)
-sprintf(\在建立向量儲存同質資料的 %s 題練習中，您總共答對了 %s 題。\, length(all_tests), passed_tests)</code></pre>
-<p>```</p>
+sprintf(&quot;在怎樣學好 R 語言的 %s 題練習中，您總共答對了 %s 題。&quot;, length(all_tests), passed_tests)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwi5Zyo5oCO5qij5a245aW9IFIg6Kqe6KiA55qEIDEwIOmhjOe3tOe/kuS4re+8jOaCqOe4veWFseetlOWwjeS6hiAxMCDpoYzjgIJcIlxuIn0= -->
+<pre><code>[1] &quot;在怎樣學好 R 語言的 10 題練習中，您總共答對了 10 題。&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAi57e057+S6aGMIDAyMS0wMzAiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIOe3tOe/kumhjOaMh+W8lQoKLSDlsIfnt7Tnv5LpoYzoiIfmiYDpnIDmqpTmoYjkuIvovInliLDlsIjmoYjos4fmlpnlpL7vvIzkuKbku6UgUlN0dWRpbyDpgbjllq4gRmlsZSAtPiBPcGVuIFByb2plY3QgaW4gTmV3IFNlc3Npb24uLi4g6ZaL5ZWf5bCI5qGI6LOH5paZ5aS+44CCCi0g57e057+S6aGM5bey57aT5a6a576p5aW95Ye95pW455qE5ZCN56ix5Lul5Y+K5Y+D5pW45ZCN56ix77yM5oiR5YCR5Y+q6ZyA6KaB5a+r5L2c5Ye95pW455qE5Li76auU5Y2z5Y+v44CCCi0g57e057+S6aGM5YWx5YiG54K65LiJ56iu77yM6aCQ6Kit6Ly45Ye655qG54K6IGByZXR1cm4oTkEpYO+8mgogIC0g5piv6Z2e6aGM77ya6Iul6Ka65b6X5piv6Z2e6aGM55qE5pWY6L+wKirkuI3mraPnoroqKu+8jOWwseWwh+mgkOiorei8uOWHuuaUueWvq+eCuiBgcmV0dXJuKEZBTFNFKWDvvIzoi6XoprrlvpfmmK/pnZ7poYznmoTmlZjov7AqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oVFJVRSlgCiAgLSDllq7pgbjpoYzvvJroi6Xoprrlvpfllq7pgbjpoYznmoTnrKzkuIDlgIvpgbjpoIUqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oMSlg77yM6Iul6Ka65b6X5Zau6YG46aGM55qE56ys5LqM5YCL6YG46aCFKirmraPnoroqKuWJh+aUueWvq+eCuiBgcmV0dXJuKDIpYO+8jOiLpeimuuW+l+WWrumBuOmhjOeahOesrOS4ieWAi+mBuOmghSoq5q2j56K6KirliYfmlLnlr6vngrogYHJldHVybigzKWDvvIzoi6Xoprrlvpfllq7pgbjpoYznmoTnrKzlm5vlgIvpgbjpoIUqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oNClgCiAgLSDnqIvlvI/poYzvvJrlh73mlbjlkI3nqLHkuYvkuIvnmoToqLvop6PmnIPmj4/ov7DmuKzoqablpoLkvZXpgLLooYzvvIzog73lpKDorpPmiJHlgJHlhYXliIbmmrjop6PpoJDmnJ/ovLjlhaXku6Xlj4rpoJDmnJ/ovLjlh7rkuYvplpPnmoTlsI3mh4npl5zkv4LvvIzlr6vkvZzlroznlaLlvozmlLnlr6vngrogYHJldHVybihleHBlY3RlZF9vdXRwdXQpYAotIOWmguaenOe3tOe/kumhjOmcgOimgei8ieWFpeaqlOahiO+8jOaqlOahiOacg+iIh+e3tOe/kumhjOWtmOaUvuWcqOWQjOWAi+izh+aWmeWkvuS4re+8jOmAmeaZguWwseWPr+S7pemBi+eUqOW3peS9nOebrumMhOOAgeebtOaOpeaMh+WumuaqlOahiOWQjeeosei8ieWFpeOAggotIOWft+ihjOa4rOippueahOaWueW8j+eCuum7numBuCBTb3VyY2Ug5Y+z5LiK5pa56YG45Zau55qEIFJ1biAtPiBSZXN0YXJ0IFIgYW5kIFJ1biBBbGwgQ2h1bmtzCgpgYGB7cn0KcGtncyA8LSBjKCJybWFya2Rvd24iLCAidGVzdHRoYXQiKQppbnN0YWxsLnBhY2thZ2VzKHBrZ3MpICMg6Iul5LiN5piv56ys5LiA5qyh5a+r5L2c5qWt77yM5Y+v5Lul5bCH6YCZ5YiX6Ki76Kej5o6JCmxpYnJhcnkoInRlc3R0aGF0IikKYGBgCgojIyAwMjHvvIjmmK/pnZ7poYzvvIlSIOiqnuiogOeahOWQkemHj+izh+aWmee1kOani+WPr+S7peeUqOS+huWEsuWtmOeVsOizquizh+aWmeOAggoKYGBge3J9CmV4ZXJjaXNlXzAyMSA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oTkEpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMDIy77yI5piv6Z2e6aGM77yJ5oiR5YCR5Y+v5Lul5L2/55SoIFIg6Kqe6KiA55qEIGBjKClgIOWHveaVuOW7uueri+WQkemHj++8jGBjKClgIOWHveaVuOaYryBjb21iaW5lIOeahOe4ruWvq+OAggoKYGBge3J9CmV4ZXJjaXNlXzAyMiA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oTkEpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMDIz77yI5piv6Z2e6aGM77yJ5ZCR6YeP5pivIFIg6Kqe6KiA5Z+65pys55qE6LOH5paZ57WQ5qeL44CCCgpgYGB7cn0KZXhlcmNpc2VfMDIzIDwtIGZ1bmN0aW9uKCkgewogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybihOQSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAwMjTvvIjllq7pgbjpoYzvvInmiJHlgJHlnKjmnKznq6Dnr4Dku4vntLnnmoTlkJHph4/poZ7liKXkuI3ljIXlkKvkuIvliJflk6rkuIDlgIvvvJ8KCjEuIOaWh+Wtl+OAggoyLiDmuIXllq7jgIIKMy4g5pW45YC844CCCjQuIOacquWumue+qeWAvOOAggoKYGBge3J9CmV4ZXJjaXNlXzAyNCA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oTkEpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMDI177yI5Zau6YG46aGM77yJ5oiR5YCR5Y+v5Lul5L2/55So5ZOq5YCL5Ye95pW45bu656uL44CM562J5beu5pW45YiX44CN5Z6L5oWL55qE5pW45YC85ZCR6YeP77yfCgoxLiBgcygpYOOAggoyLiBgc2VyaWVzKClg44CCCjMuIGBzZXQoKWDjgIIKNC4gYHNlcSgpYOOAggoKYGBge3J9CmV4ZXJjaXNlXzAyNSA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oTkEpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMDI277yI56iL5byP6aGM77yJ5YmN5Y2B5YCL5YG25pW444CCCgrlrprnvqnlh73mlbggYHJldHVybl9maXJzdF90ZW5fZXZlbnMoKWAg5Zue5YKz5YmN5Y2B5YCL5YG25pW444CCCgotIOS9v+eUqCBgc2VxKClgIOWHveaVuOOAggotIOWwh+etlOahiOWvq+WcqCBgcmV0dXJuKClgIOS5i+S4reOAggoKYGBge3J9CnJldHVybl9maXJzdF90ZW5fZXZlbnMgPC0gZnVuY3Rpb24oKSB7CiAgIyA+IHJldHVybl9maXJzdF90ZW5fZXZlbnMoKQogICMgWzFdICAwICAyICA0ICA2ICA4IDEwIDEyIDE0IDE2IDE4CiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgcmV0dXJuKE5BKQogICMjIyBFTkQgU09MVVRJT04KfQpgYGAKCiMjIDAyN++8iOeoi+W8j+mhjO+8ieesrOS4gOWAi+iIh+acgOW+jOS4gOWAi+WFg+e0oOOAggoK5a6a576p5Ye95pW4IGByZXR1cm5fZmlyc3RfbGFzdF9lbGVtZW50cygpYCDlm57lgrPlkJHph4/kuK3nmoTnrKzkuIDlgIvoiIfmnIDlvozkuIDlgIvlhYPntKDjgIIKCi0g5b6e5ZCR6YeP5Lit5pO35Y+W6LOH5paZ44CCCi0g5L2/55SoIGBsZW5ndGgoKWAg5Ye95pW444CCCi0g5bCH562U5qGI5a+r5ZyoIGByZXR1cm4oKWAg5LmL5Lit44CCCgpgYGB7cn0KcmV0dXJuX2ZpcnN0X2xhc3RfZWxlbWVudHMgPC0gZnVuY3Rpb24oeCkgewogICMgPiByZXR1cm5fZmlyc3RfbGFzdF9lbGVtZW50cygxOjUpCiAgIyBbMV0gMSA1CiAgIyA+IHJldHVybl9maXJzdF9sYXN0X2VsZW1lbnRzKDY6MTApCiAgIyBbMV0gIDYgMTAKICAjID4gcmV0dXJuX2ZpcnN0X2xhc3RfZWxlbWVudHMoYygyLCAzLCA1LCA3KSkKICAjIFsxXSAgMiA3IAogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybihOQSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAwMjjvvIjnqIvlvI/poYzvvInmiYDmnInlhYPntKDpg73mmK8gMOOAggoK5a6a576p5Ye95pW4IGByZXR1cm5fbl96ZXJvcygpYCDog73lpKDlm57lgrPplbfluqbngrogYG5g44CB5omA5pyJ5YWD57Sg6YO95pivIDAg55qE5pW45YC85ZCR6YeP44CCCgotIOS9v+eUqCBgcmVwKClgIOWHveaVuOOAggotIOWwh+etlOahiOWvq+WcqCBgcmV0dXJuKClgIOS5i+S4reOAggoKYGBge3J9CnJldHVybl9uX3plcm9zIDwtIGZ1bmN0aW9uKG4pIHsKICAjID4gcmV0dXJuX25femVyb3MoMykKICAjIFsxXSAwIDAgMAogICMgPiByZXR1cm5fbl96ZXJvcyg1KQogICMgWzFdIDAgMCAwIDAgMAogICMgPiByZXR1cm5fbl96ZXJvcyg3KQogICMgWzFdIDAgMCAwIDAgMCAwIDAKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oTkEpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMDI577yI56iL5byP6aGM77yJ56+p6YG46Ly45YWl5ZCR6YeP5Lit55qE5q2j5pW444CCCgrlrprnvqnlh73mlbggYGZpbHRlcl9wb3NpdGl2ZXMoKWAg5Zue5YKz6Ly45YWl5ZCR6YeP5Lit55qE5q2j5pW444CCCgotIOS9v+eUqOmCj+i8r+WAvOe0ouW8leOAggotIOWwh+etlOahiOWvq+WcqCBgcmV0dXJuKClgIOS5i+S4reOAggoKYGBge3J9CmZpbHRlcl9wb3NpdGl2ZXMgPC0gZnVuY3Rpb24oeCkgewogICMgPiBmaWx0ZXJfcG9zaXRpdmVzKC0yOjIpCiAgIyBbMV0gMSAyCiAgIyA+IGZpbHRlcl9wb3NpdGl2ZXMoLTM6MykKICAjIFsxXSAxIDIgMwogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybihOQSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAwMzDvvIjnqIvlvI/poYzvvInoqIjnrpfml6Xmlbjlt67ot53jgIIKCuWumue+qeWHveaVuCBgY291bnRfZGF5X2RpZmZlcmVuY2UoKWAg5Zue5YKz6Ly45YWl5paH5a2X5ZCR6YeP6ZaT55qE5pel5pW45beu6Led44CCCgotIOS9v+eUqCBgYXMuRGF0ZSgpYCDlh73mlbjjgIIKLSDpgYvnlKjmlbjlgLzpgYvnrpfnrKbjgIIKLSDkvb/nlKggYGFzLm51bWVyaWMoKWAg5Ye95pW444CCCi0g5bCH562U5qGI5a+r5ZyoIGByZXR1cm4oKWAg5LmL5Lit44CCCgpgYGB7cn0KY291bnRfZGF5X2RpZmZlcmVuY2UgPC0gZnVuY3Rpb24oeCwgeSkgewogICMgPiBjb3VudF9kYXlfZGlmZmVyZW5jZSgiMjAyMy0wMS0wMSIsICIyMDIzLTAxLTMxIikKICAjIFsxXSAzMAogICMgPiBjb3VudF9kYXlfZGlmZmVyZW5jZSgiMjAyMy0wMi0wMSIsICIyMDIzLTAyLTI4IikKICAjIFsxXSAyNwogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybihOQSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyDln7fooYzmuKzoqaYKCi0g6bue6YG45Y+z5LiK5pa56YG45Zau55qEIFJ1biAtPiBSZXN0YXJ0IFIgYW5kIFJ1biBBbGwgQ2h1bmtzCi0g5LiL5pa554K65ris6Kmm56iL5byP77yM6KuL5ZCM5a245b+955Wl5Lim5LiU5LiN6KaB5pu05YuV44CCCgpgYGB7cn0KdGVzdF8wMjEgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8wMjEiLCB7CiAgICBhbnN3ZXIgPC0gZXhlcmNpc2VfMDIxKCkKICAgIGV4cGVjdF9mYWxzZShhbnN3ZXIpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMDIyIDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMDIyIiwgewogICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAyMigpCiAgICBleHBlY3RfdHJ1ZShhbnN3ZXIpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMDIzIDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMDIzIiwgewogICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAyMygpCiAgICBleHBlY3RfdHJ1ZShhbnN3ZXIpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMDI0IDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMDI0IiwgewogICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAyNCgpCiAgICBleHBlY3RfZXF1YWwoYW5zd2VyLCAyKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQp0ZXN0XzAyNSA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzAyNSIsIHsKICAgIGFuc3dlciA8LSBleGVyY2lzZV8wMjUoKQogICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgNCkKICB9KQogIH0sIGVycm9yID0gZnVuY3Rpb24oZSkgewogICAgRkFMU0UKfSkKdGVzdF8wMjYgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8wMjYiLCB7CiAgICBhbnN3ZXIgPC0gcmV0dXJuX2ZpcnN0X3Rlbl9ldmVucygpCiAgICBmaXJzdF90ZW5fZXZlbnMgPC0gc2VxKDAsIDE4LCBieSA9IDIpCiAgICBleHBlY3RfZXF1YWwoYW5zd2VyLCBmaXJzdF90ZW5fZXZlbnMpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMDI3IDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMDI3IiwgewogICAgZXhwZWN0X2VxdWFsKHJldHVybl9maXJzdF9sYXN0X2VsZW1lbnRzKDE6NSksIGMoMSwgNSkpCiAgICBleHBlY3RfZXF1YWwocmV0dXJuX2ZpcnN0X2xhc3RfZWxlbWVudHMoNjoxMCksIGMoNiwgMTApKQogICAgZXhwZWN0X2VxdWFsKHJldHVybl9maXJzdF9sYXN0X2VsZW1lbnRzKGMoMiwgMywgNSwgNykpLCBjKDIsIDcpKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQoKdGVzdF8wMjggPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8wMjgiLCB7CiAgICBleHBlY3RfZXF1YWwocmV0dXJuX25femVyb3MoMSksIDApCiAgICBleHBlY3RfZXF1YWwocmV0dXJuX25femVyb3MoMiksIGMoMCwgMCkpCiAgICBleHBlY3RfZXF1YWwocmV0dXJuX25femVyb3MoMyksIGMoMCwgMCwgMCkpCiAgICBleHBlY3RfZXF1YWwocmV0dXJuX25femVyb3MoNSksIGMoMCwgMCwgMCwgMCwgMCkpCiAgICBleHBlY3RfZXF1YWwocmV0dXJuX25femVyb3MoNyksIGMoMCwgMCwgMCwgMCwgMCwgMCwgMCkpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMDI5IDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMDI5IiwgewogICAgZXhwZWN0X2VxdWFsKGZpbHRlcl9wb3NpdGl2ZXMoLTI6MiksIDE6MikKICAgIGV4cGVjdF9lcXVhbChmaWx0ZXJfcG9zaXRpdmVzKC0zOjMpLCAxOjMpCiAgICBleHBlY3RfZXF1YWwoZmlsdGVyX3Bvc2l0aXZlcyhjKC01LCA1LCAtNiwgNikpLCBjKDUsIDYpKQogICAgZXhwZWN0X2VxdWFsKGZpbHRlcl9wb3NpdGl2ZXMoLTQ6NCksIDE6NCkKICAgIGV4cGVjdF9lcXVhbChmaWx0ZXJfcG9zaXRpdmVzKC01OjUpLCAxOjUpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMDMwIDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMDMwIiwgewogICAgYW5zd2VyIDwtIGNvdW50X2RheV9kaWZmZXJlbmNlKCIyMDIzLTAxLTAxIiwgIjIwMjMtMDEtMzEiKQogICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMzApCiAgICBhbnN3ZXIgPC0gY291bnRfZGF5X2RpZmZlcmVuY2UoIjIwMjMtMDItMDEiLCAiMjAyMy0wMi0yOCIpCiAgICBleHBlY3RfZXF1YWwoYW5zd2VyLCAyNykKICAgIGFuc3dlciA8LSBjb3VudF9kYXlfZGlmZmVyZW5jZSgiMjAyMy0wMy0wMSIsICIyMDIzLTAzLTMxIikKICAgIGV4cGVjdF9lcXVhbChhbnN3ZXIsIDMwKQogICAgYW5zd2VyIDwtIGNvdW50X2RheV9kaWZmZXJlbmNlKCIyMDIzLTA0LTAxIiwgIjIwMjMtMDQtMzAiKQogICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMjkpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCmFsbF90ZXN0cyA8LSBjKHRlc3RfMDIxLCAKICAgICAgICAgICAgICAgdGVzdF8wMjIsCiAgICAgICAgICAgICAgIHRlc3RfMDIzLAogICAgICAgICAgICAgICB0ZXN0XzAyNCwKICAgICAgICAgICAgICAgdGVzdF8wMjUsCiAgICAgICAgICAgICAgIHRlc3RfMDI2LCAKICAgICAgICAgICAgICAgdGVzdF8wMjcsCiAgICAgICAgICAgICAgIHRlc3RfMDI4LAogICAgICAgICAgICAgICB0ZXN0XzAyOSwKICAgICAgICAgICAgICAgdGVzdF8wMzAKICAgICAgICAgICAgICApCnBhc3NlZF90ZXN0cyA8LSBzdW0oYWxsX3Rlc3RzKQpzcHJpbnRmKCLlnKjlu7rnq4vlkJHph4/lhLLlrZjlkIzos6ros4fmlpnnmoQgJXMg6aGM57e057+S5Lit77yM5oKo57i95YWx562U5bCN5LqGICVzIOmhjOOAgiIsIGxlbmd0aChhbGxfdGVzdHMpLCBwYXNzZWRfdGVzdHMpCmBgYA==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAi57e057+S6aGM6Kmz6KejIDAxMS0wMjAiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIOe3tOe/kumhjOaMh+W8lQoKLSDlsIfnt7Tnv5LpoYzoiIfmiYDpnIDmqpTmoYjkuIvovInliLDlsIjmoYjos4fmlpnlpL7vvIzkuKbku6UgUlN0dWRpbyDpgbjllq4gRmlsZSAtPiBPcGVuIFByb2plY3QgaW4gTmV3IFNlc3Npb24uLi4g6ZaL5ZWf5bCI5qGI6LOH5paZ5aS+44CCCi0g57e057+S6aGM5bey57aT5a6a576p5aW95Ye95pW455qE5ZCN56ix5Lul5Y+K5Y+D5pW45ZCN56ix77yM5oiR5YCR5Y+q6ZyA6KaB5a+r5L2c5Ye95pW455qE5Li76auU5Y2z5Y+v44CCCi0g57e057+S6aGM5YWx5YiG54K65LiJ56iu77yM6aCQ6Kit6Ly45Ye655qG54K6IGByZXR1cm4oTkEpYO+8mgogIC0g5piv6Z2e6aGM77ya6Iul6Ka65b6X5piv6Z2e6aGM55qE5pWY6L+wKirkuI3mraPnoroqKu+8jOWwseWwh+mgkOiorei8uOWHuuaUueWvq+eCuiBgcmV0dXJuKEZBTFNFKWDvvIzoi6XoprrlvpfmmK/pnZ7poYznmoTmlZjov7AqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oVFJVRSlgCiAgLSDllq7pgbjpoYzvvJroi6Xoprrlvpfllq7pgbjpoYznmoTnrKzkuIDlgIvpgbjpoIUqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oMSlg77yM6Iul6Ka65b6X5Zau6YG46aGM55qE56ys5LqM5YCL6YG46aCFKirmraPnoroqKuWJh+aUueWvq+eCuiBgcmV0dXJuKDIpYO+8jOiLpeimuuW+l+WWrumBuOmhjOeahOesrOS4ieWAi+mBuOmghSoq5q2j56K6KirliYfmlLnlr6vngrogYHJldHVybigzKWDvvIzoi6Xoprrlvpfllq7pgbjpoYznmoTnrKzlm5vlgIvpgbjpoIUqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oNClgCiAgLSDnqIvlvI/poYzvvJrlh73mlbjlkI3nqLHkuYvkuIvnmoToqLvop6PmnIPmj4/ov7DmuKzoqablpoLkvZXpgLLooYzvvIzog73lpKDorpPmiJHlgJHlhYXliIbmmrjop6PpoJDmnJ/ovLjlhaXku6Xlj4rpoJDmnJ/ovLjlh7rkuYvplpPnmoTlsI3mh4npl5zkv4LvvIzlr6vkvZzlroznlaLlvozmlLnlr6vngrogYHJldHVybihleHBlY3RlZF9vdXRwdXQpYAotIOWmguaenOe3tOe/kumhjOmcgOimgei8ieWFpeaqlOahiO+8jOaqlOahiOacg+iIh+e3tOe/kumhjOWtmOaUvuWcqOWQjOWAi+izh+aWmeWkvuS4re+8jOmAmeaZguWwseWPr+S7pemBi+eUqOW3peS9nOebrumMhOOAgeebtOaOpeaMh+WumuaqlOahiOWQjeeosei8ieWFpeOAggotIOWft+ihjOa4rOippueahOaWueW8j+eCuum7numBuCBTb3VyY2Ug5Y+z5LiK5pa56YG45Zau55qEIFJ1biAtPiBSZXN0YXJ0IFIgYW5kIFJ1biBBbGwgQ2h1bmtzCgpgYGB7cn0KcGtncyA8LSBjKCJybWFya2Rvd24iLCAidGVzdHRoYXQiKQppbnN0YWxsLnBhY2thZ2VzKHBrZ3MpICMg6Iul5LiN5piv56ys5LiA5qyh5a+r5L2c5qWt77yM5Y+v5Lul5bCH6YCZ5YiX6Ki76Kej5o6JCmxpYnJhcnkoInRlc3R0aGF0IikKYGBgCgojIyAwMTHvvIjmmK/pnZ7poYzvvIlgPC1gIOaYryBSIOiqnuiogOaFo+eUqOeahOizpuWAvOmBi+eul+espuOAggoKYGBge3J9CmV4ZXJjaXNlXzAxMSA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oVFJVRSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAwMTLvvIjmmK/pnZ7poYzvvIlgI2Ag5pivIFIg6Kqe6KiA5Lit55So5L6G5qiZ6Ki76YeN6KaB56iL5byP55qE56ym6Jmf77yM5Y+v5Lul54m55Yil5by36Kq/6Kmy5YiX56iL5byP56K855qE6YeN6KaB5oCn44CCCgpgYGB7cn0KZXhlcmNpc2VfMDEyIDwtIGZ1bmN0aW9uKCkgewogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybihGQUxTRSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAwMTPvvIjmmK/pnZ7poYzvvIlgbHMoKWAg5Ye95pW46IO95aSg5bu656uLIFIg6Kqe6KiA55qE6LOH5paZ57WQ5qeLIGBsaXN0YAoKYGBge3J9CmV4ZXJjaXNlXzAxMyA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oRkFMU0UpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMDE077yI5piv6Z2e6aGM77yJYFN5cy5EYXRlKClgIOWHveaVuOiDveWkoOWPluW+l+ebruWJjembu+iFpuezu+e1seaXpeacn+OAggoKYGBge3J9CmV4ZXJjaXNlXzAxNCA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oVFJVRSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAwMTXvvIjllq7pgbjpoYzvvInkuIvliJfkvZXogIXkuI3mmK8gUiDoqp7oqIDnmoTos4fmlpnntZDmp4vpoZ7liKXlkb3lkI3vvJ8KCjEuIGBkYXRhLmZyYW1lYAoyLiBgZGljdGAKMy4gYGxpc3RgCjQuIGBtYXRyaXhgCgpgYGB7cn0KZXhlcmNpc2VfMDE1IDwtIGZ1bmN0aW9uKCkgewogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybigyKQogICMjIyBFTkQgU09MVVRJT04KfQpgYGAKCiMjIDAxNu+8iOWWrumBuOmhjO+8iVIg6Kqe6KiA55qE5qC45b+D57K+56WeICJUaGUgd2F5IFIgd29ya3MgaXMgcHJldHR5IHN0cmFpZ2h0Zm9yd2FyZCwgeW91IGFwcGx5IGZ1bmN0aW9ucyB0byBvYmplY3RzLiIg5piv5byV55So6Ieq5LiL5YiX5ZOq5LiA5L2N77yfCgoxLiBIYWRsZXkgV2lja2hhbQoyLiBKb2huIENoYW1iZXJzCjMuIFdpbnN0b24gQ2hhbmcKNC4gR3JlZyBNYXJ0aW4KCmBgYHtyfQpleGVyY2lzZV8wMTYgPC0gZnVuY3Rpb24oKSB7CiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgcmV0dXJuKDQpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMDE377yI5Zau6YG46aGM77yJ5LiL5YiX5L2V6ICF5LiN5pivIFIg6Kqe6KiA6Kit6KiI6LOH5paZ57WQ5qeL55qE6ICD6YeP77yfCgoxLiDlpJbop4DmmK/lkKbmvILkuq4KMi4g6LOH5paZ5piv5ZCm5ZCM6LOqCjMuIOizh+aWmeaYr+WQpueVsOizqgo0LiDntq3luqblgIvmlbgKCmBgYHtyfQpleGVyY2lzZV8wMTcgPC0gZnVuY3Rpb24oKSB7CiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgcmV0dXJuKDEpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMDE477yI5Zau6YG46aGM77yJ5LiL5YiX5ZOq5LiA5YCL5Ye95pW46IO95aSg6K6T5oiR5YCR5p+l6Kmi5Ye95pW45oiW6ICF6LOH5paZ6Kqq5piO77yfCgoxLiBgU3lzLkRhdGUoKWAKMi4gYFN5cy50aW1lKClgCjMuIGBoZWxwKClgCjQuIGBzZXR3ZCgpYAoKYGBge3J9CmV4ZXJjaXNlXzAxOCA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oMykKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAwMTnvvIjnqIvlvI/poYzvvInnkrDlooPkuK3miYDmnInnianku7blkI3nqLHjgIIKCuWumue+qeWHveaVuCBgcmV0dXJuX2Vudmlyb25tZW50X29iamVjdF9uYW1lcygpYCDlm57lgrPnkrDlooPkuK3miYDmnInnianku7blkI3nqLHjgIIKCi0g5bCH562U5qGI5a+r5ZyoIGByZXR1cm4oKWAg5LmL5Lit44CCCi0g5L2/55SoIGBscygpYCDlh73mlbjjgIIKCmBgYHtyfQpyZXR1cm5fZW52aXJvbm1lbnRfb2JqZWN0X25hbWVzIDwtIGZ1bmN0aW9uKCkgewogICMgPiByZXR1cm5fZW52aXJvbm1lbnRfb2JqZWN0X25hbWVzKCkKICAjIFsxXSAiT2JqZWN0IG5hbWVzIGluIGVudmlyb25tZW50LiIKICAjIyMgQkVHSU4gU09MVVRJT04KICBhbnN3ZXIgPC0gbHMoKQogIHJldHVybihhbnN3ZXIpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMDIw77yI56iL5byP6aGM77yJ6Zu76IWm57O757Wx5pel5pyf44CCCgrlrprnvqnlh73mlbggYHJldHVybl9zeXNfZGF0ZSgpYCDlm57lgrPpm7vohabns7vntbHml6XmnJ/jgIIKCi0g5bCH562U5qGI5a+r5ZyoIGByZXR1cm4oKWAg5LmL5Lit44CCCi0g5L2/55SoIGBTeXMuRGF0ZSgpYCDlh73mlbjjgIIKCmBgYHtyfQpyZXR1cm5fc3lzX2RhdGUgPC0gZnVuY3Rpb24oKSB7CiAgIyA+IHJldHVybl9zeXNfZGF0ZSgpCiAgIyBbMV0gIlN5c3RlbSBkYXRlIG9mIHlvdXIgY29tcHV0ZXIuIgogICMgPiByZXR1cm5fc3lzX2RhdGUoKQogICMgWzFdICIyMDIyLTEyLTMxIgogICMgPiByZXR1cm5fc3lzX2RhdGUoKQogICMgWzFdICIyMDIzLTAxLTAxIgogICMjIyBCRUdJTiBTT0xVVElPTgogIGFuc3dlciA8LSBTeXMuRGF0ZSgpCiAgcmV0dXJuKGFuc3dlcikKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyDln7fooYzmuKzoqaYKCi0g6bue6YG45Y+z5LiK5pa56YG45Zau55qEIFJ1biAtPiBSZXN0YXJ0IFIgYW5kIFJ1biBBbGwgQ2h1bmtzCi0g5LiL5pa554K65ris6Kmm56iL5byP77yM6KuL5ZCM5a245b+955Wl5Lim5LiU5LiN6KaB5pu05YuV44CCCgpgYGB7cn0KdGVzdF8wMTEgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8wMTEiLCB7CiAgICBhbnN3ZXIgPC0gZXhlcmNpc2VfMDExKCkKICAgIGV4cGVjdF90cnVlKGFuc3dlcikKICB9KQogIH0sIGVycm9yID0gZnVuY3Rpb24oZSkgewogICAgRkFMU0UKfSkKdGVzdF8wMTIgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8wMTIiLCB7CiAgICBhbnN3ZXIgPC0gZXhlcmNpc2VfMDEyKCkKICAgIGV4cGVjdF9mYWxzZShhbnN3ZXIpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMDEzIDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMDEzIiwgewogICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxMygpCiAgICBleHBlY3RfZmFsc2UoYW5zd2VyKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQp0ZXN0XzAxNCA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzAxNCIsIHsKICAgIGFuc3dlciA8LSBleGVyY2lzZV8wMTQoKQogICAgZXhwZWN0X3RydWUoYW5zd2VyKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQp0ZXN0XzAxNSA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzAxNSIsIHsKICAgIGFuc3dlciA8LSBleGVyY2lzZV8wMTUoKQogICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMikKICB9KQogIH0sIGVycm9yID0gZnVuY3Rpb24oZSkgewogICAgRkFMU0UKfSkKdGVzdF8wMTYgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8wMTYiLCB7CiAgICBhbnN3ZXIgPC0gZXhlcmNpc2VfMDE2KCkKICAgIGV4cGVjdF9lcXVhbChhbnN3ZXIsIDQpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMDE3IDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMDE3IiwgewogICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzAxNygpCiAgICBleHBlY3RfZXF1YWwoYW5zd2VyLCAxKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQp0ZXN0XzAxOCA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzAxOCIsIHsKICAgIGFuc3dlciA8LSBleGVyY2lzZV8wMTgoKQogICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMykKICB9KQogIH0sIGVycm9yID0gZnVuY3Rpb24oZSkgewogICAgRkFMU0UKfSkKdGVzdF8wMTkgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8wMTkiLCB7CiAgICBhbnN3ZXIgPC0gcmV0dXJuX2Vudmlyb25tZW50X29iamVjdF9uYW1lcygpCiAgICBleHBlY3RfdHlwZShhbnN3ZXIsICJjaGFyYWN0ZXIiKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQp0ZXN0XzAyMCA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzAyMCIsIHsKICAgIGFuc3dlciA8LSByZXR1cm5fc3lzX2RhdGUoKQogICAgZXhwZWN0X3MzX2NsYXNzKGFuc3dlciwgIkRhdGUiKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQphbGxfdGVzdHMgPC0gYyh0ZXN0XzAxMSwgCiAgICAgICAgICAgICAgIHRlc3RfMDEyLAogICAgICAgICAgICAgICB0ZXN0XzAxMywKICAgICAgICAgICAgICAgdGVzdF8wMTQsCiAgICAgICAgICAgICAgIHRlc3RfMDE1LAogICAgICAgICAgICAgICB0ZXN0XzAxNiwgCiAgICAgICAgICAgICAgIHRlc3RfMDE3LAogICAgICAgICAgICAgICB0ZXN0XzAxOCwKICAgICAgICAgICAgICAgdGVzdF8wMTksCiAgICAgICAgICAgICAgIHRlc3RfMDIwCiAgICAgICAgICAgICAgKQpwYXNzZWRfdGVzdHMgPC0gc3VtKGFsbF90ZXN0cykKc3ByaW50Zigi5Zyo5oCO5qij5a245aW9IFIg6Kqe6KiA55qEICVzIOmhjOe3tOe/kuS4re+8jOaCqOe4veWFseetlOWwjeS6hiAlcyDpoYzjgIIiLCBsZW5ndGgoYWxsX3Rlc3RzKSwgcGFzc2VkX3Rlc3RzKQpgYGA=</div>
 
 
 
@@ -2297,7 +2199,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("exercises.Rmd");
+  window.initializeSourceEmbed("suggested_answers.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

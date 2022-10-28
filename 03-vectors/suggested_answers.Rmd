@@ -1,48 +1,56 @@
 ---
-title: "參考解答 011-020"
+title: "練習題詳解 021-030"
 output: html_notebook
 ---
 
 ## 練習題指引
 
-- 第一個程式碼儲存格會將可能用得到的套件以及單元測試 `testthat` 載入。
-- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作答案與函數主體即可。
-- 練習題共分為三種：
-  1. 是非題（預設輸出為 `NA`）
-  2. 單選題（預設輸出為 `0`）
-  3. 程式題（預設輸出為 `0`）
-- 是非題與單選題沒有註解描述測試；程式題則會在函數名稱之下的註解是描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的關係。
-- 將答案寫在 `return()` 之中，若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`；若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，以此類推。
-- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄來載入（直接指定檔案名稱）。
-- 在 `### BEGIN SOLUTION` 與 `### END SOLUTION` 這兩個單行註解之間撰寫答案與函數主體。
-- 執行測試的方式為點選右上方選單的 Run -> Restart R and Run All Chunks
-- 練習題連結閒置超過 10 分鐘會自動斷線，只要重新點選練習題連結即可重新啟動，可以先將練習題下載到自己電腦，完成以後再上傳覆蓋執行測試。
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
 
 ```{r}
+pkgs <- c("rmarkdown", "testthat")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
 library("testthat")
 ```
 
-## 011（是非題）R 語言的向量資料結構可以用來儲存異質資料。
+## 021（是非題）R 語言的向量資料結構可以用來儲存異質資料。
 
 ```{r}
-exercise_011 <- function() {
+exercise_021 <- function() {
   ### BEGIN SOLUTION
   return(FALSE)
   ### END SOLUTION
 }
 ```
 
-## 012（是非題）我們可以使用 R 語言的 `c()` 函數建立向量，`c()` 函數是 combine 的縮寫。
+## 022（是非題）我們可以使用 R 語言的 `c()` 函數建立向量，`c()` 函數是 combine 的縮寫。
 
 ```{r}
-exercise_012 <- function() {
+exercise_022 <- function() {
   ### BEGIN SOLUTION
   return(TRUE)
   ### END SOLUTION
 }
 ```
 
-## 013（單選題）我們在本章節介紹的向量類別不包含下列哪一個？
+## 023（是非題）向量是 R 語言基本的資料結構。
+
+```{r}
+exercise_023 <- function() {
+  ### BEGIN SOLUTION
+  return(TRUE)
+  ### END SOLUTION
+}
+```
+
+## 024（單選題）我們在本章節介紹的向量類別不包含下列哪一個？
 
 1. 文字。
 2. 清單。
@@ -50,14 +58,14 @@ exercise_012 <- function() {
 4. 未定義值。
 
 ```{r}
-exercise_013 <- function() {
+exercise_024 <- function() {
   ### BEGIN SOLUTION
   return(2)
   ### END SOLUTION
 }
 ```
 
-## 014（單選題）我們可以使用哪個函數建立「等差數列」型態的數值向量？
+## 025（單選題）我們可以使用哪個函數建立「等差數列」型態的數值向量？
 
 1. `s()`。
 2. `series()`。
@@ -65,92 +73,80 @@ exercise_013 <- function() {
 4. `seq()`。
 
 ```{r}
-exercise_014 <- function() {
+exercise_025 <- function() {
   ### BEGIN SOLUTION
   return(4)
   ### END SOLUTION
 }
 ```
 
-## 015（程式題）回傳前十個偶數。
+## 026（程式題）前十個偶數。
 
-定義函數 `get_first_ten_evens()` 回傳前十個偶數。
+定義函數 `return_first_ten_evens()` 回傳前十個偶數。
 
 - 使用 `seq()` 函數。
 - 將答案寫在 `return()` 之中。
 
 ```{r}
-get_first_ten_evens <- function() {
-  # > first_ten_evens <- get_first_ten_evens()
-  # > first_ten_evens
+return_first_ten_evens <- function() {
+  # > return_first_ten_evens()
   # [1]  0  2  4  6  8 10 12 14 16 18
   ### BEGIN SOLUTION
-  v <- seq(0, 18, 2)
-  return(v)
+  answer <- seq(0, 18, 2)
+  return(answer)
   ### END SOLUTION
 }
 ```
 
-## 016（程式題）回傳前十個質數。
+## 027（程式題）第一個與最後一個元素。
 
-定義函數 `get_first_ten_primes()` 回傳前十個質數。
+定義函數 `return_first_last_elements()` 回傳向量中的第一個與最後一個元素。
 
-- 使用 `c()` 函數。
+- 從向量中擷取資料。
+- 使用 `length()` 函數。
 - 將答案寫在 `return()` 之中。
 
 ```{r}
-get_first_ten_primes <- function() {
-  # > first_ten_primes <- get_first_ten_primes()
-  # > first_ten_primes
-  # [1]  2  3  5  7 11 13 17 19 23 29
+return_first_last_elements <- function(x) {
+  # > return_first_last_elements(1:5)
+  # [1] 1 5
+  # > return_first_last_elements(6:10)
+  # [1]  6 10
+  # > return_first_last_elements(c(2, 3, 5, 7))
+  # [1]  2 7 
   ### BEGIN SOLUTION
-  v <- c(2, 3, 5, 7, 11, 13, 17, 19, 23, 29)
-  return(v)
+  length_x <- length(x)
+  first_element <- x[1]
+  last_element <- x[length_x]
+  answer <- c(first_element, last_element)
+  return(answer)
   ### END SOLUTION
 }
 ```
 
-## 017（程式題）所有的邏輯值。
+## 028（程式題）所有元素都是 0。
 
-定義函數 `get_logicals()` 回傳所有的邏輯值。
+定義函數 `return_n_zeros()` 能夠回傳長度為 `n`、所有元素都是 0 的數值向量。
 
-- 使用 `c()` 函數。
+- 使用 `rep()` 函數。
 - 將答案寫在 `return()` 之中。
 
 ```{r}
-get_logicals <- function() {
-  # > logicals <- get_logicals()
-  # > logicals
-  # [1] FALSE  TRUE  
-  ### BEGIN SOLUTION
-  return(c(FALSE, TRUE))
-  ### END SOLUTION
-}
-```
-
-## 018（程式題）所有元素都是 0。
-
-定義函數 `get_n_zeros()` 能夠回傳長度為 `n`、所有元素都是 0 的數值向量。
-
-- 使用 `rep`()` 函數。
-- 將答案寫在 `return()` 之中。
-
-```{r}
-get_n_zeros <- function(n) {
-  # get_n_zeros(3)
+return_n_zeros <- function(n) {
+  # > return_n_zeros(3)
   # [1] 0 0 0
-  # get_n_zeros(5)
+  # > return_n_zeros(5)
   # [1] 0 0 0 0 0
-  # get_n_zeros(7)
+  # > return_n_zeros(7)
   # [1] 0 0 0 0 0 0 0
   ### BEGIN SOLUTION
-  v <- rep(0, times = n)
-  return(v)
+  answer <- rep(0, times = n)
+  return(answer)
   ### END SOLUTION
 }
 ```
 
-## 019（程式題）輸入向量中的正數。
+## 029（程式題）篩選輸入向量中的正數。
 
 定義函數 `filter_positives()` 回傳輸入向量中的正數。
 
@@ -158,22 +154,20 @@ get_n_zeros <- function(n) {
 - 將答案寫在 `return()` 之中。
 
 ```{r}
-filter_positives <- function(v) {
-  # filter_positives(-2:2)
+filter_positives <- function(x) {
+  # > filter_positives(-2:2)
   # [1] 1 2
-  # filter_positives(-3:3)
+  # > filter_positives(-3:3)
   # [1] 1 2 3
-  # filter_positives(c(-5, 5, -6, 6))
-  # [1] 5 6  
   ### BEGIN SOLUTION
-  is_positive <- v > 0
-  ans <- v[is_positive]
-  return(ans)
+  is_positive <- x > 0
+  answer <- x[is_positive]
+  return(answer)
   ### END SOLUTION
 }
 ```
 
-## 020（程式題）日數差距。
+## 030（程式題）計算日數差距。
 
 定義函數 `count_day_difference()` 回傳輸入文字向量間的日數差距。
 
@@ -183,17 +177,17 @@ filter_positives <- function(v) {
 - 將答案寫在 `return()` 之中。
 
 ```{r}
-count_day_difference <- function(a, b) {
-  # count_day_difference("2022-01-01", "2022-01-31")
+count_day_difference <- function(x, y) {
+  # > count_day_difference("2023-01-01", "2023-01-31")
   # [1] 30
-  # count_day_difference("2022-02-01", "2022-02-28")
+  # > count_day_difference("2023-02-01", "2023-02-28")
   # [1] 27
   ### BEGIN SOLUTION
-  date_a <- as.Date(a)
-  date_b <- as.Date(b)
-  days_diff <- date_b - date_a
-  ans <- as.numeric(days_diff)
-  return(ans)
+  date_x <- as.Date(x)
+  date_y <- as.Date(y)
+  days_diff <- date_y - date_x
+  answer <- as.numeric(days_diff)
+  return(answer)
   ### END SOLUTION
 }
 ```
@@ -204,78 +198,78 @@ count_day_difference <- function(a, b) {
 - 下方為測試程式，請同學忽略並且不要更動。
 
 ```{r}
-test_011 <- tryCatch({
-  test_that("test_011", {
-    answer <- exercise_011()
+test_021 <- tryCatch({
+  test_that("test_021", {
+    answer <- exercise_021()
     expect_false(answer)
   })
   }, error = function(e) {
     FALSE
 })
-test_012 <- tryCatch({
-  test_that("test_012", {
-    answer <- exercise_012()
+test_022 <- tryCatch({
+  test_that("test_022", {
+    answer <- exercise_022()
     expect_true(answer)
   })
   }, error = function(e) {
     FALSE
 })
-test_013 <- tryCatch({
-  test_that("test_013", {
-    answer <- exercise_013()
+test_023 <- tryCatch({
+  test_that("test_023", {
+    answer <- exercise_023()
+    expect_true(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_024 <- tryCatch({
+  test_that("test_024", {
+    answer <- exercise_024()
     expect_equal(answer, 2)
   })
   }, error = function(e) {
     FALSE
 })
-test_014 <- tryCatch({
-  test_that("test_014", {
-    answer <- exercise_014()
+test_025 <- tryCatch({
+  test_that("test_025", {
+    answer <- exercise_025()
     expect_equal(answer, 4)
   })
   }, error = function(e) {
     FALSE
 })
-test_015 <- tryCatch({
-  test_that("test_015", {
-    answer <- get_first_ten_evens()
-    first_ten_evens <- seq(0, 18, 2)
+test_026 <- tryCatch({
+  test_that("test_026", {
+    answer <- return_first_ten_evens()
+    first_ten_evens <- seq(0, 18, by = 2)
     expect_equal(answer, first_ten_evens)
   })
   }, error = function(e) {
     FALSE
 })
-test_016 <- tryCatch({
-  test_that("test_016", {
-    answer <- get_first_ten_primes()
-    first_ten_primes <- c(2, 3, 5, 7, 11, 13, 17, 19, 23, 29)
-    expect_equal(answer, first_ten_primes)
+test_027 <- tryCatch({
+  test_that("test_027", {
+    expect_equal(return_first_last_elements(1:5), c(1, 5))
+    expect_equal(return_first_last_elements(6:10), c(6, 10))
+    expect_equal(return_first_last_elements(c(2, 3, 5, 7)), c(2, 7))
   })
   }, error = function(e) {
     FALSE
 })
-test_017 <- tryCatch({
-  test_that("test_017", {
-    answer <- get_logicals()
-    expect_false(answer[1])
-    expect_true(answer[2])
+
+test_028 <- tryCatch({
+  test_that("test_028", {
+    expect_equal(return_n_zeros(1), 0)
+    expect_equal(return_n_zeros(2), c(0, 0))
+    expect_equal(return_n_zeros(3), c(0, 0, 0))
+    expect_equal(return_n_zeros(5), c(0, 0, 0, 0, 0))
+    expect_equal(return_n_zeros(7), c(0, 0, 0, 0, 0, 0, 0))
   })
   }, error = function(e) {
     FALSE
 })
-test_018 <- tryCatch({
-  test_that("test_018", {
-    expect_equal(get_n_zeros(1), 0)
-    expect_equal(get_n_zeros(2), c(0, 0))
-    expect_equal(get_n_zeros(3), c(0, 0, 0))
-    expect_equal(get_n_zeros(5), c(0, 0, 0, 0, 0))
-    expect_equal(get_n_zeros(7), c(0, 0, 0, 0, 0, 0, 0))
-  })
-  }, error = function(e) {
-    FALSE
-})
-test_019 <- tryCatch({
-  test_that("test_019", {
+test_029 <- tryCatch({
+  test_that("test_029", {
     expect_equal(filter_positives(-2:2), 1:2)
     expect_equal(filter_positives(-3:3), 1:3)
     expect_equal(filter_positives(c(-5, 5, -6, 6)), c(5, 6))
@@ -285,31 +279,31 @@ test_019 <- tryCatch({
   }, error = function(e) {
     FALSE
 })
-test_020 <- tryCatch({
-  test_that("test_020", {
-    answer <- count_day_difference("2022-01-01", "2022-01-31")
+test_030 <- tryCatch({
+  test_that("test_030", {
+    answer <- count_day_difference("2023-01-01", "2023-01-31")
     expect_equal(answer, 30)
-    answer <- count_day_difference("2022-02-01", "2022-02-28")
+    answer <- count_day_difference("2023-02-01", "2023-02-28")
     expect_equal(answer, 27)
-    answer <- count_day_difference("2022-03-01", "2022-03-31")
+    answer <- count_day_difference("2023-03-01", "2023-03-31")
     expect_equal(answer, 30)
-    answer <- count_day_difference("2022-04-01", "2022-04-30")
+    answer <- count_day_difference("2023-04-01", "2023-04-30")
     expect_equal(answer, 29)
   })
   }, error = function(e) {
     FALSE
 })
-all_tests <- c(test_011, 
-               test_012,
-               test_013,
-               test_014,
-               test_015,
-               test_016, 
-               test_017,
-               test_018,
-               test_019,
-               test_020
+all_tests <- c(test_021, 
+               test_022,
+               test_023,
+               test_024,
+               test_025,
+               test_026, 
+               test_027,
+               test_028,
+               test_029,
+               test_030
               )
 passed_tests <- sum(all_tests)
-sprintf("在 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+sprintf("在建立向量儲存同質資料的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
 ```

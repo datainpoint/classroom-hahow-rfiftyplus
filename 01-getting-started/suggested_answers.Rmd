@@ -5,22 +5,18 @@ output: html_notebook
 
 ## 練習題指引
 
-- 第一個程式碼儲存格會將可能用得到的套件以及單元測試套件 `testthat` 載入。
-- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作答案與函數主體即可。
-- 練習題共分為三種，預設輸出皆為 `NA`：
-  1. 是非題
-  2. 單選題
-  3. 程式題
-- 是非題與單選題沒有註解描述測試；程式題則會在函數名稱之下的註解是描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的關係。
-- 將答案寫在 `return()` 的小括號之中，若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`；若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，以此類推。
-- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄來載入（直接指定檔案名稱）。
-- 在 `### BEGIN SOLUTION` 與 `### END SOLUTION` 兩列註解之間撰寫答案與函數主體。
-- 執行測試的方式為點選右上方選單的 Run -> Restart R and Run All Chunks
-- 因為使用免費的伺服器資源，練習題閒置超過 10 分鐘會自動斷線，只要重新點選連結即可重新啟動。
-- 建議同學可以先將練習題下載到自己電腦，完成以後可以選擇在自己電腦批改測試或上傳覆蓋原本的 `exercises.Rmd` 批改測試。
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
 
 ```{r}
-install.packages("testthat") # 若已經安裝可以將這列註解
+pkgs <- c("rmarkdown", "testthat")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
 library("testthat")
 ```
 
@@ -126,13 +122,13 @@ exercise_008 <- function() {
 
 ## 009（程式題）哈囉世界。
 
-定義函數 `hello_world()` 回傳 `"Hello, world!"`
+定義函數 `return_hello_world()` 回傳 `"Hello, world!"`
 
 - 將答案寫在 `return()` 之中。
-- 文字用單引號或雙引號包括起來。
+- 文字需要用單引號或雙引號包括起來。
 
 ```{r}
-hello_world <- function() {
+return_hello_world <- function() {
   # > hello_world()
   # [1] "Hello, world!"
   ### BEGIN SOLUTION
@@ -143,13 +139,13 @@ hello_world <- function() {
 
 ## 010（程式題）幸運數字。
 
-定義函數 `lucky_number()` 回傳任何一個你喜歡的數字
+定義函數 `return_lucky_number()` 回傳任何一個你喜歡的數字。
 
 - 將答案寫在 `return()` 之中。
 - 數字不需要用單引號或雙引號包括起來。
 
 ```{r}
-lucky_number <- function() {
+return_lucky_number <- function() {
   # > lucky_number()
   # [1] 7
   # > lucky_number()
@@ -232,7 +228,7 @@ test_008 <- tryCatch({
 })
 test_009 <- tryCatch({
   test_that("test_009", {
-    answer <- hello_world()
+    answer <- return_hello_world()
     expect_equal(answer, "Hello, world!")
   })
   }, error = function(e) {
@@ -240,7 +236,7 @@ test_009 <- tryCatch({
 })
 test_010 <- tryCatch({
   test_that("test_010", {
-    answer <- lucky_number()
+    answer <- return_lucky_number()
     expect_type(answer, "double")
   })
   }, error = function(e) {
@@ -258,5 +254,5 @@ all_tests <- c(test_001,
                test_010
               )
 passed_tests <- sum(all_tests)
-sprintf("在 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+sprintf("在 R 語言起步走的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
 ```

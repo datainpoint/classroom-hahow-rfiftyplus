@@ -1,5 +1,5 @@
 ---
-title: "練習題詳解 011-020"
+title: "練習題 011-020"
 output: html_notebook
 ---
 
@@ -25,7 +25,7 @@ library("testthat")
 ```{r}
 exercise_011 <- function() {
   ### BEGIN SOLUTION
-  return(TRUE)
+  return(NA)
   ### END SOLUTION
 }
 ```
@@ -35,7 +35,7 @@ exercise_011 <- function() {
 ```{r}
 exercise_012 <- function() {
   ### BEGIN SOLUTION
-  return(FALSE)
+  return(NA)
   ### END SOLUTION
 }
 ```
@@ -45,7 +45,7 @@ exercise_012 <- function() {
 ```{r}
 exercise_013 <- function() {
   ### BEGIN SOLUTION
-  return(FALSE)
+  return(NA)
   ### END SOLUTION
 }
 ```
@@ -55,7 +55,7 @@ exercise_013 <- function() {
 ```{r}
 exercise_014 <- function() {
   ### BEGIN SOLUTION
-  return(TRUE)
+  return(NA)
   ### END SOLUTION
 }
 ```
@@ -70,7 +70,7 @@ exercise_014 <- function() {
 ```{r}
 exercise_015 <- function() {
   ### BEGIN SOLUTION
-  return(2)
+  return(NA)
   ### END SOLUTION
 }
 ```
@@ -85,7 +85,7 @@ exercise_015 <- function() {
 ```{r}
 exercise_016 <- function() {
   ### BEGIN SOLUTION
-  return(4)
+  return(NA)
   ### END SOLUTION
 }
 ```
@@ -100,7 +100,7 @@ exercise_016 <- function() {
 ```{r}
 exercise_017 <- function() {
   ### BEGIN SOLUTION
-  return(1)
+  return(NA)
   ### END SOLUTION
 }
 ```
@@ -115,7 +115,7 @@ exercise_017 <- function() {
 ```{r}
 exercise_018 <- function() {
   ### BEGIN SOLUTION
-  return(3)
+  return(NA)
   ### END SOLUTION
 }
 ```
@@ -132,8 +132,7 @@ return_environment_object_names <- function() {
   # > return_environment_object_names()
   # [1] "Object names in environment."
   ### BEGIN SOLUTION
-  answer <- ls()
-  return(answer)
+  return(NA)
   ### END SOLUTION
 }
 ```
@@ -154,8 +153,7 @@ return_sys_date <- function() {
   # > return_sys_date()
   # [1] "2023-01-01"
   ### BEGIN SOLUTION
-  answer <- Sys.Date()
-  return(answer)
+  return(NA)
   ### END SOLUTION
 }
 ```
