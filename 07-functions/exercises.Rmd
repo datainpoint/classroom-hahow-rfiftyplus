@@ -1,0 +1,396 @@
+---
+title: "練習題 061-070"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+```
+
+## 061（是非題）重複使用先前寫的程式碼用複製貼上的方式最有效率。
+
+```{r}
+exercise_061 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 062（是非題）`sum()` 函數是屬於一種通用函數。
+
+```{r}
+exercise_062 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 063（單選題）下列哪一個函數屬於通用函數？
+
+1. `length()`
+2. `abs()`
+3. `max()`
+4. `median()`
+
+```{r}
+exercise_063 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 064（單選題）下列哪一個函數可以指定分割符號來進行文字的切割？
+
+1. `grep()`
+2. `paste()`
+3. `sub()`
+4. `strsplit()`
+
+```{r}
+exercise_064 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 065（單選題）下面這段程式碼中 `demo_function(6, 14)` 會輸出哪個值？
+
+```r
+demo_function <- function(x, y) {
+  answer <- (x + y) / 2
+  return(answer)
+}
+x <- 3
+y <- 7
+demo_function(6, 14)
+```
+
+1. `[1] 5`
+2. `[1] 10`
+3. `[1] 6.5`
+4. `[1] 13`
+
+```{r}
+exercise_065 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 066（程式題）回傳中位的元素。
+
+定義函數 `return_middle_elements`()` 將輸入數值向量的中位元素回傳。
+
+- 使用 `sort()` 函數遞增排序數值向量。
+- 使用 `length()` 函數得知元素個數。
+- 以元素個數作為條件判斷中位元素的位置和數量。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+return_middle_elements <- function(x) {
+  # > return_middle_elements(c(3, 2, 7, 5))
+  # [1] 3 5
+  # > return_middle_elements(c(3, 2, 7, 5, 11))
+  # [1] 5
+  # > return_middle_elements(c(3, 2, 7, 5, 13, 11))
+  # [1] 5 7
+  # > return_middle_elements(c(3, 2, 7, 5, 13, 11, 17))
+  # [1] 7
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 067（程式題）回傳中位數。
+
+定義函數 `return_median()` 將輸入數值向量的中位數回傳。
+
+- 使用 066（程式題）定義的 `return_middle_elements()` 函數。
+- 使用 `length()` 函數得知中位元素個數。
+- 以中位元素個數作為條件判斷中位數該如何計算。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+return_median <- function(x) {
+  # > return_median(c(3, 2, 7, 5))
+  # [1] 4
+  # > return_median(c(3, 2, 7, 5, 11))
+  # [1] 5
+  # > return_median(c(3, 2, 7, 5, 13, 11))
+  # [1] 6
+  # > return_median(c(3, 2, 7, 5, 13, 11, 17))
+  # [1] 7
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 068（程式題）連接清單中的文字。
+
+定義函數 `paste_characters_in_list()` 將清單中的文字向量連接為一個長度 1 的文字向量。
+
+- 以 `for` 迴圈或者 `while` 迴圈走訪清單。
+- 在迴圈中加入 `if` 條件判斷。
+- 使用 `paste0()` 函數合併資料。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+paste_characters_in_list <- function(x) {
+  # > paste_characters_in_list(list(1, "A", 2, "B", 3))
+  # [1] "AB"
+  # > paste_characters_in_list(list(4, 5, 6, "C", "D", "E"))
+  # [1] "CDE"
+  # > paste_characters_in_list(list("F", "G", 7, 8, 9))
+  # [1] "FG"
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 069（程式題）取出年月日。
+
+定義函數 `extract_year_month_day()` 回傳輸入文字向量的年、月、日。
+
+- 使用 `strsplit()` 函數分割文字。
+- 以命名清單儲存切割後的年、月、日。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+extract_year_month_day <- function(x) {
+  # > extract_year_month_day("2022-11-30")
+  # $year
+  # [1] 2022
+  #
+  # $month
+  # [1] 11
+  #
+  # $day
+  # [1] 30
+  # > extract_year_month_day("2022-12-31")
+  # $year
+  # [1] 2022
+  #
+  # $month
+  # [1] 12
+  #
+  # $day
+  # [1] 31
+  # > extract_year_month_day("2023-01-01")
+  # $year
+  # [1] 2023
+  #
+  # $month
+  # [1] 1
+  #
+  # $day
+  # [1] 1
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 070（程式題）統計母音的出現次數。
+
+定義函數 `count_vowels()` 回傳輸入文字向量中母音（a, e, i, o, u）的出現次數。
+
+- 使用 `nchar()` 函數得知文字向量有幾個字母。
+- 以 `for` 迴圈或者 `while` 迴圈走訪文字向量的每一個字母。
+- 在迴圈中加入 `if` 條件判斷。
+- 以命名清單統計母音的出現次數。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+count_vowels <- function(x) {
+  # > count_vowels("statistical programming")
+  # $a
+  # [1] 3
+  #
+  # $e
+  # [1] 0
+  #
+  # $i
+  # [1] 3
+  #
+  # $o
+  # [1] 1
+  #
+  # $u
+  # [1] 0
+  # > count_vowels("giannis antetokounmpo")
+  # $a
+  # [1] 2
+  #
+  # $e
+  # [1] 1
+  #
+  # $i
+  # [1] 2
+  #
+  # $o
+  # [1] 3
+  #
+  # $u
+  # [1] 1
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_061 <- tryCatch({
+  test_that("test_061", {
+    answer <- exercise_061()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_062 <- tryCatch({
+  test_that("test_062", {
+    answer <- exercise_062()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_063 <- tryCatch({
+  test_that("test_063", {
+    answer <- exercise_063()
+    expect_equal(answer, 2)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_064 <- tryCatch({
+  test_that("test_064", {
+    answer <- exercise_064()
+    expect_equal(answer, 4)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_065 <- tryCatch({
+  test_that("test_065", {
+    answer <- exercise_065()
+    expect_equal(answer, 2)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_066 <- tryCatch({
+  test_that("test_066", {
+    answer <- return_middle_elements(c(3, 2, 7, 5))
+    expect_equal(answer, c(3, 5))
+    answer <- return_middle_elements(c(3, 2, 7, 5, 11))
+    expect_equal(answer, 5)
+    answer <- return_middle_elements(c(3, 2, 7, 5, 13, 11))
+    expect_equal(answer, c(5, 7))
+    answer <- return_middle_elements(c(3, 2, 7, 5, 13, 11, 17))
+    expect_equal(answer, 7)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_067 <- tryCatch({
+  test_that("test_067", {
+    answer <- return_median(c(3, 2, 7, 5))
+    expect_equal(answer, 4)
+     answer <- return_median(c(3, 2, 7, 5, 11))
+    expect_equal(answer, 5)
+     answer <- return_median(c(3, 2, 7, 5, 13, 11))
+    expect_equal(answer, 6)
+     answer <- return_median(c(3, 2, 7, 5, 13, 11, 17))
+    expect_equal(answer, 7)
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+test_068 <- tryCatch({
+  test_that("test_068", {
+    answer <- paste_characters_in_list(list(1, "A", 2, "B", 3))
+    expect_equal(answer, "AB")
+    answer <- paste_characters_in_list(list(4, 5, 6, "C", "D", "E"))
+    expect_equal(answer, "CDE")
+    answer <- paste_characters_in_list(list("F", "G", 7, 8, 9))
+    expect_equal(answer, "FG")
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_069 <- tryCatch({
+  test_that("test_069", {
+    answer <- extract_year_month_day("2022-11-30")
+    expect_equal(answer$year, 2022)
+    expect_equal(answer$month, 11)
+    expect_equal(answer$day, 30)
+    answer <- extract_year_month_day("2022-12-31")
+    expect_equal(answer$year, 2022)
+    expect_equal(answer$month, 12)
+    expect_equal(answer$day, 31)
+    answer <- extract_year_month_day("2023-01-01")
+    expect_equal(answer$year, 2023)
+    expect_equal(answer$month, 1)
+    expect_equal(answer$day, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_070 <- tryCatch({
+  test_that("test_070", {
+    answer <- count_vowels("statistical programming")
+    expect_equal(answer$a, 3)
+    expect_equal(answer$i, 3)
+    expect_equal(answer$o, 1)
+    answer <- count_vowels("giannis antetokounmpo")
+    expect_equal(answer$a, 2)
+    expect_equal(answer$e, 1)
+    expect_equal(answer$i, 2)
+    expect_equal(answer$o, 3)
+    expect_equal(answer$u, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+all_tests <- c(test_061, 
+               test_062,
+               test_063,
+               test_064,
+               test_065,
+               test_066, 
+               test_067,
+               test_068,
+               test_069,
+               test_070
+              )
+passed_tests <- sum(all_tests)
+sprintf("在自行定義函數組織 R 語言的程式碼的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```

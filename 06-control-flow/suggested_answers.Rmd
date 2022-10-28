@@ -1,0 +1,374 @@
+---
+title: "練習題詳解 051-060"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+```
+
+## 051（是非題）下面這段程式碼中，當 `x <- -5566` 時，只有 `x < 0` 的條件會被判斷，`x >= 0` 的條件不會被判斷。
+
+```{r}
+x <- -5566
+if (x < 0) {
+  print("x is negative.")
+}
+if (x >= 0) {
+  print("x is non-negative.")
+}
+```
+
+```{r}
+exercise_051 <- function() {
+  ### BEGIN SOLUTION
+  return(FALSE)
+  ### END SOLUTION
+}
+```
+
+## 052（是非題）下面這段程式碼中，當 `x <- -5566` 時，不論 `x < 0` 或 `x >= 0` 的條件都會被判斷。
+
+```{r}
+x <- -5566
+if (x < 0) {
+  print("x is negative.")
+} else if (x >= 0) {
+  print("x is non-negative.")
+}
+```
+
+```{r}
+exercise_052 <- function() {
+  ### BEGIN SOLUTION
+  return(FALSE)
+  ### END SOLUTION
+}
+```
+
+## 053（是非題）下面這段程式碼中，當 `x <- 0` 時，只有 `x == 0` 的條件會被判斷。
+
+```{r}
+x <- 0
+if (x < 0) {
+  print("x is negative.")
+} else if (x > 0) {
+  print("x is positive.")
+} else if (x == 0) {
+  print("x is zero.")
+}
+```
+
+```{r}
+exercise_053 <- function() {
+  ### BEGIN SOLUTION
+  return(FALSE)
+  ### END SOLUTION
+}
+```
+
+## 054（是非題）下面這段程式碼中，當 `x <- -5566` 時，不論 `x < 0` 或 `x > 0` 的條件都會被判斷。
+
+```{r}
+x <- -5566
+if (x < 0) {
+  print("x is negative.")
+} else if (x > 0) {
+  print("x is positive.")
+} else {
+  print("x is zero.")
+}
+```
+
+```{r}
+exercise_054 <- function() {
+  ### BEGIN SOLUTION
+  return(FALSE)
+  ### END SOLUTION
+}
+```
+
+## 055（單選題）下列哪一個保留字的功能不是用來建立流程控制？
+
+1. `function`。
+2. `if...else if...else`。
+3. `for`。
+4. `while`。
+
+```{r}
+exercise_055 <- function() {
+  ### BEGIN SOLUTION
+  return(1)
+  ### END SOLUTION
+}
+```
+
+## 056（程式題）加總清單中的項目。
+
+定義函數 `sum_items_in_list()` 將清單中的項目加總。
+
+- 以 `for` 迴圈或者 `while` 迴圈走訪清單。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+sum_items_in_list <- function(x) {
+  # > sum_items_in_list(list(1, 2, 3))
+  # [1] 6
+  # > sum_items_in_list(list(4, 5, 6, 7, 8))
+  # [1] 30
+  # > sum_items_in_list(list(9, 10, 11))
+  # [1] 30
+  ### BEGIN SOLUTION
+  answer <- 0
+  for (item in x) {
+    answer <- answer + item
+  }
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 057（程式題）加總清單中的數值向量。
+
+定義函數 `sum_numerics_in_list()` 將清單中的數值向量加總。
+
+- 以 `for` 迴圈或者 `while` 迴圈走訪清單。
+- 在迴圈中加入 `if` 條件判斷。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+sum_numerics_in_list <- function(x) {
+  # > sum_numerics_in_list(list(1, "A", 2, "B", 3))
+  # [1] 6
+  # > sum_numerics_in_list(list(4, 5, 6, "C", "D", "E"))
+  # [1] 15
+  # > sum_numerics_in_list(list("F", "G", 7, 8, 9))
+  # [1] 24
+  ### BEGIN SOLUTION
+  answer <- 0
+  for (item in x) {
+    if (is.numeric(item)) {
+      answer <- answer + item
+    }
+  }
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 058（程式題）合併清單中的文字。
+
+定義函數 `combine_characters_in_list()` 將清單中的文字向量合併為一個文字向量。
+
+- 以 `for` 迴圈或者 `while` 迴圈走訪清單。
+- 在迴圈中加入 `if` 條件判斷。
+- 使用 `c()` 函數合併資料。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+combine_characters_in_list <- function(x) {
+  # > combine_characters_in_list(list(1, "A", 2, "B", 3))
+  # [1] "A" "B"
+  # > combine_characters_in_list(list(4, 5, 6, "C", "D", "E"))
+  # [1] "C" "D" "E"
+  # > combine_characters_in_list(list("F", "G", 7, 8, 9))
+  # [1] "F" "G"
+  ### BEGIN SOLUTION
+  answer <- c()
+  for (item in x) {
+    if (is.character(item)) {
+      answer <- c(answer, item)
+    }
+  }
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 059（程式題）合併數值的因數。
+
+定義函數 `combine_numerics_divisors()` 回傳輸入數值的因數。
+
+- 以 `for` 迴圈或者 `while` 迴圈走訪 `1:x`。
+- 在迴圈中加入 `if` 條件判斷。
+- 使用 `c()` 函數合併資料。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+combine_numerics_divisors <- function(x) {
+  # > combine_numerics_divisors(1)
+  # [1] 1
+  # > combine_numerics_divisors(2)
+  # [1] 1 2
+  # > combine_numerics_divisors(3)
+  # [1] 1 3
+  # > combine_numerics_divisors(4)
+  # [1] 1 2 4
+  # > combine_numerics_divisors(5)
+  # [1] 1 5
+  ### BEGIN SOLUTION
+  answer <- c()
+  for (item in 1:x) {
+    if (x %% item == 0) {
+      answer <- c(answer, item)
+    }
+  }
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 060（程式題）判斷質數。
+
+定義函數 `is_prime()` 回傳輸入數值是否為質數。
+
+- 使用 059（程式題）定義的 `combine_numerics_divisors()` 函數。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+is_prime <- function(x) {
+  # > is_prime(1)
+  # [1] FALSE
+  # > is_prime(2)
+  # [1] TRUE
+  # > is_prime(3)
+  # [1] TRUE
+  # > is_prime(4)
+  # [1] FALSE
+  # > is_prime(5)
+  # [1] TRUE
+  ### BEGIN SOLUTION
+  numerics_divisors <- combine_numerics_divisors(x)
+  length_numerics_divisors <- length(numerics_divisors)
+  answer <- length_numerics_divisors == 2
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_051 <- tryCatch({
+  test_that("test_051", {
+    answer <- exercise_051()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_052 <- tryCatch({
+  test_that("test_052", {
+    answer <- exercise_052()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_053 <- tryCatch({
+  test_that("test_053", {
+    answer <- exercise_053()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_054 <- tryCatch({
+  test_that("test_054", {
+    answer <- exercise_054()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_055 <- tryCatch({
+  test_that("test_055", {
+    answer <- exercise_055()
+    expect_equal(answer, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_056 <- tryCatch({
+  test_that("test_056", {
+    expect_equal(sum_items_in_list(list(1, 2, 3)), 6)
+    expect_equal(sum_items_in_list(list(4, 5, 6, 7, 8)), 30)
+    expect_equal(sum_items_in_list(list(9, 10, 11)), 30)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_057 <- tryCatch({
+  test_that("test_057", {
+    expect_equal(sum_numerics_in_list(list(1, "A", 2, "B", 3)), 6)
+    expect_equal(sum_numerics_in_list(list(4, 5, 6, "C", "D", "E")), 15)
+    expect_equal(sum_numerics_in_list(list("F", "G", 7, 8, 9)), 24)
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+test_058 <- tryCatch({
+  test_that("test_058", {
+    answer <- combine_characters_in_list(list(1, "A", 2, "B", 3))
+    expect_equal(answer, c("A", "B"))
+    answer <- combine_characters_in_list(list(4, 5, 6, "C", "D", "E"))
+    expect_equal(answer, c("C", "D", "E"))
+    answer <- combine_characters_in_list(list("F", "G", 7, 8, 9))
+    expect_equal(answer, c("F", "G"))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_059 <- tryCatch({
+  test_that("test_059", {
+    expect_equal(combine_numerics_divisors(1), 1)
+    expect_equal(combine_numerics_divisors(2), 1:2)
+    expect_equal(combine_numerics_divisors(3), c(1, 3))
+    expect_equal(combine_numerics_divisors(4), c(1, 2, 4))
+    expect_equal(combine_numerics_divisors(5), c(1, 5))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_060 <- tryCatch({
+  test_that("test_060", {
+    expect_false(is_prime(1))
+    expect_true(is_prime(2))
+    expect_true(is_prime(3))
+    expect_false(is_prime(4))
+    expect_true(is_prime(5))
+  })
+  }, error = function(e) {
+    FALSE
+})
+all_tests <- c(test_051, 
+               test_052,
+               test_053,
+               test_054,
+               test_055,
+               test_056, 
+               test_057,
+               test_058,
+               test_059,
+               test_060
+              )
+passed_tests <- sum(all_tests)
+sprintf("在使用流程控制管理程式區塊的執行的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```

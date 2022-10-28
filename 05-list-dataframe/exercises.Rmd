@@ -1,0 +1,342 @@
+---
+title: "練習題 041-050"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+```
+
+## 041（是非題）清單 `list` 資料結構只能用來儲存同質的資料類別。
+
+```{r}
+exercise_041 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 042（是非題）資料框 `data.frame` 跟矩陣 `matrix` 是完全相同的資料結構。
+
+```{r}
+exercise_042 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 043（單選題）下列哪一個 R 語言的資料結構用來對應字典（Dictionary）或者雜湊表（Hash table）等鍵値配對的資料結構？
+
+1. `vector`
+2. `matrix`
+3. named `list`
+4. `array`。
+
+```{r}
+exercise_043 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 044（單選題）我們可以使用下列哪一個索引語法選出清單 `your_list` 的資料 `[1] "R"           "Programming" "Statistics"`？
+
+```{r}
+your_list <- list(
+  "logicals" = c(FALSE, TRUE),
+  "numerics" = 1:10,
+  "characters" = c("R", "Programming", "Statistics")
+)
+```
+
+1. `your_list[[3]]`。
+2. `your_list[["characters"]]`。
+3. `your_list$characters`。
+4. 以上皆是。
+
+```{r}
+exercise_044 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 045（單選題）我們可以使用下列哪一個函數建立資料框 `data.frame` 資料結構？
+
+1. `df()`。
+2. `Data.Frame()`。
+3. `data.frame()`。
+4. `dataFrame()`。
+
+```{r}
+exercise_045 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 046（程式題）建立清單。
+
+定義函數 `create_a_list()` 建立一個清單包含下列幾個向量。
+
+```{r}
+odds <- c(1, 3, 5, 7, 9)
+primes <- c(2, 3, 5, 7, 11)
+logicals <- c(FALSE, TRUE)
+characters <- c("R", "Programming", "Statistics")
+```
+
+- 使用 `list()` 函數。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+create_a_list <- function() {
+  # > a_list <- create_a_list()
+  # > length(a_list)
+  # [1] 4
+  # > a_list[[1]]
+  # [1] 1 3 5 7 9
+  # > a_list[[2]]
+  # [1]  2  3  5  7 11
+  # > a_list[[3]]
+  # [1] FALSE  TRUE
+  # > a_list[[4]]
+  # [1] "R"           "Programming" "Statistics"
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 047（程式題）建立命名清單。
+
+定義函數 `create_a_named_list()` 建立一個清單包含下列幾個向量，並分別以 `"odds"`、`"primes"`、`"logicals"` 與 `"characters"` 為命名。
+
+```{r}
+odds <- c(1, 3, 5, 7, 9)
+primes <- c(2, 3, 5, 7, 11)
+logicals <- c(FALSE, TRUE)
+characters <- c("R", "Programming", "Statistics")
+```
+
+- 使用 `list()` 函數。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+create_a_named_list <- function() {
+  # > a_named_list <- create_a_named_list()
+  # > length(a_named_list)
+  # [1] 4
+  # > a_named_list[["odds"]]
+  # [1] 1 3 5 7 9
+  # > a_named_list[["primes"]]
+  # [1]  2  3  5  7 11
+  # > a_named_list[["logicals"]]
+  # [1] FALSE  TRUE
+  # > a_named_list[["characters"]]
+  # [1] "R"           "Programming" "Statistics"
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 048（程式題）清單的第一個與最後一個元素。
+
+定義函數 `create_batman_trilogy_list()` 能夠以命名清單回傳清單中的第一個與最後一個元素。
+
+- 使用索引值選取資料 `list[[index]]`。
+- 使用 `length()` 函數。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+return_first_last_elements_from_list <- function(x) {
+  # > return_first_last_elements_from_list(list(1, 2, 3))
+  # $first
+  # [1] 1
+  #   
+  # $last
+  # [1] 3
+  # > return_first_last_elements_from_list(list(1, 2, 3, 4, 5))
+  # $first
+  # [1] 1
+  #   
+  # $last
+  # [1] 5
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 049（程式題）內建資料框 `iris` 的外型。
+
+定義函數 `return_dim_of_iris()` 回傳內建資料框 `iris` 的外型。
+
+```{r}
+class(iris) # 直接以物件命名就能取得內建資料框
+```
+
+- 以 `iris` 物件命名取得內建資料框。
+- 使用 `dim()` 函數。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+return_dim_of_iris <- function(iris) {
+  # > return_dim_of_iris(iris)
+  # [1] 150   5
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 050（程式題）篩選內建資料框 `iris`。
+
+定義函數 `filter_iris_virginica()` 將內建資料框 `iris` 的 `Species` 變數篩選出 `virginica` 這個品種的觀測值。
+
+- 以邏輯向量篩選 `data.frame[logical, ]`。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+filter_iris_virginica <- function(iris) {
+  # > iris_virginica <- filter_iris_virginica(iris)
+  # > dim(iris_virginica)
+  # [1] 50  5
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_041 <- tryCatch({
+  test_that("test_041", {
+    answer <- exercise_041()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_042 <- tryCatch({
+  test_that("test_042", {
+    answer <- exercise_042()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_043 <- tryCatch({
+  test_that("test_043", {
+    answer <- exercise_043()
+    expect_equal(answer, 3)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_044 <- tryCatch({
+  test_that("test_044", {
+    answer <- exercise_044()
+    expect_equal(answer, 4)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_045 <- tryCatch({
+  test_that("test_045", {
+    answer <- exercise_045()
+    expect_equal(answer, 3)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_046 <- tryCatch({
+  test_that("test_046", {
+    a_list <- create_a_list()
+    expect_equal(length(a_list), 4)
+    expect_equal(a_list[[1]], c(1, 3, 5, 7, 9))
+    expect_equal(a_list[[2]], c(2, 3, 5, 7, 11))
+    expect_equal(a_list[[3]], c(FALSE, TRUE))
+    expect_equal(a_list[[4]], c("R", "Programming", "Statistics"))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_047 <- tryCatch({
+  test_that("test_047", {
+    a_named_list <- create_a_named_list()
+    expect_equal(length(a_named_list), 4)
+    expect_equal(a_named_list[["odds"]], c(1, 3, 5, 7, 9))
+    expect_equal(a_named_list[["primes"]], c(2, 3, 5, 7, 11))
+    expect_equal(a_named_list[["logicals"]], c(FALSE, TRUE))
+    expect_equal(a_named_list[["characters"]], c("R", "Programming", "Statistics"))
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+test_048 <- tryCatch({
+  test_that("test_048", {
+    answer <- return_first_last_elements_from_list(list(1, 2, 3))
+    expect_equal(answer[["first"]], 1)
+    expect_equal(answer[["last"]], 3)
+    answer <- return_first_last_elements_from_list(list(1, 2, 3, 4, 5))
+    expect_equal(answer[["first"]], 1)
+    expect_equal(answer[["last"]], 5)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_049 <- tryCatch({
+  test_that("test_049", {
+    answer <- return_dim_of_iris(iris)
+    expect_equal(answer, c(150, 5))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_050 <- tryCatch({
+  test_that("test_050", {
+    answer <- filter_iris_virginica(iris)
+    expect_equal(dim(answer), c(50, 5))
+  })
+  }, error = function(e) {
+    FALSE
+})
+all_tests <- c(test_041, 
+               test_042,
+               test_043,
+               test_044,
+               test_045,
+               test_046, 
+               test_047,
+               test_048,
+               test_049,
+               test_050
+              )
+passed_tests <- sum(all_tests)
+sprintf("在建立清單、資料框儲存異質資料的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```

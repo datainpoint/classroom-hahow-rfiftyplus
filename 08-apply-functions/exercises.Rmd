@@ -1,0 +1,365 @@
+---
+title: "練習題 071-080"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+```
+
+## 071（是非題）`apply()` 函數家族與前面章節所提及的通用函數、聚合函數沒有差別。
+
+```{r}
+exercise_071 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 072（是非題）匿名函數可以獨立地被使用。
+
+```{r}
+exercise_072 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 073（是非題）定義函數結構中的 `{}` 可以被省略。
+
+```{r}
+exercise_073 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 074（單選題）`apply()` 函數家族又被稱為？
+
+1. 函數型函數。
+2. 物件導向型函數。
+3. 超函數。
+4. 專用函數。
+
+```{r}
+exercise_074 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 075（單選題）下列哪一個不是 R 語言使用者重複執行程式碼時會使用的技巧？
+
+1. 向量運算。
+2. 迴圈。
+3. `apply()` 函數家族。
+4. 複製貼上。
+
+```{r}
+exercise_075 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 076（程式題）列總和與欄總和。
+
+定義函數 `return_row_sums_column_sums`()` 將輸入矩陣的列總和與欄總和回傳。
+
+- 使用 `rowSums()` 函數計算列總和。
+- 使用 `colSums()` 函數計算欄總和。
+- 以命名清單儲存列總和與欄總和。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+return_row_sums_column_sums <- function(X) {
+  # > m <- matrix(1:20, nrow = 4)
+  # > return_row_sums_column_sums(m)
+  # $rowSums
+  # [1] 45 50 55 60
+  #
+  # $colSums
+  # [1] 10 26 42 58 74
+  # > m <- matrix(21:35, nrow = 3)
+  # > return_row_sums_column_sums(m)
+  # $rowSums
+  # [1] 135 140 145
+  #
+  # $colSums
+  # [1]  66  75  84  93 102
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 077（程式題）列最大值與欄最大值。
+
+定義函數 `return_row_max_column_max`()` 將輸入矩陣的列最大值與欄最大值回傳。
+
+- 使用 `apply()` 函數與 `max()` 計算列最大值、欄最大值。
+- 以命名清單儲存列最大值與欄最大值。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+return_row_max_column_max <- function(X) {
+  # > m <- matrix(1:20, nrow = 4)
+  # > return_row_max_column_max(m)
+  # $rowMax
+  # [1] 17 18 19 20
+  #
+  # $colMax
+  # [1]  4  8 12 16 20
+  # > m <- matrix(21:35, nrow = 3)
+  # > return_row_max_column_max(m)
+  # $rowMax
+  # [1] 33 34 35
+  #
+  # $colMax
+  # [1] 23 26 29 32 35
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 078（程式題）將清單中的數值向量開根號乘以十並無條件進位。
+
+定義函數 `lapply_sqrt_multiply_ten_ceiling()` 將清單中的數值向量開根號乘以十並無條件進位。
+
+$$
+\text{adjusted_score} = \text{ceiling} ( \sqrt{\text{score}} \times 10 )
+$$
+
+- 使用 `lapply()` 函數與匿名函數開根號乘以十並無條件進位。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+lapply_sqrt_multiply_ten_ceiling <- function(x) {
+  # > scores <- list(0, 10, 20)
+  # > lapply_sqrt_multiply_ten_ceiling(scores)
+  # [[1]]
+  # [1] 0
+  #
+  # [[2]]
+  # [1] 32
+  #
+  # [[3]]
+  # [1] 45
+  # > scores <- list(80, 90, 100)
+  # > lapply_sqrt_multiply_ten_ceiling(scores)
+  # [[1]]
+  # [1] 90
+  #
+  # [[2]]
+  # [1] 95
+  #
+  # [[3]]
+  # [1] 100
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 079（程式題）計算圓面積。
+
+定義函數 `calculate_circle_area()` 可以根據清單中的圓形半徑計算圓面積。
+
+$$
+\text{circle area} = \pi r^2
+$$
+
+- 使用 `sapply()` 函數與匿名函數計算圓面積。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+calculate_circle_area <- function(x) {
+  # > radiuses <- list(3, 4, 5)
+  # > calculate_circle_area(radiuses)
+  # [1] 28.27433 50.26548 78.53982
+  # > radiuses <- list(5, 12, 13)
+  # > calculate_circle_area(radiuses)
+  # [1]  78.53982 452.38934 530.92916
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 080（程式題）計算身體質量指數 BMI。
+
+定義函數 `calculate_bmi()` 可以根據清單中的身高、體重計算身體質量指數 BMI(Body Mass Index)。
+
+$$
+\text{BMI} = \frac{\text{weight}_{kg}}{\text{height}_m^2}
+$$
+
+- 使用 `mapply()` 函數與匿名函數計算 BMI。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+calculate_bmi <- function(weights, heights) {
+  # LeBron James, Cristiano Ronaldo, Roger Federer, Suguru Osako
+  # > weights <- list(113, 85, 85, 52)
+  # > heights <- list(206, 187, 185, 170)
+  # > calculate_bmi(weights, heights)
+  # [1] 26.62833 24.30724 24.83565 17.99308
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_071 <- tryCatch({
+  test_that("test_071", {
+    answer <- exercise_071()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_072 <- tryCatch({
+  test_that("test_072", {
+    answer <- exercise_072()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_073 <- tryCatch({
+  test_that("test_073", {
+    answer <- exercise_073()
+    expect_true(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_074 <- tryCatch({
+  test_that("test_074", {
+    answer <- exercise_074()
+    expect_equal(answer, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_075 <- tryCatch({
+  test_that("test_075", {
+    answer <- exercise_075()
+    expect_equal(answer, 4)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_076 <- tryCatch({
+  test_that("test_076", {
+    m <- matrix(1:20, nrow = 4)
+    answer <- return_row_sums_column_sums(m)
+    expect_equal(answer$rowSums, c(45, 50, 55, 60))
+    expect_equal(answer$colSums, c(10, 26, 42, 58, 74))
+    m <- matrix(21:35, nrow = 3)
+    answer <- return_row_sums_column_sums(m)
+    expect_equal(answer$rowSums, c(135, 140, 145))
+    expect_equal(answer$colSums, c(66,  75,  84,  93, 102))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_077 <- tryCatch({
+  test_that("test_077", {
+    m <- matrix(1:20, nrow = 4)
+    answer <- return_row_max_column_max(m)
+    expect_equal(answer$rowMax, c(17, 18, 19, 20))
+    expect_equal(answer$colMax, c(4,  8, 12, 16, 20))
+    m <- matrix(21:35, nrow = 3)
+    answer <- return_row_max_column_max(m)
+    expect_equal(answer$rowMax, c(33, 34, 35))
+    expect_equal(answer$colMax, c(23, 26, 29, 32, 35))
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+test_078 <- tryCatch({
+  test_that("test_078", {
+    scores <- list(0, 10, 20)
+    answer <- lapply_sqrt_multiply_ten_ceiling(scores)
+    expect_equal(answer[[1]], 0)
+    expect_equal(answer[[2]], 32)
+    expect_equal(answer[[3]], 45)
+    scores <- list(80, 90, 100)
+    answer <- lapply_sqrt_multiply_ten_ceiling(scores)
+    expect_equal(answer[[1]], 90)
+    expect_equal(answer[[2]], 95)
+    expect_equal(answer[[3]], 100)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_079 <- tryCatch({
+  test_that("test_079", {
+    radiuses <- list(3, 4, 5)
+    answer <- calculate_circle_area(radiuses)
+    expect_gt(answer[1], 28)
+    expect_gt(answer[2], 50)
+    expect_gt(answer[3], 78)
+    radiuses <- list(5, 12, 13)
+    answer <- calculate_circle_area(radiuses)
+    expect_gt(answer[1], 78)
+    expect_gt(answer[2], 452)
+    expect_gt(answer[3], 530)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_080 <- tryCatch({
+  test_that("test_080", {
+    weights <- list(113, 85, 85, 52)
+    heights <- list(206, 187, 185, 170)
+    answer <- calculate_bmi(weights, heights)
+    expect_gt(answer[1], 26)
+    expect_gt(answer[2], 24)
+    expect_gt(answer[3], 24)
+    expect_gt(answer[4], 17)
+  })
+  }, error = function(e) {
+    FALSE
+})
+all_tests <- c(test_071, 
+               test_072,
+               test_073,
+               test_074,
+               test_075,
+               test_076, 
+               test_077,
+               test_078,
+               test_079,
+               test_080
+              )
+passed_tests <- sum(all_tests)
+sprintf("在從 apply() 函數家族認識函數型程式設計的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```
