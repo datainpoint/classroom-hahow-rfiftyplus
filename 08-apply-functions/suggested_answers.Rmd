@@ -82,7 +82,7 @@ exercise_075 <- function() {
 
 ## 076（程式題）列總和與欄總和。
 
-定義函數 `return_row_sums_column_sums`()` 將輸入矩陣的列總和與欄總和回傳。
+定義函數 `return_row_sums_column_sums()` 將輸入矩陣的列總和與欄總和回傳。
 
 - 使用 `rowSums()` 函數計算列總和。
 - 使用 `colSums()` 函數計算欄總和。
@@ -119,7 +119,7 @@ return_row_sums_column_sums <- function(X) {
 
 ## 077（程式題）列最大值與欄最大值。
 
-定義函數 `return_row_max_column_max`()` 將輸入矩陣的列最大值與欄最大值回傳。
+定義函數 `return_row_max_column_max()` 將輸入矩陣的列最大值與欄最大值回傳。
 
 - 使用 `apply()` 函數與 `max()` 計算列最大值、欄最大值。
 - 以命名清單儲存列最大值與欄最大值。

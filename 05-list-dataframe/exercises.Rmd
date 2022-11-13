@@ -161,7 +161,7 @@ create_a_named_list <- function() {
 
 ## 048（程式題）清單的第一個與最後一個元素。
 
-定義函數 `create_batman_trilogy_list()` 能夠以命名清單回傳清單中的第一個與最後一個元素。
+定義函數 `return_first_last_elements_from_list()` 能夠以命名清單回傳清單中的第一個與最後一個元素。
 
 - 使用索引值選取資料 `list[[index]]`。
 - 使用 `length()` 函數。
