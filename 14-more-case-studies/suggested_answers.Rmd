@@ -1,0 +1,385 @@
+---
+title: "練習題詳解 131-140"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat", "dplyr")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+library("dplyr")
+```
+
+## 131（是非題）在一個 30 人左右的小班級，其中有兩個學生同一天生日的可能性很低。
+
+```{r}
+exercise_131 <- function() {
+  ### BEGIN SOLUTION
+  return(FALSE)
+  ### END SOLUTION
+}
+```
+
+## 132（是非題）如果我們有機會參加「蒙提霍爾遊戲」，選定門之後，主持人會開啟一扇是山羊的門；並問我們：「要不要換一扇門？」這時我們可以擲銅板決定換或者不換，因為對贏得汽車的機率並沒有差別。
+
+```{r}
+exercise_132 <- function() {
+  ### BEGIN SOLUTION
+  return(FALSE)
+  ### END SOLUTION
+}
+```
+
+## 133（單選題）一個班級中的人數大約要超過多少，有兩人同一天生日的機率就會超過 50%？
+
+1. 15 人。
+2. 23 人。
+3. 30 人。
+4. 60 人。
+
+```{r}
+exercise_133 <- function() {
+  ### BEGIN SOLUTION
+  return(2)
+  ### END SOLUTION
+}
+```
+
+## 134（單選題）「蒙提霍爾遊戲」中在主持人開啟一扇是山羊的門之前，參賽者贏得汽車的機率為何？
+
+1. `33.3%`。
+2. `50%`。
+3. `66.7%`。
+4. `75%`。
+
+```{r}
+exercise_134 <- function() {
+  ### BEGIN SOLUTION
+  return(1)
+  ### END SOLUTION
+}
+```
+
+## 135（單選題）「蒙提霍爾遊戲」中在主持人開啟一扇是山羊的門之後，參賽者的優勢策略（Dominant strategy）為何？
+
+1. 更換選擇（switch）。
+2. 不換（stick）。
+3. 混合策略，以 `50% vs. 50%` 機率決定更換選擇（switch）或不換（stick）。
+4. 混合策略，以 `67% vs. 33%` 機率決定更換選擇（switch）或不換（stick）。
+
+```{r}
+exercise_135 <- function() {
+  ### BEGIN SOLUTION
+  return(1)
+  ### END SOLUTION
+}
+```
+
+## 136（程式題）載入 `players.csv` 並依照 `heightMeters` 排序。
+
+定義函數 `import_players_csv()` 將工作目錄中的 `players.csv` 載入，並以 `heightMeters` 排序。
+
+- 指定檔案的相對路徑。
+- 以排序資料框的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+import_players_csv <- function() {
+  # > players <- import_players_csv()
+  # > class(players)
+  # [1] "data.frame"
+  # > dim(players)
+  # [1] 484  18
+  ### BEGIN SOLUTION
+  file_path <- "players.csv"
+  answer <- read.csv(file_path) |>
+    dplyr::arrange(heightMeters)
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 137（程式題）偏誤抽樣。
+
+定義函數 `biased_sampling()` 將 `players` 資料框中前十矮與前十高的球員挑選出來。
+
+- 使用 `import_players_csv()` 函數。
+- 以索引值挑選前十矮與前十高的球員身高。
+- 以命名清單（Named `list`）儲存答案。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+biased_sampling <- function() {
+  # > biased_samples <- biased_sampling()
+  # > biased_samples
+  # $shortest_ten
+  # [1] 1.78 1.78 1.78 1.78 1.80 1.80 1.80 1.80 1.83 1.83
+  #
+  # $tallest_ten
+  # [1] 2.13 2.13 2.16 2.16 2.18 2.18 2.18 2.21 2.24 2.26
+  ### BEGIN SOLUTION
+  players <- import_players_csv()
+  nrows <- nrow(players)
+  shortest_ten <- players$heightMeters[1:10]
+  tallest_ten <- players$heightMeters[(nrows - 9):nrows]
+  answer <- list(
+    "shortest_ten" = shortest_ten,
+    "tallest_ten" = tallest_ten
+  )
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 138（程式題）以統計分析檢定，偏誤抽樣的平均身高是否與 NBA 球員平均身高有差。
+
+$$
+H_0: \bar{x} = \mu \\
+H_1: \bar{x} \neq \mu
+$$
+
+以 z 統計值來判斷兩個平均數之間的差距是否足夠「顯著」。
+
+$$
+z = \frac{\bar{x} - \mu}{\sigma}
+$$
+
+信賴係數 $\alpha = 0.05$、信賴區間 95% 時的分界點。
+
+```{r}
+alpha <- 0.05
+z_half_alpha <- qnorm(1 - alpha/2)
+cut_off_points <- c(-z_half_alpha, z_half_alpha)
+cut_off_points
+```
+- 使用 `import_players_csv()` 函數。
+- 使用 `biased_sampling()` 函數。
+- 計算前十矮與前十高的球員平均身高 z 統計值。
+- 判斷是否介於分界點 `cut_off_points` 之間。
+- 以命名清單（Named `list`）儲存答案
+- 介於分界點 `cut_off_points` 之間為「不拒絕虛無假設」，反之則為「拒絕虛無假設」。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+ztest_for_biased_sampling <- function() {
+  # > ztest_for_biased_sampling()
+  # $shortest_test
+  # [1] "Reject null hypothesis."
+  #
+  # $tallest_test
+  # [1] "Reject null hypothesis."
+  ### BEGIN SOLUTION
+  biased_samples <- biased_sampling()
+  players <- import_players_csv()
+  mean_heightMeters <- mean(players$heightMeters)
+  n <- nrow(players)
+  sd_heightMeters <- sqrt(var(players$heightMeters) * (n - 1) / n)
+  shortest_zstat <- (mean(biased_samples$shortest_ten) - mean_heightMeters) / sd_heightMeters
+  tallest_zstat <- (mean(biased_samples$tallest_ten) - mean_heightMeters) / sd_heightMeters
+  cut_off_points <- c(-1.96, 1.96)
+  if (shortest_zstat <= max(cut_off_points) & shortest_zstat >= min(cut_off_points)) {
+    shortest_test <- "Do not reject null hypothesis."
+  } else {
+    shortest_test <- "Reject null hypothesis."
+  }
+  if (tallest_zstat <= max(cut_off_points) & tallest_zstat >= min(cut_off_points)) {
+    tallest_test <- "Do not reject null hypothesis."
+  } else {
+    tallest_test <- "Reject null hypothesis."
+  }
+  answer <- list(
+    "shortest_test" = shortest_test,
+    "tallest_test" = tallest_test
+  )
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 139（程式題）隨機抽樣。
+
+定義函數 `random_sampling()` 從 `players` 資料框中隨機抽樣三十位球員。
+
+- 使用 `import_players_csv()` 函數。
+- 使用 `sample()` 函數。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+random_sampling <- function() {
+  # > random_samples <- random_sampling()
+  # > length(random_samples)
+  # [1] 30
+  ### BEGIN SOLUTION
+  players <- import_players_csv()
+  answer <- sample(players$heightMeters, size = 30)
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 140（程式題）以統計分析檢定，隨機抽樣的平均身高是否與 NBA 球員平均身高有差。
+
+$$
+H_0: \bar{x} = \mu \\
+H_1: \bar{x} \neq \mu
+$$
+
+以 z 統計值來判斷兩個平均數之間的差距是否足夠「顯著」。
+
+$$
+z = \frac{\bar{x} - \mu}{\sigma}
+$$
+
+信賴係數 $\alpha = 0.05$、信賴區間 95% 時的分界點
+
+```{r}
+alpha <- 0.05
+z_half_alpha <- qnorm(1 - alpha/2)
+cut_off_points <- c(-z_half_alpha, z_half_alpha)
+cut_off_points
+```
+- 使用 `import_players_csv()` 函數。
+- 使用 `random_sampling()` 函數。
+- 計算隨機抽樣球員平均身高 z 統計值。
+- 判斷是否介於分界點 `cut_off_points` 之間。
+- 以命名清單（Named `list`）儲存答案
+- 介於分界點 `cut_off_points` 之間為「不拒絕虛無假設」，反之則為「拒絕虛無假設」。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+ztest_for_random_sampling <- function() {
+  # > ztest_for_random_sampling()
+  # [1] "Do not reject null hypothesis."
+  ### BEGIN SOLUTION
+  random_samples <- random_sampling()
+  players <- import_players_csv()
+  mean_heightMeters <- mean(players$heightMeters)
+  n <- nrow(players)
+  sd_heightMeters <- sqrt(var(players$heightMeters) * (n - 1) / n)
+  zstat <- (mean(random_samples) - mean_heightMeters) / sd_heightMeters
+  cut_off_points <- c(-1.96, 1.96)
+  if (zstat <= max(cut_off_points) & zstat >= min(cut_off_points)) {
+    answer <- "Do not reject null hypothesis."
+  } else {
+    answer <- "Reject null hypothesis."
+  }
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_131 <- tryCatch({
+  test_that("test_131", {
+    answer <- exercise_131()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_132 <- tryCatch({
+  test_that("test_132", {
+    answer <- exercise_132()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_133 <- tryCatch({
+  test_that("test_133", {
+    answer <- exercise_133()
+    expect_equal(answer, 2)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_134 <- tryCatch({
+  test_that("test_134", {
+    answer <- exercise_134()
+    expect_equal(answer, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_135 <- tryCatch({
+  test_that("test_135", {
+    answer <- exercise_135()
+    expect_equal(answer, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_136 <- tryCatch({
+  test_that("test_136", {
+    players <- import_players_csv()
+    expect_s3_class(players, "data.frame")
+    expect_equal(dim(players), c(484, 18))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_137 <- tryCatch({
+  test_that("test_137", {
+    biased_samples <- biased_sampling()
+    expect_equal(length(biased_samples$shortest_ten), 10)
+    expect_equal(length(biased_samples$tallest_ten), 10)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_138 <- tryCatch({
+  test_that("test_138", {
+    answer <- ztest_for_biased_sampling()
+    expect_true(grepl("Reject", answer$shortest_test))
+    expect_true(grepl("Reject", answer$tallest_test))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_139 <- tryCatch({
+  test_that("test_139", {
+    random_samples <- random_sampling()
+    expect_equal(length(random_samples), 30)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_140 <- tryCatch({
+  test_that("test_140", {
+    answer <- ztest_for_random_sampling()
+    expect_true(grepl("Do not reject", answer))
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+all_tests <- c(test_131, 
+               test_132,
+               test_133,
+               test_134,
+               test_135,
+               test_136, 
+               test_137,
+               test_138,
+               test_139,
+               test_140
+              )
+passed_tests <- sum(all_tests)
+sprintf("在更多個案研究的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```

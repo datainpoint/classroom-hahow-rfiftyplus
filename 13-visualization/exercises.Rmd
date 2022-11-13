@@ -1,0 +1,293 @@
+---
+title: "練習題 121-130"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat", "dplyr", "tidyr", "ggplot2")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+library("dplyr")
+library("tidyr")
+library("ggplot2")
+```
+
+## 121（是非題）對人來說原始資料相當具體，不需要視覺化的輔助來幫助理解。
+
+```{r}
+exercise_121 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 122（是非題）R 語言僅能使用 Base plotting system 作為資料視覺化的工具。
+
+```{r}
+exercise_122 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 123（單選題）`ggplot2` 套件的功能可以用下列哪一句話概括？
+
+1. A model builder.
+2. A grammar of graphics.
+3. A grammar of data manipulation.
+4. A canvas for data scientists.
+
+```{r}
+exercise_123 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 124（單選題）下列哪一個運算符能用來搭配 `ggplot2` 套件堆疊圖形函數與添加圖形元素？
+
+1. `+`
+2. `-`
+3. `>>`
+4. `|>`
+
+```{r}
+exercise_124 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 125（單選題）使用 `ggplot2::ggplot()` 函數的時候會搭配下列哪一個函數建立座標系統？
+
+1. `ggplo2::coordinates()`。
+2. `ggplo2::xyaxis()`。
+3. `ggplo2::mapping()`。
+4. `ggplo2::aes()`。
+
+```{r}
+exercise_125 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 寫作程式題之前先使用 `import_time_series()` 函數獲得 `time_series` 資料框。
+
+```{r}
+import_time_series <- function() {
+  time_series_route <- "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/"
+  confirmed_file_name <- "time_series_covid19_confirmed_global.csv"
+  deaths_file_name <- "time_series_covid19_deaths_global.csv"
+  confirmed_file_url <- paste0(time_series_route, confirmed_file_name)
+  deaths_file_url <- paste0(time_series_route, deaths_file_name)
+  time_series_confirmed <- read.csv(confirmed_file_url)
+  time_series_deaths <- read.csv(deaths_file_url)
+  cols_not_to_pivot <- c("Province.State", "Country.Region", "Lat", "Long")
+  time_series_confirmed_long <- time_series_confirmed |>
+    tidyr::pivot_longer(cols = !all_of(cols_not_to_pivot), names_to = "Date", values_to = "Confirmed")
+  time_series_deaths_long <- time_series_deaths |>
+    tidyr::pivot_longer(cols = !all_of(cols_not_to_pivot), names_to = "Date", values_to = "Deaths")
+  time_series_confirmed_long$Date <- sub(pattern = "X", replacement = "", time_series_confirmed_long$Date)
+  time_series_deaths_long$Date <- sub(pattern = "X", replacement = "", time_series_deaths_long$Date)
+  from_format <- "%m.%d.%y"
+time_series_confirmed_long$Date <- as.Date(time_series_confirmed_long$Date, format = from_format)
+time_series_deaths_long$Date <- as.Date(time_series_deaths_long$Date, format = from_format)
+  time_series <- dplyr::inner_join(time_series_confirmed_long, time_series_deaths_long, by = c("Province.State" = "Province.State",
+                                "Country.Region" = "Country.Region",
+                                "Lat" = "Lat",
+                                "Long" = "Long",
+                                "Date" = "Date"))
+  return(time_series)
+}
+time_series <- import_time_series()
+```
+
+## 126（程式題）各國確診死亡人數總計。
+
+定義函數 `sum_confirmed_deaths_by_countries()` 輸出 `time_series` 資料框的各國確診、死亡人數總計。
+
+- 以篩選觀測值的技巧操作。
+- 以分組聚合的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+sum_confirmed_deaths_by_countries <- function(time_series) {
+  # > confirmed_deaths_by_countries <- sum_confirmed_deaths_by_countries(time_series)
+  # > ncol(confirmed_deaths_by_countries)
+  # [1] 3
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 127（程式題）以 `ggplot2` 繪製水平長條圖視覺化前十大確診人數的國家（作圖不跑測試）。
+
+接續上題，定義函數 `plot_top_ten_confirmed_by_countries()` 以 `ggplot2` 繪製水平長條圖視覺化前十大確診人數的國家。
+
+- 使用 `sum_confirmed_deaths_by_countries()` 函數。
+- 使用 `dplry::arrange()` 函數排序。
+- 使用 `head()` 函數。
+- 使用 `ggplot2::ggplot()` 函數與 `ggplot2::aes()` 函數建立座標系統。
+- 使用 `ggplot2::geom_bar(stat = "identity")` 函數繪製觀察排序的長條圖。
+- 使用 `ggplot2::coord_flip()` 函數將長條圖反轉為水平。
+
+```{r}
+plot_top_ten_confirmed_by_countries <- function() {
+  # > plot_top_ten_confirmed_by_countries()
+  # Check "Plots" panel
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 128（程式題）以 `ggplot2` 繪製水平長條圖視覺化前十大死亡人數的國家（作圖不跑測試）。
+
+接續上題，定義函數 `plot_top_ten_deaths_by_countries()` 以 `ggplot2` 繪製水平長條圖視覺化前十大死亡人數的國家。
+
+- 使用 `sum_confirmed_deaths_by_countries()` 函數。
+- 使用 `dplry::arrange()` 函數排序。
+- 使用 `head()` 函數。
+- 使用 `ggplot2::ggplot()` 函數與 `ggplot2::aes()` 函數建立座標系統。
+- 使用 `ggplot2::geom_bar(stat = "identity")` 函數繪製觀察排序的長條圖。
+- 使用 `ggplot2::coord_flip()` 函數將長條圖反轉為水平。
+
+```{r}
+plot_top_ten_deaths_by_countries <- function() {
+  # > plot_top_ten_deaths_by_countries()
+  # Check "Plots" panel
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 129（程式題）各國確診死亡人數依國家、日數總計。
+
+定義函數 `sum_confirmed_deaths_by_countries_dates()` 輸出 `time_series` 資料框的各國依日期的確診、死亡人數總計。
+
+- 以分組聚合的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+sum_confirmed_deaths_by_countries_dates <- function(time_series) {
+  # > confirmed_deaths_by_countries_dates <- sum_confirmed_deaths_by_countries_dates(time_series)
+  # > ncol(confirmed_deaths_by_countries_dates)
+  # [1] 4
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 130（程式題）以 `ggplot2` 繪製線圖視覺化台灣、南韓、日本與新加坡的確診人數趨勢（作圖不跑測試）。
+
+接續上題，定義函數 `plot_lines()` 以 `ggplot2` 繪製線圖視覺化台灣（`"Taiwan*"`）、南韓（`"Korea, South"`）、日本（`"Japan"`）與新加坡（`"Singapore"`）的確診人數趨勢。
+
+- 使用 `sum_confirmed_deaths_by_countries_dates()` 函數。
+- 以篩選觀測值的技巧操作。
+- 使用 `ggplot2::ggplot()` 函數與 `ggplot2::aes()` 函數建立座標系統。
+- 使用 `ggplot2::geom_line()` 函數繪製觀察趨勢的線圖。
+
+```{r}
+plot_lines <- function() {
+  # > plot_lines()
+  # Check "Plots" panel
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_121 <- tryCatch({
+  test_that("test_121", {
+    answer <- exercise_121()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_122 <- tryCatch({
+  test_that("test_122", {
+    answer <- exercise_122()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_123 <- tryCatch({
+  test_that("test_123", {
+    answer <- exercise_123()
+    expect_equal(answer, 2)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_124 <- tryCatch({
+  test_that("test_124", {
+    answer <- exercise_124()
+    expect_equal(answer, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_125 <- tryCatch({
+  test_that("test_125", {
+    answer <- exercise_125()
+    expect_equal(answer, 4)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_126 <- tryCatch({
+  test_that("test_126", {
+    confirmed_deaths_by_countries <- sum_confirmed_deaths_by_countries(time_series)
+    expect_equal(ncol(confirmed_deaths_by_countries), 3)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_129 <- tryCatch({
+  test_that("test_129", {
+    confirmed_deaths_by_countries_dates <- sum_confirmed_deaths_by_countries_dates(time_series)
+    expect_equal(ncol(confirmed_deaths_by_countries_dates), 4)
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+all_tests <- c(test_121, 
+               test_122,
+               test_123,
+               test_124,
+               test_125,
+               test_126, 
+               test_129
+              )
+passed_tests <- sum(all_tests)
+sprintf("在視覺化文法的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```

@@ -1,0 +1,373 @@
+---
+title: "練習題 111-120"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat", "dplyr", "tidyr", "RSQLite", "DBI")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+library("DBI")
+library("dplyr")
+library("tidyr")
+```
+
+## 111（是非題）使用 `tidyr` 套件的 `pivot_longer()` 函數可以將資料框由長格式轉為寬格式。
+
+```{r}
+exercise_111 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 112（是非題）內部連接（Inner join）可以保留兩個關聯資料框聯集的觀測值。
+
+```{r}
+exercise_112 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 113（單選題）下列哪一個函數能夠讓我們實踐資料框的內部連接？
+
+1. `dplyr::left_join()`。
+2. `dplyr::right_join()`。
+3. `dplyr::full_join()`。
+4. `merge()`。
+
+```{r}
+exercise_113 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 114（單選題）`merge()` 函數預設的參數是下列哪一種連接？
+
+1. 內部連接（Inner join）。
+2. 左外部連接（Left join）。
+3. 右外部連接（Right join）。
+4. 全外部連接（Full join）。
+
+```{r}
+exercise_114 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 115（單選題）下列哪一個連接可以保留左資料框所有的觀測值？
+
+1. 內部連接（Inner join）。
+2. 左外部連接（Left join）。
+3. 右外部連接（Right join）。
+4. 全外部連接（Full join）。
+
+```{r}
+exercise_115 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 116（程式題）選擇 `movies` 資料表的欄位。
+
+定義函數 `select_columns_from_movies()` 將工作目錄中的 `imdb.db` 資料庫 `"movies"` 資料表載入，並選擇四個欄位 `title`、`release_year`、`rating` 與 `runtime`。
+
+- 指定檔案的相對路徑。
+- 使用 `DBI::dbConnect()` 函數建立資料庫連線。
+- 使用 `DBI::dbReadTable()` 函數載入。
+- 以選擇欄位的技巧操作。
+- 使用 `DBI::dbDisconnect()` 函數中斷資料庫連線。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+select_columns_from_movies <- function() {
+  # > columns_from_movies <- select_columns_from_movies()
+  # > class(columns_from_movies)
+  # [1] "data.frame"
+  # > dim(columns_from_movies)
+  # [1] 250   4 
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 117（程式題）寬格式轉長格式。
+
+接續上題，定義函數 `pivot_longer_selected_movies()` 將選擇四個欄位的資料框由寬格式轉換為長格式，變數名稱命名為 `variable`、數值名稱命名為 `value`。
+
+- 使用 `select_columns_from_movies()` 函數。
+- 使用 `tidyr::pivot_longer()` 函數。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+pivot_longer_selected_movies <- function() {
+  # > longer_selected_movies <- pivot_longer_selected_movies()
+  # > dim(longer_selected_movies)
+  # [1] 750   3
+  # > head(longer_selected_movies)
+  # # A tibble: 6 × 3
+  #   title                    variable      value
+  #   <chr>                    <chr>         <dbl>
+  # 1 The Shawshank Redemption release_year 1994  
+  # 2 The Shawshank Redemption rating          9.3
+  # 3 The Shawshank Redemption runtime       142  
+  # 4 The Godfather            release_year 1972  
+  # 5 The Godfather            rating          9.2
+  # 6 The Godfather            runtime       175
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 118（程式題）篩選魔戒三部曲以及蝙蝠俠（黑暗騎士）三部曲。
+
+定義函數 `filter_two_trilogies()` 將工作目錄中的 `imdb.db` 資料庫 `"movies"` 資料表載入，並篩選其中的魔戒三部曲以及蝙蝠俠（黑暗騎士）三部曲。
+
+- 指定檔案的相對路徑。
+- 使用 `DBI::dbConnect()` 函數建立資料庫連線。
+- 使用 `DBI::dbReadTable()` 函數載入。
+- 以篩選觀測值的技巧操作。
+- 使用 `DBI::dbDisconnect()` 函數中斷資料庫連線。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+filter_two_trilogies <- function() {
+  # > two_trilogies <- filter_two_trilogies()
+  # > dim(two_trilogies)
+  # [1] 6 6
+  # > two_trilogies$title
+  # [1] "Batman Begins"                                    
+  # [2] "The Dark Knight"                                  
+  # [3] "The Dark Knight Rises"                            
+  # [4] "The Lord of the Rings: The Fellowship of the Ring"
+  # [5] "The Lord of the Rings: The Two Towers"            
+  # [6] "The Lord of the Rings: The Return of the King"
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 119（程式題）魔戒三部曲以及蝙蝠俠（黑暗騎士）三部曲的卡司。
+
+定義函數 `inner_join_trilogy_casting()` 將魔戒三部曲以及蝙蝠俠（黑暗騎士）三部曲與工作目錄中的 `imdb.db` 資料庫 `"casting"` 資料表內部連接，並選擇 `title`、`actor_id` 與 `ord`。
+
+- 指定檔案的相對路徑。
+- 使用 `DBI::dbConnect()` 函數建立資料庫連線。
+- 使用 `DBI::dbReadTable()` 函數載入。
+- 使用 `DBI::dbDisconnect()` 函數中斷資料庫連線。
+- 使用 `filter_two_trilogies()` 函數。
+- 以關聯資料框的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+inner_join_trilogy_casting <- function() {
+  # > trilogy_casting <- inner_join_trilogy_casting()
+  # > dim(trilogy_casting)
+  # [1] 90  3
+  # > head(trilogy_casting)
+  #          title actor_id ord
+  #1 Batman Begins      502   1
+  #2 Batman Begins     2015   2
+  #3 Batman Begins     1783   3
+  #4 Batman Begins     1613   4
+  #5 Batman Begins      985   5
+  #6 Batman Begins      528   6
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 120（程式題）魔戒三部曲以及蝙蝠俠（黑暗騎士）三部曲的演員。
+
+接續上題，定義函數 `inner_join_trilogy_casting_actors()` 將魔戒三部曲以及蝙蝠俠（黑暗騎士）三部曲的卡司與工作目錄中的 `imdb.db` 資料庫 `"actors"` 資料表內部連接，並選擇 `title`、`ord` 與 `name`。
+
+- 指定檔案的相對路徑。
+- 使用 `DBI::dbConnect()` 函數建立資料庫連線。
+- 使用 `DBI::dbReadTable()` 函數載入。
+- 使用 `DBI::dbDisconnect()` 函數中斷資料庫連線。
+- 使用 `inner_join_trilogy_casting()` 函數。
+- 以關聯資料框的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+inner_join_trilogy_casting_actors <- function() {
+  # > trilogy_casting_actors <- inner_join_trilogy_casting_actors()
+  # > dim(trilogy_casting_actors)
+  # [1] 90  3
+  # > head(trilogy_casting_actors)
+  #           title ord           name
+  # 1 Batman Begins   1 Christian Bale
+  # 2 Batman Begins   2  Michael Caine
+  # 3 Batman Begins   3    Liam Neeson
+  # 4 Batman Begins   4   Katie Holmes
+  # 5 Batman Begins   5    Gary Oldman
+  # 6 Batman Begins   6 Cillian Murphy
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_111 <- tryCatch({
+  test_that("test_111", {
+    answer <- exercise_111()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_112 <- tryCatch({
+  test_that("test_112", {
+    answer <- exercise_112()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_113 <- tryCatch({
+  test_that("test_113", {
+    answer <- exercise_113()
+    expect_equal(answer, 4)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_114 <- tryCatch({
+  test_that("test_114", {
+    answer <- exercise_114()
+    expect_equal(answer, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_115 <- tryCatch({
+  test_that("test_115", {
+    answer <- exercise_115()
+    expect_equal(answer, 2)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_116 <- tryCatch({
+  test_that("test_116", {
+    columns_from_movies <- select_columns_from_movies()
+    expect_s3_class(columns_from_movies, "data.frame")
+    expect_equal(dim(columns_from_movies), c(250, 4))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_117 <- tryCatch({
+  test_that("test_117", {
+    longer_selected_movies <- pivot_longer_selected_movies()
+    expect_equal(dim(longer_selected_movies), c(750, 3))
+    unique_variables <- unique(longer_selected_movies$variable)
+    expect_true("release_year" %in% unique_variables)
+    expect_true("rating" %in% unique_variables)
+    expect_true("runtime" %in% unique_variables)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_118 <- tryCatch({
+  test_that("test_118", {
+    two_trilogies <- filter_two_trilogies()
+    expect_equal(dim(two_trilogies), c(6, 6))
+    expect_true("Batman Begins" %in% two_trilogies$title)
+    expect_true("The Dark Knight" %in% two_trilogies$title)
+    expect_true("The Dark Knight Rises" %in% two_trilogies$title)
+    expect_true("The Lord of the Rings: The Fellowship of the Ring" %in% two_trilogies$title)
+    expect_true("The Lord of the Rings: The Two Towers" %in% two_trilogies$title)
+    expect_true("The Lord of the Rings: The Return of the King" %in% two_trilogies$title)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_119 <- tryCatch({
+  test_that("test_119", {
+    trilogy_casting <- inner_join_trilogy_casting()
+    expect_equal(dim(trilogy_casting), c(90, 3))
+    col_names <- colnames(trilogy_casting)
+    expect_true("title" %in% col_names)
+    expect_true("actor_id" %in% col_names)
+    expect_true("ord" %in% col_names)
+    unique_ords <- sort(unique(trilogy_casting$ord))
+    expect_equal(unique_ords, 1:15)
+    unique_titles <- unique(trilogy_casting$title)
+    expect_true("Batman Begins" %in% unique_titles)
+    expect_true("The Dark Knight" %in% unique_titles)
+    expect_true("The Dark Knight Rises" %in% unique_titles)
+    expect_true("The Lord of the Rings: The Fellowship of the Ring" %in% unique_titles)
+    expect_true("The Lord of the Rings: The Two Towers" %in% unique_titles)
+    expect_true("The Lord of the Rings: The Return of the King" %in% unique_titles)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_120 <- tryCatch({
+  test_that("test_120", {
+    trilogy_casting_actors <- inner_join_trilogy_casting_actors()
+    expect_equal(dim(trilogy_casting_actors), c(90, 3))
+    unique_titles <- unique(trilogy_casting_actors$title)
+    expect_true("Batman Begins" %in% unique_titles)
+    expect_true("The Dark Knight" %in% unique_titles)
+    expect_true("The Dark Knight Rises" %in% unique_titles)
+    expect_true("The Lord of the Rings: The Fellowship of the Ring" %in% unique_titles)
+    expect_true("The Lord of the Rings: The Two Towers" %in% unique_titles)
+    expect_true("The Lord of the Rings: The Return of the King" %in% unique_titles)
+    unique_ords <- sort(unique(trilogy_casting_actors$ord))
+    expect_equal(unique_ords, 1:15)
+    unique_names <- unique(trilogy_casting_actors$name)
+    expect_true("Christian Bale" %in% unique_names)
+    expect_true("Anne Hathaway" %in% unique_names)
+    expect_true("Heath Ledger" %in% unique_names)
+    expect_true("Orlando Bloom" %in% unique_names)
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+all_tests <- c(test_111, 
+               test_112,
+               test_113,
+               test_114,
+               test_115,
+               test_116, 
+               test_117,
+               test_118,
+               test_119,
+               test_120
+              )
+passed_tests <- sum(all_tests)
+sprintf("在進階資料框操作的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```

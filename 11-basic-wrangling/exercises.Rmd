@@ -1,0 +1,325 @@
+---
+title: "練習題 101-110"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat", "dplyr")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+library("dplyr")
+```
+
+## 101（是非題）在資料科學應用的場景，載入（Import）、清理（Tidy）與轉換（Transform）合稱 Wrangle。
+
+```{r}
+exercise_101 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 102（是非題）機器學習專案僅花費不到 5% 的時間處理與 Wrangle 相關的任務。
+
+```{r}
+exercise_102 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 103（單選題）一個具有 `m` 列觀測值、`n` 欄變數的資料框通常都怎麼被資料分析師描述？
+
+1. `(n, m)`。
+2. `(m, n)`。
+3. `n&m`。
+4. `m&n`。
+
+```{r}
+exercise_103 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 104（單選題）`dplyr` 套件的功能可以用下列哪一句話概括？
+
+1. A grammar of data manipulation.
+2. An apple a day keeps the doctor away.
+3. A grammar of data visualization.
+4. A toolbox of data scientist.
+
+```{r}
+exercise_104 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 105（單選題）下列哪一個運算符是常用來搭配 `dplyr` 套件的函數，能用來串連函數按順序作用？
+
+1. `+`
+2. `-`
+3. `>>`
+4. `|>`
+
+```{r}
+exercise_105 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 106（程式題）載入特定符號分隔的純文字檔案。
+
+定義函數 `import_movies_csv()` 將工作目錄中的 `movies.csv` 載入為資料框。
+
+- 指定檔案的相對路徑。
+- 使用 `read.csv()` 函數載入。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+import_movies_csv <- function() {
+  # > movies_csv <- import_movies_csv()
+  # > class(movies_csv)
+  # [1] "data.frame"
+  # > dim(movies_csv)
+  # [1] 250   6 
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 107（程式題）篩選 Christopher Nolan、Steven Spielberg 與 Peter Jackson 的電影。
+
+定義函數 `filter_movie_of_directors()` 將 `movies.csv` 檔案中由 Christopher Nolan、Steven Spielberg 與 Peter Jackson 執導的電影篩選出來。
+
+- 使用 `import_movies_csv()` 函數。
+- 以篩選觀測值的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+filter_movie_of_directors <- function() {
+  # > movie_of_directors <- filter_movie_of_directors()
+  # > dim(movie_of_directors)
+  # [1] 16  6
+  # > "Christopher Nolan" %in% movie_of_directors$director
+  # [1] TRUE
+  # > "Steven Spielberg" %in% movie_of_directors$director
+  # [1] TRUE
+  # > "Peter Jackson" %in% movie_of_directors$director
+  # [1] TRUE
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 108（程式題）以導演與上映年份排序。
+
+定義函數 `order_by_director_release_year()` 先以導演遞增排序、再以上映年份遞增排序 Christopher Nolan、Steven Spielberg 與 Peter Jackson 執導的電影，並選擇 `title`、`release_year` 與 `director` 三欄位。
+
+- 使用 `filter_movie_of_directors()` 函數。
+- 以排序資料框的技巧操作。
+- 以選擇欄位的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+order_by_director_release_year <- function() {
+  # > ordered_by_director_release_year <- order_by_director_release_year()
+  # > ordered_by_director_release_year$title[1]
+  # [1] "Memento"
+  # > ordered_by_director_release_year$title[16]
+  # [1] "Catch Me If You Can"
+  # > ordered_by_director_release_year$director[1]
+  # [1] "Christopher Nolan"
+  # > ordered_by_director_release_year$director[16]
+  # [1] "Steven Spielberg"
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 109（程式題）三位導演的電影各有幾部。
+
+定義函數 `count_movies_by_director()` 統計 Christopher Nolan、Steven Spielberg 與 Peter Jackson 執導的電影各有幾部。
+
+- 使用 `filter_movie_of_directors()` 函數。
+- 以分組聚合的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+count_movies_by_director <- function() {
+  # > movies_by_director <- count_movies_by_director()
+  # > movies_by_director
+  #  A tibble: 3 × 2
+  #  Groups:   director [3]
+  #  director              n
+  #  <chr>             <int>
+  #1 Christopher Nolan     7
+  #2 Peter Jackson         3
+  #3 Steven Spielberg      6
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 110（程式題）三位導演的電影平均評等與平均片長。
+
+定義函數 `mean_movies_rating_runtime_by_director()` 統計 Christopher Nolan、Steven Spielberg 與 Peter Jackson 執導的電影平均評等與平均片長。
+
+- 使用 `filter_movie_of_directors()` 函數。
+- 以分組聚合的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+mean_movies_rating_runtime_by_director <- function() {
+  # > movies_rating_runtime_by_director <- mean_movies_rating_runtime_by_director()
+  # > movies_rating_runtime_by_director
+  #  A tibble: 3 × 3
+  #  director          mean_rating mean_runtime
+  #  <chr>                   <dbl>        <dbl>
+  #1 Christopher Nolan        8.56         145.
+  #2 Peter Jackson            8.8          186 
+  #3 Steven Spielberg         8.38         146.
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_101 <- tryCatch({
+  test_that("test_101", {
+    answer <- exercise_101()
+    expect_true(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_102 <- tryCatch({
+  test_that("test_102", {
+    answer <- exercise_102()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_103 <- tryCatch({
+  test_that("test_103", {
+    answer <- exercise_103()
+    expect_equal(answer, 2)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_104 <- tryCatch({
+  test_that("test_104", {
+    answer <- exercise_104()
+    expect_equal(answer, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_105 <- tryCatch({
+  test_that("test_105", {
+    answer <- exercise_105()
+    expect_equal(answer, 4)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_106 <- tryCatch({
+  test_that("test_106", {
+    movies_csv <- import_movies_csv()
+    expect_s3_class(movies_csv, "data.frame")
+    expect_equal(dim(movies_csv), c(250, 6))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_107 <- tryCatch({
+  test_that("test_107", {
+    movie_of_directors <- filter_movie_of_directors()
+    expect_equal(dim(movie_of_directors), c(16, 6))
+    expect_true("Christopher Nolan" %in% movie_of_directors$director)
+    expect_true("Steven Spielberg" %in% movie_of_directors$director)
+    expect_true("Peter Jackson" %in% movie_of_directors$director)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_108 <- tryCatch({
+  test_that("test_108", {
+    ordered_by_director_release_year <- order_by_director_release_year()
+    expect_equal(ordered_by_director_release_year$title[1],
+                 "Memento")
+    expect_equal(ordered_by_director_release_year$title[16],
+                 "Catch Me If You Can")
+    expect_equal(ordered_by_director_release_year$director[1],
+                 "Christopher Nolan")
+    expect_equal(ordered_by_director_release_year$director[16],
+                 "Steven Spielberg")
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_109 <- tryCatch({
+  test_that("test_109", {
+    movies_by_director <- count_movies_by_director()
+    expect_equal(dim(movies_by_director), c(3, 2))
+    expect_true(max(movies_by_director$n) == 7)
+    expect_true(min(movies_by_director$n) == 3)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_110 <- tryCatch({
+  test_that("test_110", {
+    movies_rating_runtime_by_director <- mean_movies_rating_runtime_by_director()
+    expect_equal(dim(movies_rating_runtime_by_director), c(3, 3))
+    expect_true(mean(movies_rating_runtime_by_director$mean_rating) >= 8.3)
+    expect_true(mean(movies_rating_runtime_by_director$mean_runtime) >= 140)
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+all_tests <- c(test_101, 
+               test_102,
+               test_103,
+               test_104,
+               test_105,
+               test_106, 
+               test_107,
+               test_108,
+               test_109,
+               test_110
+              )
+passed_tests <- sum(all_tests)
+sprintf("在基礎資料框操作的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```

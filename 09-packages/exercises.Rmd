@@ -1,0 +1,248 @@
+---
+title: "練習題詳解 081-090"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+```
+
+## 081（是非題）若有想使用的 R 語言套件，可以前往 RStudio 網站下載。
+
+```{r}
+exercise_081 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 082（是非題）R 語言允許不同的套件中有相同命名的函數。
+
+```{r}
+exercise_082 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 083（是非題）在 RStudio 整合開發環境不論是安裝或者載入 R 語言的套件都只能夠使用程式函數。
+
+```{r}
+exercise_083 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 084（是非題）在同樣的 R 語言版本下，每次重啟使用第三方套件的函數都要安裝第三方套件。
+
+```{r}
+exercise_084 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 085（是非題）在同樣的 R 語言版本下，每次重啟使用第三方套件的函數都要載入第三方套件。
+
+```{r}
+exercise_085 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 086（單選題）下列哪一個函數的功能是安裝套件？
+
+1. `install.libraries()`。
+2. `libraries.install()`。
+3. `install.packages()`。
+4. `packages.install()`。
+
+```{r}
+exercise_086 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 087（單選題）下列哪一個函數的功能是載入套件？
+
+1. `use()`。
+2. `library()`。
+3. `package()`。
+4. `import()`。
+
+```{r}
+exercise_087 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 088（單選題）載入套件之後如果環境中沒有相同命名的函數，可以用下列哪個指令使用函數？例如載入 `foreign` 套件後想使用其中的 `read.spss()` 函數。
+
+1. `foreign::read.spss()`。
+2. `read.spss()`。
+3. 1、2 兩種指令皆可。
+4. 1、2 兩種指令皆不可。
+
+```{r}
+exercise_088 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 089（單選題）載入 `dplyr` 套件之後直接以 `filter()` 應用函數，系統會使用下列哪個套件的 `filter()` 函數？
+
+1. `stats`。
+2. `dplyr`。
+3. `base`。
+4. `utils`
+
+```{r}
+exercise_089 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 090（單選題）載入 `dplyr` 套件之後，下列哪個語法能夠指定使用 `base` 套件的 `intersect()` 函數？
+
+1. `intersect()`。
+2. `~dplyr::intersect()`。
+3. `base::intersect()`。
+4. `use::intersect()`
+
+```{r}
+exercise_090 <- function() {
+  ### BEGIN SOLUTION
+  return(NA)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_081 <- tryCatch({
+  test_that("test_081", {
+    answer <- exercise_081()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_082 <- tryCatch({
+  test_that("test_082", {
+    answer <- exercise_082()
+    expect_true(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_083 <- tryCatch({
+  test_that("test_083", {
+    answer <- exercise_083()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_084 <- tryCatch({
+  test_that("test_084", {
+    answer <- exercise_084()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_085 <- tryCatch({
+  test_that("test_085", {
+    answer <- exercise_085()
+    expect_true(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_086 <- tryCatch({
+  test_that("test_086", {
+    answer <- exercise_086()
+    expect_equal(answer, 3)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_087 <- tryCatch({
+  test_that("test_087", {
+    answer <- exercise_087()
+    expect_equal(answer, 2)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_088 <- tryCatch({
+  test_that("test_088", {
+    answer <- exercise_088()
+    expect_equal(answer, 3)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_089 <- tryCatch({
+  test_that("test_089", {
+    answer <- exercise_089()
+    expect_equal(answer, 2)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_090 <- tryCatch({
+  test_that("test_090", {
+    answer <- exercise_090()
+    expect_equal(answer, 3)
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+all_tests <- c(test_081, 
+               test_082,
+               test_083,
+               test_084,
+               test_085,
+               test_086, 
+               test_087,
+               test_088,
+               test_089,
+               test_090
+              )
+passed_tests <- sum(all_tests)
+sprintf("在使用 R 語言套件獲得更多功能的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```

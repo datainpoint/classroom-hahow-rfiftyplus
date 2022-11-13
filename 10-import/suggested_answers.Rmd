@@ -1,0 +1,316 @@
+---
+title: "練習題詳解 091-100"
+output: html_notebook
+---
+
+## 練習題指引
+
+- 將練習題與所需檔案下載到專案資料夾，並以 RStudio 選單 File -> Open Project in New Session... 開啟專案資料夾。
+- 練習題已經定義好函數的名稱以及參數名稱，我們只需要寫作函數的主體即可。
+- 練習題共分為三種，預設輸出皆為 `return(NA)`：
+  - 是非題：若覺得是非題的敘述**不正確**，就將預設輸出改寫為 `return(FALSE)`，若覺得是非題的敘述**正確**則改寫為 `return(TRUE)`
+  - 單選題：若覺得單選題的第一個選項**正確**則改寫為 `return(1)`，若覺得單選題的第二個選項**正確**則改寫為 `return(2)`，若覺得單選題的第三個選項**正確**則改寫為 `return(3)`，若覺得單選題的第四個選項**正確**則改寫為 `return(4)`
+  - 程式題：函數名稱之下的註解會描述測試如何進行，能夠讓我們充分暸解預期輸入以及預期輸出之間的對應關係，寫作完畢後改寫為 `return(expected_output)`
+- 如果練習題需要載入檔案，檔案會與練習題存放在同個資料夾中，這時就可以運用工作目錄、直接指定檔案名稱載入。
+- 執行測試的方式為點選 Source 右上方選單的 Run -> Restart R and Run All Chunks
+
+```{r}
+pkgs <- c("rmarkdown", "testthat", "jsonlite", "readxl", "RSQLite", "DBI")
+install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉
+library("testthat")
+library("jsonlite")
+library("readxl")
+library("DBI")
+```
+
+## 091（是非題）純文字檔案指的是用 Microsoft Word 或 Google 文件所寫作帶有字型的樣式或者段落標記的文件。
+
+```{r}
+exercise_091 <- function() {
+  ### BEGIN SOLUTION
+  return(FALSE)
+  ### END SOLUTION
+}
+```
+
+## 092（是非題）JSON(JavaScript Object Notation) 是一種輕量的資料交換格式，僅能夠在 JavaScript 中被使用。
+
+```{r}
+exercise_092 <- function() {
+  ### BEGIN SOLUTION
+  return(FALSE)
+  ### END SOLUTION
+}
+```
+
+## 093（單選題）下列哪一個函數能用來載入副檔名為 `.csv` 的純文字檔案？
+
+1. `csv.import()`。
+2. `csv.read()`。
+3. `import.csv()`。
+4. `read.csv()`。
+
+```{r}
+exercise_093 <- function() {
+  ### BEGIN SOLUTION
+  return(4)
+  ### END SOLUTION
+}
+```
+
+## 094（單選題）下列哪一個函數能用來載入副檔名為 `.json` 的純文字檔案？
+
+1. `jsonlite::fromJSON()`。
+2. `read.json()`。
+3. `import.json()`。
+4. `from.json()`。
+
+```{r}
+exercise_094 <- function() {
+  ### BEGIN SOLUTION
+  return(1)
+  ### END SOLUTION
+}
+```
+
+## 095（單選題）下列哪一個函數能用來載入副檔名為 `.xlsx` 的試算表檔案？
+
+1. `import.excel()`。
+2. `read.excel()`。
+3. `readxl::read_excel()`。
+4. `from.excel()`。
+
+```{r}
+exercise_095 <- function() {
+  ### BEGIN SOLUTION
+  return(3)
+  ### END SOLUTION
+}
+```
+
+## 096（程式題）載入非結構化的純文字檔案。
+
+定義函數 `import_the_dark_knight_summaries()` 將工作目錄中的 `the_dark_knight_summaries.txt` 載入為文字向量。
+
+- 指定檔案的相對路徑。
+- 使用 `readLines()` 函數載入。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+import_the_dark_knight_summaries <- function() {
+  # > the_dark_knight_summaries <- import_the_dark_knight_summaries()
+  # > class(the_dark_knight_summaries)
+  # [1] "character"
+  # > length(the_dark_knight_summaries)
+  # [1] 6
+  ### BEGIN SOLUTION
+  file_path <- "the_dark_knight_summaries.txt"
+  answer <- readLines(file_path)
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 097（程式題）載入特定符號分隔的純文字檔案。
+
+定義函數 `import_movies_csv()` 將工作目錄中的 `movies.csv` 載入為資料框。
+
+- 指定檔案的相對路徑。
+- 使用 `read.csv()` 函數載入。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+import_movies_csv <- function() {
+  # > movies_csv <- import_movies_csv()
+  # > class(movies_csv)
+  # [1] "data.frame"
+  # > dim(movies_csv)
+  # [1] 250   6 
+  ### BEGIN SOLUTION
+  file_path <- "movies.csv"
+  answer <- read.csv(file_path)
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 098（程式題）載入 JSON。
+
+定義函數 `import_players_json()` 將工作目錄中的 `players.json` 載入為命名清單。
+
+- 指定檔案的相對路徑。
+- 使用 `jsonlite::fromJSON()` 函數載入。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+import_players_json <- function() {
+  # > players_json <- import_players_json()
+  # > class(players_json)
+  # [1] "list"
+  # > length(players_json)
+  # [1] 2
+  ### BEGIN SOLUTION
+  file_path <- "players.json"
+  answer <- jsonlite::fromJSON(file_path)
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 099（程式題）載入試算表。
+
+定義函數 `import_imdb_xlsx_actors()` 將工作目錄中的 `imdb.xlsx` 活頁簿 `"actors"` 試算表載入為資料框。
+
+- 指定檔案的相對路徑。
+- 使用 `readxl::read_excel()` 函數載入。
+- 以 `sheet` 參數指定試算表。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+import_imdb_xlsx_actors <- function() {
+  # > actors <- import_imdb_xlsx_actors()
+  # > class(actors)
+  # [1] "tbl_df"     "tbl"        "data.frame"
+  # > dim(actors)
+  # [1] 3108    2
+  ### BEGIN SOLUTION
+  file_path <- "imdb.xlsx"
+  answer <- readxl::read_excel(file_path, sheet = "actors")
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 100（程式題）載入關聯式資料庫中的資料表。
+
+定義函數 `import_imdb_db_casting()` 將工作目錄中的 `imdb.db` 資料庫 `"casting"` 資料表載入為資料框。
+
+- 指定檔案的相對路徑。
+- 使用 `DBI::dbConnect()` 函數建立資料庫連線。
+- 使用 `DBI::dbReadTable()` 函數載入。
+- 使用 `DBI::dbDisconnect()` 函數中斷資料庫連線。
+- 將答案寫在 `return()` 之中。
+
+```{r}
+import_imdb_db_casting <- function() {
+  # > casting <- import_imdb_db_casting()
+  # > class(casting)
+  # [1] "data.frame"
+  # > dim(casting)
+  # [1] 3584    3
+  ### BEGIN SOLUTION
+  file_path <- "imdb.db"
+  connection <- DBI::dbConnect(RSQLite::SQLite(), file_path)
+  answer <- DBI::dbReadTable(connection, "casting")
+  DBI::dbDisconnect(connection)
+  return(answer)
+  ### END SOLUTION
+}
+```
+
+## 執行測試
+
+- 點選右上方選單的 Run -> Restart R and Run All Chunks
+- 下方為測試程式，請同學忽略並且不要更動。
+
+```{r}
+test_091 <- tryCatch({
+  test_that("test_091", {
+    answer <- exercise_091()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_092 <- tryCatch({
+  test_that("test_092", {
+    answer <- exercise_092()
+    expect_false(answer)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_093 <- tryCatch({
+  test_that("test_093", {
+    answer <- exercise_093()
+    expect_equal(answer, 4)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_094 <- tryCatch({
+  test_that("test_094", {
+    answer <- exercise_094()
+    expect_equal(answer, 1)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_095 <- tryCatch({
+  test_that("test_095", {
+    answer <- exercise_095()
+    expect_equal(answer, 3)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_096 <- tryCatch({
+  test_that("test_096", {
+    the_dark_knight_summaries <- import_the_dark_knight_summaries()
+    expect_type(the_dark_knight_summaries, "character")
+    expect_equal(length(the_dark_knight_summaries), 6)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_097 <- tryCatch({
+  test_that("test_097", {
+    movies_csv <- import_movies_csv()
+    expect_s3_class(movies_csv, "data.frame")
+    expect_equal(dim(movies_csv), c(250, 6))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_098 <- tryCatch({
+  test_that("test_098", {
+    players_json <- import_players_json()
+    expect_type(players_json, "list")
+    expect_equal(length(players_json), 2)
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_099 <- tryCatch({
+  test_that("test_099", {
+    actors <- import_imdb_xlsx_actors()
+    expect_s3_class(actors, "data.frame")
+    expect_equal(dim(actors), c(3108, 2))
+  })
+  }, error = function(e) {
+    FALSE
+})
+test_100 <- tryCatch({
+  test_that("test_100", {
+    casting <- import_imdb_db_casting()
+    expect_s3_class(casting, "data.frame")
+    expect_equal(dim(casting), c(3584, 3))
+  })
+  }, error = function(e) {
+    FALSE
+})
+
+all_tests <- c(test_091, 
+               test_092,
+               test_093,
+               test_094,
+               test_095,
+               test_096, 
+               test_097,
+               test_098,
+               test_099,
+               test_100
+              )
+passed_tests <- sum(all_tests)
+sprintf("在資料的載入的 %s 題練習中，您總共答對了 %s 題。", length(all_tests), passed_tests)
+```
