@@ -927,7 +927,7 @@ $char
 <li>在欄的索引值留空
 <ul>
 <li>以索引值篩選 <code>data.frame[c(index, ...), ...]</code></li>
-<li>以邏輯向量篩選 <code>data.frame[logical, ]</code></li>
+<li>以邏輯向量篩選 <code>data.frame[logical, ]</code>*-+399————————-</li>
 </ul></li>
 </ul>
 <div class="cell">
@@ -1118,6 +1118,14 @@ Episode 3 The Dark Knight Rises 2012    8.3 Christopher Nolan       3</code></pr
 <li>關聯式資料庫管理系統中的資料表</li>
 </ul>
 </section>
+<section id="如何瀏覽不同資料來源格式" class="slide level2">
+<h2>如何瀏覽不同資料來源格式</h2>
+<ul>
+<li>純文字檔案：以 RStudio 作為純文字編輯器開啟。</li>
+<li>試算表：以 Microsoft Excel 或 Google Sheet 開啟。</li>
+<li>關聯式資料庫管理系統中的資料表：以使用者介面軟體（以 SQLiteStudio 為例）連接開啟。</li>
+</ul>
+</section>
 <section id="r-語言如何面對這些不同資料來源格式" class="slide level2">
 <h2>R 語言如何面對這些不同資料來源格式</h2>
 <table>
@@ -1158,6 +1166,181 @@ Episode 3 The Dark Knight Rises 2012    8.3 Christopher Nolan       3</code></pr
 </tr>
 </tbody>
 </table>
+</section>
+<section id="使用-r-載入不同資料來源格式" class="slide level2">
+<h2>使用 R 載入不同資料來源格式</h2>
+<ul>
+<li>資料載入所用到的技巧在課程後面「使用 R 語言套件獲得更多功能」、「資料的載入」兩個章節還會詳細介紹。</li>
+<li>只是快速地帶大家預習一下，同學有不暸解的地方先不用擔心，之後還會再詳細介紹。</li>
+</ul>
+</section>
+<section id="使用-r-載入非結構化純文字檔案" class="slide level2">
+<h2>使用 R 載入非結構化純文字檔案</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">資料來源格式</th>
+<th style="text-align: left;">R 的資料結構</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">非結構化純文字檔案</td>
+<td style="text-align: left;"><code>character</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a>the_dark_knight_summaries <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"the_dark_knight_summaries.txt"</span>)</span>
+<span id="cb105-2"><a href="#cb105-2"></a><span class="fu">class</span>(the_dark_knight_summaries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-r-載入-csv" class="slide level2">
+<h2>使用 R 載入 CSV</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">資料來源格式</th>
+<th style="text-align: left;">R 的資料結構</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CSV</td>
+<td style="text-align: left;"><code>data.frame</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a>movies_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"movies.csv"</span>)</span>
+<span id="cb107-2"><a href="#cb107-2"></a><span class="fu">class</span>(movies_csv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-r-載入-json" class="slide level2">
+<h2>使用 R 載入 JSON</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">資料來源格式</th>
+<th style="text-align: left;">R 的資料結構</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">JSON</td>
+<td style="text-align: left;"><code>list</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a><span class="co">#install.packages("jsonlite")</span></span>
+<span id="cb109-2"><a href="#cb109-2"></a><span class="fu">library</span>(<span class="st">"jsonlite"</span>)</span>
+<span id="cb109-3"><a href="#cb109-3"></a></span>
+<span id="cb109-4"><a href="#cb109-4"></a>players_json <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">fromJSON</span>(<span class="st">"players.json"</span>)</span>
+<span id="cb109-5"><a href="#cb109-5"></a><span class="fu">class</span>(players_json)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-r-載入-html" class="slide level2">
+<h2>使用 R 載入 HTML</h2>
+<p>這個部分參考即可，課程不會涵蓋 HTML 的載入與解析。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">資料來源格式</th>
+<th style="text-align: left;">R 的資料結構</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HTML（解析前）</td>
+<td style="text-align: left;"><code>character</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HTML（解析後）</td>
+<td style="text-align: left;">套件自訂的資料結構類別</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1"></a><span class="co">#install.packages("rvest")</span></span>
+<span id="cb111-2"><a href="#cb111-2"></a><span class="fu">library</span>(<span class="st">"rvest"</span>)</span>
+<span id="cb111-3"><a href="#cb111-3"></a></span>
+<span id="cb111-4"><a href="#cb111-4"></a>html_before_parsing <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"top-250-movies-imdb.html"</span>)</span>
+<span id="cb111-5"><a href="#cb111-5"></a><span class="fu">class</span>(html_before_parsing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1"></a>html_after_parsing <span class="ot">&lt;-</span> rvest<span class="sc">::</span><span class="fu">read_html</span>(<span class="st">"top-250-movies-imdb.html"</span>)</span>
+<span id="cb113-2"><a href="#cb113-2"></a><span class="fu">class</span>(html_after_parsing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "xml_document" "xml_node"    </code></pre>
+</div>
+</div>
+</section>
+<section id="使用-r-載入試算表" class="slide level2">
+<h2>使用 R 載入試算表</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">資料來源格式</th>
+<th style="text-align: left;">R 的資料結構</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">試算表</td>
+<td style="text-align: left;"><code>data.frame</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="co">#install.packages("readxl")</span></span>
+<span id="cb115-2"><a href="#cb115-2"></a><span class="fu">library</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb115-3"><a href="#cb115-3"></a></span>
+<span id="cb115-4"><a href="#cb115-4"></a>imdb_xlsx <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"imdb.xlsx"</span>)</span>
+<span id="cb115-5"><a href="#cb115-5"></a><span class="fu">class</span>(imdb_xlsx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+</section>
+<section id="使用-r-載入關聯式資料庫管理系統中的資料表" class="slide level2">
+<h2>使用 R 載入關聯式資料庫管理系統中的資料表</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">資料來源格式</th>
+<th style="text-align: left;">R 的資料結構</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">關聯式資料庫管理系統中的資料表</td>
+<td style="text-align: left;"><code>data.frame</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="co">#install.packages("RSQLite")</span></span>
+<span id="cb117-2"><a href="#cb117-2"></a><span class="fu">library</span>(<span class="st">"DBI"</span>)</span>
+<span id="cb117-3"><a href="#cb117-3"></a></span>
+<span id="cb117-4"><a href="#cb117-4"></a>connection <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="st">"imdb.db"</span>)</span>
+<span id="cb117-5"><a href="#cb117-5"></a>movies_table <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbReadTable</span>(connection, <span class="at">name =</span> <span class="st">"movies"</span>)</span>
+<span id="cb117-6"><a href="#cb117-6"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(connection)</span>
+<span id="cb117-7"><a href="#cb117-7"></a><span class="fu">class</span>(movies_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
 </section>
 <section id="舉我在-hahow-上的另一堂課sql-的五十道練習為例" class="slide level2">
 <h2>舉我在 Hahow 上的另一堂課：<a href="https://hahow.in/cr/sqlfifty">SQL 的五十道練習</a>為例</h2>

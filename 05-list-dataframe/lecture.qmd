@@ -281,7 +281,7 @@ df[,c("title", "imdb_rating")]
 
 - 在欄的索引值留空
   - 以索引值篩選 `data.frame[c(index, ...), ...]`
-  - 以邏輯向量篩選 `data.frame[logical, ]`
+  - 以邏輯向量篩選 `data.frame[logical, ]`*-+399-------------------------
 
 ```{r}
 df[2, ]
@@ -382,6 +382,12 @@ df
 - 試算表
 - 關聯式資料庫管理系統中的資料表
 
+## 如何瀏覽不同資料來源格式
+
+- 純文字檔案：以 RStudio 作為純文字編輯器開啟。 
+- 試算表：以 Microsoft Excel 或 Google Sheet 開啟。
+- 關聯式資料庫管理系統中的資料表：以使用者介面軟體（以 SQLiteStudio 為例）連接開啟。
+
 ## R 語言如何面對這些不同資料來源格式
 
 |資料來源格式|R 的資料結構|
@@ -393,6 +399,95 @@ df
 |HTML（解析後）|套件自訂的資料結構類別|
 |試算表|`data.frame`|
 |關聯式資料庫管理系統中的資料表|`data.frame`|
+
+## 使用 R 載入不同資料來源格式
+
+- 資料載入所用到的技巧在課程後面「使用 R 語言套件獲得更多功能」、「資料的載入」兩個章節還會詳細介紹。
+- 只是快速地帶大家預習一下，同學有不暸解的地方先不用擔心，之後還會再詳細介紹。
+
+## 使用 R 載入非結構化純文字檔案
+
+|資料來源格式|R 的資料結構|
+|:-----------|:-----------|
+|非結構化純文字檔案|`character`|
+
+```{r}
+the_dark_knight_summaries <- readLines("the_dark_knight_summaries.txt")
+class(the_dark_knight_summaries)
+```
+
+## 使用 R 載入 CSV
+
+|資料來源格式|R 的資料結構|
+|:-----------|:-----------|
+|CSV|`data.frame`|
+
+```{r}
+movies_csv <- read.csv("movies.csv")
+class(movies_csv)
+```
+
+## 使用 R 載入 JSON
+
+|資料來源格式|R 的資料結構|
+|:-----------|:-----------|
+|JSON|`list`|
+
+```{r}
+#install.packages("jsonlite")
+library("jsonlite")
+
+players_json <- jsonlite::fromJSON("players.json")
+class(players_json)
+```
+
+## 使用 R 載入 HTML
+
+這個部分參考即可，課程不會涵蓋 HTML 的載入與解析。
+
+|資料來源格式|R 的資料結構|
+|:-----------|:-----------|
+|HTML（解析前）|`character`|
+|HTML（解析後）|套件自訂的資料結構類別|
+
+```{r}
+#install.packages("rvest")
+library("rvest")
+
+html_before_parsing <- readLines("top-250-movies-imdb.html")
+class(html_before_parsing)
+html_after_parsing <- rvest::read_html("top-250-movies-imdb.html")
+class(html_after_parsing)
+```
+## 使用 R 載入試算表
+
+|資料來源格式|R 的資料結構|
+|:-----------|:-----------|
+|試算表|`data.frame`|
+
+```{r}
+#install.packages("readxl")
+library("readxl")
+
+imdb_xlsx <- readxl::read_excel("imdb.xlsx")
+class(imdb_xlsx)
+```
+
+## 使用 R 載入關聯式資料庫管理系統中的資料表
+
+|資料來源格式|R 的資料結構|
+|:-----------|:-----------|
+|關聯式資料庫管理系統中的資料表|`data.frame`|
+
+```{r}
+#install.packages("RSQLite")
+library("DBI")
+
+connection <- DBI::dbConnect(RSQLite::SQLite(), "imdb.db")
+movies_table <- DBI::dbReadTable(connection, name = "movies")
+DBI::dbDisconnect(connection)
+class(movies_table)
+```
 
 ## 舉我在 Hahow 上的另一堂課：[SQL 的五十道練習](https://hahow.in/cr/sqlfifty)為例
 
