@@ -246,7 +246,7 @@ extract_year_month_day <- function(x) {
 
 定義函數 `count_vowels()` 回傳輸入文字向量中母音（a, e, i, o, u）的出現次數。
 
-- 使用 `strplit()` 函數分割文字。
+- 使用 `strsplit()` 函數分割文字。
 - 以 `for` 迴圈或者 `while` 迴圈走訪文字向量的每一個字母。
 - 在迴圈中加入 `if` 條件判斷。
 - 以命名清單統計母音的出現次數。
