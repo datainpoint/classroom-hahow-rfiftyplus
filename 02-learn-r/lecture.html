@@ -687,7 +687,7 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">Sys.Date</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2022-09-11"</code></pre>
+<pre><code>[1] "2023-02-07"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -733,10 +733,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 loaded via a namespace (and not attached):
- [1] compiler_4.2.1  magrittr_2.0.3  fastmap_1.1.0   cli_3.3.0      
+ [1] compiler_4.2.1  magrittr_2.0.3  fastmap_1.1.0   cli_3.4.1      
  [5] tools_4.2.1     htmltools_0.5.3 yaml_2.3.5      stringi_1.7.8  
- [9] rmarkdown_2.16  knitr_1.40      stringr_1.4.1   xfun_0.32      
-[13] digest_0.6.29   jsonlite_1.8.0  rlang_1.0.4     evaluate_0.16  </code></pre>
+ [9] rmarkdown_2.18  knitr_1.40      stringr_1.4.1   xfun_0.32      
+[13] digest_0.6.29   jsonlite_1.8.3  rlang_1.0.6     evaluate_0.16  </code></pre>
 </div>
 </div>
 </section>
@@ -746,7 +746,7 @@ loaded via a namespace (and not attached):
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>sys_date <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
 <span id="cb33-2"><a href="#cb33-2"></a>sys_date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2022-09-11"</code></pre>
+<pre><code>[1] "2023-02-07"</code></pre>
 </div>
 </div>
 </section>
@@ -757,7 +757,7 @@ loaded via a namespace (and not attached):
 <span id="cb35-2"><a href="#cb35-2"></a>sys_timezone <span class="ot">&lt;-</span> <span class="fu">Sys.timezone</span>()</span>
 <span id="cb35-3"><a href="#cb35-3"></a>sys_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2022-09-11 20:35:49 CST"</code></pre>
+<pre><code>[1] "2023-02-07 13:27:50 CST"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>sys_timezone</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -779,7 +779,7 @@ loaded via a namespace (and not attached):
 <h2>設定目前工作目錄的 <code>setwd()</code></h2>
 <ul>
 <li>路徑要用單引號或雙引號包括。</li>
-<li>Windows 使用者要特別注意路徑斜線要使用正斜線 <code>/</code>（而非 Windows 作業系統使用的反斜線 <code>\</code>）</li>
+<li>Windows 使用者要特別注意路徑斜線要使用正斜線 <code>/</code>（而不是平常在電腦中看到的反斜線路徑 <code>C:\Users\username</code>）</li>
 <li>避免在路徑設定上出現空格與非英文的文字。</li>
 </ul>
 <div class="cell">
