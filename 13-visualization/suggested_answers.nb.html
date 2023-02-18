@@ -1777,256 +1777,343 @@ All Chunks</li>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGtncyA8LSBjKFwicm1hcmtkb3duXCIsIFwidGVzdHRoYXRcIiwgXCJkcGx5clwiLCBcInRpZHlyXCIsIFwiZ2dwbG90MlwiKVxuaW5zdGFsbC5wYWNrYWdlcyhwa2dzKSAjIOiLpeS4jeaYr+esrOS4gOasoeWvq+S9nOalre+8jOWPr+S7peWwh+mAmeWIl+iou+ino+aOiVxuYGBgIn0= -->
-<pre class="r"><code>pkgs &lt;- c(&quot;rmarkdown&quot;, &quot;testthat&quot;, &quot;dplyr&quot;, &quot;tidyr&quot;, &quot;ggplot2&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGtncyA8LSBjKFxccm1hcmtkb3duXFwsIFxcdGVzdHRoYXRcXCwgXFxkcGx5clxcLCBcXHRpZHlyXFwsIFxcZ2dwbG90MlxcKVxuaW5zdGFsbC5wYWNrYWdlcyhwa2dzKSAjIOiLpeS4jeaYr+esrOS4gOasoeWvq+S9nOalre+8jOWPr+S7peWwh+mAmeWIl+iou+ino+aOiVxuYGBgXG5gYGAifQ== -->
+<pre class="r"><code>```r
+pkgs &lt;- c(\rmarkdown\, \testthat\, \dplyr\, \tidyr\, \ggplot2\)
 install.packages(pkgs) # 若不是第一次寫作業，可以將這列註解掉</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG4gIFRoZXJlIGlzIGEgYmluYXJ5IHZlcnNpb24gYXZhaWxhYmxlIGJ1dCB0aGUgc291cmNlIHZlcnNpb24gaXMgbGF0ZXI6XG4ifQ== -->
 <pre><code>
-  There is a binary version available but the source version is later:</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Mywic3VtbWFyeSI6W119LCJyZGYiOiJINHNJQUFBQUFBQUFBMjFRVzA0RUlSRHNlYUJaRWwveEhFT3krcUVITUI3QWFMSi9obVZReVRJd2dabXNYbjYxUVlnaldSSkNWM1ZYTmQxUEQ1dGJ1cUVBMEVCYlY5QVFESUc4UEQ5Mjk0QU1nZ3BhV0lYM0U0dXVZeVhBNVNMUjNyRDEzUkVPRFlCR0xwNS9ac1R3UWZva2FoSjVzbFdHdTYrTXZKMmRrQWxkR1NsNy95cnNNQ3JOSjJWTjRiaHlkcytXcm4rSmdidGRiL2VsZ2dqTmZWbE5lejV4OXViUUNOR2hrSnphTWJSR1VSMDJRUXB4NVFyaVlqYmhTMzBuUG1hejY5YUxqWVI3ZGlSdWZsdlczOG1LNUhWSTg2NU1YZ2ZSZkN0MUF1YzRlcHljalU2WktVK0NyR2VUblhpdW84THF6TVRaNFBBRDBQNk5FQUFDQUFBPSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["binary"],"name":[1],"type":["chr"],"align":["left"]},{"label":["source"],"name":[2],"type":["chr"],"align":["left"]},{"label":["needs_compilation"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"2.17","2":"2.18","3":"FALSE","_rn_":"rmarkdown"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-output-begin eyJkYXRhIjoidHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvY29udHJpYi80LjIvdGVzdHRoYXRfMy4xLjUudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCAyOTkyMTYzIGJ5dGVzICgyLjkgTUIpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAyLjkgTUJcblxudHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvY29udHJpYi80LjIvZHBseXJfMS4wLjEwLnRneidcbkNvbnRlbnQgdHlwZSAnYXBwbGljYXRpb24veC1nemlwJyBsZW5ndGggMTMxMDMzOCBieXRlcyAoMS4yIE1CKVxuPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbmRvd25sb2FkZWQgMS4yIE1CXG5cbnRyeWluZyBVUkwgJ2h0dHBzOi8vY3Jhbi5yc3R1ZGlvLmNvbS9iaW4vbWFjb3N4L2NvbnRyaWIvNC4yL3RpZHlyXzEuMi4xLnRneidcbkNvbnRlbnQgdHlwZSAnYXBwbGljYXRpb24veC1nemlwJyBsZW5ndGggOTk4ODkzIGJ5dGVzICg5NzUgS0IpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCA5NzUgS0JcblxudHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvY29udHJpYi80LjIvZ2dwbG90Ml8zLjQuMC50Z3onXG5Db250ZW50IHR5cGUgJ2FwcGxpY2F0aW9uL3gtZ3ppcCcgbGVuZ3RoIDQyMTEzMDcgYnl0ZXMgKDQuMCBNQilcbj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5kb3dubG9hZGVkIDQuMCBNQlxuIn0= -->
-<pre><code>trying URL &#39;https://cran.rstudio.com/bin/macosx/contrib/4.2/testthat_3.1.5.tgz&#39;
-Content type &#39;application/x-gzip&#39; length 2992163 bytes (2.9 MB)
-==================================================
-downloaded 2.9 MB
+&lt;!-- rnb-source-end --&gt;
 
-trying URL &#39;https://cran.rstudio.com/bin/macosx/contrib/4.2/dplyr_1.0.10.tgz&#39;
-Content type &#39;application/x-gzip&#39; length 1310338 bytes (1.2 MB)
-==================================================
-downloaded 1.2 MB
-
-trying URL &#39;https://cran.rstudio.com/bin/macosx/contrib/4.2/tidyr_1.2.1.tgz&#39;
-Content type &#39;application/x-gzip&#39; length 998893 bytes (975 KB)
-==================================================
-downloaded 975 KB
-
-trying URL &#39;https://cran.rstudio.com/bin/macosx/contrib/4.2/ggplot2_3.4.0.tgz&#39;
-Content type &#39;application/x-gzip&#39; length 4211307 bytes (4.0 MB)
-==================================================
-downloaded 4.0 MB</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5UaGUgZG93bmxvYWRlZCBiaW5hcnkgcGFja2FnZXMgYXJlIGluXG5cdC92YXIvZm9sZGVycy8wYi9yX196NW1wbjZsZGdiX3cyajdfeV9udHIwMDAwZ24vVC8vUnRtcHc3OVljNi9kb3dubG9hZGVkX3BhY2thZ2VzXG4ifQ== -->
+&lt;!-- rnb-output-begin eyJkYXRhIjoiXG4gIFRoZXJlIGlzIGEgYmluYXJ5IHZlcnNpb24gYXZhaWxhYmxlIGJ1dCB0aGUgc291cmNlIHZlcnNpb24gaXMgbGF0ZXI6XG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL21hY29zeC9jb250cmliLzQuMi90ZXN0dGhhdF8zLjEuNS50Z3onXG5Db250ZW50IHR5cGUgJ2FwcGxpY2F0aW9uL3gtZ3ppcCcgbGVuZ3RoIDI5OTIxNjMgYnl0ZXMgKDIuOSBNQilcbj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5kb3dubG9hZGVkIDIuOSBNQlxuXG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL21hY29zeC9jb250cmliLzQuMi9kcGx5cl8xLjAuMTAudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCAxMzEwMzM4IGJ5dGVzICgxLjIgTUIpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAxLjIgTUJcblxudHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvY29udHJpYi80LjIvdGlkeXJfMS4yLjEudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCA5OTg4OTMgYnl0ZXMgKDk3NSBLQilcbj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5kb3dubG9hZGVkIDk3NSBLQlxuXG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL21hY29zeC9jb250cmliLzQuMi9nZ3Bsb3QyXzMuNC4wLnRneidcbkNvbnRlbnQgdHlwZSAnYXBwbGljYXRpb24veC1nemlwJyBsZW5ndGggNDIxMTMwNyBieXRlcyAoNC4wIE1CKVxuPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbmRvd25sb2FkZWQgNC4wIE1CXG5cblRoZSBkb3dubG9hZGVkIGJpbmFyeSBwYWNrYWdlcyBhcmUgaW5cblx0L3Zhci9mb2xkZXJzLzBiL3JfX3o1bXBuNmxkZ2JfdzJqN195X250cjAwMDBnbi9ULy9SdG1wdzc5WWM2L2Rvd25sb2FkZWRfcGFja2FnZXNcbmluc3RhbGxpbmcgdGhlIHNvdXJjZSBwYWNrYWdlIOKAmHJtYXJrZG93buKAmVxuXG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vc3JjL2NvbnRyaWIvcm1hcmtkb3duXzIuMTgudGFyLmd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCAzMjQzNjEyIGJ5dGVzICgzLjEgTUIpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAzLjEgTUJcblxuKiBpbnN0YWxsaW5nICpzb3VyY2UqIHBhY2thZ2Ug4oCYcm1hcmtkb3du4oCZIC4uLlxuKiogcGFja2FnZSDigJhybWFya2Rvd27igJkgc3VjY2Vzc2Z1bGx5IHVucGFja2VkIGFuZCBNRDUgc3VtcyBjaGVja2VkXG4qKiB1c2luZyBzdGFnZWQgaW5zdGFsbGF0aW9uXG4qKiBSXG4qKiBpbnN0XG4qKiBieXRlLWNvbXBpbGUgYW5kIHByZXBhcmUgcGFja2FnZSBmb3IgbGF6eSBsb2FkaW5nXG4qKiBoZWxwXG4qKiogaW5zdGFsbGluZyBoZWxwIGluZGljZXNcbioqKiBjb3B5aW5nIGZpZ3VyZXNcbioqIGJ1aWxkaW5nIHBhY2thZ2UgaW5kaWNlc1xuKiogaW5zdGFsbGluZyB2aWduZXR0ZXNcbioqIHRlc3RpbmcgaWYgaW5zdGFsbGVkIHBhY2thZ2UgY2FuIGJlIGxvYWRlZCBmcm9tIHRlbXBvcmFyeSBsb2NhdGlvblxuKiogdGVzdGluZyBpZiBpbnN0YWxsZWQgcGFja2FnZSBjYW4gYmUgbG9hZGVkIGZyb20gZmluYWwgbG9jYXRpb25cbioqIHRlc3RpbmcgaWYgaW5zdGFsbGVkIHBhY2thZ2Uga2VlcHMgYSByZWNvcmQgb2YgdGVtcG9yYXJ5IGluc3RhbGxhdGlvbiBwYXRoXG4qIERPTkUgKHJtYXJrZG93bilcblxuVGhlIGRvd25sb2FkZWQgc291cmNlIHBhY2thZ2VzIGFyZSBpblxuXHTigJgvcHJpdmF0ZS92YXIvZm9sZGVycy8wYi9yX196NW1wbjZsZGdiX3cyajdfeV9udHIwMDAwZ24vVC9SdG1wdzc5WWM2L2Rvd25sb2FkZWRfcGFja2FnZXPigJlcbiJ9 --&gt;
+</code></pre>
+<p>There is a binary version available but the source version is later:
+trying URL ‘<a href="https://cran.rstudio.com/bin/macosx/contrib/4.2/testthat_3.1.5.tgz" class="uri">https://cran.rstudio.com/bin/macosx/contrib/4.2/testthat_3.1.5.tgz</a>’
+Content type ‘application/x-gzip’ length 2992163 bytes (2.9 MB)
+================================================== downloaded 2.9 MB</p>
+<p>trying URL ‘<a href="https://cran.rstudio.com/bin/macosx/contrib/4.2/dplyr_1.0.10.tgz" class="uri">https://cran.rstudio.com/bin/macosx/contrib/4.2/dplyr_1.0.10.tgz</a>’
+Content type ‘application/x-gzip’ length 1310338 bytes (1.2 MB)
+================================================== downloaded 1.2 MB</p>
+<p>trying URL ‘<a href="https://cran.rstudio.com/bin/macosx/contrib/4.2/tidyr_1.2.1.tgz" class="uri">https://cran.rstudio.com/bin/macosx/contrib/4.2/tidyr_1.2.1.tgz</a>’
+Content type ‘application/x-gzip’ length 998893 bytes (975 KB)
+================================================== downloaded 975 KB</p>
+<p>trying URL ‘<a href="https://cran.rstudio.com/bin/macosx/contrib/4.2/ggplot2_3.4.0.tgz" class="uri">https://cran.rstudio.com/bin/macosx/contrib/4.2/ggplot2_3.4.0.tgz</a>’
+Content type ‘application/x-gzip’ length 4211307 bytes (4.0 MB)
+================================================== downloaded 4.0 MB</p>
+<p>The downloaded binary packages are in
+/var/folders/0b/r__z5mpn6ldgb_w2j7_y_ntr0000gn/T//Rtmpw79Yc6/downloaded_packages
+installing the source package ‘rmarkdown’</p>
+<p>trying URL ‘<a href="https://cran.rstudio.com/src/contrib/rmarkdown_2.18.tar.gz" class="uri">https://cran.rstudio.com/src/contrib/rmarkdown_2.18.tar.gz</a>’
+Content type ‘application/x-gzip’ length 3243612 bytes (3.1 MB)
+================================================== downloaded 3.1 MB</p>
+<ul>
+<li>installing <em>source</em> package ‘rmarkdown’ … ** package
+‘rmarkdown’ successfully unpacked and MD5 sums checked ** using staged
+installation ** R ** inst ** byte-compile and prepare package for lazy
+loading ** help *** installing help indices *** copying figures **
+building package indices ** installing vignettes ** testing if installed
+package can be loaded from temporary location ** testing if installed
+package can be loaded from final location ** testing if installed
+package keeps a record of temporary installation path</li>
+<li>DONE (rmarkdown)</li>
+</ul>
+<p>The downloaded source packages are in
+’/private/var/folders/0b/r__z5mpn6ldgb_w2j7_y_ntr0000gn/T/Rtmpw79Yc6/downloaded_packages’</p>
 <pre><code>
-The downloaded binary packages are in
-    /var/folders/0b/r__z5mpn6ldgb_w2j7_y_ntr0000gn/T//Rtmpw79Yc6/downloaded_packages</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiaW5zdGFsbGluZyB0aGUgc291cmNlIHBhY2thZ2Ug4oCYcm1hcmtkb3du4oCZXG5cbnRyeWluZyBVUkwgJ2h0dHBzOi8vY3Jhbi5yc3R1ZGlvLmNvbS9zcmMvY29udHJpYi9ybWFya2Rvd25fMi4xOC50YXIuZ3onXG5Db250ZW50IHR5cGUgJ2FwcGxpY2F0aW9uL3gtZ3ppcCcgbGVuZ3RoIDMyNDM2MTIgYnl0ZXMgKDMuMSBNQilcbj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5kb3dubG9hZGVkIDMuMSBNQlxuXG4qIGluc3RhbGxpbmcgKnNvdXJjZSogcGFja2FnZSDigJhybWFya2Rvd27igJkgLi4uXG4qKiBwYWNrYWdlIOKAmHJtYXJrZG93buKAmSBzdWNjZXNzZnVsbHkgdW5wYWNrZWQgYW5kIE1ENSBzdW1zIGNoZWNrZWRcbioqIHVzaW5nIHN0YWdlZCBpbnN0YWxsYXRpb25cbioqIFJcbioqIGluc3RcbioqIGJ5dGUtY29tcGlsZSBhbmQgcHJlcGFyZSBwYWNrYWdlIGZvciBsYXp5IGxvYWRpbmdcbioqIGhlbHBcbioqKiBpbnN0YWxsaW5nIGhlbHAgaW5kaWNlc1xuKioqIGNvcHlpbmcgZmlndXJlc1xuKiogYnVpbGRpbmcgcGFja2FnZSBpbmRpY2VzXG4qKiBpbnN0YWxsaW5nIHZpZ25ldHRlc1xuKiogdGVzdGluZyBpZiBpbnN0YWxsZWQgcGFja2FnZSBjYW4gYmUgbG9hZGVkIGZyb20gdGVtcG9yYXJ5IGxvY2F0aW9uXG4qKiB0ZXN0aW5nIGlmIGluc3RhbGxlZCBwYWNrYWdlIGNhbiBiZSBsb2FkZWQgZnJvbSBmaW5hbCBsb2NhdGlvblxuKiogdGVzdGluZyBpZiBpbnN0YWxsZWQgcGFja2FnZSBrZWVwcyBhIHJlY29yZCBvZiB0ZW1wb3JhcnkgaW5zdGFsbGF0aW9uIHBhdGhcbiogRE9ORSAocm1hcmtkb3duKVxuXG5UaGUgZG93bmxvYWRlZCBzb3VyY2UgcGFja2FnZXMgYXJlIGluXG5cdOKAmC9wcml2YXRlL3Zhci9mb2xkZXJzLzBiL3JfX3o1bXBuNmxkZ2JfdzJqN195X250cjAwMDBnbi9UL1J0bXB3NzlZYzYvZG93bmxvYWRlZF9wYWNrYWdlc+KAmVxuIn0= -->
-<pre><code>installing the source package ‘rmarkdown’
 
-trying URL &#39;https://cran.rstudio.com/src/contrib/rmarkdown_2.18.tar.gz&#39;
-Content type &#39;application/x-gzip&#39; length 3243612 bytes (3.1 MB)
-==================================================
-downloaded 3.1 MB
 
-* installing *source* package ‘rmarkdown’ ...
-** package ‘rmarkdown’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (rmarkdown)
+&lt;!-- rnb-output-end --&gt;
 
-The downloaded source packages are in
-    ‘/private/var/folders/0b/r__z5mpn6ldgb_w2j7_y_ntr0000gn/T/Rtmpw79Yc6/downloaded_packages’</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcInRlc3R0aGF0XCIpXG5saWJyYXJ5KFwiZHBseXJcIilcbmBgYCJ9 -->
-<pre class="r"><code>library(&quot;testthat&quot;)
-library(&quot;dplyr&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYZHBseXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTp0ZXN0dGhhdOKAmTpcblxuICAgIG1hdGNoZXNcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnN0YXRz4oCZOlxuXG4gICAgZmlsdGVyLCBsYWdcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmJhc2XigJk6XG5cbiAgICBpbnRlcnNlY3QsIHNldGRpZmYsIHNldGVxdWFsLCB1bmlvblxuIn0= -->
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeShcXHRlc3R0aGF0XFwpXG5saWJyYXJ5KFxcZHBseXJcXClcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+library(\testthat\)
+library(\dplyr\)</code></pre>
 <pre><code>
-Attaching package: ‘dplyr’
+&lt;!-- rnb-source-end --&gt;
 
-The following object is masked from ‘package:testthat’:
-
-    matches
-
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcInRpZHlyXCIpXG5gYGAifQ== -->
-<pre class="r"><code>library(&quot;tidyr&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYdGlkeXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTp0ZXN0dGhhdOKAmTpcblxuICAgIG1hdGNoZXNcbiJ9 -->
+&lt;!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYZHBseXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTp0ZXN0dGhhdOKAmTpcblxuICAgIG1hdGNoZXNcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnN0YXRz4oCZOlxuXG4gICAgZmlsdGVyLCBsYWdcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmJhc2XigJk6XG5cbiAgICBpbnRlcnNlY3QsIHNldGRpZmYsIHNldGVxdWFsLCB1bmlvblxuIn0= --&gt;
+</code></pre>
+<p>Attaching package: ‘dplyr’</p>
+<p>The following object is masked from ‘package:testthat’:</p>
+<pre><code>matches</code></pre>
+<p>The following objects are masked from ‘package:stats’:</p>
+<pre><code>filter, lag</code></pre>
+<p>The following objects are masked from ‘package:base’:</p>
+<pre><code>intersect, setdiff, setequal, union</code></pre>
 <pre><code>
-Attaching package: ‘tidyr’
 
-The following object is masked from ‘package:testthat’:
 
-    matches</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcImdncGxvdDJcIilcbmBgYCJ9 -->
-<pre class="r"><code>library(&quot;ggplot2&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUlN0dWRpbyBDb21tdW5pdHkgaXMgYSBncmVhdCBwbGFjZSB0byBnZXQgaGVscDpcbmh0dHBzOi8vY29tbXVuaXR5LnJzdHVkaW8uY29tL2MvdGlkeXZlcnNlXG4ifQ== -->
-<pre><code>RStudio Community is a great place to get help:
-https://community.rstudio.com/c/tidyverse</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="是非題對人來說原始資料相當具體不需要視覺化的輔助來幫助理解" class="section level2">
-<h2>121（是非題）對人來說原始資料相當具體，不需要視覺化的輔助來幫助理解。</h2>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMTIxIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKEZBTFNFKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGAifQ== -->
-<pre class="r"><code>exercise_121 &lt;- function() {
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeShcXHRpZHlyXFwpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+library(\tidyr\)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYdGlkeXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTp0ZXN0dGhhdOKAmTpcblxuICAgIG1hdGNoZXNcbiJ9 --&gt;
+</code></pre>
+<p>Attaching package: ‘tidyr’</p>
+<p>The following object is masked from ‘package:testthat’:</p>
+<pre><code>matches</code></pre>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeShcXGdncGxvdDJcXClcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+library(\ggplot2\)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiUlN0dWRpbyBDb21tdW5pdHkgaXMgYSBncmVhdCBwbGFjZSB0byBnZXQgaGVscDpcbmh0dHBzOi8vY29tbXVuaXR5LnJzdHVkaW8uY29tL2MvdGlkeXZlcnNlXG4ifQ== --&gt;
+</code></pre>
+<p>RStudio Community is a great place to get help: <a href="https://community.rstudio.com/c/tidyverse" class="uri">https://community.rstudio.com/c/tidyverse</a></p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjoiZGF0YS5mcmFtZSIsIm5yb3ciOjEsIm5jb2wiOjMsInN1bW1hcnkiOltdfSwicmRmIjoiSDRzSUFBQUFBQUFBQTIxUVcwNEVJUkRzZWFCWkVsL3hIRU95K3FFSE1CN0FhTEovaG1WUXlUSXdnWm1zWG42MVFZZ2pXUkpDVjNWWE5kMVBENXRidXFFQTBFQmJWOUFRRElHOFBEOTI5NEFNZ2dwYVdJWDNFNHV1WXlYQTVTTFIzckQxM1JFT0RZQkdMcDUvWnNUd1Fmb2thaEo1c2xXR3U2K012SjJka0FsZEdTbDcveXJzTUNyTkoyVk40Ymh5ZHMrV3JuK0pnYnRkYi9lbGdnak5mVmxOZXo1eDl1YlFDTkdoa0p6YU1iUkdVUjAyUVFweDVRcmlZamJoUzMwblBtYXo2OWFMallSN2RpUnVmbHZXMzhtSzVIVkk4NjVNWGdmUmZDdDFBdWM0ZXB5Y2pVNlpLVStDckdlVG5YaXVvOExxek1UWjRQQUQwUDZORUFBQ0FBQT0ifQ== --&gt;
+
+&lt;div data-pagedtable=&quot;false&quot;&gt;
+  &lt;script data-pagedtable-source type=&quot;application/json&quot;&gt;
+{&quot;columns&quot;:[{&quot;label&quot;:[&quot;&quot;],&quot;name&quot;:[&quot;_rn_&quot;],&quot;type&quot;:[&quot;&quot;],&quot;align&quot;:[&quot;left&quot;]},{&quot;label&quot;:[&quot;binary&quot;],&quot;name&quot;:[1],&quot;type&quot;:[&quot;chr&quot;],&quot;align&quot;:[&quot;left&quot;]},{&quot;label&quot;:[&quot;source&quot;],&quot;name&quot;:[2],&quot;type&quot;:[&quot;chr&quot;],&quot;align&quot;:[&quot;left&quot;]},{&quot;label&quot;:[&quot;needs_compilation&quot;],&quot;name&quot;:[3],&quot;type&quot;:[&quot;lgl&quot;],&quot;align&quot;:[&quot;right&quot;]}],&quot;data&quot;:[{&quot;1&quot;:&quot;2.17&quot;,&quot;2&quot;:&quot;2.18&quot;,&quot;3&quot;:&quot;FALSE&quot;,&quot;_rn_&quot;:&quot;rmarkdown&quot;}],&quot;options&quot;:{&quot;columns&quot;:{&quot;min&quot;:{},&quot;max&quot;:[10],&quot;total&quot;:[3]},&quot;rows&quot;:{&quot;min&quot;:[10],&quot;max&quot;:[10],&quot;total&quot;:[1]},&quot;pages&quot;:{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;!-- rnb-frame-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 121（是非題）對人來說原始資料相當具體，不需要視覺化的輔助來幫助理解。
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMTIxIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKEZBTFNFKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+exercise_121 &lt;- function() {
   ### BEGIN SOLUTION
   return(FALSE)
   ### END SOLUTION
 }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="是非題r-語言僅能使用-base-plotting-system-作為資料視覺化的工具" class="section level2">
-<h2>122（是非題）R 語言僅能使用 Base plotting system
-作為資料視覺化的工具。</h2>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMTIyIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKEZBTFNFKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGAifQ== -->
-<pre class="r"><code>exercise_122 &lt;- function() {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 122（是非題）R 語言僅能使用 Base plotting system 作為資料視覺化的工具。
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMTIyIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKEZBTFNFKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+exercise_122 &lt;- function() {
   ### BEGIN SOLUTION
   return(FALSE)
   ### END SOLUTION
 }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="單選題ggplot2-套件的功能可以用下列哪一句話概括" class="section level2">
-<h2>123（單選題）<code>ggplot2</code>
-套件的功能可以用下列哪一句話概括？</h2>
-<ol style="list-style-type: decimal">
-<li>A model builder.</li>
-<li>A grammar of graphics.</li>
-<li>A grammar of data manipulation.</li>
-<li>A canvas for data scientists.</li>
-</ol>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMTIzIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDIpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
-<pre class="r"><code>exercise_123 &lt;- function() {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 123（單選題）`ggplot2` 套件的功能可以用下列哪一句話概括？
+
+1. A model builder.
+2. A grammar of graphics.
+3. A grammar of data manipulation.
+4. A canvas for data scientists.
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMTIzIDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDIpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+exercise_123 &lt;- function() {
   ### BEGIN SOLUTION
   return(2)
   ### END SOLUTION
 }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="單選題下列哪一個運算符能用來搭配-ggplot2-套件堆疊圖形函數與添加圖形元素" class="section level2">
-<h2>124（單選題）下列哪一個運算符能用來搭配 <code>ggplot2</code>
-套件堆疊圖形函數與添加圖形元素？</h2>
-<ol style="list-style-type: decimal">
-<li><code>+</code></li>
-<li><code>-</code></li>
-<li><code>&gt;&gt;</code></li>
-<li><code>|&gt;</code></li>
-</ol>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMTI0IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDEpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
-<pre class="r"><code>exercise_124 &lt;- function() {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 124（單選題）下列哪一個運算符能用來搭配 `ggplot2` 套件堆疊圖形函數與添加圖形元素？
+
+1. `+`
+2. `-`
+3. `&gt;&gt;`
+4. `|&gt;`
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMTI0IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDEpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+exercise_124 &lt;- function() {
   ### BEGIN SOLUTION
   return(1)
   ### END SOLUTION
 }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="單選題使用-ggplot2ggplot-函數的時候會搭配下列哪一個函數建立座標系統" class="section level2">
-<h2>125（單選題）使用 <code>ggplot2::ggplot()</code>
-函數的時候會搭配下列哪一個函數建立座標系統？</h2>
-<ol style="list-style-type: decimal">
-<li><code>ggplo2::coordinates()</code>。</li>
-<li><code>ggplo2::xyaxis()</code>。</li>
-<li><code>ggplo2::mapping()</code>。</li>
-<li><code>ggplo2::aes()</code>。</li>
-</ol>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXhlcmNpc2VfMTI1IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDQpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
-<pre class="r"><code>exercise_125 &lt;- function() {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 125（單選題）使用 `ggplot2::ggplot()` 函數的時候會搭配下列哪一個函數建立座標系統？
+
+1. `ggplot2::coordinates()`。
+2. `ggplot2::xyaxis()`。
+3. `ggplot2::mapping()`。
+4. `ggplot2::aes()`。
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZXhlcmNpc2VfMTI1IDwtIGZ1bmN0aW9uKCkge1xuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgcmV0dXJuKDQpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+exercise_125 &lt;- function() {
   ### BEGIN SOLUTION
   return(4)
   ### END SOLUTION
 }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="寫作程式題之前先使用-import_time_series-函數獲得-time_series-資料框" class="section level2">
-<h2>寫作程式題之前先使用 <code>import_time_series()</code> 函數獲得
-<code>time_series</code> 資料框。</h2>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW1wb3J0X3RpbWVfc2VyaWVzIDwtIGZ1bmN0aW9uKCkge1xuICB0aW1lX3Nlcmllc19yb3V0ZSA8LSBcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9DU1NFR0lTYW5kRGF0YS9DT1ZJRC0xOS9tYXN0ZXIvY3NzZV9jb3ZpZF8xOV9kYXRhL2Nzc2VfY292aWRfMTlfdGltZV9zZXJpZXMvXCJcbiAgY29uZmlybWVkX2ZpbGVfbmFtZSA8LSBcInRpbWVfc2VyaWVzX2NvdmlkMTlfY29uZmlybWVkX2dsb2JhbC5jc3ZcIlxuICBkZWF0aHNfZmlsZV9uYW1lIDwtIFwidGltZV9zZXJpZXNfY292aWQxOV9kZWF0aHNfZ2xvYmFsLmNzdlwiXG4gIGNvbmZpcm1lZF9maWxlX3VybCA8LSBwYXN0ZTAodGltZV9zZXJpZXNfcm91dGUsIGNvbmZpcm1lZF9maWxlX25hbWUpXG4gIGRlYXRoc19maWxlX3VybCA8LSBwYXN0ZTAodGltZV9zZXJpZXNfcm91dGUsIGRlYXRoc19maWxlX25hbWUpXG4gIHRpbWVfc2VyaWVzX2NvbmZpcm1lZCA8LSByZWFkLmNzdihjb25maXJtZWRfZmlsZV91cmwpXG4gIHRpbWVfc2VyaWVzX2RlYXRocyA8LSByZWFkLmNzdihkZWF0aHNfZmlsZV91cmwpXG4gIGNvbHNfbm90X3RvX3Bpdm90IDwtIGMoXCJQcm92aW5jZS5TdGF0ZVwiLCBcIkNvdW50cnkuUmVnaW9uXCIsIFwiTGF0XCIsIFwiTG9uZ1wiKVxuICB0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyA8LSB0aW1lX3Nlcmllc19jb25maXJtZWQgfD5cbiAgICB0aWR5cjo6cGl2b3RfbG9uZ2VyKGNvbHMgPSAhYWxsX29mKGNvbHNfbm90X3RvX3Bpdm90KSwgbmFtZXNfdG8gPSBcIkRhdGVcIiwgdmFsdWVzX3RvID0gXCJDb25maXJtZWRcIilcbiAgdGltZV9zZXJpZXNfZGVhdGhzX2xvbmcgPC0gdGltZV9zZXJpZXNfZGVhdGhzIHw+XG4gICAgdGlkeXI6OnBpdm90X2xvbmdlcihjb2xzID0gIWFsbF9vZihjb2xzX25vdF90b19waXZvdCksIG5hbWVzX3RvID0gXCJEYXRlXCIsIHZhbHVlc190byA9IFwiRGVhdGhzXCIpXG4gIHRpbWVfc2VyaWVzX2NvbmZpcm1lZF9sb25nJERhdGUgPC0gc3ViKHBhdHRlcm4gPSBcIlhcIiwgcmVwbGFjZW1lbnQgPSBcIlwiLCB0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyREYXRlKVxuICB0aW1lX3Nlcmllc19kZWF0aHNfbG9uZyREYXRlIDwtIHN1YihwYXR0ZXJuID0gXCJYXCIsIHJlcGxhY2VtZW50ID0gXCJcIiwgdGltZV9zZXJpZXNfZGVhdGhzX2xvbmckRGF0ZSlcbiAgZnJvbV9mb3JtYXQgPC0gXCIlbS4lZC4leVwiXG50aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyREYXRlIDwtIGFzLkRhdGUodGltZV9zZXJpZXNfY29uZmlybWVkX2xvbmckRGF0ZSwgZm9ybWF0ID0gZnJvbV9mb3JtYXQpXG50aW1lX3Nlcmllc19kZWF0aHNfbG9uZyREYXRlIDwtIGFzLkRhdGUodGltZV9zZXJpZXNfZGVhdGhzX2xvbmckRGF0ZSwgZm9ybWF0ID0gZnJvbV9mb3JtYXQpXG4gIHRpbWVfc2VyaWVzIDwtIGRwbHlyOjppbm5lcl9qb2luKHRpbWVfc2VyaWVzX2NvbmZpcm1lZF9sb25nLCB0aW1lX3Nlcmllc19kZWF0aHNfbG9uZywgYnkgPSBjKFwiUHJvdmluY2UuU3RhdGVcIiA9IFwiUHJvdmluY2UuU3RhdGVcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJDb3VudHJ5LlJlZ2lvblwiID0gXCJDb3VudHJ5LlJlZ2lvblwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIkxhdFwiID0gXCJMYXRcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJMb25nXCIgPSBcIkxvbmdcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJEYXRlXCIgPSBcIkRhdGVcIikpXG4gIHJldHVybih0aW1lX3Nlcmllcylcbn1cbnRpbWVfc2VyaWVzIDwtIGltcG9ydF90aW1lX3NlcmllcygpXG5gYGAifQ== -->
-<pre class="r"><code>import_time_series &lt;- function() {
-  time_series_route &lt;- &quot;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/&quot;
-  confirmed_file_name &lt;- &quot;time_series_covid19_confirmed_global.csv&quot;
-  deaths_file_name &lt;- &quot;time_series_covid19_deaths_global.csv&quot;
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 寫作程式題之前先使用 `import_time_series()` 函數獲得 `time_series` 資料框。
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuaW1wb3J0X3RpbWVfc2VyaWVzIDwtIGZ1bmN0aW9uKCkge1xuICB0aW1lX3Nlcmllc19yb3V0ZSA8LSBcXGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9DU1NFR0lTYW5kRGF0YS9DT1ZJRC0xOS9tYXN0ZXIvY3NzZV9jb3ZpZF8xOV9kYXRhL2Nzc2VfY292aWRfMTlfdGltZV9zZXJpZXMvXFxcbiAgY29uZmlybWVkX2ZpbGVfbmFtZSA8LSBcXHRpbWVfc2VyaWVzX2NvdmlkMTlfY29uZmlybWVkX2dsb2JhbC5jc3ZcXFxuICBkZWF0aHNfZmlsZV9uYW1lIDwtIFxcdGltZV9zZXJpZXNfY292aWQxOV9kZWF0aHNfZ2xvYmFsLmNzdlxcXG4gIGNvbmZpcm1lZF9maWxlX3VybCA8LSBwYXN0ZTAodGltZV9zZXJpZXNfcm91dGUsIGNvbmZpcm1lZF9maWxlX25hbWUpXG4gIGRlYXRoc19maWxlX3VybCA8LSBwYXN0ZTAodGltZV9zZXJpZXNfcm91dGUsIGRlYXRoc19maWxlX25hbWUpXG4gIHRpbWVfc2VyaWVzX2NvbmZpcm1lZCA8LSByZWFkLmNzdihjb25maXJtZWRfZmlsZV91cmwpXG4gIHRpbWVfc2VyaWVzX2RlYXRocyA8LSByZWFkLmNzdihkZWF0aHNfZmlsZV91cmwpXG4gIGNvbHNfbm90X3RvX3Bpdm90IDwtIGMoXFxQcm92aW5jZS5TdGF0ZVxcLCBcXENvdW50cnkuUmVnaW9uXFwsIFxcTGF0XFwsIFxcTG9uZ1xcKVxuICB0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyA8LSB0aW1lX3Nlcmllc19jb25maXJtZWQgfD5cbiAgICB0aWR5cjo6cGl2b3RfbG9uZ2VyKGNvbHMgPSAhYWxsX29mKGNvbHNfbm90X3RvX3Bpdm90KSwgbmFtZXNfdG8gPSBcXERhdGVcXCwgdmFsdWVzX3RvID0gXFxDb25maXJtZWRcXClcbiAgdGltZV9zZXJpZXNfZGVhdGhzX2xvbmcgPC0gdGltZV9zZXJpZXNfZGVhdGhzIHw+XG4gICAgdGlkeXI6OnBpdm90X2xvbmdlcihjb2xzID0gIWFsbF9vZihjb2xzX25vdF90b19waXZvdCksIG5hbWVzX3RvID0gXFxEYXRlXFwsIHZhbHVlc190byA9IFxcRGVhdGhzXFwpXG4gIHRpbWVfc2VyaWVzX2NvbmZpcm1lZF9sb25nJERhdGUgPC0gc3ViKHBhdHRlcm4gPSBcXFhcXCwgcmVwbGFjZW1lbnQgPSBcXFxcLCB0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyREYXRlKVxuICB0aW1lX3Nlcmllc19kZWF0aHNfbG9uZyREYXRlIDwtIHN1YihwYXR0ZXJuID0gXFxYXFwsIHJlcGxhY2VtZW50ID0gXFxcXCwgdGltZV9zZXJpZXNfZGVhdGhzX2xvbmckRGF0ZSlcbiAgZnJvbV9mb3JtYXQgPC0gXFwlbS4lZC4leVxcXG50aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyREYXRlIDwtIGFzLkRhdGUodGltZV9zZXJpZXNfY29uZmlybWVkX2xvbmckRGF0ZSwgZm9ybWF0ID0gZnJvbV9mb3JtYXQpXG50aW1lX3Nlcmllc19kZWF0aHNfbG9uZyREYXRlIDwtIGFzLkRhdGUodGltZV9zZXJpZXNfZGVhdGhzX2xvbmckRGF0ZSwgZm9ybWF0ID0gZnJvbV9mb3JtYXQpXG4gIHRpbWVfc2VyaWVzIDwtIGRwbHlyOjppbm5lcl9qb2luKHRpbWVfc2VyaWVzX2NvbmZpcm1lZF9sb25nLCB0aW1lX3Nlcmllc19kZWF0aHNfbG9uZywgYnkgPSBjKFxcUHJvdmluY2UuU3RhdGVcXCA9IFxcUHJvdmluY2UuU3RhdGVcXCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXFxDb3VudHJ5LlJlZ2lvblxcID0gXFxDb3VudHJ5LlJlZ2lvblxcLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcXExhdFxcID0gXFxMYXRcXCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXFxMb25nXFwgPSBcXExvbmdcXCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXFxEYXRlXFwgPSBcXERhdGVcXCkpXG4gIHJldHVybih0aW1lX3Nlcmllcylcbn1cbnRpbWVfc2VyaWVzIDwtIGltcG9ydF90aW1lX3NlcmllcygpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+import_time_series &lt;- function() {
+  time_series_route &lt;- \https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/\
+  confirmed_file_name &lt;- \time_series_covid19_confirmed_global.csv\
+  deaths_file_name &lt;- \time_series_covid19_deaths_global.csv\
   confirmed_file_url &lt;- paste0(time_series_route, confirmed_file_name)
   deaths_file_url &lt;- paste0(time_series_route, deaths_file_name)
   time_series_confirmed &lt;- read.csv(confirmed_file_url)
   time_series_deaths &lt;- read.csv(deaths_file_url)
-  cols_not_to_pivot &lt;- c(&quot;Province.State&quot;, &quot;Country.Region&quot;, &quot;Lat&quot;, &quot;Long&quot;)
+  cols_not_to_pivot &lt;- c(\Province.State\, \Country.Region\, \Lat\, \Long\)
   time_series_confirmed_long &lt;- time_series_confirmed |&gt;
-    tidyr::pivot_longer(cols = !all_of(cols_not_to_pivot), names_to = &quot;Date&quot;, values_to = &quot;Confirmed&quot;)
+    tidyr::pivot_longer(cols = !all_of(cols_not_to_pivot), names_to = \Date\, values_to = \Confirmed\)
   time_series_deaths_long &lt;- time_series_deaths |&gt;
-    tidyr::pivot_longer(cols = !all_of(cols_not_to_pivot), names_to = &quot;Date&quot;, values_to = &quot;Deaths&quot;)
-  time_series_confirmed_long$Date &lt;- sub(pattern = &quot;X&quot;, replacement = &quot;&quot;, time_series_confirmed_long$Date)
-  time_series_deaths_long$Date &lt;- sub(pattern = &quot;X&quot;, replacement = &quot;&quot;, time_series_deaths_long$Date)
-  from_format &lt;- &quot;%m.%d.%y&quot;
+    tidyr::pivot_longer(cols = !all_of(cols_not_to_pivot), names_to = \Date\, values_to = \Deaths\)
+  time_series_confirmed_long$Date &lt;- sub(pattern = \X\, replacement = \\, time_series_confirmed_long$Date)
+  time_series_deaths_long$Date &lt;- sub(pattern = \X\, replacement = \\, time_series_deaths_long$Date)
+  from_format &lt;- \%m.%d.%y\
 time_series_confirmed_long$Date &lt;- as.Date(time_series_confirmed_long$Date, format = from_format)
 time_series_deaths_long$Date &lt;- as.Date(time_series_deaths_long$Date, format = from_format)
-  time_series &lt;- dplyr::inner_join(time_series_confirmed_long, time_series_deaths_long, by = c(&quot;Province.State&quot; = &quot;Province.State&quot;,
-                                &quot;Country.Region&quot; = &quot;Country.Region&quot;,
-                                &quot;Lat&quot; = &quot;Lat&quot;,
-                                &quot;Long&quot; = &quot;Long&quot;,
-                                &quot;Date&quot; = &quot;Date&quot;))
+  time_series &lt;- dplyr::inner_join(time_series_confirmed_long, time_series_deaths_long, by = c(\Province.State\ = \Province.State\,
+                                \Country.Region\ = \Country.Region\,
+                                \Lat\ = \Lat\,
+                                \Long\ = \Long\,
+                                \Date\ = \Date\))
   return(time_series)
 }
 time_series &lt;- import_time_series()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="程式題各國確診死亡人數總計" class="section level2">
-<h2>126（程式題）各國確診死亡人數總計。</h2>
-<p>定義函數 <code>sum_confirmed_deaths_by_countries()</code> 輸出
-<code>time_series</code> 資料框的各國確診、死亡人數總計。</p>
-<ul>
-<li>以篩選觀測值的技巧操作。</li>
-<li>以分組聚合的技巧操作。</li>
-<li>將答案寫在 <code>return()</code> 之中。</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzIDwtIGZ1bmN0aW9uKHRpbWVfc2VyaWVzKSB7XG4gICMgPiBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXModGltZV9zZXJpZXMpXG4gICMgPiBuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKVxuICAjIFsxXSAzXG4gICMjIyBCRUdJTiBTT0xVVElPTlxuICBhbnN3ZXIgPC0gdGltZV9zZXJpZXMgfD5cbiAgICBkcGx5cjo6Z3JvdXBfYnkoQ291bnRyeS5SZWdpb24pIHw+XG4gICAgZHBseXI6OnN1bW1hcmlzZShDb25maXJtZWQgPSBzdW0oQ29uZmlybWVkKSxcbiAgICAgICAgICAgICAgICAgICAgIERlYXRocyA9IHN1bShEZWF0aHMpKVxuICByZXR1cm4oYW5zd2VyKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGAifQ== -->
-<pre class="r"><code>sum_confirmed_deaths_by_countries &lt;- function(time_series) {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 126（程式題）各國確診死亡人數總計。
+
+定義函數 `sum_confirmed_deaths_by_countries()` 輸出 `time_series` 資料框的各國確診、死亡人數總計。
+
+- 以篩選觀測值的技巧操作。
+- 以分組聚合的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzIDwtIGZ1bmN0aW9uKHRpbWVfc2VyaWVzKSB7XG4gICMgPiBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXModGltZV9zZXJpZXMpXG4gICMgPiBuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKVxuICAjIFsxXSAzXG4gICMjIyBCRUdJTiBTT0xVVElPTlxuICBhbnN3ZXIgPC0gdGltZV9zZXJpZXMgfD5cbiAgICBkcGx5cjo6Z3JvdXBfYnkoQ291bnRyeS5SZWdpb24pIHw+XG4gICAgZHBseXI6OnN1bW1hcmlzZShDb25maXJtZWQgPSBzdW0oQ29uZmlybWVkKSxcbiAgICAgICAgICAgICAgICAgICAgIERlYXRocyA9IHN1bShEZWF0aHMpKVxuICByZXR1cm4oYW5zd2VyKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+sum_confirmed_deaths_by_countries &lt;- function(time_series) {
   # &gt; confirmed_deaths_by_countries &lt;- sum_confirmed_deaths_by_countries(time_series)
   # &gt; ncol(confirmed_deaths_by_countries)
   # [1] 3
@@ -2038,32 +2125,40 @@ time_series &lt;- import_time_series()</code></pre>
   return(answer)
   ### END SOLUTION
 }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="程式題以-ggplot2-繪製水平長條圖視覺化前十大確診人數的國家作圖不跑測試" class="section level2">
-<h2>127（程式題）以 <code>ggplot2</code>
-繪製水平長條圖視覺化前十大確診人數的國家（作圖不跑測試）。</h2>
-<p>接續上題，定義函數 <code>plot_top_ten_confirmed_by_countries()</code>
-以 <code>ggplot2</code> 繪製水平長條圖視覺化前十大確診人數的國家。</p>
-<ul>
-<li>使用 <code>sum_confirmed_deaths_by_countries()</code> 函數。</li>
-<li>使用 <code>dplry::arrange()</code> 函數排序。</li>
-<li>使用 <code>head()</code> 函數。</li>
-<li>使用 <code>ggplot2::ggplot()</code> 函數與
-<code>ggplot2::aes()</code> 函數建立座標系統。</li>
-<li>使用 <code>ggplot2::geom_bar(stat = &quot;identity&quot;)</code>
-函數繪製觀察排序的長條圖。</li>
-<li>使用 <code>ggplot2::coord_flip()</code>
-函數將長條圖反轉為水平。</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdF90b3BfdGVuX2NvbmZpcm1lZF9ieV9jb3VudHJpZXMgPC0gZnVuY3Rpb24oKSB7XG4gICMgPiBwbG90X3RvcF90ZW5fY29uZmlybWVkX2J5X2NvdW50cmllcygpXG4gICMgQ2hlY2sgXCJQbG90c1wiIHBhbmVsXG4gICMjIyBCRUdJTiBTT0xVVElPTlxuICBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXModGltZV9zZXJpZXMpXG4gIHRvcF90ZW4gPC0gY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgfD5cbiAgICBkcGx5cjo6YXJyYW5nZShkZXNjKENvbmZpcm1lZCkpIHw+XG4gICAgaGVhZCgxMCkgfD5cbiAgICBkcGx5cjo6YXJyYW5nZShDb25maXJtZWQpXG4gIGJhcl9vcmRlciA8LSBhcy5jaGFyYWN0ZXIodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbilcbiAgdG9wX3RlbiRDb3VudHJ5LlJlZ2lvbiA8LSBmYWN0b3IodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbiwgbGV2ZWxzID0gYmFyX29yZGVyKVxuICBnZ3Bsb3QyOjpnZ3Bsb3QodG9wX3RlbiwgYWVzKHggPSBDb3VudHJ5LlJlZ2lvbiwgeSA9IENvbmZpcm1lZCwgZmlsbCA9IENvdW50cnkuUmVnaW9uKSkgK1xuICAgIGdncGxvdDI6Omdlb21fYmFyKHN0YXQgPSBcImlkZW50aXR5XCIpICsgXG4gICAgZ2dwbG90Mjo6Y29vcmRfZmxpcCgpICtcbiAgICBnZ3Bsb3QyOjpnZ3RpdGxlKFwiVG9wIDEwIENvbmZpcm1lZCBieSBDb3VudHJ5XCIpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
-<pre class="r"><code>plot_top_ten_confirmed_by_countries &lt;- function() {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 127（程式題）以 `ggplot2` 繪製水平長條圖視覺化前十大確診人數的國家（作圖不跑測試）。
+
+接續上題，定義函數 `plot_top_ten_confirmed_by_countries()` 以 `ggplot2` 繪製水平長條圖視覺化前十大確診人數的國家。
+
+- 使用 `sum_confirmed_deaths_by_countries()` 函數。
+- 使用 `dplry::arrange()` 函數排序。
+- 使用 `head()` 函數。
+- 使用 `ggplot2::ggplot()` 函數與 `ggplot2::aes()` 函數建立座標系統。
+- 使用 `ggplot2::geom_bar(stat = &quot;identity&quot;)` 函數繪製觀察排序的長條圖。
+- 使用 `ggplot2::coord_flip()` 函數將長條圖反轉為水平。
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGxvdF90b3BfdGVuX2NvbmZpcm1lZF9ieV9jb3VudHJpZXMgPC0gZnVuY3Rpb24oKSB7XG4gICMgPiBwbG90X3RvcF90ZW5fY29uZmlybWVkX2J5X2NvdW50cmllcygpXG4gICMgQ2hlY2sgXFxQbG90c1xcIHBhbmVsXG4gICMjIyBCRUdJTiBTT0xVVElPTlxuICBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXModGltZV9zZXJpZXMpXG4gIHRvcF90ZW4gPC0gY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgfD5cbiAgICBkcGx5cjo6YXJyYW5nZShkZXNjKENvbmZpcm1lZCkpIHw+XG4gICAgaGVhZCgxMCkgfD5cbiAgICBkcGx5cjo6YXJyYW5nZShDb25maXJtZWQpXG4gIGJhcl9vcmRlciA8LSBhcy5jaGFyYWN0ZXIodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbilcbiAgdG9wX3RlbiRDb3VudHJ5LlJlZ2lvbiA8LSBmYWN0b3IodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbiwgbGV2ZWxzID0gYmFyX29yZGVyKVxuICBnZ3Bsb3QyOjpnZ3Bsb3QodG9wX3RlbiwgYWVzKHggPSBDb3VudHJ5LlJlZ2lvbiwgeSA9IENvbmZpcm1lZCwgZmlsbCA9IENvdW50cnkuUmVnaW9uKSkgK1xuICAgIGdncGxvdDI6Omdlb21fYmFyKHN0YXQgPSBcXGlkZW50aXR5XFwpICsgXG4gICAgZ2dwbG90Mjo6Y29vcmRfZmxpcCgpICtcbiAgICBnZ3Bsb3QyOjpnZ3RpdGxlKFxcVG9wIDEwIENvbmZpcm1lZCBieSBDb3VudHJ5XFwpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+plot_top_ten_confirmed_by_countries &lt;- function() {
   # &gt; plot_top_ten_confirmed_by_countries()
-  # Check &quot;Plots&quot; panel
+  # Check \Plots\ panel
   ### BEGIN SOLUTION
   confirmed_deaths_by_countries &lt;- sum_confirmed_deaths_by_countries(time_series)
   top_ten &lt;- confirmed_deaths_by_countries |&gt;
@@ -2073,37 +2168,45 @@ time_series &lt;- import_time_series()</code></pre>
   bar_order &lt;- as.character(top_ten$Country.Region)
   top_ten$Country.Region &lt;- factor(top_ten$Country.Region, levels = bar_order)
   ggplot2::ggplot(top_ten, aes(x = Country.Region, y = Confirmed, fill = Country.Region)) +
-    ggplot2::geom_bar(stat = &quot;identity&quot;) + 
+    ggplot2::geom_bar(stat = \identity\) + 
     ggplot2::coord_flip() +
-    ggplot2::ggtitle(&quot;Top 10 Confirmed by Country&quot;)
+    ggplot2::ggtitle(\Top 10 Confirmed by Country\)
   ### END SOLUTION
 }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="程式題以-ggplot2-繪製水平長條圖視覺化前十大死亡人數的國家作圖不跑測試" class="section level2">
-<h2>128（程式題）以 <code>ggplot2</code>
-繪製水平長條圖視覺化前十大死亡人數的國家（作圖不跑測試）。</h2>
-<p>接續上題，定義函數 <code>plot_top_ten_deaths_by_countries()</code> 以
-<code>ggplot2</code> 繪製水平長條圖視覺化前十大死亡人數的國家。</p>
-<ul>
-<li>使用 <code>sum_confirmed_deaths_by_countries()</code> 函數。</li>
-<li>使用 <code>dplry::arrange()</code> 函數排序。</li>
-<li>使用 <code>head()</code> 函數。</li>
-<li>使用 <code>ggplot2::ggplot()</code> 函數與
-<code>ggplot2::aes()</code> 函數建立座標系統。</li>
-<li>使用 <code>ggplot2::geom_bar(stat = &quot;identity&quot;)</code>
-函數繪製觀察排序的長條圖。</li>
-<li>使用 <code>ggplot2::coord_flip()</code>
-函數將長條圖反轉為水平。</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdF90b3BfdGVuX2RlYXRoc19ieV9jb3VudHJpZXMgPC0gZnVuY3Rpb24oKSB7XG4gICMgPiBwbG90X3RvcF90ZW5fZGVhdGhzX2J5X2NvdW50cmllcygpXG4gICMgQ2hlY2sgXCJQbG90c1wiIHBhbmVsXG4gICMjIyBCRUdJTiBTT0xVVElPTlxuICBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXModGltZV9zZXJpZXMpXG4gIHRvcF90ZW4gPC0gY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgfD5cbiAgICBkcGx5cjo6YXJyYW5nZShkZXNjKERlYXRocykpIHw+XG4gICAgaGVhZCgxMCkgfD5cbiAgICBkcGx5cjo6YXJyYW5nZShEZWF0aHMpXG4gIGJhcl9vcmRlciA8LSBhcy5jaGFyYWN0ZXIodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbilcbiAgdG9wX3RlbiRDb3VudHJ5LlJlZ2lvbiA8LSBmYWN0b3IodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbiwgbGV2ZWxzID0gYmFyX29yZGVyKVxuICBnZ3Bsb3QyOjpnZ3Bsb3QodG9wX3RlbiwgYWVzKHggPSBDb3VudHJ5LlJlZ2lvbiwgeSA9IERlYXRocywgZmlsbCA9IENvdW50cnkuUmVnaW9uKSkgK1xuICAgIGdncGxvdDI6Omdlb21fYmFyKHN0YXQgPSBcImlkZW50aXR5XCIpICsgXG4gICAgZ2dwbG90Mjo6Y29vcmRfZmxpcCgpICtcbiAgICBnZ3Bsb3QyOjpnZ3RpdGxlKFwiVG9wIDEwIERlYXRocyBieSBDb3VudHJ5XCIpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYCJ9 -->
-<pre class="r"><code>plot_top_ten_deaths_by_countries &lt;- function() {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 128（程式題）以 `ggplot2` 繪製水平長條圖視覺化前十大死亡人數的國家（作圖不跑測試）。
+
+接續上題，定義函數 `plot_top_ten_deaths_by_countries()` 以 `ggplot2` 繪製水平長條圖視覺化前十大死亡人數的國家。
+
+- 使用 `sum_confirmed_deaths_by_countries()` 函數。
+- 使用 `dplry::arrange()` 函數排序。
+- 使用 `head()` 函數。
+- 使用 `ggplot2::ggplot()` 函數與 `ggplot2::aes()` 函數建立座標系統。
+- 使用 `ggplot2::geom_bar(stat = &quot;identity&quot;)` 函數繪製觀察排序的長條圖。
+- 使用 `ggplot2::coord_flip()` 函數將長條圖反轉為水平。
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGxvdF90b3BfdGVuX2RlYXRoc19ieV9jb3VudHJpZXMgPC0gZnVuY3Rpb24oKSB7XG4gICMgPiBwbG90X3RvcF90ZW5fZGVhdGhzX2J5X2NvdW50cmllcygpXG4gICMgQ2hlY2sgXFxQbG90c1xcIHBhbmVsXG4gICMjIyBCRUdJTiBTT0xVVElPTlxuICBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXModGltZV9zZXJpZXMpXG4gIHRvcF90ZW4gPC0gY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgfD5cbiAgICBkcGx5cjo6YXJyYW5nZShkZXNjKERlYXRocykpIHw+XG4gICAgaGVhZCgxMCkgfD5cbiAgICBkcGx5cjo6YXJyYW5nZShEZWF0aHMpXG4gIGJhcl9vcmRlciA8LSBhcy5jaGFyYWN0ZXIodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbilcbiAgdG9wX3RlbiRDb3VudHJ5LlJlZ2lvbiA8LSBmYWN0b3IodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbiwgbGV2ZWxzID0gYmFyX29yZGVyKVxuICBnZ3Bsb3QyOjpnZ3Bsb3QodG9wX3RlbiwgYWVzKHggPSBDb3VudHJ5LlJlZ2lvbiwgeSA9IERlYXRocywgZmlsbCA9IENvdW50cnkuUmVnaW9uKSkgK1xuICAgIGdncGxvdDI6Omdlb21fYmFyKHN0YXQgPSBcXGlkZW50aXR5XFwpICsgXG4gICAgZ2dwbG90Mjo6Y29vcmRfZmxpcCgpICtcbiAgICBnZ3Bsb3QyOjpnZ3RpdGxlKFxcVG9wIDEwIERlYXRocyBieSBDb3VudHJ5XFwpXG4gICMjIyBFTkQgU09MVVRJT05cbn1cbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+plot_top_ten_deaths_by_countries &lt;- function() {
   # &gt; plot_top_ten_deaths_by_countries()
-  # Check &quot;Plots&quot; panel
+  # Check \Plots\ panel
   ### BEGIN SOLUTION
   confirmed_deaths_by_countries &lt;- sum_confirmed_deaths_by_countries(time_series)
   top_ten &lt;- confirmed_deaths_by_countries |&gt;
@@ -2113,27 +2216,39 @@ time_series &lt;- import_time_series()</code></pre>
   bar_order &lt;- as.character(top_ten$Country.Region)
   top_ten$Country.Region &lt;- factor(top_ten$Country.Region, levels = bar_order)
   ggplot2::ggplot(top_ten, aes(x = Country.Region, y = Deaths, fill = Country.Region)) +
-    ggplot2::geom_bar(stat = &quot;identity&quot;) + 
+    ggplot2::geom_bar(stat = \identity\) + 
     ggplot2::coord_flip() +
-    ggplot2::ggtitle(&quot;Top 10 Deaths by Country&quot;)
+    ggplot2::ggtitle(\Top 10 Deaths by Country\)
   ### END SOLUTION
 }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="程式題各國確診死亡人數依國家日數總計" class="section level2">
-<h2>129（程式題）各國確診死亡人數依國家、日數總計。</h2>
-<p>定義函數 <code>sum_confirmed_deaths_by_countries_dates()</code> 輸出
-<code>time_series</code> 資料框的各國依日期的確診、死亡人數總計。</p>
-<ul>
-<li>以分組聚合的技巧操作。</li>
-<li>將答案寫在 <code>return()</code> 之中。</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzIDwtIGZ1bmN0aW9uKHRpbWVfc2VyaWVzKSB7XG4gICMgPiBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXModGltZV9zZXJpZXMpXG4gICMgPiBuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKVxuICAjIFsxXSA0XG4gICMjIyBCRUdJTiBTT0xVVElPTlxuICBhbnN3ZXIgPC0gdGltZV9zZXJpZXMgfD5cbiAgICBkcGx5cjo6Z3JvdXBfYnkoQ291bnRyeS5SZWdpb24sIERhdGUpIHw+XG4gICAgZHBseXI6OnN1bW1hcmlzZShDb25maXJtZWQgPSBzdW0oQ29uZmlybWVkKSxcbiAgICAgICAgICAgICAgICAgICAgIERlYXRocyA9IHN1bShEZWF0aHMpKVxuICByZXR1cm4oYW5zd2VyKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGAifQ== -->
-<pre class="r"><code>sum_confirmed_deaths_by_countries_dates &lt;- function(time_series) {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 129（程式題）各國確診死亡人數依國家、日數總計。
+
+定義函數 `sum_confirmed_deaths_by_countries_dates()` 輸出 `time_series` 資料框的各國依日期的確診、死亡人數總計。
+
+- 以分組聚合的技巧操作。
+- 將答案寫在 `return()` 之中。
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzIDwtIGZ1bmN0aW9uKHRpbWVfc2VyaWVzKSB7XG4gICMgPiBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXModGltZV9zZXJpZXMpXG4gICMgPiBuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKVxuICAjIFsxXSA0XG4gICMjIyBCRUdJTiBTT0xVVElPTlxuICBhbnN3ZXIgPC0gdGltZV9zZXJpZXMgfD5cbiAgICBkcGx5cjo6Z3JvdXBfYnkoQ291bnRyeS5SZWdpb24sIERhdGUpIHw+XG4gICAgZHBseXI6OnN1bW1hcmlzZShDb25maXJtZWQgPSBzdW0oQ29uZmlybWVkKSxcbiAgICAgICAgICAgICAgICAgICAgIERlYXRocyA9IHN1bShEZWF0aHMpKVxuICByZXR1cm4oYW5zd2VyKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+sum_confirmed_deaths_by_countries_dates &lt;- function(time_series) {
   # &gt; confirmed_deaths_by_countries_dates &lt;- sum_confirmed_deaths_by_countries_dates(time_series)
   # &gt; ncol(confirmed_deaths_by_countries_dates)
   # [1] 4
@@ -2145,38 +2260,42 @@ time_series &lt;- import_time_series()</code></pre>
   return(answer)
   ### END SOLUTION
 }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="程式題以-ggplot2-繪製線圖視覺化台灣南韓日本與新加坡的確診人數趨勢作圖不跑測試" class="section level2">
-<h2>130（程式題）以 <code>ggplot2</code>
-繪製線圖視覺化台灣、南韓、日本與新加坡的確診人數趨勢（作圖不跑測試）。</h2>
-<p>接續上題，定義函數 <code>plot_lines()</code> 以 <code>ggplot2</code>
-繪製線圖視覺化台灣（<code>&quot;Taiwan*&quot;</code>）、南韓（<code>&quot;Korea, South&quot;</code>）、日本（<code>&quot;Japan&quot;</code>）與新加坡（<code>&quot;Singapore&quot;</code>）的確診人數趨勢。</p>
-<ul>
-<li>使用 <code>sum_confirmed_deaths_by_countries_dates()</code>
-函數。</li>
-<li>以篩選觀測值的技巧操作。</li>
-<li>使用 <code>ggplot2::ggplot()</code> 函數與
-<code>ggplot2::aes()</code> 函數建立座標系統。</li>
-<li>使用 <code>ggplot2::geom_line()</code> 函數繪製觀察趨勢的線圖。</li>
-</ul>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdF9saW5lcyA8LSBmdW5jdGlvbigpIHtcbiAgIyA+IHBsb3RfbGluZXMoKVxuICAjIENoZWNrIFwiUGxvdHNcIiBwYW5lbFxuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKHRpbWVfc2VyaWVzKVxuICB0d19rcl9qcF9zZyA8LSBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyB8PlxuICAgIGZpbHRlcihDb3VudHJ5LlJlZ2lvbiAlaW4lIGMoXCJUYWl3YW4qXCIsIFwiS29yZWEsIFNvdXRoXCIsIFwiSmFwYW5cIiwgXCJTaW5nYXBvcmVcIikpXG4gIGdncGxvdDI6OmdncGxvdCh0d19rcl9qcF9zZywgYWVzKHggPSBEYXRlLCB5ID0gQ29uZmlybWVkLCBjb2xvdXIgPSBDb3VudHJ5LlJlZ2lvbikpICtcbiAgICBnZ3Bsb3QyOjpnZW9tX2xpbmUoKSArIFxuICAgIGdncGxvdDI6OmdndGl0bGUoXCJDb25maXJtZWQgYnkgRGF0ZVwiKVxuICAjIyMgRU5EIFNPTFVUSU9OXG59XG5gYGAifQ== -->
-<pre class="r"><code>plot_lines &lt;- function() {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+## 130（程式題）以 `ggplot2` 繪製線圖視覺化台灣、南韓、日本與新加坡的確診人數趨勢（作圖不跑測試）。
+
+接續上題，定義函數 `plot_lines()` 以 `ggplot2` 繪製線圖視覺化台灣（`&quot;Taiwan*&quot;`）、南韓（`&quot;Korea, South&quot;`）、日本（`&quot;Japan&quot;`）與新加坡（`&quot;Singapore&quot;`）的確診人數趨勢。
+
+- 使用 `sum_confirmed_deaths_by_countries_dates()` 函數。
+- 以篩選觀測值的技巧操作。
+- 使用 `ggplot2::ggplot()` 函數與 `ggplot2::aes()` 函數建立座標系統。
+- 使用 `ggplot2::geom_line()` 函數繪製觀察趨勢的線圖。
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGxvdF9saW5lcyA8LSBmdW5jdGlvbigpIHtcbiAgIyA+IHBsb3RfbGluZXMoKVxuICAjIENoZWNrIFxcUGxvdHNcXCBwYW5lbFxuICAjIyMgQkVHSU4gU09MVVRJT05cbiAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKHRpbWVfc2VyaWVzKVxuICB0d19rcl9qcF9zZyA8LSBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyB8PlxuICAgIGZpbHRlcihDb3VudHJ5LlJlZ2lvbiAlaW4lIGMoXFxUYWl3YW4qXFwsIFxcS29yZWFcbmBgYCJ9 --&gt;
+
+```r
+```r
+plot_lines &lt;- function() {
   # &gt; plot_lines()
-  # Check &quot;Plots&quot; panel
+  # Check \Plots\ panel
   ### BEGIN SOLUTION
   confirmed_deaths_by_countries_dates &lt;- sum_confirmed_deaths_by_countries_dates(time_series)
   tw_kr_jp_sg &lt;- confirmed_deaths_by_countries_dates |&gt;
-    filter(Country.Region %in% c(&quot;Taiwan*&quot;, &quot;Korea, South&quot;, &quot;Japan&quot;, &quot;Singapore&quot;))
-  ggplot2::ggplot(tw_kr_jp_sg, aes(x = Date, y = Confirmed, colour = Country.Region)) +
-    ggplot2::geom_line() + 
-    ggplot2::ggtitle(&quot;Confirmed by Date&quot;)
-  ### END SOLUTION
-}</code></pre>
+    filter(Country.Region %in% c(\Taiwan*\, \Korea</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -2189,99 +2308,170 @@ time_series &lt;- import_time_series()</code></pre>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8xMjEgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzEyMVwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyMSgpXG4gICAgZXhwZWN0X2ZhbHNlKGFuc3dlcilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
-<pre class="r"><code>test_121 &lt;- tryCatch({
-  test_that(&quot;test_121&quot;, {
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudGVzdF8xMjEgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzEyMVxcLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyMSgpXG4gICAgZXhwZWN0X2ZhbHNlKGFuc3dlcilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGBcbmBgYCJ9 -->
+<pre class="r"><code>```r
+test_121 &lt;- tryCatch({
+  test_that(\test_121\, {
     answer &lt;- exercise_121()
     expect_false(answer)
   })
   }, error = function(e) {
     FALSE
 })</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+YgFxuIn0= -->
-<pre><code>Test passed 😀</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8xMjIgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzEyMlwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyMigpXG4gICAgZXhwZWN0X2ZhbHNlKGFuc3dlcilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
-<pre class="r"><code>test_122 &lt;- tryCatch({
-  test_that(&quot;test_122&quot;, {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+YgFxuIn0= --&gt;
+</code></pre>
+<p>Test passed 😀</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudGVzdF8xMjIgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzEyMlxcLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyMigpXG4gICAgZXhwZWN0X2ZhbHNlKGFuc3dlcilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+test_122 &lt;- tryCatch({
+  test_that(\test_122\, {
     answer &lt;- exercise_122()
     expect_false(answer)
   })
   }, error = function(e) {
     FALSE
 })</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+ls1xuIn0= -->
-<pre><code>Test passed 🥳</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8xMjMgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzEyM1wiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyMygpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
-<pre class="r"><code>test_123 &lt;- tryCatch({
-  test_that(&quot;test_123&quot;, {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+ls1xuIn0= --&gt;
+</code></pre>
+<p>Test passed 🥳</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudGVzdF8xMjMgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzEyM1xcLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyMygpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMilcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+test_123 &lt;- tryCatch({
+  test_that(\test_123\, {
     answer &lt;- exercise_123()
     expect_equal(answer, 2)
   })
   }, error = function(e) {
     FALSE
 })</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+OilxuIn0= -->
-<pre><code>Test passed 🎊</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8xMjQgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzEyNFwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyNCgpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMSlcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
-<pre class="r"><code>test_124 &lt;- tryCatch({
-  test_that(&quot;test_124&quot;, {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+OilxuIn0= --&gt;
+</code></pre>
+<p>Test passed 🎊</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudGVzdF8xMjQgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzEyNFxcLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyNCgpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMSlcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+test_124 &lt;- tryCatch({
+  test_that(\test_124\, {
     answer &lt;- exercise_124()
     expect_equal(answer, 1)
   })
   }, error = function(e) {
     FALSE
 })</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+lh1xuIn0= -->
-<pre><code>Test passed 🥇</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8xMjUgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzEyNVwiLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyNSgpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgNClcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
-<pre class="r"><code>test_125 &lt;- tryCatch({
-  test_that(&quot;test_125&quot;, {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+lh1xuIn0= --&gt;
+</code></pre>
+<p>Test passed 🥇</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudGVzdF8xMjUgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzEyNVxcLCB7XG4gICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyNSgpXG4gICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgNClcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+test_125 &lt;- tryCatch({
+  test_that(\test_125\, {
     answer &lt;- exercise_125()
     expect_equal(answer, 4)
   })
   }, error = function(e) {
     FALSE
 })</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+MiFxuIn0= -->
-<pre><code>Test passed 🌈</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8xMjYgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzEyNlwiLCB7XG4gICAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKHRpbWVfc2VyaWVzKVxuICAgIGV4cGVjdF9lcXVhbChuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKSwgMylcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
-<pre class="r"><code>test_126 &lt;- tryCatch({
-  test_that(&quot;test_126&quot;, {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+MiFxuIn0= --&gt;
+</code></pre>
+<p>Test passed 🌈</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudGVzdF8xMjYgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzEyNlxcLCB7XG4gICAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKHRpbWVfc2VyaWVzKVxuICAgIGV4cGVjdF9lcXVhbChuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKSwgMylcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+test_126 &lt;- tryCatch({
+  test_that(\test_126\, {
     confirmed_deaths_by_countries &lt;- sum_confirmed_deaths_by_countries(time_series)
     expect_equal(ncol(confirmed_deaths_by_countries), 3)
   })
   }, error = function(e) {
     FALSE
 })</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+lh1xuIn0= -->
-<pre><code>Test passed 🥇</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF8xMjkgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXCJ0ZXN0XzEyOVwiLCB7XG4gICAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKHRpbWVfc2VyaWVzKVxuICAgIGV4cGVjdF9lcXVhbChuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKSwgNClcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGAifQ== -->
-<pre class="r"><code>test_129 &lt;- tryCatch({
-  test_that(&quot;test_129&quot;, {
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+lh1xuIn0= --&gt;
+</code></pre>
+<p>Test passed 🥇</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudGVzdF8xMjkgPC0gdHJ5Q2F0Y2goe1xuICB0ZXN0X3RoYXQoXFx0ZXN0XzEyOVxcLCB7XG4gICAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKHRpbWVfc2VyaWVzKVxuICAgIGV4cGVjdF9lcXVhbChuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKSwgNClcbiAgfSlcbiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7XG4gICAgRkFMU0Vcbn0pXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+test_129 &lt;- tryCatch({
+  test_that(\test_129\, {
     confirmed_deaths_by_countries_dates &lt;- sum_confirmed_deaths_by_countries_dates(time_series)
     expect_equal(ncol(confirmed_deaths_by_countries_dates), 4)
   })
   }, error = function(e) {
     FALSE
 })</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+lh1xuIn0= -->
-<pre><code>Test passed 🥇</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWxsX3Rlc3RzIDwtIGModGVzdF8xMjEsIFxuICAgICAgICAgICAgICAgdGVzdF8xMjIsXG4gICAgICAgICAgICAgICB0ZXN0XzEyMyxcbiAgICAgICAgICAgICAgIHRlc3RfMTI0LFxuICAgICAgICAgICAgICAgdGVzdF8xMjUsXG4gICAgICAgICAgICAgICB0ZXN0XzEyNiwgXG4gICAgICAgICAgICAgICB0ZXN0XzEyOVxuICAgICAgICAgICAgICApXG5wYXNzZWRfdGVzdHMgPC0gc3VtKGFsbF90ZXN0cylcbnNwcmludGYoXCLlnKjoppboprrljJbmlofms5XnmoQgJXMg6aGM57e057+S5Lit77yM5oKo57i95YWx562U5bCN5LqGICVzIOmhjOOAglwiLCBsZW5ndGgoYWxsX3Rlc3RzKSwgcGFzc2VkX3Rlc3RzKVxuYGBgIn0= -->
-<pre class="r"><code>all_tests &lt;- c(test_121, 
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+lh1xuIn0= --&gt;
+</code></pre>
+<p>Test passed 🥇</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYWxsX3Rlc3RzIDwtIGModGVzdF8xMjEsIFxuICAgICAgICAgICAgICAgdGVzdF8xMjIsXG4gICAgICAgICAgICAgICB0ZXN0XzEyMyxcbiAgICAgICAgICAgICAgIHRlc3RfMTI0LFxuICAgICAgICAgICAgICAgdGVzdF8xMjUsXG4gICAgICAgICAgICAgICB0ZXN0XzEyNiwgXG4gICAgICAgICAgICAgICB0ZXN0XzEyOVxuICAgICAgICAgICAgICApXG5wYXNzZWRfdGVzdHMgPC0gc3VtKGFsbF90ZXN0cylcbnNwcmludGYoXFzlnKjoppboprrljJbmlofms5XnmoQgJXMg6aGM57e057+S5Lit77yM5oKo57i95YWx562U5bCN5LqGICVzIOmhjOOAglxcLCBsZW5ndGgoYWxsX3Rlc3RzKSwgcGFzc2VkX3Rlc3RzKVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+all_tests &lt;- c(test_121, 
                test_122,
                test_123,
                test_124,
@@ -2290,15 +2480,19 @@ time_series &lt;- import_time_series()</code></pre>
                test_129
               )
 passed_tests &lt;- sum(all_tests)
-sprintf(&quot;在視覺化文法的 %s 題練習中，您總共答對了 %s 題。&quot;, length(all_tests), passed_tests)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwi5Zyo6KaW6Ka65YyW5paH5rOV55qEIDcg6aGM57e057+S5Lit77yM5oKo57i95YWx562U5bCN5LqGIDcg6aGM44CCXCJcbiJ9 -->
-<pre><code>[1] &quot;在視覺化文法的 7 題練習中，您總共答對了 7 題。&quot;</code></pre>
+sprintf(\在視覺化文法的 %s 題練習中，您總共答對了 %s 題。\, length(all_tests), passed_tests)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiWzFdIFxc5Zyo6KaW6Ka65YyW5paH5rOV55qEIDcg6aGM57e057+S5Lit77yM5oKo57i95YWx562U5bCN5LqGIDcg6aGM44CCXFxcbiJ9 --&gt;
+</code></pre>
+<p>[1] 題練習中，您總共答對了 7 題。<br />
+```</p>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAi57e057+S6aGM6Kmz6KejIDEyMS0xMzAiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIOe3tOe/kumhjOaMh+W8lQoKLSDlsIfnt7Tnv5LpoYzoiIfmiYDpnIDmqpTmoYjkuIvovInliLDlsIjmoYjos4fmlpnlpL7vvIzkuKbku6UgUlN0dWRpbyDpgbjllq4gRmlsZSAtPiBPcGVuIFByb2plY3QgaW4gTmV3IFNlc3Npb24uLi4g6ZaL5ZWf5bCI5qGI6LOH5paZ5aS+44CCCi0g57e057+S6aGM5bey57aT5a6a576p5aW95Ye95pW455qE5ZCN56ix5Lul5Y+K5Y+D5pW45ZCN56ix77yM5oiR5YCR5Y+q6ZyA6KaB5a+r5L2c5Ye95pW455qE5Li76auU5Y2z5Y+v44CCCi0g57e057+S6aGM5YWx5YiG54K65LiJ56iu77yM6aCQ6Kit6Ly45Ye655qG54K6IGByZXR1cm4oTkEpYO+8mgogIC0g5piv6Z2e6aGM77ya6Iul6Ka65b6X5piv6Z2e6aGM55qE5pWY6L+wKirkuI3mraPnoroqKu+8jOWwseWwh+mgkOiorei8uOWHuuaUueWvq+eCuiBgcmV0dXJuKEZBTFNFKWDvvIzoi6XoprrlvpfmmK/pnZ7poYznmoTmlZjov7AqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oVFJVRSlgCiAgLSDllq7pgbjpoYzvvJroi6Xoprrlvpfllq7pgbjpoYznmoTnrKzkuIDlgIvpgbjpoIUqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oMSlg77yM6Iul6Ka65b6X5Zau6YG46aGM55qE56ys5LqM5YCL6YG46aCFKirmraPnoroqKuWJh+aUueWvq+eCuiBgcmV0dXJuKDIpYO+8jOiLpeimuuW+l+WWrumBuOmhjOeahOesrOS4ieWAi+mBuOmghSoq5q2j56K6KirliYfmlLnlr6vngrogYHJldHVybigzKWDvvIzoi6Xoprrlvpfllq7pgbjpoYznmoTnrKzlm5vlgIvpgbjpoIUqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oNClgCiAgLSDnqIvlvI/poYzvvJrlh73mlbjlkI3nqLHkuYvkuIvnmoToqLvop6PmnIPmj4/ov7DmuKzoqablpoLkvZXpgLLooYzvvIzog73lpKDorpPmiJHlgJHlhYXliIbmmrjop6PpoJDmnJ/ovLjlhaXku6Xlj4rpoJDmnJ/ovLjlh7rkuYvplpPnmoTlsI3mh4npl5zkv4LvvIzlr6vkvZzlroznlaLlvozmlLnlr6vngrogYHJldHVybihleHBlY3RlZF9vdXRwdXQpYAotIOWmguaenOe3tOe/kumhjOmcgOimgei8ieWFpeaqlOahiO+8jOaqlOahiOacg+iIh+e3tOe/kumhjOWtmOaUvuWcqOWQjOWAi+izh+aWmeWkvuS4re+8jOmAmeaZguWwseWPr+S7pemBi+eUqOW3peS9nOebrumMhOOAgeebtOaOpeaMh+WumuaqlOahiOWQjeeosei8ieWFpeOAggotIOWft+ihjOa4rOippueahOaWueW8j+eCuum7numBuCBTb3VyY2Ug5Y+z5LiK5pa56YG45Zau55qEIFJ1biAtPiBSZXN0YXJ0IFIgYW5kIFJ1biBBbGwgQ2h1bmtzCgpgYGB7cn0KcGtncyA8LSBjKCJybWFya2Rvd24iLCAidGVzdHRoYXQiLCAiZHBseXIiLCAidGlkeXIiLCAiZ2dwbG90MiIpCmluc3RhbGwucGFja2FnZXMocGtncykgIyDoi6XkuI3mmK/nrKzkuIDmrKHlr6vkvZzmpa3vvIzlj6/ku6XlsIfpgJnliJfoqLvop6PmjokKbGlicmFyeSgidGVzdHRoYXQiKQpsaWJyYXJ5KCJkcGx5ciIpCmxpYnJhcnkoInRpZHlyIikKbGlicmFyeSgiZ2dwbG90MiIpCmBgYAoKIyMgMTIx77yI5piv6Z2e6aGM77yJ5bCN5Lq65L6G6Kqq5Y6f5aeL6LOH5paZ55u455W25YW36auU77yM5LiN6ZyA6KaB6KaW6Ka65YyW55qE6LyU5Yqp5L6G5bmr5Yqp55CG6Kej44CCCgpgYGB7cn0KZXhlcmNpc2VfMTIxIDwtIGZ1bmN0aW9uKCkgewogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybihGQUxTRSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAxMjLvvIjmmK/pnZ7poYzvvIlSIOiqnuiogOWDheiDveS9v+eUqCBCYXNlIHBsb3R0aW5nIHN5c3RlbSDkvZzngrros4fmlpnoppboprrljJbnmoTlt6XlhbfjgIIKCmBgYHtyfQpleGVyY2lzZV8xMjIgPC0gZnVuY3Rpb24oKSB7CiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgcmV0dXJuKEZBTFNFKQogICMjIyBFTkQgU09MVVRJT04KfQpgYGAKCiMjIDEyM++8iOWWrumBuOmhjO+8iWBnZ3Bsb3QyYCDlpZfku7bnmoTlip/og73lj6/ku6XnlKjkuIvliJflk6rkuIDlj6XoqbHmpoLmi6zvvJ8KCjEuIEEgbW9kZWwgYnVpbGRlci4KMi4gQSBncmFtbWFyIG9mIGdyYXBoaWNzLgozLiBBIGdyYW1tYXIgb2YgZGF0YSBtYW5pcHVsYXRpb24uCjQuIEEgY2FudmFzIGZvciBkYXRhIHNjaWVudGlzdHMuCgpgYGB7cn0KZXhlcmNpc2VfMTIzIDwtIGZ1bmN0aW9uKCkgewogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybigyKQogICMjIyBFTkQgU09MVVRJT04KfQpgYGAKCiMjIDEyNO+8iOWWrumBuOmhjO+8ieS4i+WIl+WTquS4gOWAi+mBi+eul+espuiDveeUqOS+huaQremFjSBgZ2dwbG90MmAg5aWX5Lu25aCG55aK5ZyW5b2i5Ye95pW46IiH5re75Yqg5ZyW5b2i5YWD57Sg77yfCgoxLiBgK2AKMi4gYC1gCjMuIGA+PmAKNC4gYHw+YAoKYGBge3J9CmV4ZXJjaXNlXzEyNCA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oMSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAxMjXvvIjllq7pgbjpoYzvvInkvb/nlKggYGdncGxvdDI6OmdncGxvdCgpYCDlh73mlbjnmoTmmYLlgJnmnIPmkK3phY3kuIvliJflk6rkuIDlgIvlh73mlbjlu7rnq4vluqfmqJnns7vntbHvvJ8KCjEuIGBnZ3BsbzI6OmNvb3JkaW5hdGVzKClg44CCCjIuIGBnZ3BsbzI6Onh5YXhpcygpYOOAggozLiBgZ2dwbG8yOjptYXBwaW5nKClg44CCCjQuIGBnZ3BsbzI6OmFlcygpYOOAggoKYGBge3J9CmV4ZXJjaXNlXzEyNSA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oNCkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyDlr6vkvZznqIvlvI/poYzkuYvliY3lhYjkvb/nlKggYGltcG9ydF90aW1lX3NlcmllcygpYCDlh73mlbjnjbLlvpcgYHRpbWVfc2VyaWVzYCDos4fmlpnmoYbjgIIKCmBgYHtyfQppbXBvcnRfdGltZV9zZXJpZXMgPC0gZnVuY3Rpb24oKSB7CiAgdGltZV9zZXJpZXNfcm91dGUgPC0gImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9DU1NFR0lTYW5kRGF0YS9DT1ZJRC0xOS9tYXN0ZXIvY3NzZV9jb3ZpZF8xOV9kYXRhL2Nzc2VfY292aWRfMTlfdGltZV9zZXJpZXMvIgogIGNvbmZpcm1lZF9maWxlX25hbWUgPC0gInRpbWVfc2VyaWVzX2NvdmlkMTlfY29uZmlybWVkX2dsb2JhbC5jc3YiCiAgZGVhdGhzX2ZpbGVfbmFtZSA8LSAidGltZV9zZXJpZXNfY292aWQxOV9kZWF0aHNfZ2xvYmFsLmNzdiIKICBjb25maXJtZWRfZmlsZV91cmwgPC0gcGFzdGUwKHRpbWVfc2VyaWVzX3JvdXRlLCBjb25maXJtZWRfZmlsZV9uYW1lKQogIGRlYXRoc19maWxlX3VybCA8LSBwYXN0ZTAodGltZV9zZXJpZXNfcm91dGUsIGRlYXRoc19maWxlX25hbWUpCiAgdGltZV9zZXJpZXNfY29uZmlybWVkIDwtIHJlYWQuY3N2KGNvbmZpcm1lZF9maWxlX3VybCkKICB0aW1lX3Nlcmllc19kZWF0aHMgPC0gcmVhZC5jc3YoZGVhdGhzX2ZpbGVfdXJsKQogIGNvbHNfbm90X3RvX3Bpdm90IDwtIGMoIlByb3ZpbmNlLlN0YXRlIiwgIkNvdW50cnkuUmVnaW9uIiwgIkxhdCIsICJMb25nIikKICB0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyA8LSB0aW1lX3Nlcmllc19jb25maXJtZWQgfD4KICAgIHRpZHlyOjpwaXZvdF9sb25nZXIoY29scyA9ICFhbGxfb2YoY29sc19ub3RfdG9fcGl2b3QpLCBuYW1lc190byA9ICJEYXRlIiwgdmFsdWVzX3RvID0gIkNvbmZpcm1lZCIpCiAgdGltZV9zZXJpZXNfZGVhdGhzX2xvbmcgPC0gdGltZV9zZXJpZXNfZGVhdGhzIHw+CiAgICB0aWR5cjo6cGl2b3RfbG9uZ2VyKGNvbHMgPSAhYWxsX29mKGNvbHNfbm90X3RvX3Bpdm90KSwgbmFtZXNfdG8gPSAiRGF0ZSIsIHZhbHVlc190byA9ICJEZWF0aHMiKQogIHRpbWVfc2VyaWVzX2NvbmZpcm1lZF9sb25nJERhdGUgPC0gc3ViKHBhdHRlcm4gPSAiWCIsIHJlcGxhY2VtZW50ID0gIiIsIHRpbWVfc2VyaWVzX2NvbmZpcm1lZF9sb25nJERhdGUpCiAgdGltZV9zZXJpZXNfZGVhdGhzX2xvbmckRGF0ZSA8LSBzdWIocGF0dGVybiA9ICJYIiwgcmVwbGFjZW1lbnQgPSAiIiwgdGltZV9zZXJpZXNfZGVhdGhzX2xvbmckRGF0ZSkKICBmcm9tX2Zvcm1hdCA8LSAiJW0uJWQuJXkiCnRpbWVfc2VyaWVzX2NvbmZpcm1lZF9sb25nJERhdGUgPC0gYXMuRGF0ZSh0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyREYXRlLCBmb3JtYXQgPSBmcm9tX2Zvcm1hdCkKdGltZV9zZXJpZXNfZGVhdGhzX2xvbmckRGF0ZSA8LSBhcy5EYXRlKHRpbWVfc2VyaWVzX2RlYXRoc19sb25nJERhdGUsIGZvcm1hdCA9IGZyb21fZm9ybWF0KQogIHRpbWVfc2VyaWVzIDwtIGRwbHlyOjppbm5lcl9qb2luKHRpbWVfc2VyaWVzX2NvbmZpcm1lZF9sb25nLCB0aW1lX3Nlcmllc19kZWF0aHNfbG9uZywgYnkgPSBjKCJQcm92aW5jZS5TdGF0ZSIgPSAiUHJvdmluY2UuU3RhdGUiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJDb3VudHJ5LlJlZ2lvbiIgPSAiQ291bnRyeS5SZWdpb24iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJMYXQiID0gIkxhdCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkxvbmciID0gIkxvbmciLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJEYXRlIiA9ICJEYXRlIikpCiAgcmV0dXJuKHRpbWVfc2VyaWVzKQp9CnRpbWVfc2VyaWVzIDwtIGltcG9ydF90aW1lX3NlcmllcygpCmBgYAoKIyMgMTI277yI56iL5byP6aGM77yJ5ZCE5ZyL56K66Ki65q275Lqh5Lq65pW457i96KiI44CCCgrlrprnvqnlh73mlbggYHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcygpYCDovLjlh7ogYHRpbWVfc2VyaWVzYCDos4fmlpnmoYbnmoTlkITlnIvnorroqLrjgIHmrbvkuqHkurrmlbjnuL3oqIjjgIIKCi0g5Lul56+p6YG46KeA5ris5YC855qE5oqA5ben5pON5L2c44CCCi0g5Lul5YiG57WE6IGa5ZCI55qE5oqA5ben5pON5L2c44CCCi0g5bCH562U5qGI5a+r5ZyoIGByZXR1cm4oKWAg5LmL5Lit44CCCgpgYGB7cn0Kc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzIDwtIGZ1bmN0aW9uKHRpbWVfc2VyaWVzKSB7CiAgIyA+IGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzIDwtIHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyh0aW1lX3NlcmllcykKICAjID4gbmNvbChjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcykKICAjIFsxXSAzCiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgbW9zdF9yZWNlbnRfZGF0ZSA8LSBtYXgodGltZV9zZXJpZXMkRGF0ZSkKICBhbnN3ZXIgPC0gdGltZV9zZXJpZXMgfD4KICAgIGRwbHlyOjpmaWx0ZXIoRGF0ZSA9PSBtb3N0X3JlY2VudF9kYXRlKSB8PgogICAgZHBseXI6Omdyb3VwX2J5KENvdW50cnkuUmVnaW9uKSB8PgogICAgZHBseXI6OnN1bW1hcmlzZShDb25maXJtZWQgPSBzdW0oQ29uZmlybWVkKSwKICAgICAgICAgICAgICAgICAgICAgRGVhdGhzID0gc3VtKERlYXRocykpCiAgcmV0dXJuKGFuc3dlcikKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAxMjfvvIjnqIvlvI/poYzvvInku6UgYGdncGxvdDJgIOe5quijveawtOW5s+mVt+aineWcluimluimuuWMluWJjeWNgeWkp+eiuuiouuS6uuaVuOeahOWci+Wutu+8iOS9nOWcluS4jei3kea4rOippu+8ieOAggoK5o6l57qM5LiK6aGM77yM5a6a576p5Ye95pW4IGBwbG90X3RvcF90ZW5fY29uZmlybWVkX2J5X2NvdW50cmllcygpYCDku6UgYGdncGxvdDJgIOe5quijveawtOW5s+mVt+aineWcluimluimuuWMluWJjeWNgeWkp+eiuuiouuS6uuaVuOeahOWci+WutuOAggoKLSDkvb/nlKggYHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcygpYCDlh73mlbjjgIIKLSDkvb/nlKggYGRwbHJ5OjphcnJhbmdlKClgIOWHveaVuOaOkuW6j+OAggotIOS9v+eUqCBgaGVhZCgpYCDlh73mlbjjgIIKLSDkvb/nlKggYGdncGxvdDI6OmdncGxvdCgpYCDlh73mlbjoiIcgYGdncGxvdDI6OmFlcygpYCDlh73mlbjlu7rnq4vluqfmqJnns7vntbHjgIIKLSDkvb/nlKggYGdncGxvdDI6Omdlb21fYmFyKHN0YXQgPSAiaWRlbnRpdHkiKWAg5Ye95pW457mq6KO96KeA5a+f5o6S5bqP55qE6ZW35qKd5ZyW44CCCi0g5L2/55SoIGBnZ3Bsb3QyOjpjb29yZF9mbGlwKClgIOWHveaVuOWwh+mVt+aineWcluWPjei9ieeCuuawtOW5s+OAggoKYGBge3J9CnBsb3RfdG9wX3Rlbl9jb25maXJtZWRfYnlfY291bnRyaWVzIDwtIGZ1bmN0aW9uKCkgewogICMgPiBwbG90X3RvcF90ZW5fY29uZmlybWVkX2J5X2NvdW50cmllcygpCiAgIyBDaGVjayAiUGxvdHMiIHBhbmVsCiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKHRpbWVfc2VyaWVzKQogIHRvcF90ZW4gPC0gY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgfD4KICAgIGRwbHlyOjphcnJhbmdlKGRlc2MoQ29uZmlybWVkKSkgfD4KICAgIGhlYWQoMTApIHw+CiAgICBkcGx5cjo6YXJyYW5nZShDb25maXJtZWQpCiAgYmFyX29yZGVyIDwtIGFzLmNoYXJhY3Rlcih0b3BfdGVuJENvdW50cnkuUmVnaW9uKQogIHRvcF90ZW4kQ291bnRyeS5SZWdpb24gPC0gZmFjdG9yKHRvcF90ZW4kQ291bnRyeS5SZWdpb24sIGxldmVscyA9IGJhcl9vcmRlcikKICBnZ3Bsb3QyOjpnZ3Bsb3QodG9wX3RlbiwgYWVzKHggPSBDb3VudHJ5LlJlZ2lvbiwgeSA9IENvbmZpcm1lZCwgZmlsbCA9IENvdW50cnkuUmVnaW9uKSkgKwogICAgZ2dwbG90Mjo6Z2VvbV9iYXIoc3RhdCA9ICJpZGVudGl0eSIpICsgCiAgICBnZ3Bsb3QyOjpjb29yZF9mbGlwKCkgKwogICAgZ2dwbG90Mjo6Z2d0aXRsZSgiVG9wIDEwIENvbmZpcm1lZCBieSBDb3VudHJ5IikKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAxMjjvvIjnqIvlvI/poYzvvInku6UgYGdncGxvdDJgIOe5quijveawtOW5s+mVt+aineWcluimluimuuWMluWJjeWNgeWkp+atu+S6oeS6uuaVuOeahOWci+Wutu+8iOS9nOWcluS4jei3kea4rOippu+8ieOAggoK5o6l57qM5LiK6aGM77yM5a6a576p5Ye95pW4IGBwbG90X3RvcF90ZW5fZGVhdGhzX2J5X2NvdW50cmllcygpYCDku6UgYGdncGxvdDJgIOe5quijveawtOW5s+mVt+aineWcluimluimuuWMluWJjeWNgeWkp+atu+S6oeS6uuaVuOeahOWci+WutuOAggoKLSDkvb/nlKggYHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcygpYCDlh73mlbjjgIIKLSDkvb/nlKggYGRwbHJ5OjphcnJhbmdlKClgIOWHveaVuOaOkuW6j+OAggotIOS9v+eUqCBgaGVhZCgpYCDlh73mlbjjgIIKLSDkvb/nlKggYGdncGxvdDI6OmdncGxvdCgpYCDlh73mlbjoiIcgYGdncGxvdDI6OmFlcygpYCDlh73mlbjlu7rnq4vluqfmqJnns7vntbHjgIIKLSDkvb/nlKggYGdncGxvdDI6Omdlb21fYmFyKHN0YXQgPSAiaWRlbnRpdHkiKWAg5Ye95pW457mq6KO96KeA5a+f5o6S5bqP55qE6ZW35qKd5ZyW44CCCi0g5L2/55SoIGBnZ3Bsb3QyOjpjb29yZF9mbGlwKClgIOWHveaVuOWwh+mVt+aineWcluWPjei9ieeCuuawtOW5s+OAggoKYGBge3J9CnBsb3RfdG9wX3Rlbl9kZWF0aHNfYnlfY291bnRyaWVzIDwtIGZ1bmN0aW9uKCkgewogICMgPiBwbG90X3RvcF90ZW5fZGVhdGhzX2J5X2NvdW50cmllcygpCiAgIyBDaGVjayAiUGxvdHMiIHBhbmVsCiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKHRpbWVfc2VyaWVzKQogIHRvcF90ZW4gPC0gY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgfD4KICAgIGRwbHlyOjphcnJhbmdlKGRlc2MoRGVhdGhzKSkgfD4KICAgIGhlYWQoMTApIHw+CiAgICBkcGx5cjo6YXJyYW5nZShEZWF0aHMpCiAgYmFyX29yZGVyIDwtIGFzLmNoYXJhY3Rlcih0b3BfdGVuJENvdW50cnkuUmVnaW9uKQogIHRvcF90ZW4kQ291bnRyeS5SZWdpb24gPC0gZmFjdG9yKHRvcF90ZW4kQ291bnRyeS5SZWdpb24sIGxldmVscyA9IGJhcl9vcmRlcikKICBnZ3Bsb3QyOjpnZ3Bsb3QodG9wX3RlbiwgYWVzKHggPSBDb3VudHJ5LlJlZ2lvbiwgeSA9IERlYXRocywgZmlsbCA9IENvdW50cnkuUmVnaW9uKSkgKwogICAgZ2dwbG90Mjo6Z2VvbV9iYXIoc3RhdCA9ICJpZGVudGl0eSIpICsgCiAgICBnZ3Bsb3QyOjpjb29yZF9mbGlwKCkgKwogICAgZ2dwbG90Mjo6Z2d0aXRsZSgiVG9wIDEwIERlYXRocyBieSBDb3VudHJ5IikKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAxMjnvvIjnqIvlvI/poYzvvInlkITlnIvnorroqLrmrbvkuqHkurrmlbjkvp3lnIvlrrbjgIHml6XmlbjnuL3oqIjjgIIKCuWumue+qeWHveaVuCBgc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKClgIOi8uOWHuiBgdGltZV9zZXJpZXNgIOizh+aWmeahhueahOWQhOWci+S+neaXpeacn+eahOeiuuiouuOAgeatu+S6oeS6uuaVuOe4veioiOOAggoKLSDku6XliIbntYTogZrlkIjnmoTmioDlt6fmk43kvZzjgIIKLSDlsIfnrZTmoYjlr6vlnKggYHJldHVybigpYCDkuYvkuK3jgIIKCmBgYHtyfQpzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXMgPC0gZnVuY3Rpb24odGltZV9zZXJpZXMpIHsKICAjID4gY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKHRpbWVfc2VyaWVzKQogICMgPiBuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKQogICMgWzFdIDQKICAjIyMgQkVHSU4gU09MVVRJT04KICBhbnN3ZXIgPC0gdGltZV9zZXJpZXMgfD4KICAgIGRwbHlyOjpncm91cF9ieShDb3VudHJ5LlJlZ2lvbiwgRGF0ZSkgfD4KICAgIGRwbHlyOjpzdW1tYXJpc2UoQ29uZmlybWVkID0gc3VtKENvbmZpcm1lZCksCiAgICAgICAgICAgICAgICAgICAgIERlYXRocyA9IHN1bShEZWF0aHMpKQogIHJldHVybihhbnN3ZXIpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMTMw77yI56iL5byP6aGM77yJ5LulIGBnZ3Bsb3QyYCDnuaroo73nt5rlnJboppboprrljJblj7DngaPjgIHljZfpn5PjgIHml6XmnKzoiIfmlrDliqDlnaHnmoTnorroqLrkurrmlbjotqjli6LvvIjkvZzlnJbkuI3ot5HmuKzoqabvvInjgIIKCuaOpee6jOS4iumhjO+8jOWumue+qeWHveaVuCBgcGxvdF9saW5lcygpYCDku6UgYGdncGxvdDJgIOe5quijvee3muWcluimluimuuWMluWPsOeBo++8iGAiVGFpd2FuKiJg77yJ44CB5Y2X6Z+T77yIYCJLb3JlYSwgU291dGgiYO+8ieOAgeaXpeacrO+8iGAiSmFwYW4iYO+8ieiIh+aWsOWKoOWdoe+8iGAiU2luZ2Fwb3JlImDvvInnmoTnorroqLrkurrmlbjotqjli6LjgIIKCi0g5L2/55SoIGBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXMoKWAg5Ye95pW444CCCi0g5Lul56+p6YG46KeA5ris5YC855qE5oqA5ben5pON5L2c44CCCi0g5L2/55SoIGBnZ3Bsb3QyOjpnZ3Bsb3QoKWAg5Ye95pW46IiHIGBnZ3Bsb3QyOjphZXMoKWAg5Ye95pW45bu656uL5bqn5qiZ57O757Wx44CCCi0g5L2/55SoIGBnZ3Bsb3QyOjpnZW9tX2xpbmUoKWAg5Ye95pW457mq6KO96KeA5a+f6Lao5Yui55qE57ea5ZyW44CCCgpgYGB7cn0KcGxvdF9saW5lcyA8LSBmdW5jdGlvbigpIHsKICAjID4gcGxvdF9saW5lcygpCiAgIyBDaGVjayAiUGxvdHMiIHBhbmVsCiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKHRpbWVfc2VyaWVzKQogIHR3X2tyX2pwX3NnIDwtIGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzIHw+CiAgICBmaWx0ZXIoQ291bnRyeS5SZWdpb24gJWluJSBjKCJUYWl3YW4qIiwgIktvcmVhLCBTb3V0aCIsICJKYXBhbiIsICJTaW5nYXBvcmUiKSkKICBnZ3Bsb3QyOjpnZ3Bsb3QodHdfa3JfanBfc2csIGFlcyh4ID0gRGF0ZSwgeSA9IENvbmZpcm1lZCwgY29sb3VyID0gQ291bnRyeS5SZWdpb24pKSArCiAgICBnZ3Bsb3QyOjpnZW9tX2xpbmUoKSArIAogICAgZ2dwbG90Mjo6Z2d0aXRsZSgiQ29uZmlybWVkIGJ5IERhdGUiKQogICMjIyBFTkQgU09MVVRJT04KfQpgYGAKCiMjIOWft+ihjOa4rOippgoKLSDpu57pgbjlj7PkuIrmlrnpgbjllq7nmoQgUnVuIC0+IFJlc3RhcnQgUiBhbmQgUnVuIEFsbCBDaHVua3MKLSDkuIvmlrnngrrmuKzoqabnqIvlvI/vvIzoq4vlkIzlrbjlv73nlaXkuKbkuJTkuI3opoHmm7Tli5XjgIIKCmBgYHtyfQp0ZXN0XzEyMSA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzEyMSIsIHsKICAgIGFuc3dlciA8LSBleGVyY2lzZV8xMjEoKQogICAgZXhwZWN0X2ZhbHNlKGFuc3dlcikKICB9KQogIH0sIGVycm9yID0gZnVuY3Rpb24oZSkgewogICAgRkFMU0UKfSkKdGVzdF8xMjIgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8xMjIiLCB7CiAgICBhbnN3ZXIgPC0gZXhlcmNpc2VfMTIyKCkKICAgIGV4cGVjdF9mYWxzZShhbnN3ZXIpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMTIzIDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMTIzIiwgewogICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyMygpCiAgICBleHBlY3RfZXF1YWwoYW5zd2VyLCAyKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQp0ZXN0XzEyNCA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzEyNCIsIHsKICAgIGFuc3dlciA8LSBleGVyY2lzZV8xMjQoKQogICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMSkKICB9KQogIH0sIGVycm9yID0gZnVuY3Rpb24oZSkgewogICAgRkFMU0UKfSkKdGVzdF8xMjUgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8xMjUiLCB7CiAgICBhbnN3ZXIgPC0gZXhlcmNpc2VfMTI1KCkKICAgIGV4cGVjdF9lcXVhbChhbnN3ZXIsIDQpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMTI2IDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMTI2IiwgewogICAgY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMgPC0gc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKHRpbWVfc2VyaWVzKQogICAgZXhwZWN0X2VxdWFsKG5jb2woY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMpLCAzKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQp0ZXN0XzEyOSA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzEyOSIsIHsKICAgIGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzIDwtIHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyh0aW1lX3NlcmllcykKICAgIGV4cGVjdF9lcXVhbChuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKSwgNCkKICB9KQogIH0sIGVycm9yID0gZnVuY3Rpb24oZSkgewogICAgRkFMU0UKfSkKCmFsbF90ZXN0cyA8LSBjKHRlc3RfMTIxLCAKICAgICAgICAgICAgICAgdGVzdF8xMjIsCiAgICAgICAgICAgICAgIHRlc3RfMTIzLAogICAgICAgICAgICAgICB0ZXN0XzEyNCwKICAgICAgICAgICAgICAgdGVzdF8xMjUsCiAgICAgICAgICAgICAgIHRlc3RfMTI2LCAKICAgICAgICAgICAgICAgdGVzdF8xMjkKICAgICAgICAgICAgICApCnBhc3NlZF90ZXN0cyA8LSBzdW0oYWxsX3Rlc3RzKQpzcHJpbnRmKCLlnKjoppboprrljJbmlofms5XnmoQgJXMg6aGM57e057+S5Lit77yM5oKo57i95YWx562U5bCN5LqGICVzIOmhjOOAgiIsIGxlbmd0aChhbGxfdGVzdHMpLCBwYXNzZWRfdGVzdHMpCmBgYA==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAi57e057+S6aGM6Kmz6KejIDEyMS0xMzAiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIOe3tOe/kumhjOaMh+W8lQoKLSDlsIfnt7Tnv5LpoYzoiIfmiYDpnIDmqpTmoYjkuIvovInliLDlsIjmoYjos4fmlpnlpL7vvIzkuKbku6UgUlN0dWRpbyDpgbjllq4gRmlsZSAtPiBPcGVuIFByb2plY3QgaW4gTmV3IFNlc3Npb24uLi4g6ZaL5ZWf5bCI5qGI6LOH5paZ5aS+44CCCi0g57e057+S6aGM5bey57aT5a6a576p5aW95Ye95pW455qE5ZCN56ix5Lul5Y+K5Y+D5pW45ZCN56ix77yM5oiR5YCR5Y+q6ZyA6KaB5a+r5L2c5Ye95pW455qE5Li76auU5Y2z5Y+v44CCCi0g57e057+S6aGM5YWx5YiG54K65LiJ56iu77yM6aCQ6Kit6Ly45Ye655qG54K6IGByZXR1cm4oTkEpYO+8mgogIC0g5piv6Z2e6aGM77ya6Iul6Ka65b6X5piv6Z2e6aGM55qE5pWY6L+wKirkuI3mraPnoroqKu+8jOWwseWwh+mgkOiorei8uOWHuuaUueWvq+eCuiBgcmV0dXJuKEZBTFNFKWDvvIzoi6XoprrlvpfmmK/pnZ7poYznmoTmlZjov7AqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oVFJVRSlgCiAgLSDllq7pgbjpoYzvvJroi6Xoprrlvpfllq7pgbjpoYznmoTnrKzkuIDlgIvpgbjpoIUqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oMSlg77yM6Iul6Ka65b6X5Zau6YG46aGM55qE56ys5LqM5YCL6YG46aCFKirmraPnoroqKuWJh+aUueWvq+eCuiBgcmV0dXJuKDIpYO+8jOiLpeimuuW+l+WWrumBuOmhjOeahOesrOS4ieWAi+mBuOmghSoq5q2j56K6KirliYfmlLnlr6vngrogYHJldHVybigzKWDvvIzoi6Xoprrlvpfllq7pgbjpoYznmoTnrKzlm5vlgIvpgbjpoIUqKuato+eiuioq5YmH5pS55a+r54K6IGByZXR1cm4oNClgCiAgLSDnqIvlvI/poYzvvJrlh73mlbjlkI3nqLHkuYvkuIvnmoToqLvop6PmnIPmj4/ov7DmuKzoqablpoLkvZXpgLLooYzvvIzog73lpKDorpPmiJHlgJHlhYXliIbmmrjop6PpoJDmnJ/ovLjlhaXku6Xlj4rpoJDmnJ/ovLjlh7rkuYvplpPnmoTlsI3mh4npl5zkv4LvvIzlr6vkvZzlroznlaLlvozmlLnlr6vngrogYHJldHVybihleHBlY3RlZF9vdXRwdXQpYAotIOWmguaenOe3tOe/kumhjOmcgOimgei8ieWFpeaqlOahiO+8jOaqlOahiOacg+iIh+e3tOe/kumhjOWtmOaUvuWcqOWQjOWAi+izh+aWmeWkvuS4re+8jOmAmeaZguWwseWPr+S7pemBi+eUqOW3peS9nOebrumMhOOAgeebtOaOpeaMh+WumuaqlOahiOWQjeeosei8ieWFpeOAggotIOWft+ihjOa4rOippueahOaWueW8j+eCuum7numBuCBTb3VyY2Ug5Y+z5LiK5pa56YG45Zau55qEIFJ1biAtPiBSZXN0YXJ0IFIgYW5kIFJ1biBBbGwgQ2h1bmtzCgpgYGB7cn0KcGtncyA8LSBjKCJybWFya2Rvd24iLCAidGVzdHRoYXQiLCAiZHBseXIiLCAidGlkeXIiLCAiZ2dwbG90MiIpCmluc3RhbGwucGFja2FnZXMocGtncykgIyDoi6XkuI3mmK/nrKzkuIDmrKHlr6vkvZzmpa3vvIzlj6/ku6XlsIfpgJnliJfoqLvop6PmjokKbGlicmFyeSgidGVzdHRoYXQiKQpsaWJyYXJ5KCJkcGx5ciIpCmxpYnJhcnkoInRpZHlyIikKbGlicmFyeSgiZ2dwbG90MiIpCmBgYAoKIyMgMTIx77yI5piv6Z2e6aGM77yJ5bCN5Lq65L6G6Kqq5Y6f5aeL6LOH5paZ55u455W25YW36auU77yM5LiN6ZyA6KaB6KaW6Ka65YyW55qE6LyU5Yqp5L6G5bmr5Yqp55CG6Kej44CCCgpgYGB7cn0KZXhlcmNpc2VfMTIxIDwtIGZ1bmN0aW9uKCkgewogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybihGQUxTRSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAxMjLvvIjmmK/pnZ7poYzvvIlSIOiqnuiogOWDheiDveS9v+eUqCBCYXNlIHBsb3R0aW5nIHN5c3RlbSDkvZzngrros4fmlpnoppboprrljJbnmoTlt6XlhbfjgIIKCmBgYHtyfQpleGVyY2lzZV8xMjIgPC0gZnVuY3Rpb24oKSB7CiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgcmV0dXJuKEZBTFNFKQogICMjIyBFTkQgU09MVVRJT04KfQpgYGAKCiMjIDEyM++8iOWWrumBuOmhjO+8iWBnZ3Bsb3QyYCDlpZfku7bnmoTlip/og73lj6/ku6XnlKjkuIvliJflk6rkuIDlj6XoqbHmpoLmi6zvvJ8KCjEuIEEgbW9kZWwgYnVpbGRlci4KMi4gQSBncmFtbWFyIG9mIGdyYXBoaWNzLgozLiBBIGdyYW1tYXIgb2YgZGF0YSBtYW5pcHVsYXRpb24uCjQuIEEgY2FudmFzIGZvciBkYXRhIHNjaWVudGlzdHMuCgpgYGB7cn0KZXhlcmNpc2VfMTIzIDwtIGZ1bmN0aW9uKCkgewogICMjIyBCRUdJTiBTT0xVVElPTgogIHJldHVybigyKQogICMjIyBFTkQgU09MVVRJT04KfQpgYGAKCiMjIDEyNO+8iOWWrumBuOmhjO+8ieS4i+WIl+WTquS4gOWAi+mBi+eul+espuiDveeUqOS+huaQremFjSBgZ2dwbG90MmAg5aWX5Lu25aCG55aK5ZyW5b2i5Ye95pW46IiH5re75Yqg5ZyW5b2i5YWD57Sg77yfCgoxLiBgK2AKMi4gYC1gCjMuIGA+PmAKNC4gYHw+YAoKYGBge3J9CmV4ZXJjaXNlXzEyNCA8LSBmdW5jdGlvbigpIHsKICAjIyMgQkVHSU4gU09MVVRJT04KICByZXR1cm4oMSkKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyAxMjXvvIjllq7pgbjpoYzvvInkvb/nlKggYGdncGxvdDI6OmdncGxvdCgpYCDlh73mlbjnmoTmmYLlgJnmnIPmkK3phY3kuIvliJflk6rkuIDlgIvlh73mlbjlu7rnq4vluqfmqJnns7vntbHvvJ8KCjEuIGBnZ3Bsb3QyOjpjb29yZGluYXRlcygpYOOAggoyLiBgZ2dwbG90Mjo6eHlheGlzKClg44CCCjMuIGBnZ3Bsb3QyOjptYXBwaW5nKClg44CCCjQuIGBnZ3Bsb3QyOjphZXMoKWDjgIIKCmBgYHtyfQpleGVyY2lzZV8xMjUgPC0gZnVuY3Rpb24oKSB7CiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgcmV0dXJuKDQpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMg5a+r5L2c56iL5byP6aGM5LmL5YmN5YWI5L2/55SoIGBpbXBvcnRfdGltZV9zZXJpZXMoKWAg5Ye95pW4542y5b6XIGB0aW1lX3Nlcmllc2Ag6LOH5paZ5qGG44CCCgpgYGB7cn0KaW1wb3J0X3RpbWVfc2VyaWVzIDwtIGZ1bmN0aW9uKCkgewogIHRpbWVfc2VyaWVzX3JvdXRlIDwtICJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vQ1NTRUdJU2FuZERhdGEvQ09WSUQtMTkvbWFzdGVyL2Nzc2VfY292aWRfMTlfZGF0YS9jc3NlX2NvdmlkXzE5X3RpbWVfc2VyaWVzLyIKICBjb25maXJtZWRfZmlsZV9uYW1lIDwtICJ0aW1lX3Nlcmllc19jb3ZpZDE5X2NvbmZpcm1lZF9nbG9iYWwuY3N2IgogIGRlYXRoc19maWxlX25hbWUgPC0gInRpbWVfc2VyaWVzX2NvdmlkMTlfZGVhdGhzX2dsb2JhbC5jc3YiCiAgY29uZmlybWVkX2ZpbGVfdXJsIDwtIHBhc3RlMCh0aW1lX3Nlcmllc19yb3V0ZSwgY29uZmlybWVkX2ZpbGVfbmFtZSkKICBkZWF0aHNfZmlsZV91cmwgPC0gcGFzdGUwKHRpbWVfc2VyaWVzX3JvdXRlLCBkZWF0aHNfZmlsZV9uYW1lKQogIHRpbWVfc2VyaWVzX2NvbmZpcm1lZCA8LSByZWFkLmNzdihjb25maXJtZWRfZmlsZV91cmwpCiAgdGltZV9zZXJpZXNfZGVhdGhzIDwtIHJlYWQuY3N2KGRlYXRoc19maWxlX3VybCkKICBjb2xzX25vdF90b19waXZvdCA8LSBjKCJQcm92aW5jZS5TdGF0ZSIsICJDb3VudHJ5LlJlZ2lvbiIsICJMYXQiLCAiTG9uZyIpCiAgdGltZV9zZXJpZXNfY29uZmlybWVkX2xvbmcgPC0gdGltZV9zZXJpZXNfY29uZmlybWVkIHw+CiAgICB0aWR5cjo6cGl2b3RfbG9uZ2VyKGNvbHMgPSAhYWxsX29mKGNvbHNfbm90X3RvX3Bpdm90KSwgbmFtZXNfdG8gPSAiRGF0ZSIsIHZhbHVlc190byA9ICJDb25maXJtZWQiKQogIHRpbWVfc2VyaWVzX2RlYXRoc19sb25nIDwtIHRpbWVfc2VyaWVzX2RlYXRocyB8PgogICAgdGlkeXI6OnBpdm90X2xvbmdlcihjb2xzID0gIWFsbF9vZihjb2xzX25vdF90b19waXZvdCksIG5hbWVzX3RvID0gIkRhdGUiLCB2YWx1ZXNfdG8gPSAiRGVhdGhzIikKICB0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyREYXRlIDwtIHN1YihwYXR0ZXJuID0gIlgiLCByZXBsYWNlbWVudCA9ICIiLCB0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyREYXRlKQogIHRpbWVfc2VyaWVzX2RlYXRoc19sb25nJERhdGUgPC0gc3ViKHBhdHRlcm4gPSAiWCIsIHJlcGxhY2VtZW50ID0gIiIsIHRpbWVfc2VyaWVzX2RlYXRoc19sb25nJERhdGUpCiAgZnJvbV9mb3JtYXQgPC0gIiVtLiVkLiV5Igp0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZyREYXRlIDwtIGFzLkRhdGUodGltZV9zZXJpZXNfY29uZmlybWVkX2xvbmckRGF0ZSwgZm9ybWF0ID0gZnJvbV9mb3JtYXQpCnRpbWVfc2VyaWVzX2RlYXRoc19sb25nJERhdGUgPC0gYXMuRGF0ZSh0aW1lX3Nlcmllc19kZWF0aHNfbG9uZyREYXRlLCBmb3JtYXQgPSBmcm9tX2Zvcm1hdCkKICB0aW1lX3NlcmllcyA8LSBkcGx5cjo6aW5uZXJfam9pbih0aW1lX3Nlcmllc19jb25maXJtZWRfbG9uZywgdGltZV9zZXJpZXNfZGVhdGhzX2xvbmcsIGJ5ID0gYygiUHJvdmluY2UuU3RhdGUiID0gIlByb3ZpbmNlLlN0YXRlIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQ291bnRyeS5SZWdpb24iID0gIkNvdW50cnkuUmVnaW9uIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTGF0IiA9ICJMYXQiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJMb25nIiA9ICJMb25nIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiRGF0ZSIgPSAiRGF0ZSIpKQogIHJldHVybih0aW1lX3NlcmllcykKfQp0aW1lX3NlcmllcyA8LSBpbXBvcnRfdGltZV9zZXJpZXMoKQpgYGAKCiMjIDEyNu+8iOeoi+W8j+mhjO+8ieWQhOWci+eiuuiouuatu+S6oeS6uuaVuOe4veioiOOAggoK5a6a576p5Ye95pW4IGBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMoKWAg6Ly45Ye6IGB0aW1lX3Nlcmllc2Ag6LOH5paZ5qGG55qE5ZCE5ZyL56K66Ki644CB5q275Lqh5Lq65pW457i96KiI44CCCgotIOS7peevqemBuOingOa4rOWAvOeahOaKgOW3p+aTjeS9nOOAggotIOS7peWIhue1hOiBmuWQiOeahOaKgOW3p+aTjeS9nOOAggotIOWwh+etlOahiOWvq+WcqCBgcmV0dXJuKClgIOS5i+S4reOAggoKYGBge3J9CnN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyA8LSBmdW5jdGlvbih0aW1lX3NlcmllcykgewogICMgPiBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXModGltZV9zZXJpZXMpCiAgIyA+IG5jb2woY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMpCiAgIyBbMV0gMwogICMjIyBCRUdJTiBTT0xVVElPTgogIG1vc3RfcmVjZW50X2RhdGUgPC0gbWF4KHRpbWVfc2VyaWVzJERhdGUpCiAgYW5zd2VyIDwtIHRpbWVfc2VyaWVzIHw+CiAgICBkcGx5cjo6ZmlsdGVyKERhdGUgPT0gbW9zdF9yZWNlbnRfZGF0ZSkgfD4KICAgIGRwbHlyOjpncm91cF9ieShDb3VudHJ5LlJlZ2lvbikgfD4KICAgIGRwbHlyOjpzdW1tYXJpc2UoQ29uZmlybWVkID0gc3VtKENvbmZpcm1lZCksCiAgICAgICAgICAgICAgICAgICAgIERlYXRocyA9IHN1bShEZWF0aHMpKQogIHJldHVybihhbnN3ZXIpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMTI377yI56iL5byP6aGM77yJ5LulIGBnZ3Bsb3QyYCDnuaroo73msLTlubPplbfmop3lnJboppboprrljJbliY3ljYHlpKfnorroqLrkurrmlbjnmoTlnIvlrrbvvIjkvZzlnJbkuI3ot5HmuKzoqabvvInjgIIKCuaOpee6jOS4iumhjO+8jOWumue+qeWHveaVuCBgcGxvdF90b3BfdGVuX2NvbmZpcm1lZF9ieV9jb3VudHJpZXMoKWAg5LulIGBnZ3Bsb3QyYCDnuaroo73msLTlubPplbfmop3lnJboppboprrljJbliY3ljYHlpKfnorroqLrkurrmlbjnmoTlnIvlrrbjgIIKCi0g5L2/55SoIGBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMoKWAg5Ye95pW444CCCi0g5L2/55SoIGBkcGxyeTo6YXJyYW5nZSgpYCDlh73mlbjmjpLluo/jgIIKLSDkvb/nlKggYGhlYWQoKWAg5Ye95pW444CCCi0g5L2/55SoIGBnZ3Bsb3QyOjpnZ3Bsb3QoKWAg5Ye95pW46IiHIGBnZ3Bsb3QyOjphZXMoKWAg5Ye95pW45bu656uL5bqn5qiZ57O757Wx44CCCi0g5L2/55SoIGBnZ3Bsb3QyOjpnZW9tX2JhcihzdGF0ID0gImlkZW50aXR5IilgIOWHveaVuOe5quijveingOWvn+aOkuW6j+eahOmVt+aineWcluOAggotIOS9v+eUqCBgZ2dwbG90Mjo6Y29vcmRfZmxpcCgpYCDlh73mlbjlsIfplbfmop3lnJblj43ovYnngrrmsLTlubPjgIIKCmBgYHtyfQpwbG90X3RvcF90ZW5fY29uZmlybWVkX2J5X2NvdW50cmllcyA8LSBmdW5jdGlvbigpIHsKICAjID4gcGxvdF90b3BfdGVuX2NvbmZpcm1lZF9ieV9jb3VudHJpZXMoKQogICMgQ2hlY2sgIlBsb3RzIiBwYW5lbAogICMjIyBCRUdJTiBTT0xVVElPTgogIGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzIDwtIHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyh0aW1lX3NlcmllcykKICB0b3BfdGVuIDwtIGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzIHw+CiAgICBkcGx5cjo6YXJyYW5nZShkZXNjKENvbmZpcm1lZCkpIHw+CiAgICBoZWFkKDEwKSB8PgogICAgZHBseXI6OmFycmFuZ2UoQ29uZmlybWVkKQogIGJhcl9vcmRlciA8LSBhcy5jaGFyYWN0ZXIodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbikKICB0b3BfdGVuJENvdW50cnkuUmVnaW9uIDwtIGZhY3Rvcih0b3BfdGVuJENvdW50cnkuUmVnaW9uLCBsZXZlbHMgPSBiYXJfb3JkZXIpCiAgZ2dwbG90Mjo6Z2dwbG90KHRvcF90ZW4sIGFlcyh4ID0gQ291bnRyeS5SZWdpb24sIHkgPSBDb25maXJtZWQsIGZpbGwgPSBDb3VudHJ5LlJlZ2lvbikpICsKICAgIGdncGxvdDI6Omdlb21fYmFyKHN0YXQgPSAiaWRlbnRpdHkiKSArIAogICAgZ2dwbG90Mjo6Y29vcmRfZmxpcCgpICsKICAgIGdncGxvdDI6OmdndGl0bGUoIlRvcCAxMCBDb25maXJtZWQgYnkgQ291bnRyeSIpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMTI477yI56iL5byP6aGM77yJ5LulIGBnZ3Bsb3QyYCDnuaroo73msLTlubPplbfmop3lnJboppboprrljJbliY3ljYHlpKfmrbvkuqHkurrmlbjnmoTlnIvlrrbvvIjkvZzlnJbkuI3ot5HmuKzoqabvvInjgIIKCuaOpee6jOS4iumhjO+8jOWumue+qeWHveaVuCBgcGxvdF90b3BfdGVuX2RlYXRoc19ieV9jb3VudHJpZXMoKWAg5LulIGBnZ3Bsb3QyYCDnuaroo73msLTlubPplbfmop3lnJboppboprrljJbliY3ljYHlpKfmrbvkuqHkurrmlbjnmoTlnIvlrrbjgIIKCi0g5L2/55SoIGBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXMoKWAg5Ye95pW444CCCi0g5L2/55SoIGBkcGxyeTo6YXJyYW5nZSgpYCDlh73mlbjmjpLluo/jgIIKLSDkvb/nlKggYGhlYWQoKWAg5Ye95pW444CCCi0g5L2/55SoIGBnZ3Bsb3QyOjpnZ3Bsb3QoKWAg5Ye95pW46IiHIGBnZ3Bsb3QyOjphZXMoKWAg5Ye95pW45bu656uL5bqn5qiZ57O757Wx44CCCi0g5L2/55SoIGBnZ3Bsb3QyOjpnZW9tX2JhcihzdGF0ID0gImlkZW50aXR5IilgIOWHveaVuOe5quijveingOWvn+aOkuW6j+eahOmVt+aineWcluOAggotIOS9v+eUqCBgZ2dwbG90Mjo6Y29vcmRfZmxpcCgpYCDlh73mlbjlsIfplbfmop3lnJblj43ovYnngrrmsLTlubPjgIIKCmBgYHtyfQpwbG90X3RvcF90ZW5fZGVhdGhzX2J5X2NvdW50cmllcyA8LSBmdW5jdGlvbigpIHsKICAjID4gcGxvdF90b3BfdGVuX2RlYXRoc19ieV9jb3VudHJpZXMoKQogICMgQ2hlY2sgIlBsb3RzIiBwYW5lbAogICMjIyBCRUdJTiBTT0xVVElPTgogIGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzIDwtIHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyh0aW1lX3NlcmllcykKICB0b3BfdGVuIDwtIGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzIHw+CiAgICBkcGx5cjo6YXJyYW5nZShkZXNjKERlYXRocykpIHw+CiAgICBoZWFkKDEwKSB8PgogICAgZHBseXI6OmFycmFuZ2UoRGVhdGhzKQogIGJhcl9vcmRlciA8LSBhcy5jaGFyYWN0ZXIodG9wX3RlbiRDb3VudHJ5LlJlZ2lvbikKICB0b3BfdGVuJENvdW50cnkuUmVnaW9uIDwtIGZhY3Rvcih0b3BfdGVuJENvdW50cnkuUmVnaW9uLCBsZXZlbHMgPSBiYXJfb3JkZXIpCiAgZ2dwbG90Mjo6Z2dwbG90KHRvcF90ZW4sIGFlcyh4ID0gQ291bnRyeS5SZWdpb24sIHkgPSBEZWF0aHMsIGZpbGwgPSBDb3VudHJ5LlJlZ2lvbikpICsKICAgIGdncGxvdDI6Omdlb21fYmFyKHN0YXQgPSAiaWRlbnRpdHkiKSArIAogICAgZ2dwbG90Mjo6Y29vcmRfZmxpcCgpICsKICAgIGdncGxvdDI6OmdndGl0bGUoIlRvcCAxMCBEZWF0aHMgYnkgQ291bnRyeSIpCiAgIyMjIEVORCBTT0xVVElPTgp9CmBgYAoKIyMgMTI577yI56iL5byP6aGM77yJ5ZCE5ZyL56K66Ki65q275Lqh5Lq65pW45L6d5ZyL5a6244CB5pel5pW457i96KiI44CCCgrlrprnvqnlh73mlbggYHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcygpYCDovLjlh7ogYHRpbWVfc2VyaWVzYCDos4fmlpnmoYbnmoTlkITlnIvkvp3ml6XmnJ/nmoTnorroqLrjgIHmrbvkuqHkurrmlbjnuL3oqIjjgIIKCi0g5Lul5YiG57WE6IGa5ZCI55qE5oqA5ben5pON5L2c44CCCi0g5bCH562U5qGI5a+r5ZyoIGByZXR1cm4oKWAg5LmL5Lit44CCCgpgYGB7cn0Kc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzIDwtIGZ1bmN0aW9uKHRpbWVfc2VyaWVzKSB7CiAgIyA+IGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzIDwtIHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyh0aW1lX3NlcmllcykKICAjID4gbmNvbChjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcykKICAjIFsxXSA0CiAgIyMjIEJFR0lOIFNPTFVUSU9OCiAgYW5zd2VyIDwtIHRpbWVfc2VyaWVzIHw+CiAgICBkcGx5cjo6Z3JvdXBfYnkoQ291bnRyeS5SZWdpb24sIERhdGUpIHw+CiAgICBkcGx5cjo6c3VtbWFyaXNlKENvbmZpcm1lZCA9IHN1bShDb25maXJtZWQpLAogICAgICAgICAgICAgICAgICAgICBEZWF0aHMgPSBzdW0oRGVhdGhzKSkKICByZXR1cm4oYW5zd2VyKQogICMjIyBFTkQgU09MVVRJT04KfQpgYGAKCiMjIDEzMO+8iOeoi+W8j+mhjO+8ieS7pSBgZ2dwbG90MmAg57mq6KO957ea5ZyW6KaW6Ka65YyW5Y+w54Gj44CB5Y2X6Z+T44CB5pel5pys6IiH5paw5Yqg5Z2h55qE56K66Ki65Lq65pW46Lao5Yui77yI5L2c5ZyW5LiN6LeR5ris6Kmm77yJ44CCCgrmjqXnuozkuIrpoYzvvIzlrprnvqnlh73mlbggYHBsb3RfbGluZXMoKWAg5LulIGBnZ3Bsb3QyYCDnuaroo73nt5rlnJboppboprrljJblj7DngaPvvIhgIlRhaXdhbioiYO+8ieOAgeWNl+mfk++8iGAiS29yZWEsIFNvdXRoImDvvInjgIHml6XmnKzvvIhgIkphcGFuImDvvInoiIfmlrDliqDlnaHvvIhgIlNpbmdhcG9yZSJg77yJ55qE56K66Ki65Lq65pW46Lao5Yui44CCCgotIOS9v+eUqCBgc3VtX2NvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzKClgIOWHveaVuOOAggotIOS7peevqemBuOingOa4rOWAvOeahOaKgOW3p+aTjeS9nOOAggotIOS9v+eUqCBgZ2dwbG90Mjo6Z2dwbG90KClgIOWHveaVuOiIhyBgZ2dwbG90Mjo6YWVzKClgIOWHveaVuOW7uueri+W6p+aomeezu+e1seOAggotIOS9v+eUqCBgZ2dwbG90Mjo6Z2VvbV9saW5lKClgIOWHveaVuOe5quijveingOWvn+i2qOWLoueahOe3muWcluOAggoKYGBge3J9CnBsb3RfbGluZXMgPC0gZnVuY3Rpb24oKSB7CiAgIyA+IHBsb3RfbGluZXMoKQogICMgQ2hlY2sgIlBsb3RzIiBwYW5lbAogICMjIyBCRUdJTiBTT0xVVElPTgogIGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzX2RhdGVzIDwtIHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyh0aW1lX3NlcmllcykKICB0d19rcl9qcF9zZyA8LSBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyB8PgogICAgZmlsdGVyKENvdW50cnkuUmVnaW9uICVpbiUgYygiVGFpd2FuKiIsICJLb3JlYSwgU291dGgiLCAiSmFwYW4iLCAiU2luZ2Fwb3JlIikpCiAgZ2dwbG90Mjo6Z2dwbG90KHR3X2tyX2pwX3NnLCBhZXMoeCA9IERhdGUsIHkgPSBDb25maXJtZWQsIGNvbG91ciA9IENvdW50cnkuUmVnaW9uKSkgKwogICAgZ2dwbG90Mjo6Z2VvbV9saW5lKCkgKyAKICAgIGdncGxvdDI6OmdndGl0bGUoIkNvbmZpcm1lZCBieSBEYXRlIikKICAjIyMgRU5EIFNPTFVUSU9OCn0KYGBgCgojIyDln7fooYzmuKzoqaYKCi0g6bue6YG45Y+z5LiK5pa56YG45Zau55qEIFJ1biAtPiBSZXN0YXJ0IFIgYW5kIFJ1biBBbGwgQ2h1bmtzCi0g5LiL5pa554K65ris6Kmm56iL5byP77yM6KuL5ZCM5a245b+955Wl5Lim5LiU5LiN6KaB5pu05YuV44CCCgpgYGB7cn0KdGVzdF8xMjEgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8xMjEiLCB7CiAgICBhbnN3ZXIgPC0gZXhlcmNpc2VfMTIxKCkKICAgIGV4cGVjdF9mYWxzZShhbnN3ZXIpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMTIyIDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMTIyIiwgewogICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyMigpCiAgICBleHBlY3RfZmFsc2UoYW5zd2VyKQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQp0ZXN0XzEyMyA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzEyMyIsIHsKICAgIGFuc3dlciA8LSBleGVyY2lzZV8xMjMoKQogICAgZXhwZWN0X2VxdWFsKGFuc3dlciwgMikKICB9KQogIH0sIGVycm9yID0gZnVuY3Rpb24oZSkgewogICAgRkFMU0UKfSkKdGVzdF8xMjQgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8xMjQiLCB7CiAgICBhbnN3ZXIgPC0gZXhlcmNpc2VfMTI0KCkKICAgIGV4cGVjdF9lcXVhbChhbnN3ZXIsIDEpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCnRlc3RfMTI1IDwtIHRyeUNhdGNoKHsKICB0ZXN0X3RoYXQoInRlc3RfMTI1IiwgewogICAgYW5zd2VyIDwtIGV4ZXJjaXNlXzEyNSgpCiAgICBleHBlY3RfZXF1YWwoYW5zd2VyLCA0KQogIH0pCiAgfSwgZXJyb3IgPSBmdW5jdGlvbihlKSB7CiAgICBGQUxTRQp9KQp0ZXN0XzEyNiA8LSB0cnlDYXRjaCh7CiAgdGVzdF90aGF0KCJ0ZXN0XzEyNiIsIHsKICAgIGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzIDwtIHN1bV9jb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllcyh0aW1lX3NlcmllcykKICAgIGV4cGVjdF9lcXVhbChuY29sKGNvbmZpcm1lZF9kZWF0aHNfYnlfY291bnRyaWVzKSwgMykKICB9KQogIH0sIGVycm9yID0gZnVuY3Rpb24oZSkgewogICAgRkFMU0UKfSkKdGVzdF8xMjkgPC0gdHJ5Q2F0Y2goewogIHRlc3RfdGhhdCgidGVzdF8xMjkiLCB7CiAgICBjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyA8LSBzdW1fY29uZmlybWVkX2RlYXRoc19ieV9jb3VudHJpZXNfZGF0ZXModGltZV9zZXJpZXMpCiAgICBleHBlY3RfZXF1YWwobmNvbChjb25maXJtZWRfZGVhdGhzX2J5X2NvdW50cmllc19kYXRlcyksIDQpCiAgfSkKICB9LCBlcnJvciA9IGZ1bmN0aW9uKGUpIHsKICAgIEZBTFNFCn0pCgphbGxfdGVzdHMgPC0gYyh0ZXN0XzEyMSwgCiAgICAgICAgICAgICAgIHRlc3RfMTIyLAogICAgICAgICAgICAgICB0ZXN0XzEyMywKICAgICAgICAgICAgICAgdGVzdF8xMjQsCiAgICAgICAgICAgICAgIHRlc3RfMTI1LAogICAgICAgICAgICAgICB0ZXN0XzEyNiwgCiAgICAgICAgICAgICAgIHRlc3RfMTI5CiAgICAgICAgICAgICAgKQpwYXNzZWRfdGVzdHMgPC0gc3VtKGFsbF90ZXN0cykKc3ByaW50Zigi5Zyo6KaW6Ka65YyW5paH5rOV55qEICVzIOmhjOe3tOe/kuS4re+8jOaCqOe4veWFseetlOWwjeS6hiAlcyDpoYzjgIIiLCBsZW5ndGgoYWxsX3Rlc3RzKSwgcGFzc2VkX3Rlc3RzKQpgYGA=</div>
 
 
 

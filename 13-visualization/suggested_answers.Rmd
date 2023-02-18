@@ -75,10 +75,10 @@ exercise_124 <- function() {
 
 ## 125（單選題）使用 `ggplot2::ggplot()` 函數的時候會搭配下列哪一個函數建立座標系統？
 
-1. `ggplo2::coordinates()`。
-2. `ggplo2::xyaxis()`。
-3. `ggplo2::mapping()`。
-4. `ggplo2::aes()`。
+1. `ggplot2::coordinates()`。
+2. `ggplot2::xyaxis()`。
+3. `ggplot2::mapping()`。
+4. `ggplot2::aes()`。
 
 ```{r}
 exercise_125 <- function() {
